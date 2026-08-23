@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Product Details | Shudh Loha</title>
+<meta name="description" content="Product details for Shudh Loha pure iron and Sarbloh cookware." />
+<link rel="icon" type="image/png" href="logo.png" />
+<style>
+  :root{--ink:#171717;--cream:#FBFAF6;--cream-deep:#F1EBDD;--gold:#B88A24;--rust:#A97818;--line:rgba(20,18,16,.14);--display:Didot,'Bodoni MT','Times New Roman',serif;--body:'Trebuchet MS','Segoe UI',sans-serif}
+  *{box-sizing:border-box} body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);line-height:1.55;background-image:linear-gradient(rgba(184,138,36,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(184,138,36,.035) 1px,transparent 1px);background-size:28px 28px}
+  a{color:inherit;text-decoration:none}:focus-visible{outline:2px solid var(--gold);outline-offset:4px}.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+  header{background:rgba(20,18,16,.96);border-bottom:1px solid rgba(251,250,246,.2);color:var(--cream)}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between}.brand{font:700 21px var(--display);letter-spacing:2.5px}.brand span{display:inline-block;width:8px;height:8px;border:1px solid var(--gold);transform:rotate(45deg);margin-right:10px}.back{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--cream)}.back:hover{color:var(--gold)}
+  main{padding:76px 0}.product{display:grid;grid-template-columns:minmax(280px,1fr) minmax(280px,.9fr);gap:72px;align-items:center}.visual{background:var(--cream-deep);border:1px solid var(--line);padding:18px;min-height:360px;display:grid;place-items:center}.visual img{width:100%;max-height:470px;object-fit:contain}.visual .missing{font:700 24px var(--display);text-align:center;padding:40px}.eyebrow{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase}.details h1{font:700 clamp(38px,5vw,62px)/1.05 var(--display);margin:10px 0 18px}.intro{color:#3d3a35;font-size:17px;max-width:500px}.facts{border-top:1px solid var(--line);margin:28px 0 0}.fact{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}.fact strong{font-weight:700}.fact span{text-align:right;color:#5b554d}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;padding:13px 20px;border:1px solid var(--gold);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase}.primary{background:var(--gold)}.secondary:hover{background:var(--cream-deep)}.note{background:var(--cream-deep);border-left:2px solid var(--gold);padding:16px 18px;margin-top:34px;font-size:14px;color:#3d3a35}
+  footer{background:var(--ink);color:rgba(244,238,225,.7);padding:30px 0;text-align:center;font-size:13px}footer span{color:var(--gold)}
+  @media(max-width:760px){main{padding:44px 0}.product{grid-template-columns:1fr;gap:38px}.visual{min-height:260px}.nav{min-height:62px}.back{font-size:11px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="brand" href="index.html"><span></span>SHUDH LOHA</a><a class="back" href="index.html#products">Back to products</a></div></header>
+<main><div class="wrap product">
+  <div class="visual" id="visual"></div>
+  <article class="details">
+    <p class="eyebrow" id="category">Shudh Loha</p>
+    <h1 id="name">Product details</h1>
+    <p class="intro">Hand-finished iron cookware made for everyday kitchens. Ask us about the right size, weight, availability, and delivery for your home.</p>
+    <div class="facts">
+      <div class="fact"><strong>Material</strong><span>Pure iron / Sarbloh</span></div>
+      <div class="fact"><strong>Finish</strong><span>Hand-finished</span></div>
+      <div class="fact"><strong>Size & weight</strong><span>Confirm with us</span></div>
+      <div class="fact"><strong>Price</strong><span>Ask for current price</span></div>
+    </div>
+    <div class="actions"><a class="btn primary" id="whatsapp" href="" target="_blank" rel="noopener">Ask on WhatsApp</a><a class="btn secondary" href="tel:+919988059285">Call us</a></div>
+    <div class="note"><strong>Care:</strong> Keep iron cookware dry after washing and lightly oil it regularly. We can guide you through first-use seasoning.</div>
+  </article>
+</div></main>
+<footer><div class="wrap">Shudh Loha — <span>Pure Loha, Pure Quality</span> · Malerkotla, Punjab</div></footer>
+<script>
+  const number = '919988059285';
+  const products = {
+    'Sarbloh Bata': ['Sarbloh', 'Sarbloh_bata2.png'],
+    'Sarbloh Kadhai': ['Sarbloh', 'sarbloh_kadhai.png'],
+    'Sarbloh Tawi': ['Sarbloh', 'Sarbloh_Tawi.png'],
+    'Sarbloh Karchi': ['Sarbloh', 'sarbloh_karchi.png'],
+    'Sarbloh Deg': ['Sarbloh', 'Sarbloh_deg.png'],
+    Tawa: ['Kitchenware', ''], Kadhai: ['Kitchenware', ''], Karahi: ['Kitchenware', ''], Donga: ['Kitchenware', ''], Chamcha: ['Kitchenware', ''], Glass: ['Kitchenware', '']
+  };
+  const item = new URLSearchParams(location.search).get('item') || 'Sarbloh Kadhai';
+  const product = products[item] || products['Sarbloh Kadhai'];
+  document.title = `${item} | Shudh Loha`;
+  document.getElementById('name').textContent = item;
+  document.getElementById('category').textContent = product[0];
+  document.getElementById('visual').innerHTML = product[1] ? `<img src="${product[1]}" alt="${item}" />` : '<div class="missing">Ask us for a current photo</div>';
+  document.getElementById('whatsapp').href = `https://wa.me/${number}?text=${encodeURIComponent(`Hi, I'm interested in ${item}. Can you share the size, weight, price, and delivery details?`)}`;
+</script>
+</body>
+</html>
