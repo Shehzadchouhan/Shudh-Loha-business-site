@@ -1,10 +1,10 @@
 # Shudh Loha
 
-A responsive business website for Shudh Loha, a hand-finished iron cookware business based in Malerkotla, Punjab, with a dedicated Sarbloh collection.
+A responsive business website for Shudh Loha, a hand-finished iron cookware business based in Malerkotla, Punjab.
 
 ## Project Overview
 
-This client-style project presents the brand story, product collections, individual product details, ordering guidance, contact information, social links, and location details in a mobile-friendly experience.
+This client-style project presents the brand story, product catalog, individual product details, ordering guidance, contact information, social links, and location details in a mobile-friendly experience.
 
 ## Features
 
@@ -41,7 +41,7 @@ Then visit `http://localhost:8000`.
 ```text
 .
 ├── index.html          # Homepage and featured product sections
-├── products.html       # Full iron cookware and Sarbloh catalog
+├── products.html       # Full iron cookware catalog
 ├── product.html        # Reusable product detail page
 ├── logo.png            # Brand logo
 ├── Assets 2/            # Product title photography
@@ -50,7 +50,7 @@ Then visit `http://localhost:8000`.
 
 ## Updating Products
 
-Product data for the full catalog is maintained in the `products` array in `products.html`. Homepage featured cards use the `sarblohItems` and `kitchenItems` arrays in `index.html`. Product detail data and image mappings are maintained in `product.html`.
+Product data for the full catalog is maintained in the `products` array in `products.html`. Homepage featured cards use the `kitchenItems` array in `index.html`. Product detail data and image mappings are maintained in `product.html`.
 
 To add a photographed product:
 
@@ -73,4 +73,4 @@ Every future push to `main` will publish the current site automatically.
 
 ## Portfolio Description
 
-Designed and developed a responsive static business website for a traditional Sarbloh cookware brand, including product detail routing, multilingual UI labels, WhatsApp commerce flows, local SEO metadata, accessible navigation, and automated GitHub Pages deployment.
+Designed and developed a responsive static business website for a traditional iron cookware brand, including product detail routing, multilingual UI labels, WhatsApp commerce flows, local SEO metadata, accessible navigation, and automated GitHub Pages deployment.

@@ -4,14 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Shudh Loha — Pure Iron, Pure Quality</title>
-<meta name="description" content="Shudh Loha — traditional Sarbloh items and pure iron kitchenware from Malerkotla, Punjab." />
-<meta name="keywords" content="Sarbloh, pure iron cookware, iron kitchenware, Malerkotla, Punjab" />
+<meta name="description" content="Shudh Loha — traditional pure iron kitchenware from Malerkotla, Punjab." />
+<meta name="keywords" content="pure iron cookware, iron kitchenware, Malerkotla, Punjab" />
 <meta property="og:title" content="Shudh Loha — Pure Iron, Pure Quality" />
-<meta property="og:description" content="Traditional Sarbloh articles and hand-finished iron kitchenware from Malerkotla, Punjab." />
+<meta property="og:description" content="Traditional articles and hand-finished iron kitchenware from Malerkotla, Punjab." />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="logo.png" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LocalBusiness","name":"Shudh Loha","description":"Traditional Sarbloh articles and hand-finished iron kitchenware.","telephone":"+91 99880 59285","address":{"@type":"PostalAddress","addressLocality":"Malerkotla","addressRegion":"Punjab","addressCountry":"IN"},"sameAs":["https://www.instagram.com/shudh_loha_enterprise"]}
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Shudh Loha","description":"Traditional articles and hand-finished iron kitchenware.","telephone":"+91 99880 59285","address":{"@type":"PostalAddress","addressLocality":"Malerkotla","addressRegion":"Punjab","addressCountry":"IN"},"sameAs":["https://www.instagram.com/shudh_loha_enterprise"]}
 </script>
 <link rel="icon" type="image/png" href="logo.png" />
 
@@ -165,7 +165,7 @@
   }
   @keyframes spin{ to{ transform:rotate(360deg); } }
 
-  .sarbloh-ticker{ overflow:hidden; background:var(--gold); color:var(--ink); border-bottom:1px solid var(--ink); }
+  .collection-ticker{ overflow:hidden; background:var(--gold); color:var(--ink); border-bottom:1px solid var(--ink); }
   .ticker-track{ width:max-content; display:flex; align-items:center; gap:34px; padding:11px 0; font-size:12px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; animation:ticker 24s linear infinite; }
   @keyframes ticker{ to{ transform:translateX(-50%); } }
   @media (prefers-reduced-motion: reduce){ .ticker-track{ animation:none; width:100%; justify-content:center; } .ticker-track span:nth-child(n+3){ display:none; } }
@@ -321,8 +321,8 @@
   </div>
 </section>
 
-<div class="sarbloh-ticker" aria-label="Sarbloh collection announcement">
-  <div class="ticker-track"><span>We have different types of Sarbloh items available</span><span aria-hidden="true">◆</span><span>We have different types of Sarbloh items available</span><span aria-hidden="true">◆</span></div>
+<div class="collection-ticker" aria-label="Collection announcement">
+  <div class="ticker-track"><span>We also have different types of Sarbloh items available</span><span aria-hidden="true">◆</span><span>We also have different types of Sarbloh items available</span><span aria-hidden="true">◆</span></div>
 </div>
 
 <section class="about" id="about">
@@ -333,7 +333,7 @@
     </div>
     <div class="reveal">
       <p>Shudh Loha isn't a business we started — it's one we inherited. For generations, our family hasn't just sold iron items, we've built them ourselves, by hand, the way it's always been done.</p>
-      <p>That's the difference between running a shop and carrying a craft forward. Every Sarbloh item that leaves our hands has the same care behind it as the ones before it — nothing rushed, nothing cut short.</p>
+      <p>That's the difference between running a shop and carrying a craft forward. Every item that leaves our hands has the same care behind it as the ones before it — nothing rushed, nothing cut short.</p>
       <blockquote>No mixed metal. No shortcuts.<br />Just pure iron, finished by hand.</blockquote>
       <div class="stat-row">
         <div class="stat"><div class="num">Multi-Gen.</div><div class="label">Family Craft</div></div>
@@ -354,12 +354,6 @@
     </div>
 
     <div class="reveal">
-      <span class="cat-tag">Sarbloh</span>
-      <div class="product-grid" id="sarblohGrid"></div>
-      <div class="collection-action"><a class="btn btn-primary" href="products.html">View all products</a></div>
-    </div>
-
-    <div class="reveal" style="margin-top:56px;">
       <span class="cat-tag">Kitchenware</span>
       <div class="product-grid" id="kitchenGrid"></div>
       <div class="collection-action"><a class="btn btn-primary" href="products.html">View all products</a></div>
@@ -444,13 +438,10 @@
   document.getElementById('floatingWhatsapp').href = waLink();
 
   // ---- EDIT ME: product list. priceKnown:true items show `price`, others show "Call for Price" ----
-  const sarblohItems = [
+  const kitchenItems = [
     { name: "Batta", icon: "bata", image: "Assets 2/batta.png", priceKnown: false, price: "" },
     { name: "Kadhai", icon: "kadhai", image: "Assets 2/kadhai.png", priceKnown: false, price: "" },
     { name: "Deg", icon: "donga", image: "Assets 2/deg.png", priceKnown: false, price: "" },
-  ];
-
-  const kitchenItems = [
     { name: "Iron Tawi", icon: "tawa", image: "Assets 2/tawi.png", priceKnown: false, price: "" },
     { name: "Fry Pan", icon: "tawa", image: "Assets 2/fry pan.png", priceKnown: false, price: "" },
     { name: "Iron Fork", icon: "chamcha", image: "Assets 2/fork.png", priceKnown: false, price: "" },
@@ -480,7 +471,6 @@
       </div>
     `).join('');
   }
-  renderGrid('sarblohGrid', sarblohItems);
   renderGrid('kitchenGrid', kitchenItems);
 
   function setupAutoScroll(gridId){
@@ -510,7 +500,6 @@
     });
     animate();
   }
-  setupAutoScroll('sarblohGrid');
   setupAutoScroll('kitchenGrid');
 
   // nav toggle
