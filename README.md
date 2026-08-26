@@ -1,6 +1,6 @@
 # Shudh Loha
 
-A responsive business website for Shudh Loha, a Sarbloh and pure iron kitchenware business based in Malerkotla, Punjab.
+A responsive business website for Shudh Loha, a hand-finished iron cookware business based in Malerkotla, Punjab, with a dedicated Sarbloh collection.
 
 ## Project Overview
 
@@ -9,7 +9,7 @@ This client-style project presents the brand story, product collections, individ
 ## Features
 
 - Responsive landing page for desktop and mobile
-- Product collection cards with dedicated detail pages
+- Full product catalog page with dedicated detail pages
 - Product-specific WhatsApp inquiry links
 - Direct phone and WhatsApp contact actions
 - Hindi and Punjabi navigation labels
@@ -40,21 +40,22 @@ Then visit `http://localhost:8000`.
 
 ```text
 .
-├── index.html          # Homepage and product collection
+├── index.html          # Homepage and featured product sections
+├── products.html       # Full iron cookware and Sarbloh catalog
 ├── product.html        # Reusable product detail page
 ├── logo.png            # Brand logo
-├── Sarbloh_*.png       # Product photography
+├── Assets 2/            # Product title photography
 └── .github/workflows/  # GitHub Pages deployment
 ```
 
 ## Updating Products
 
-Product data is maintained in the `sarblohItems` and `kitchenItems` arrays in `index.html`. Product detail data and image mappings are maintained in `product.html`.
+Product data for the full catalog is maintained in the `products` array in `products.html`. Homepage featured cards use the `sarblohItems` and `kitchenItems` arrays in `index.html`. Product detail data and image mappings are maintained in `product.html`.
 
 To add a photographed product:
 
-1. Add its image to the project folder.
-2. Add the product to the relevant array in `index.html`.
+1. Add its image to `Assets 2`.
+2. Add the product to the `products` array in `products.html`.
 3. Add the matching image mapping in `product.html`.
 4. Test the homepage and detail link locally.
 

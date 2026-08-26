@@ -30,23 +30,25 @@
       <div class="fact"><strong>Size & weight</strong><span>Confirm with us</span></div>
       <div class="fact"><strong>Price</strong><span>Ask for current price</span></div>
     </div>
-    <div class="actions"><a class="btn primary" id="whatsapp" href="" target="_blank" rel="noopener">Ask on WhatsApp</a><a class="btn secondary" href="tel:+919988059285">Call us</a></div>
-    <div class="note"><strong>Care:</strong> Keep iron cookware dry after washing and lightly oil it regularly. We can guide you through first-use seasoning.</div>
+    <div class="actions"><a class="btn primary" id="whatsapp" href="" target="_blank" rel="noopener">Ask on WhatsApp</a><a class="btn secondary" href="tel:+917973247767" aria-label="Call Shudh Loha at +91 79732 47767">Call us</a></div>
   </article>
 </div></main>
 <footer><div class="wrap">Shudh Loha — <span>Pure Loha, Pure Quality</span> · Malerkotla, Punjab</div></footer>
 <script>
   const number = '919988059285';
   const products = {
-    'Sarbloh Bata': ['Sarbloh', 'Sarbloh_bata2.png'],
-    'Sarbloh Kadhai': ['Sarbloh', 'sarbloh_kadhai.png'],
-    'Sarbloh Tawi': ['Sarbloh', 'Sarbloh_Tawi.png'],
-    'Sarbloh Karchi': ['Sarbloh', 'sarbloh_karchi.png'],
-    'Sarbloh Deg': ['Sarbloh', 'Sarbloh_deg.png'],
-    Tawa: ['Kitchenware', ''], Kadhai: ['Kitchenware', ''], Karahi: ['Kitchenware', ''], Donga: ['Kitchenware', ''], Chamcha: ['Kitchenware', ''], Glass: ['Kitchenware', '']
+    'Batta': ['Sarbloh', 'Assets 2/batta.png'],
+    'Kadhai': ['Sarbloh', 'Assets 2/kadhai.png'],
+    'Deg': ['Sarbloh', 'Assets 2/deg.png'],
+    'Iron Tawa': ['Iron Cookware', 'Assets 2/tawi.png'],
+    'Fry Pan': ['Iron Cookware', 'Assets 2/fry pan.png'],
+    'Iron Fork': ['Iron Cookware', 'Assets 2/fork.png'],
+    'Iron Spoon': ['Iron Cookware', 'Assets 2/karchi without handle.png'],
+    'Set of Glasses': ['Iron Cookware', 'Assets 2/glasses.png'],
+    'Tutma Tava': ['Iron Cookware', 'Assets 2/tutma tava.png']
   };
-  const item = new URLSearchParams(location.search).get('item') || 'Sarbloh Kadhai';
-  const product = products[item] || products['Sarbloh Kadhai'];
+  const item = new URLSearchParams(location.search).get('item') || 'Kadhai';
+  const product = products[item] || products['Iron Tawa'];
   document.title = `${item} | Shudh Loha`;
   document.getElementById('name').textContent = item;
   document.getElementById('category').textContent = product[0];
