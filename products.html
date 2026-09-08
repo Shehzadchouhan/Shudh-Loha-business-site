@@ -9,35 +9,45 @@
 <style>
   :root{--ink:#171717;--cream:#FBFAF6;--cream-deep:#F1EBDD;--gold:#B88A24;--rust:#A97818;--line:rgba(20,18,16,.14);--display:Didot,'Bodoni MT','Times New Roman',serif;--body:'Trebuchet MS','Segoe UI',sans-serif}
   *{box-sizing:border-box} body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);line-height:1.55;background-image:linear-gradient(rgba(184,138,36,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(184,138,36,.035) 1px,transparent 1px);background-size:28px 28px} a{color:inherit;text-decoration:none}:focus-visible{outline:2px solid var(--gold);outline-offset:4px}.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
-  header{position:sticky;top:0;z-index:10;background:rgba(20,18,16,.96);border-bottom:1px solid rgba(251,250,246,.2);color:var(--cream)}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between}.brand{font:700 21px var(--display);letter-spacing:2.5px}.brand span{display:inline-block;width:8px;height:8px;border:1px solid var(--gold);transform:rotate(45deg);margin-right:10px}.back{font-size:13px;letter-spacing:1px;text-transform:uppercase}.back:hover{color:var(--gold)}
+  header{position:sticky;top:0;z-index:10;background:rgba(20,18,16,.96);border-bottom:1px solid rgba(251,250,246,.2);color:var(--cream)}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font:700 21px var(--display);letter-spacing:2.5px}.brand span{display:inline-block;width:8px;height:8px;border:1px solid var(--gold);transform:rotate(45deg);margin-right:10px}.nav-actions{display:flex;align-items:center;gap:18px}.back{font-size:13px;letter-spacing:1px;text-transform:uppercase}.back:hover{color:var(--gold)}.language-select{background:transparent;color:var(--cream);border:1px solid rgba(251,250,246,.2);padding:8px 10px;font:inherit;font-size:12px}.language-select option{color:var(--ink)}
   main{padding:80px 0}.eyebrow{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0}.intro{max-width:650px;margin:12px 0 50px;color:#3d3a35;font-size:17px}.title{font:700 clamp(38px,5vw,62px)/1.05 var(--display);margin:10px 0 0}.collection{margin-top:64px}.collection:first-of-type{margin-top:0}.collection-head{display:flex;align-items:end;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line);padding-bottom:14px}.collection-head h2{font:700 30px var(--display);margin:0}.collection-head p{margin:0;color:#5b554d;font-size:13px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:24px}.card{background:rgba(251,250,246,.85);border:1px solid var(--line);transition:transform .2s ease,border-color .2s ease}.card:hover{transform:translateY(-4px);border-color:var(--gold)}.card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--cream-deep)}.card-body{padding:18px 18px 20px}.card h3{font:700 21px var(--display);margin:0 0 5px}.card p{margin:0;color:#5b554d;font-size:13px}.card-link{display:inline-block;margin-top:15px;color:var(--rust);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid var(--gold);padding-bottom:3px}.collection-ticker{overflow:hidden;background:var(--gold);color:var(--ink);margin:0}.ticker-track{width:max-content;display:flex;gap:34px;padding:11px 0;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;animation:ticker 24s linear infinite}@keyframes ticker{to{transform:translateX(-50%)}}
   footer{background:var(--ink);color:rgba(244,238,225,.7);padding:30px 0;text-align:center;font-size:13px}footer span{color:var(--gold)}
-  @media(max-width:760px){main{padding:48px 0}.wrap{padding:0 20px}.nav{min-height:62px}.back{font-size:11px}.collection-head{display:block}.collection-head p{margin-top:5px}.grid{grid-template-columns:1fr 1fr;gap:14px}.card-body{padding:14px}.card h3{font-size:18px}}
+  @media(max-width:760px){main{padding:48px 0}.wrap{padding:0 20px}.nav{min-height:62px}.nav-actions{gap:10px}.back{font-size:11px}.collection-head{display:block}.collection-head p{margin-top:5px}.grid{grid-template-columns:1fr 1fr;gap:14px}.card-body{padding:14px}.card h3{font-size:18px}}
   @media(max-width:460px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header><div class="wrap nav"><a class="brand" href="index.html"><span></span>SHUDH LOHA</a><a class="back" href="index.html">Back to home</a></div></header>
+<header><div class="wrap nav"><a class="brand" href="index.html"><span></span>SHUDH LOHA</a><div class="nav-actions"><a class="back" href="index.html" data-lang="backHome">Back to home</a><select class="language-select" id="languageSelect" aria-label="Choose language"><option value="en">English</option><option value="hi">हिंदी</option><option value="pa">ਪੰਜਾਬੀ</option></select></div></div></header>
 <div class="collection-ticker" aria-label="Collection announcement"><div class="ticker-track"><span>We also have different types of Sarbloh items available</span><span aria-hidden="true">◆</span><span>We also have different types of Sarbloh items available</span><span aria-hidden="true">◆</span></div></div>
 <main><div class="wrap">
-  <p class="eyebrow">The Collection</p><h1 class="title">Iron cookware for every kitchen.</h1><p class="intro">Explore hand-finished pieces made for everyday cooking, serving, and lasting use. Select any product to ask about sizes, weight, price, and delivery.</p>
-  <section class="collection"><div class="collection-head"><h2>Iron Kitchenware</h2><p>Built for daily cooking and serving</p></div><div class="grid" id="kitchenGrid"></div></section>
+  <p class="eyebrow" data-lang="collection">The Collection</p><h1 class="title" data-lang="catalogTitle">Iron cookware for every kitchen.</h1>
+  <section class="collection"><div class="collection-head"><h2 data-lang="kitchenTitle">Iron Kitchenware</h2>
+    <p data-lang="kitchenSubtitle">Built for daily cooking and serving</p></div><div class="grid" id="kitchenGrid"></div></section>
 </div></main>
 <footer><div class="wrap">Shudh Loha — <span>Pure Loha, Pure Quality</span> · Malerkotla, Punjab</div></footer>
 <script>
   const products = [
     {name:'Iron Tawi', image:'Assets 2/tawi.png', category:'Iron Kitchenware'},
-    {name:'Fry pan', image:'Assets 2/fry pan.png', category:'Iron Kitchenware'},
+    {name:'Fry Pan', image:'Assets 2/fry pan.png', category:'Iron Kitchenware'},
     {name:'Iron Fork', image:'Assets 2/fork.png', category:'Iron Kitchenware'},
     {name:'Iron Spoon', image:'Assets 2/karchi without handle.png', category:'Iron Kitchenware'},
     {name:'Set of Glasses', image:'Assets 2/glasses.png', category:'Iron Kitchenware'},
-    {name:'Tutma Tava', image:'Assets 2/tutma tava.png', category:'Iron Kitchenware'},
+    {name:'Iron Tava', image:'Assets 2/tutma tava.png', category:'Iron Kitchenware'},
     {name:'Batta', image:'Assets 2/batta.png', category:'Iron Kitchenware'},
     {name:'Kadhai', image:'Assets 2/kadhai.png', category:'Iron Kitchenware'},
     {name:'Deg', image:'Assets 2/deg.png', category:'Iron Kitchenware'}
   ];
-  function render(id){ document.getElementById(id).innerHTML = products.map(product => `<article class="card"><img src="${product.image}" alt="${product.name}" loading="lazy"><div class="card-body"><h3>${product.name}</h3><p>Pure iron · Hand-finished</p><a class="card-link" href="product.html?item=${encodeURIComponent(product.name)}">View details</a></div></article>`).join(''); }
+  function render(id){ document.getElementById(id).innerHTML = products.map(product => `<article class="card"><img src="${product.image}" alt="${product.name}" loading="lazy"><div class="card-body"><h3>${product.name}</h3><p data-lang="productMeta">Pure iron · Hand-finished</p><a class="card-link" href="product.html?item=${encodeURIComponent(product.name)}" data-lang="viewDetails">View details</a></div></article>`).join(''); }
   render('kitchenGrid');
+  const translations = {
+    en: { backHome:'Back to home', collection:'The Collection', catalogTitle:'Iron cookware for every kitchen.', catalogIntro:'Explore hand-finished pieces made for everyday cooking, serving, and lasting use. Select any product to ask about sizes, weight, price, and delivery.', kitchenTitle:'Iron Kitchenware', kitchenSubtitle:'Built for daily cooking and serving', productMeta:'Pure iron · Hand-finished', viewDetails:'View details' },
+    hi: { backHome:'होम पर वापस जाएँ', collection:'संग्रह', catalogTitle:'हर रसोई के लिए लोहे के बर्तन।', catalogIntro:'रोज़मर्रा के खाना पकाने, परोसने और लंबे उपयोग के लिए हाथ से तैयार वस्तुएँ देखें। आकार, वजन, कीमत और डिलीवरी के बारे में पूछने के लिए कोई भी उत्पाद चुनें।', kitchenTitle:'लोहे के रसोई बर्तन', kitchenSubtitle:'रोज़ाना खाना पकाने और परोसने के लिए', productMeta:'शुद्ध लोहा · हाथ से तैयार', viewDetails:'विवरण देखें' },
+    pa: { backHome:'ਮੁੱਖ ਪੰਨੇ ਤੇ ਵਾਪਸ', collection:'ਸੰਗ੍ਰਹਿ', catalogTitle:'ਹਰ ਰਸੋਈ ਲਈ ਲੋਹੇ ਦੇ ਬਰਤਨ।', catalogIntro:'ਰੋਜ਼ਾਨਾ ਖਾਣਾ ਬਣਾਉਣ, ਪਰੋਸਣ ਅਤੇ ਲੰਬੇ ਸਮੇਂ ਦੀ ਵਰਤੋਂ ਲਈ ਹੱਥ ਨਾਲ ਤਿਆਰ ਚੀਜ਼ਾਂ ਵੇਖੋ। ਆਕਾਰ, ਭਾਰ, ਕੀਮਤ ਅਤੇ ਡਿਲੀਵਰੀ ਬਾਰੇ ਪੁੱਛਣ ਲਈ ਕੋਈ ਵੀ ਉਤਪਾਦ ਚੁਣੋ।', kitchenTitle:'ਲੋਹੇ ਦੇ ਰਸੋਈ ਬਰਤਨ', kitchenSubtitle:'ਰੋਜ਼ਾਨਾ ਖਾਣਾ ਬਣਾਉਣ ਅਤੇ ਪਰੋਸਣ ਲਈ', productMeta:'ਸ਼ੁੱਧ ਲੋਹਾ · ਹੱਥ ਨਾਲ ਤਿਆਰ', viewDetails:'ਵੇਰਵਾ ਵੇਖੋ' }
+  };
+  const languageSelect = document.getElementById('languageSelect');
+  const applyLanguage = language => { const selected = translations[language] || translations.en; document.querySelectorAll('[data-lang]').forEach(el => { el.textContent = selected[el.dataset.lang]; }); document.documentElement.lang = language; languageSelect.value = language; localStorage.setItem('shudhLohaLanguage', language); };
+  languageSelect.addEventListener('change', () => applyLanguage(languageSelect.value));
+  applyLanguage(localStorage.getItem('shudhLohaLanguage') || 'en');
 </script>
 </body>
 </html>

@@ -10,32 +10,32 @@
   :root{--ink:#171717;--cream:#FBFAF6;--cream-deep:#F1EBDD;--gold:#B88A24;--rust:#A97818;--line:rgba(20,18,16,.14);--display:Didot,'Bodoni MT','Times New Roman',serif;--body:'Trebuchet MS','Segoe UI',sans-serif}
   *{box-sizing:border-box} body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);line-height:1.55;background-image:linear-gradient(rgba(184,138,36,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(184,138,36,.035) 1px,transparent 1px);background-size:28px 28px}
   a{color:inherit;text-decoration:none}:focus-visible{outline:2px solid var(--gold);outline-offset:4px}.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
-  header{background:rgba(20,18,16,.96);border-bottom:1px solid rgba(251,250,246,.2);color:var(--cream)}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between}.brand{font:700 21px var(--display);letter-spacing:2.5px}.brand span{display:inline-block;width:8px;height:8px;border:1px solid var(--gold);transform:rotate(45deg);margin-right:10px}.back{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--cream)}.back:hover{color:var(--gold)}
+  header{background:rgba(20,18,16,.96);border-bottom:1px solid rgba(251,250,246,.2);color:var(--cream)}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font:700 21px var(--display);letter-spacing:2.5px}.brand span{display:inline-block;width:8px;height:8px;border:1px solid var(--gold);transform:rotate(45deg);margin-right:10px}.nav-actions{display:flex;align-items:center;gap:18px}.back{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--cream)}.back:hover{color:var(--gold)}.language-select{background:transparent;color:var(--cream);border:1px solid rgba(251,250,246,.2);padding:8px 10px;font:inherit;font-size:12px}.language-select option{color:var(--ink)}
   main{padding:76px 0}.product{display:grid;grid-template-columns:minmax(280px,1fr) minmax(280px,.9fr);gap:72px;align-items:center}.visual{background:var(--cream-deep);border:1px solid var(--line);padding:18px;min-height:360px;display:grid;place-items:center}.visual img{width:100%;max-height:470px;object-fit:contain}.visual .missing{font:700 24px var(--display);text-align:center;padding:40px}.eyebrow{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase}.details h1{font:700 clamp(38px,5vw,62px)/1.05 var(--display);margin:10px 0 18px}.intro{color:#3d3a35;font-size:17px;max-width:500px}.facts{border-top:1px solid var(--line);margin:28px 0 0}.fact{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}.fact strong{font-weight:700}.fact span{text-align:right;color:#5b554d}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;padding:13px 20px;border:1px solid var(--gold);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase}.primary{background:var(--gold)}.secondary:hover{background:var(--cream-deep)}.note{background:var(--cream-deep);border-left:2px solid var(--gold);padding:16px 18px;margin-top:34px;font-size:14px;color:#3d3a35}
   footer{background:var(--ink);color:rgba(244,238,225,.7);padding:30px 0;text-align:center;font-size:13px}footer span{color:var(--gold)}
-  @media(max-width:760px){main{padding:44px 0}.product{grid-template-columns:1fr;gap:38px}.visual{min-height:260px}.nav{min-height:62px}.back{font-size:11px}}
+  @media(max-width:760px){main{padding:44px 0}.product{grid-template-columns:1fr;gap:38px}.visual{min-height:260px}.nav{min-height:62px}.nav-actions{gap:10px}.back{font-size:11px}}
 </style>
 </head>
 <body>
-<header><div class="wrap nav"><a class="brand" href="index.html"><span></span>SHUDH LOHA</a><a class="back" href="index.html#products">Back to products</a></div></header>
+<header><div class="wrap nav"><a class="brand" href="index.html"><span></span>SHUDH LOHA</a><div class="nav-actions"><a class="back" href="index.html#products" data-lang="backProducts">Back to products</a><select class="language-select" id="languageSelect" aria-label="Choose language"><option value="en">English</option><option value="hi">हिंदी</option><option value="pa">ਪੰਜਾਬੀ</option></select></div></div></header>
 <main><div class="wrap product">
   <div class="visual" id="visual"></div>
   <article class="details">
-    <p class="eyebrow" id="category">Shudh Loha</p>
+    <p class="eyebrow" id="category" data-lang="productCategory">Shudh Loha</p>
     <h1 id="name">Product details</h1>
-    <p class="intro">Hand-finished iron cookware made for everyday kitchens. Ask us about the right size, weight, availability, and delivery for your home.</p>
+    <p class="intro" data-lang="productIntro">Hand-finished iron cookware made for everyday kitchens. Ask us about the right size, weight, availability, and delivery for your home.</p>
     <div class="facts">
-      <div class="fact"><strong>Material</strong><span>Pure iron</span></div>
-      <div class="fact"><strong>Finish</strong><span>Hand-finished</span></div>
-      <div class="fact"><strong>Size & weight</strong><span>Confirm with us</span></div>
-      <div class="fact"><strong>Price</strong><span>Ask for current price</span></div>
+      <div class="fact"><strong data-lang="material">Material</strong><span data-lang="pureIron">Pure iron</span></div>
+      <div class="fact"><strong data-lang="finish">Finish</strong><span data-lang="handFinished">Hand-finished</span></div>
+      <div class="fact"><strong data-lang="sizeWeight">Size & weight</strong><span data-lang="confirmWithUs">Confirm with us</span></div>
+      <div class="fact"><strong data-lang="price">Price</strong><span data-lang="askPrice">Ask for current price</span></div>
     </div>
-    <div class="actions"><a class="btn primary" id="whatsapp" href="" target="_blank" rel="noopener">Ask on WhatsApp</a><a class="btn secondary" href="tel:+917973247767" aria-label="Call Shudh Loha at +91 79732 47767">Call us</a></div>
+    <div class="actions"><a class="btn primary" id="whatsapp" href="" target="_blank" rel="noopener" data-lang="askWhatsapp">Ask on WhatsApp</a><a class="btn secondary" href="tel:+917973247767" aria-label="Call Shudh Loha at +91 79732 47767" data-lang="callUs">Call us</a></div>
   </article>
 </div></main>
-<footer><div class="wrap">Shudh Loha — <span>Pure Loha, Pure Quality</span> · Malerkotla, Punjab</div></footer>
+<footer><div class="wrap">Shudh Loha — <span data-lang="footerTagline">Pure Loha, Pure Quality</span> · <span data-lang="address">Malerkotla, Punjab</span></div></footer>
 <script>
-  const number = '919988059285';
+  const number = '917973247767';
   const products = {
     'Batta': ['Iron Cookware', 'Assets 2/batta.png'],
     'Kadhai': ['Iron Cookware', 'Assets 2/kadhai.png'],
@@ -45,7 +45,7 @@
     'Iron Fork': ['Iron Cookware', 'Assets 2/fork.png'],
     'Iron Spoon': ['Iron Cookware', 'Assets 2/karchi without handle.png'],
     'Set of Glasses': ['Iron Cookware', 'Assets 2/glasses.png'],
-    'Tutma Tava': ['Iron Cookware', 'Assets 2/tutma tava.png']
+    'Iron Tava': ['Iron Cookware', 'Assets 2/tutma tava.png']
   };
   const item = new URLSearchParams(location.search).get('item') || 'Kadhai';
   const product = products[item] || products['Iron Tawa'];
@@ -54,6 +54,15 @@
   document.getElementById('category').textContent = product[0];
   document.getElementById('visual').innerHTML = product[1] ? `<img src="${product[1]}" alt="${item}" />` : '<div class="missing">Ask us for a current photo</div>';
   document.getElementById('whatsapp').href = `https://wa.me/${number}?text=${encodeURIComponent(`Hi, I'm interested in ${item}. Can you share the size, weight, price, and delivery details?`)}`;
+  const translations = {
+    en: { backProducts:'Back to products', productCategory:'Iron Cookware', productIntro:'Hand-finished iron cookware made for everyday kitchens. Ask us about the right size, weight, availability, and delivery for your home.', material:'Material', pureIron:'Pure iron', finish:'Finish', handFinished:'Hand-finished', sizeWeight:'Size & weight', confirmWithUs:'Confirm with us', price:'Price', askPrice:'Ask for current price', askWhatsapp:'Ask on WhatsApp', callUs:'Call us', footerTagline:'Pure Loha, Pure Quality', address:'Malerkotla, Punjab' },
+    hi: { backProducts:'उत्पादों पर वापस जाएँ', productCategory:'लोहे के बर्तन', productIntro:'रोज़मर्रा की रसोई के लिए हाथ से तैयार लोहे के बर्तन। अपने घर के लिए सही आकार, वजन, उपलब्धता और डिलीवरी के बारे में पूछें।', material:'सामग्री', pureIron:'शुद्ध लोहा', finish:'फिनिश', handFinished:'हाथ से तैयार', sizeWeight:'आकार और वजन', confirmWithUs:'हमसे पुष्टि करें', price:'कीमत', askPrice:'वर्तमान कीमत पूछें', askWhatsapp:'WhatsApp पर पूछें', callUs:'कॉल करें', footerTagline:'शुद्ध लोहा, शुद्ध गुणवत्ता', address:'मलेरकोटला, पंजाब' },
+    pa: { backProducts:'ਉਤਪਾਦਾਂ ਤੇ ਵਾਪਸ', productCategory:'ਲੋਹੇ ਦੇ ਬਰਤਨ', productIntro:'ਰੋਜ਼ਾਨਾ ਰਸੋਈ ਲਈ ਹੱਥ ਨਾਲ ਤਿਆਰ ਲੋਹੇ ਦੇ ਬਰਤਨ। ਆਪਣੇ ਘਰ ਲਈ ਸਹੀ ਆਕਾਰ, ਭਾਰ, ਉਪਲਬਧਤਾ ਅਤੇ ਡਿਲੀਵਰੀ ਬਾਰੇ ਪੁੱਛੋ।', material:'ਸਮੱਗਰੀ', pureIron:'ਸ਼ੁੱਧ ਲੋਹਾ', finish:'ਫਿਨਿਸ਼', handFinished:'ਹੱਥ ਨਾਲ ਤਿਆਰ', sizeWeight:'ਆਕਾਰ ਅਤੇ ਭਾਰ', confirmWithUs:'ਸਾਡੇ ਤੋਂ ਪੁਸ਼ਟੀ ਕਰੋ', price:'ਕੀਮਤ', askPrice:'ਮੌਜੂਦਾ ਕੀਮਤ ਪੁੱਛੋ', askWhatsapp:'WhatsApp ਤੇ ਪੁੱਛੋ', callUs:'ਕਾਲ ਕਰੋ', footerTagline:'ਸ਼ੁੱਧ ਲੋਹਾ, ਸ਼ੁੱਧ ਗੁਣਵੱਤਾ', address:'ਮਲੇਰਕੋਟਲਾ, ਪੰਜਾਬ' }
+  };
+  const languageSelect = document.getElementById('languageSelect');
+  const applyLanguage = language => { const selected = translations[language] || translations.en; document.querySelectorAll('[data-lang]').forEach(el => { el.textContent = selected[el.dataset.lang]; }); document.documentElement.lang = language; languageSelect.value = language; localStorage.setItem('shudhLohaLanguage', language); };
+  languageSelect.addEventListener('change', () => applyLanguage(languageSelect.value));
+  applyLanguage(localStorage.getItem('shudhLohaLanguage') || 'en');
 </script>
 </body>
 </html>
