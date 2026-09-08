@@ -1284,10 +1284,7 @@
     <script>
       const webAd = document.getElementById("webAd");
       const webAdClose = document.getElementById("webAdClose");
-      const webAdVideo = document.querySelector(".web-ad-video");
       const closeWebAd = () => {
-        webAdVideo.pause();
-        webAdVideo.currentTime = 0;
         webAd.hidden = true;
         document.body.classList.remove("ad-open");
       };
