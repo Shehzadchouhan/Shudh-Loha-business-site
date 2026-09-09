@@ -32,7 +32,12 @@
           "addressRegion": "Punjab",
           "addressCountry": "IN"
         },
-        "sameAs": ["https://www.instagram.com/shudh_loha_enterprise"]
+        "sameAs": [
+          "https://www.indiamart.com/company/271385182/",
+          "https://www.instagram.com/shudh_loha_enterprise?igsi=MXdma2xncXk5cDVsOA==",
+          "https://www.facebook.com/share/1NC6jeQcjM/",
+          "https://shudh-loha.netlify.app/"
+        ]
       }
     </script>
     <link rel="icon" type="image/png" href="logo.png" />
@@ -696,6 +701,18 @@
       .social-row a.facebook {
         color: #1877f2;
       }
+      .social-row a.indiamart {
+        color: #1476c6;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+      .social-row a.website {
+        color: var(--ink);
+      }
+      .social-row a.maps {
+        color: #d94b3d;
+      }
       .social-row a:hover {
         border-color: currentColor;
         background: rgba(255, 255, 255, 0.5);
@@ -818,6 +835,29 @@
         position: relative;
         overflow: hidden;
       }
+      .web-ad-sound {
+        position: absolute;
+        left: 14px;
+        bottom: 14px;
+        z-index: 2;
+        min-height: 40px;
+        padding: 9px 13px;
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 3px;
+        background: rgba(17, 21, 43, 0.9);
+        color: #fff;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .web-ad-sound:hover,
+      .web-ad-sound:focus-visible {
+        background: var(--web-coral);
+      }
+      .web-ad-sound.is-on {
+        display: none;
+      }
       .web-ad-video {
         width: 100%;
         height: 100%;
@@ -904,6 +944,11 @@
         }
         .web-ad-art {
           min-height: 175px;
+        }
+        .web-ad-sound {
+          left: 10px;
+          bottom: 10px;
+          font-size: 12px;
         }
         .web-ad-video {
           min-height: 175px;
@@ -1153,7 +1198,7 @@
             </a>
             <a
               class="facebook"
-              href="https://www.facebook.com/share/1DJ15tKewc/"
+              href="https://www.facebook.com/share/1NC6jeQcjM/"
               aria-label="Facebook"
               title="Facebook"
               target="_blank"
@@ -1163,6 +1208,57 @@
                 <path
                   d="M14 8h3V4h-3c-3.3 0-5 1.9-5 5v3H6v4h3v6h4v-6h3.2l.8-4H13V9c0-.7.3-1 1-1Z"
                 />
+              </svg>
+            </a>
+            <a
+              class="indiamart"
+              href="https://www.indiamart.com/company/271385182/"
+              aria-label="IndiaMART"
+              title="IndiaMART"
+              target="_blank"
+              rel="noopener"
+            >
+              IM
+            </a>
+            <a
+              class="website"
+              href="https://maps.app.goo.gl/GBGsbKjUtPneyoNn9"
+              aria-label="Shudh Loha website"
+              title="Shudh Loha website"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8" />
+                <path d="M3 12h18M12 3c2.3 2.5 3.4 5.5 3.4 9s-1.1 6.5-3.4 9c-2.3-2.5-3.4-5.5-3.4-9S9.7 5.5 12 3Z" fill="none" stroke="currentColor" stroke-width="1.8" />
+              </svg>
+            </a>
+            <a
+              class="maps"
+              href="https://share.google/k6qfBzEbWP2i2FUJC"
+              aria-label="Shudh Loha on Google Maps"
+              title="Shudh Loha on Google Maps"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 21s7-6.2 7-12A7 7 0 0 0 5 9c0 5.8 7 12 7 12Z" fill="none" stroke="currentColor" stroke-width="1.8" />
+                <circle cx="12" cy="9" r="2.2" fill="none" stroke="currentColor" stroke-width="1.8" />
+              </svg>
+            </a>
+            <a
+              class="maps"
+              href="https://share.google/k6qfBzEbWP2i2FUJC"
+              aria-label="Shudh Loha on Google Business"
+              title="Shudh Loha on Google Business"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M21.35 12.27c0-.72-.06-1.42-.18-2.09H12v3.96h5.23a4.47 4.47 0 0 1-1.94 2.93v2.43h3.14c1.84-1.69 2.92-4.18 2.92-7.23Z" fill="#4285F4" />
+                <path d="M12 21.6c2.63 0 4.84-.87 6.45-2.36l-3.14-2.43c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.51A9.74 9.74 0 0 0 12 21.6Z" fill="#34A853" />
+                <path d="M6.54 13.7A5.86 5.86 0 0 1 6.23 12c0-.59.11-1.16.31-1.7V7.79H3.3A9.59 9.59 0 0 0 2.4 12c0 1.52.36 2.96.9 4.21l3.24-2.51Z" fill="#FBBC05" />
+                <path d="M12 6.27c1.43 0 2.71.49 3.72 1.46l2.79-2.79C16.83 3.36 14.63 2.4 12 2.4a9.74 9.74 0 0 0-8.7 5.39l3.24 2.51C7.31 7.99 9.46 6.27 12 6.27Z" fill="#EA4335" />
               </svg>
             </a>
           </div>
@@ -1249,12 +1345,16 @@
         <div class="web-ad-art">
           <iframe
             class="web-ad-video"
-            src="https://www.youtube.com/embed/AMfiyHqJMME?autoplay=1&mute=1&loop=1&playlist=AMfiyHqJMME&controls=1"
+            id="webAdVideo"
+            src="https://www.youtube.com/embed/AMfiyHqJMME?autoplay=1&mute=1&loop=1&playlist=AMfiyHqJMME&controls=1&enablejsapi=1&playsinline=1"
             title="Shudh Loha Web Dev Ad"
             frameborder="0"
             allow="autoplay; encrypted-media"
             allowfullscreen
           ></iframe>
+          <button class="web-ad-sound" id="webAdSound" type="button">
+            Turn sound on
+          </button>
         </div>
         <div class="web-ad-copy">
           <p class="eyebrow">A service by our team</p>
@@ -1284,10 +1384,32 @@
     <script>
       const webAd = document.getElementById("webAd");
       const webAdClose = document.getElementById("webAdClose");
+      const webAdVideo = document.getElementById("webAdVideo");
+      const webAdSound = document.getElementById("webAdSound");
+      const enableWebAdSound = () => {
+        webAdVideo.contentWindow.postMessage(
+          JSON.stringify({ event: "command", func: "unMute", args: [] }),
+          "*",
+        );
+        webAdVideo.contentWindow.postMessage(
+          JSON.stringify({ event: "command", func: "setVolume", args: [100] }),
+          "*",
+        );
+        webAdSound.classList.add("is-on");
+      };
       const closeWebAd = () => {
         webAd.hidden = true;
         document.body.classList.remove("ad-open");
       };
+      webAdSound.addEventListener("click", () => {
+        localStorage.setItem("shudhLohaAdSound", "on");
+        enableWebAdSound();
+      });
+      webAdVideo.addEventListener("load", () => {
+        if (localStorage.getItem("shudhLohaAdSound") === "on") {
+          enableWebAdSound();
+        }
+      });
       webAdClose.addEventListener("click", closeWebAd);
       document
         .getElementById("webAdContact")
