@@ -1398,6 +1398,11 @@
         webAdSound.classList.add("is-on");
       };
       const closeWebAd = () => {
+        webAdVideo.contentWindow.postMessage(
+          JSON.stringify({ event: "command", func: "stopVideo", args: [] }),
+          "*",
+        );
+        webAdVideo.src = "about:blank";
         webAd.hidden = true;
         document.body.classList.remove("ad-open");
       };
