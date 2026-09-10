@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shudh Loha Admin</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+      :root { --ink:#171717; --muted:#686158; --paper:#fbfaf6; --panel:#f1ebdd; --gold:#b88a24; --line:rgba(20,18,16,.14); --danger:#a23b2d; }
+      * { box-sizing:border-box; }
+      body { margin:0; background:linear-gradient(135deg,#fbfaf6 0%,#f4eee1 100%); color:var(--ink); font:15px/1.5 "Trebuchet MS","Segoe UI",sans-serif; }
+      button,input,textarea,select { font:inherit; }
+      button { cursor:pointer; }
+      .shell { width:min(1180px,100%); margin:auto; padding:24px; }
+      header { background:rgba(23,23,23,.97); color:var(--paper); box-shadow:0 8px 24px rgba(23,23,23,.12); }
+      .topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; min-height:34px; }
+      .brand { font:700 21px Didot,"Times New Roman",serif; letter-spacing:2px; }
+      .brand span { color:var(--gold); }
+      .top-actions { display:flex; align-items:center; gap:10px; }
+      .button { border:1px solid var(--gold); background:var(--gold); color:var(--ink); padding:10px 14px; font-weight:700; border-radius:3px; transition:transform .18s ease,background .18s ease; }
+      .button:hover { transform:translateY(-1px); background:#d0a033; }
+      .button.secondary { background:transparent; color:inherit; border-color:currentColor; }
+      .button.danger { background:transparent; color:var(--danger); border-color:var(--danger); }
+      .view { display:none; }
+      .view.active { display:block; }
+      .login { min-height:100vh; display:grid; place-items:center; padding:24px; }
+      .login-card { width:min(430px,100%); background:rgba(255,255,255,.92); border:1px solid var(--line); padding:34px; box-shadow:0 18px 60px rgba(23,23,23,.12); }
+      h1,h2,h3 { font-family:Didot,"Times New Roman",serif; margin:0; }
+      h1 { font-size:clamp(32px,6vw,54px); line-height:1; }
+      h2 { font-size:30px; }
+      label { display:grid; gap:6px; color:var(--muted); font-size:13px; font-weight:700; }
+      input,textarea,select { width:100%; border:1px solid var(--line); background:#fff; padding:11px 12px; color:var(--ink); border-radius:2px; }
+      textarea { min-height:90px; resize:vertical; }
+      form { display:grid; gap:14px; }
+      .form-actions { display:flex; gap:10px; flex-wrap:wrap; }
+      .error { color:var(--danger); min-height:22px; }
+      .hero { padding:54px 0 30px; }
+      .eyebrow { color:var(--gold); font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; }
+      .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:20px 0 38px; }
+      .stat { background:rgba(255,255,255,.78); border:1px solid var(--line); border-top:3px solid var(--gold); padding:18px; box-shadow:0 8px 24px rgba(23,23,23,.05); }
+      .stat strong { display:block; font:700 32px Didot,"Times New Roman",serif; }
+      .stat span { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:1px; }
+      .columns { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:start; }
+      .panel { background:rgba(255,255,255,.9); border:1px solid var(--line); padding:24px; box-shadow:0 8px 24px rgba(23,23,23,.05); }
+      .panel-head { display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:18px; }
+      .product-list { display:grid; gap:10px; }
+      .product-row { display:grid; grid-template-columns:62px 1fr auto; gap:14px; align-items:center; padding:12px 0; border-bottom:1px solid var(--line); }
+      .product-row img { width:62px; height:62px; object-fit:cover; background:var(--panel); border:1px solid var(--line); }
+      .product-row h3 { font-size:19px; }
+      .product-row p { margin:2px 0 0; color:var(--muted); font-size:13px; }
+      .row-actions { display:flex; gap:6px; }
+      .icon-button { border:1px solid var(--line); background:transparent; padding:7px 9px; }
+      .leads { margin-top:24px; }
+      .lead-row { padding:13px 0; border-bottom:1px solid var(--line); }
+      .lead-meta { color:var(--muted); font-size:12px; }
+      .empty { color:var(--muted); padding:18px 0; }
+      @media (max-width:760px) { body { font-size:14px; } .shell { padding:18px; } .topbar { align-items:flex-start; flex-wrap:wrap; } .brand { font-size:18px; } .top-actions { width:100%; justify-content:flex-end; } .top-actions .button { padding:8px 10px; } .hero { padding:34px 0 24px; } .hero h1 { font-size:42px; } .stats { grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:26px; } .stat { padding:14px; } .stat strong { font-size:27px; } .columns { grid-template-columns:1fr; gap:16px; } .panel { padding:18px; } .panel-head { align-items:flex-start; } .product-row { grid-template-columns:50px 1fr; gap:10px; } .product-row img { width:50px; height:50px; } .row-actions { grid-column:2; } .row-actions .icon-button { padding:7px 12px; } .login-card { padding:26px 20px; } }
+      @media (max-width:420px) { .stats { grid-template-columns:1fr 1fr; } .stat span { font-size:10px; letter-spacing:.6px; } .top-actions { justify-content:stretch; } .top-actions .button { flex:1; text-align:center; } }
+    </style>
+  </head>
+  <body>
+    <section class="view active" id="loginView">
+      <div class="login">
+        <form class="login-card" id="loginForm">
+          <p class="eyebrow">Shudh Loha</p>
+          <h1>Admin portal</h1>
+          <p>Sign in to manage products, leads, and site activity.</p>
+          <label>Email<input id="email" type="email" autocomplete="email" required /></label>
+          <label>Password<input id="password" type="password" autocomplete="current-password" required /></label>
+          <button class="button" type="submit">Sign in</button>
+          <div class="error" id="loginError" role="alert"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="view" id="appView">
+      <header><div class="shell topbar"><div class="brand"><span>◆</span> SHUDH LOHA / ADMIN</div><div class="top-actions"><a class="button secondary" href="index.html">View site</a><button class="button secondary" id="signOut" type="button">Sign out</button></div></div></header>
+      <main class="shell">
+        <div class="hero"><p class="eyebrow">Overview</p><h1>Good morning.</h1><p>Keep the catalogue current and follow every enquiry from your phone.</p></div>
+        <div class="stats"><div class="stat"><strong id="viewsCount">0</strong><span>Views, 7 days</span></div><div class="stat"><strong id="leadsCount">0</strong><span>Leads, 7 days</span></div><div class="stat"><strong id="whatsappCount">0</strong><span>WhatsApp clicks</span></div><div class="stat"><strong id="productsCount">0</strong><span>Active products</span></div></div>
+        <div class="columns">
+          <section class="panel"><div class="panel-head"><h2>Products</h2><button class="button" id="newProduct" type="button">Add product</button></div><div class="product-list" id="productList"></div></section>
+          <section class="panel"><div class="panel-head"><h2 id="formTitle">New product</h2></div><form id="productForm"><input id="productId" type="hidden" /><label>Name<input id="productName" required /></label><label>Category<input id="productCategory" value="Iron Kitchenware" required /></label><label>Description<textarea id="productDescription">Pure iron and hand-finished.</textarea></label><label>Price or note<input id="productPrice" placeholder="Call for Price" /></label><label>Product image<input id="productImage" type="file" accept="image/*" /></label><label>Or image URL<input id="productImageUrl" type="url" placeholder="https://..." /></label><label><span>Visible on site</span><select id="productActive"><option value="true">Yes</option><option value="false">No</option></select></label><div class="form-actions"><button class="button" type="submit">Save product</button><button class="button secondary" id="cancelEdit" type="button">Clear</button></div><div class="error" id="productError" role="alert"></div></form></section>
+        </div>
+        <section class="panel leads"><div class="panel-head"><h2>Recent leads</h2><button class="button secondary" id="refresh" type="button">Refresh</button></div><div id="leadList"></div></section>
+      </main>
+    </section>
+
+    <script src="supabase-config.js"></script>
+    <script>
+      const configured = SHUDH_SUPABASE_READY;
+      const client = shudhSupabase;
+      const $ = (id) => document.getElementById(id);
+      const show = (id) => { $("loginView").classList.toggle("active", id === "loginView"); $("appView").classList.toggle("active", id === "appView"); };
+      const formatDate = (value) => new Date(value).toLocaleString([], { dateStyle: "medium", timeStyle: "short" });
+      const reportError = (element, error) => { element.textContent = error?.message || String(error); };
+      const daysAgo = (days) => new Date(Date.now() - days * 86400000).toISOString();
+
+      async function loadProducts() {
+        const { data, error } = await client.from("products").select("*").order("sort_order").order("created_at");
+        if (error) throw error;
+        $("productsCount").textContent = data.filter((item) => item.is_active).length;
+        $("productList").innerHTML = data.length ? data.map((item) => `<article class="product-row"><img src="${item.image_url || "logo.png"}" alt=""><div><h3>${item.name}</h3><p>${item.category} · ${item.is_active ? "Visible" : "Hidden"}</p></div><div class="row-actions"><button class="icon-button" type="button" data-edit="${item.id}">Edit</button><button class="icon-button" type="button" data-delete="${item.id}">Delete</button></div></article>`).join("") : '<p class="empty">No products yet.</p>';
+        document.querySelectorAll("[data-edit]").forEach((button) => button.addEventListener("click", () => editProduct(data.find((item) => item.id === button.dataset.edit))));
+        document.querySelectorAll("[data-delete]").forEach((button) => button.addEventListener("click", () => deleteProduct(button.dataset.delete)));
+      }
+      function editProduct(item) { $("formTitle").textContent = "Edit product"; $("productId").value = item.id; $("productName").value = item.name; $("productCategory").value = item.category; $("productDescription").value = item.description; $("productPrice").value = item.price || ""; $("productImageUrl").value = item.image_url || ""; $("productActive").value = String(item.is_active); window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }); }
+      async function deleteProduct(id) { if (!confirm("Delete this product?")) return; const { error } = await client.from("products").delete().eq("id", id); if (error) return reportError($("productError"), error); clearForm(); await loadProducts(); }
+      function clearForm() { $("productForm").reset(); $("productId").value = ""; $("productCategory").value = "Iron Kitchenware"; $("productDescription").value = "Pure iron and hand-finished."; $("formTitle").textContent = "New product"; $("productError").textContent = ""; }
+      async function uploadImage(file) { const extension = file.name.split(".").pop().toLowerCase(); const path = `${crypto.randomUUID()}.${extension}`; const result = await client.storage.from("product-images").upload(path, file, { upsert: false }); if (result.error) throw result.error; return client.storage.from("product-images").getPublicUrl(path).data.publicUrl; }
+      $("productForm").addEventListener("submit", async (event) => { event.preventDefault(); $("productError").textContent = "Saving..."; try { let imageUrl = $("productImageUrl").value.trim() || null; if ($("productImage").files[0]) imageUrl = await uploadImage($("productImage").files[0]); const payload = { name: $("productName").value.trim(), category: $("productCategory").value.trim(), description: $("productDescription").value.trim(), price: $("productPrice").value.trim() || null, image_url: imageUrl, is_active: $("productActive").value === "true", updated_at: new Date().toISOString() }; const id = $("productId").value; const query = id ? client.from("products").update(payload).eq("id", id) : client.from("products").insert(payload); const { error } = await query; if (error) throw error; clearForm(); await loadProducts(); } catch (error) { reportError($("productError"), error); } });
+      async function loadMetrics() { const since = daysAgo(7); const [views, leads] = await Promise.all([client.from("page_views").select("id", { count: "exact", head: true }).gte("created_at", since), client.from("leads").select("kind", { count: "exact" }).gte("created_at", since)]); if (views.error) throw views.error; if (leads.error) throw leads.error; $("viewsCount").textContent = views.count || 0; $("leadsCount").textContent = leads.data.length || 0; $("whatsappCount").textContent = leads.data.filter((lead) => lead.kind === "whatsapp").length; }
+      async function loadLeads() { const { data, error } = await client.from("leads").select("*").order("created_at", { ascending: false }).limit(30); if (error) throw error; $("leadList").innerHTML = data.length ? data.map((lead) => `<article class="lead-row"><strong>${lead.kind === "form" ? (lead.name || "Form enquiry") : lead.kind === "whatsapp" ? "WhatsApp click" : "Phone click"}</strong><div class="lead-meta">${formatDate(lead.created_at)}${lead.product_name ? ` · ${lead.product_name}` : ""}${lead.phone ? ` · ${lead.phone}` : ""}</div>${lead.message ? `<div>${lead.message}</div>` : ""}</article>`).join("") : '<p class="empty">No leads yet.</p>'; }
+      async function refreshApp() { try { await Promise.all([loadProducts(), loadMetrics(), loadLeads()]); } catch (error) { reportError($("productError"), error); } }
+      $("loginForm").addEventListener("submit", async (event) => { event.preventDefault(); if (!configured) return reportError($("loginError"), "Add your Supabase URL and anon key in admin.html first."); const { error } = await client.auth.signInWithPassword({ email: $("email").value, password: $("password").value }); if (error) return reportError($("loginError"), error); show("appView"); refreshApp(); });
+      $("signOut").addEventListener("click", async () => { await client.auth.signOut(); show("loginView"); });
+      $("newProduct").addEventListener("click", clearForm); $("cancelEdit").addEventListener("click", clearForm); $("refresh").addEventListener("click", refreshApp);
+      if (configured) client.auth.getSession().then(({ data }) => { if (data.session) { show("appView"); refreshApp(); } });
+    </script>
+  </body>
+</html>
