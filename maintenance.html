@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Site Maintenance | Shudh Loha</title>
+    <meta name="description" content="Shudh Loha is temporarily unavailable while we improve the site." />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/png" href="logo.png" />
+    <style>
+      :root {
+        --ink: #171717;
+        --cream: #fbfaf6;
+        --cream-deep: #f1ebdd;
+        --gold: #b88a24;
+        --rust: #a97818;
+        --line: rgba(20, 18, 16, 0.14);
+        --display: Didot, "Bodoni MT", "Times New Roman", serif;
+        --body: "Trebuchet MS", "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        background-color: var(--cream);
+        background-image:
+          linear-gradient(rgba(184, 138, 36, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(184, 138, 36, 0.05) 1px, transparent 1px);
+        background-size: 28px 28px;
+        color: var(--ink);
+        font-family: var(--body);
+      }
+      main {
+        width: min(680px, calc(100% - 36px));
+        padding: 56px 28px;
+        text-align: center;
+        background: rgba(251, 250, 246, 0.94);
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 60px rgba(23, 23, 23, 0.1);
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--ink);
+        font: 700 22px var(--display);
+        letter-spacing: 2.5px;
+      }
+      .brand-mark {
+        width: 10px;
+        height: 10px;
+        border: 1px solid var(--gold);
+        transform: rotate(45deg);
+      }
+      .eyebrow {
+        margin: 58px 0 12px;
+        color: var(--rust);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+      h1 {
+        max-width: 530px;
+        margin: 0 auto;
+        font: 700 clamp(42px, 8vw, 76px)/1 var(--display);
+      }
+      .message {
+        max-width: 470px;
+        margin: 24px auto 0;
+        color: #3d3a35;
+        font-size: 17px;
+      }
+      .rule {
+        width: 54px;
+        height: 2px;
+        margin: 34px auto;
+        background: var(--gold);
+      }
+      .contact {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .button {
+        display: inline-block;
+        padding: 13px 20px;
+        border: 1px solid var(--gold);
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .button.primary { background: var(--gold); }
+      .button:hover { background: var(--cream-deep); }
+      .button.primary:hover { background: #d0a033; }
+      .location {
+        margin: 34px 0 0;
+        color: #686158;
+        font-size: 13px;
+      }
+      @media (max-width: 480px) {
+        main { padding: 42px 20px; }
+        .eyebrow { margin-top: 44px; }
+        .message { font-size: 15px; }
+        .contact { display: grid; }
+        .button { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="brand"><span class="brand-mark"></span>SHUDH LOHA</div>
+      <p class="eyebrow">A little patience, please</p>
+      <h1>We are improving our site.</h1>
+      <p class="message">Our online catalogue is temporarily unavailable while we make a few improvements. We will be back shortly.</p>
+      <div class="rule"></div>
+      <div class="contact">
+        <a class="button primary" href="https://wa.me/917973247767" target="_blank" rel="noopener">WhatsApp us</a>
+        <a class="button" href="tel:+917973247767">Call us</a>
+      </div>
+      <p class="location">Pure Loha, Pure Quality · Malerkotla, Punjab</p>
+    </main>
+  </body>
+</html>
