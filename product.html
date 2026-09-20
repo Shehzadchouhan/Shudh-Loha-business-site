@@ -56,7 +56,6 @@
     'Iron Tava': ['Iron Cookware', 'Assets 2/tawa.png']
   };
   const item = new URLSearchParams(location.search).get('item') || 'Kadhai';
-  sessionStorage.setItem('shudhPendingItem', item);
   let product = products[item] || products['Iron Tawa'];
   if (shudhSupabase) {
     shudhSupabase.from('products').select('name,category,image_url,image_urls,description,price').eq('name', item).eq('is_active', true).maybeSingle().then(({ data }) => {
@@ -81,7 +80,6 @@
   renderVisual(item, product[1], product[4]);
   document.getElementById('whatsapp').href = `https://wa.me/${number}?text=${encodeURIComponent(`Hi, I'm interested in ${item}. Can you share the size, weight, price, and delivery details?`)}`;
   shudhTrackView();
-  shudhTrackItemView(item);
   document.getElementById('whatsapp').addEventListener('click', () => shudhTrackLead('whatsapp', item));
   document.querySelector('a[href^="tel:"]').addEventListener('click', () => shudhTrackLead('phone', item));
   const translations = {
