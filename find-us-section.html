@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Find Us Section</title>
+<style>
+  :root{
+    --gold: #f5b301;
+    --gold-soft: #d9a441;
+    --bg: #0b0b0c;
+    --text-muted: #b9b9be;
+  }
+
+  * { box-sizing: border-box; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #fff;
+  }
+
+  .find-us{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 60px;
+    padding: 80px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ---------- LEFT SIDE ---------- */
+  .find-us__left{
+    flex: 1 1 420px;
+    position: relative;
+    min-width: 320px;
+  }
+
+  .find-us__label{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .find-us__label .spark{ font-size: 12px; opacity: .8; }
+
+  .find-us__btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    background: transparent;
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    margin-bottom: 24px;
+  }
+
+  .find-us__btn:hover{ background: rgba(245,179,1,.1); }
+
+  .find-us__desc{
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 320px;
+    margin-bottom: 60px;
+  }
+
+  .find-us__torch-wrap{
+    position: relative;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+  }
+
+  .find-us__torch{
+    width: 220px;
+    height: auto;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 0 20px rgba(245,179,1,.4));
+  }
+
+  /* glowing cone of light behind the torch */
+  .find-us__beam{
+    position: absolute;
+    left: 90px;
+    top: 50%;
+    width: 480px;
+    height: 240px;
+    transform: translateY(-50%);
+    background: radial-gradient(ellipse at left center,
+                rgba(245,179,1,.55) 0%,
+                rgba(245,179,1,.18) 45%,
+                rgba(245,179,1,0) 75%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .find-us__copy{
+    position: relative;
+    z-index: 2;
+    margin-left: 200px;
+  }
+
+  .find-us__on{
+    display: block;
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+
+  .find-us__heading{
+    font-size: 42px;
+    line-height: 1.15;
+    font-family: Georgia, 'Times New Roman', serif;
+    margin: 0;
+  }
+
+  .find-us__heading .line1{ color: #f2f2f2; }
+  .find-us__heading .line2{ color: var(--gold); font-weight: 700; }
+
+  /* ---------- RIGHT SIDE (map) ---------- */
+  .find-us__right{
+    flex: 1 1 480px;
+    min-width: 320px;
+  }
+
+  .map-frame{
+    border: 2px solid var(--gold);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(245,179,1,.35);
+    line-height: 0;
+  }
+
+  .map-frame iframe{
+    width: 100%;
+    height: 380px;
+    border: 0;
+    display: block;
+  }
+
+  @media (max-width: 860px){
+    .find-us{ padding: 50px 24px; }
+    .find-us__copy{ margin-left: 140px; }
+    .find-us__heading{ font-size: 30px; }
+  }
+
+  @media (max-width: 560px){
+    .find-us__torch{ width: 150px; }
+    .find-us__beam{ width: 300px; height: 160px; left: 60px; }
+    .find-us__copy{ margin-left: 0; margin-top: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="find-us">
+
+  <!-- LEFT -->
+  <div class="find-us__left">
+    <div class="find-us__label">
+      <span class="spark">⟿</span> 📍 FIND US <span class="spark">⟿</span>
+    </div>
+
+    <a href="https://maps.google.com" target="_blank" class="find-us__btn">
+      📍 OPEN IN GOOGLE MAPS &nbsp;→
+    </a>
+
+    <p class="find-us__desc">
+      Ready to visit? Click below to see our location on Google Maps.
+    </p>
+
+    <div class="find-us__torch-wrap">
+      <div class="find-us__beam"></div>
+      <img src="torch.png" alt="Torch" class="find-us__torch">
+      <div class="find-us__copy">
+        <span class="find-us__on">LIGHT ON!</span>
+        <h2 class="find-us__heading">
+          <span class="line1">Visit us in</span><br>
+          <span class="line2">Malerkotla.</span>
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="find-us__right">
+    <div class="map-frame">
+      <iframe
+        src="https://www.google.com/maps?q=Malerkotla,Punjab&output=embed"
+        allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+
+</section>
+
+</body>
+</html>

@@ -7,13 +7,6 @@
     <meta
       name="description"
       content="Shudh Loha — traditional pure iron kitchenware from Malerkotla, Punjab."
-    />
-    <meta
-      name="keywords"
-      content="pure iron cookware, iron kitchenware, Malerkotla, Punjab"
-    />
-    <meta property="og:title" content="Shudh Loha — Pure Iron, Pure Quality" />
-    <meta
       property="og:description"
       content="Traditional articles and hand-finished iron kitchenware from Malerkotla, Punjab."
     />
@@ -139,7 +132,6 @@
         top: 0;
         z-index: 50;
         background: rgba(20, 18, 16, 0.96);
-        border-bottom: 1px solid var(--line-on-dark);
         backdrop-filter: blur(6px);
       }
       .nav-inner {
@@ -215,6 +207,11 @@
         color: var(--cream);
         font-size: 24px;
         cursor: pointer;
+        transition: transform 0.25s ease, color 0.25s ease;
+      }
+      .nav-toggle[aria-expanded="true"] {
+        transform: rotate(90deg) scale(1.08);
+        color: var(--gold);
       }
       .language-select {
         background: transparent;
@@ -261,22 +258,236 @@
         }
       }
 
+      @media (prefers-reduced-motion: reduce) {
+        .nav-toggle {
+          transition: none;
+        }
+      }
+
       /* ---------- Hero ---------- */
       .hero {
-        background:
-          radial-gradient(
-            circle at 18% 20%,
-            rgba(184, 138, 36, 0.14),
-            transparent 42%
-          ),
-          var(--ink);
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        background: var(--ink);
         color: var(--cream);
         position: relative;
         overflow: hidden;
-        border-bottom: 1px solid var(--gold);
       }
-      .hero .wrap {
-        padding: 96px 28px 84px;
+      .hero-slider {
+        position: relative;
+        min-height: 540px;
+        overflow: hidden;
+        background: var(--ink);
+      }
+      .hero-opening-curtain {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        display: flex;
+        pointer-events: none;
+      }
+      .hero-opening-curtain::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 2px;
+        background: var(--gold);
+        box-shadow: 0 0 22px rgba(220, 180, 58, 0.9);
+        transform: translateX(-50%);
+        opacity: 1;
+        animation: curtain-seam 1.7s 0.05s ease-in forwards;
+      }
+      .hero-opening-curtain::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, rgba(255, 220, 102, 0.3), transparent 30%);
+        opacity: 1;
+        animation: curtain-glow 1.7s 0.05s ease-in forwards;
+      }
+      .hero-curtain-panel {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        background:
+          repeating-linear-gradient(90deg, rgba(255, 221, 91, 0.08) 0 12px, transparent 12px 28px),
+          linear-gradient(105deg, #806016, #d4a92d 48%, #8d6817);
+        box-shadow: inset 0 0 60px rgba(20, 18, 16, 0.28);
+      }
+      .hero-curtain-panel::before {
+        display: none;
+      }
+      .hero-curtain-panel::after {
+        display: none;
+      }
+      .hero-curtain-panel:first-child {
+        border-right: 1px solid rgba(255, 224, 113, 0.78);
+        clip-path: none;
+        animation: curtain-left-open 1.75s 0.08s cubic-bezier(0.72, 0, 0.24, 1) forwards;
+      }
+      .hero-curtain-panel:last-child {
+        border-left: 1px solid rgba(255, 224, 113, 0.78);
+        clip-path: none;
+        animation: curtain-right-open 1.75s 0.08s cubic-bezier(0.72, 0, 0.24, 1) forwards;
+      }
+      @keyframes curtain-left-open {
+        to { transform: translateX(-100%); }
+      }
+      @keyframes curtain-right-open {
+        to { transform: translateX(100%); }
+      }
+      @keyframes curtain-seam {
+        0%, 76% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+      @keyframes curtain-glow {
+        0%, 55% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+      .hero-slide {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateX(5%);
+        transition: opacity 0.55s ease, transform 0.55s ease;
+      }
+      .hero-slide.is-active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0);
+      }
+      .hero-slide--intro {
+        background:
+          radial-gradient(circle at 78% 48%, rgba(184, 138, 36, 0.16), transparent 28%),
+          linear-gradient(110deg, #171717 0%, #171717 52%, #211d17 100%);
+      }
+      .hero-slide--intro .hero-intro-copy {
+        position: relative;
+        z-index: 2;
+      }
+      .hero-slide--intro .hero-intro-copy > * {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      .hero-slide--intro.is-active .hero-intro-copy > * {
+        animation: hero-text-in 0.75s cubic-bezier(0.22, 0.8, 0.25, 1) forwards;
+      }
+      .hero-slide--intro.is-active .hero-intro-copy .eyebrow {
+        animation-delay: 0.16s;
+      }
+      .hero-slide--intro.is-active .hero-intro-copy h1 {
+        animation-delay: 0.28s;
+      }
+      .hero-slide--intro.is-active .hero-intro-copy .hero-cta {
+        animation-delay: 0.48s;
+      }
+      .hero-slide--intro .hero-art {
+        isolation: isolate;
+      }
+      .hero-slide--intro .hero-art::before {
+        content: "";
+        position: absolute;
+        inset: -9%;
+        border: 1px solid rgba(184, 138, 36, 0.32);
+        border-radius: 50%;
+        box-shadow: 0 0 34px rgba(184, 138, 36, 0.12);
+        transform: scale(0.82) rotate(-12deg);
+        opacity: 0;
+      }
+      .hero-slide--intro.is-active .hero-art::before {
+        animation: hero-ring-in 1.15s 0.1s cubic-bezier(0.2, 0.75, 0.25, 1) forwards;
+      }
+      .hero-slide--intro .hero-logo {
+        position: relative;
+        z-index: 1;
+        opacity: 0;
+        transform: scale(0.78) rotate(-7deg);
+      }
+      .hero-slide--intro.is-active .hero-logo {
+        animation: hero-logo-in 1.05s 0.18s cubic-bezier(0.18, 0.82, 0.25, 1) forwards;
+      }
+      @keyframes hero-text-in {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes hero-ring-in {
+        to {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+        }
+      }
+      @keyframes hero-logo-in {
+        60% {
+          opacity: 1;
+          transform: scale(1.03) rotate(1deg);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+        }
+      }
+      .hero-slide .wrap > div:first-child > *,
+      .hero-slide .hero-art,
+      .hero-slide .offer-card {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      .hero-slide.is-active .wrap > div:first-child > *,
+      .hero-slide.is-active .hero-art,
+      .hero-slide.is-active .offer-card {
+        animation: hero-text-in 0.75s cubic-bezier(0.22, 0.8, 0.25, 1) forwards;
+      }
+      .hero-slide.is-active .wrap > div:first-child > *:nth-child(1) {
+        animation-delay: 0.16s;
+      }
+      .hero-slide.is-active .wrap > div:first-child > *:nth-child(2) {
+        animation-delay: 0.28s;
+      }
+      .hero-slide.is-active .wrap > div:first-child > *:nth-child(3) {
+        animation-delay: 0.48s;
+      }
+      .hero-slide.is-active .hero-art,
+      .hero-slide.is-active .offer-card {
+        animation-name: hero-art-in;
+        animation-delay: 0.18s;
+      }
+      .hero-slide--products.is-active .hero-product-collage img {
+        opacity: 0;
+        transform: scale(0.94) translateY(14px);
+        animation: hero-collage-in 0.7s cubic-bezier(0.22, 0.8, 0.25, 1) forwards;
+      }
+      .hero-slide--products.is-active .hero-product-collage img:nth-child(1) {
+        animation-delay: 0.24s;
+      }
+      .hero-slide--products.is-active .hero-product-collage img:nth-child(2) {
+        animation-delay: 0.36s;
+      }
+      .hero-slide--products.is-active .hero-product-collage img:nth-child(3) {
+        animation-delay: 0.48s;
+      }
+      @keyframes hero-art-in {
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      @keyframes hero-collage-in {
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      .hero-slide .wrap {
+        width: 100%;
+        padding: 78px 28px 92px;
         display: grid;
         grid-template-columns: 1.1fr 0.9fr;
         gap: 48px;
@@ -328,6 +539,7 @@
       }
       .btn-primary:hover {
         background: #dcb43a;
+        box-shadow: 0 0 0 5px rgba(184, 138, 36, 0.22), 0 0 18px rgba(220, 180, 58, 0.55);
       }
       .btn-ghost {
         border-color: var(--line-on-dark);
@@ -335,6 +547,13 @@
       }
       .btn-ghost:hover {
         border-color: var(--gold);
+        box-shadow: 0 0 0 5px rgba(184, 138, 36, 0.16), 0 0 16px rgba(184, 138, 36, 0.35);
+      }
+      .btn {
+        transition:
+          transform 0.18s ease,
+          background 0.18s ease,
+          box-shadow 0.25s ease;
       }
 
       .hero-art {
@@ -342,6 +561,120 @@
         width: 100%;
         max-width: 360px;
         justify-self: end;
+      }
+      .hero-slide--story {
+        background: linear-gradient(110deg, rgba(23, 23, 23, 0.98), rgba(66, 49, 25, 0.92));
+      }
+      .hero-slide--products {
+        background: linear-gradient(110deg, #171717 0%, #27241f 58%, #4d371a 100%);
+      }
+      .hero-slide--offer {
+        background: linear-gradient(110deg, #171717 0%, #512f21 58%, #a97818 100%);
+      }
+      .hero-slide--contact {
+        background: linear-gradient(110deg, #171717 0%, #183c3a 100%);
+      }
+      .hero-slide--story .hero-art,
+      .hero-slide--contact .hero-art {
+        max-width: 410px;
+        padding: 30px;
+        border: 1px solid rgba(251, 250, 246, 0.25);
+        background: rgba(251, 250, 246, 0.06);
+      }
+      .hero-slide--story .hero-art::before,
+      .hero-slide--contact .hero-art::before {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border: 1px solid rgba(184, 138, 36, 0.7);
+        pointer-events: none;
+      }
+      .hero-slide--story .hero-art p,
+      .hero-slide--contact .hero-art p {
+        position: relative;
+        margin: 0;
+        color: rgba(244, 238, 225, 0.78);
+        font-family: var(--font-display);
+        font-size: clamp(26px, 3vw, 40px);
+        line-height: 1.1;
+      }
+      .hero-product-collage {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 10px;
+      }
+      .hero-product-collage img {
+        width: 100%;
+        height: 100%;
+        min-height: 135px;
+        object-fit: cover;
+        border: 1px solid rgba(251, 250, 246, 0.35);
+      }
+      .hero-product-collage img:first-child {
+        grid-row: span 2;
+      }
+      .offer-kicker {
+        display: inline-block;
+        margin-bottom: 14px;
+        padding: 6px 10px;
+        background: var(--gold);
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .offer-card {
+        max-width: 390px;
+        margin-left: auto;
+        padding: 34px;
+        border: 1px solid rgba(251, 250, 246, 0.35);
+        background: rgba(23, 23, 23, 0.35);
+      }
+      .offer-card strong {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--gold);
+        font-family: var(--font-display);
+        font-size: 54px;
+        line-height: 0.95;
+      }
+      .slider-controls {
+        position: absolute;
+        right: max(28px, calc((100% - var(--maxw)) / 2 + 28px));
+        bottom: 26px;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      #heroDots {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .slider-arrow,
+      .slider-dot {
+        border: 1px solid rgba(251, 250, 246, 0.45);
+        background: rgba(23, 23, 23, 0.45);
+        color: var(--cream);
+        cursor: pointer;
+      }
+      .slider-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 20px;
+      }
+      .slider-dot {
+        width: 9px;
+        height: 9px;
+        padding: 0;
+        border-radius: 50%;
+      }
+      .slider-dot.is-active {
+        background: var(--gold);
+        border-color: var(--gold);
+        transform: scale(1.25);
       }
       .hero-logo {
         width: 100%;
@@ -369,6 +702,51 @@
       @keyframes spin {
         to {
           transform: rotate(360deg);
+        }
+      }
+
+      /* ---------- Sparkle particles ---------- */
+      .sparkle {
+        position: absolute;
+        color: var(--gold);
+        opacity: 0;
+        pointer-events: none;
+        font-size: 18px;
+        text-shadow: 0 0 10px rgba(184, 138, 36, 0.8);
+        animation: sparkle-float 3.2s ease-in-out infinite;
+        z-index: 1;
+      }
+      .sparkle.s-sm {
+        font-size: 11px;
+      }
+      .sparkle.s-lg {
+        font-size: 26px;
+      }
+      @keyframes sparkle-float {
+        0% {
+          opacity: 0;
+          transform: translateY(8px) scale(0.75) rotate(0deg);
+        }
+        18% {
+          opacity: 1;
+          transform: translateY(2px) scale(1) rotate(6deg);
+        }
+        50% {
+          opacity: 0.9;
+          transform: translateY(-12px) scale(1.25) rotate(12deg);
+        }
+        82% {
+          opacity: 1;
+          transform: translateY(-22px) scale(1.1) rotate(18deg);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-30px) scale(0.7) rotate(24deg);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .sparkle {
+          display: none;
         }
       }
 
@@ -407,15 +785,105 @@
       }
 
       @media (max-width: 820px) {
-        .hero .wrap {
+        .hero-slider {
+          min-height: 650px;
+        }
+        .hero-slide .wrap {
           grid-template-columns: 1fr;
           padding: 64px 24px 56px;
+          align-content: start;
+          align-items: start;
         }
         .hero-art {
           order: -1;
           max-width: 240px;
           margin: 0 auto;
           justify-self: center;
+        }
+        .hero-slide--story .hero-art,
+        .hero-slide--contact .hero-art {
+          padding: 22px;
+        }
+        .slider-controls {
+          right: 24px;
+          bottom: 18px;
+        }
+        .find-us {
+          gap: 36px;
+          padding: 56px 20px;
+        }
+        .find-us__left,
+        .find-us__right {
+          min-width: 0;
+        }
+        .find-us__label {
+          font-size: clamp(18px, 4.8vw, 30px);
+          letter-spacing: 2px;
+        }
+        .find-us__desc {
+          margin-bottom: 28px;
+        }
+        .find-us .map-frame iframe {
+          height: clamp(280px, 70vw, 380px);
+        }
+        .contact-actions .btn {
+          flex: 1 1 150px;
+        }
+        .hero-cta {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+          width: min(100%, 320px);
+        }
+        .hero-cta .btn {
+          justify-content: center;
+          width: 100%;
+        }
+      }
+      @media (max-width: 520px) {
+        .hero-slider {
+          min-height: 760px;
+        }
+        .hero-slide .wrap {
+          padding: 48px 18px 132px;
+        }
+        .hero h1 {
+          font-size: 42px;
+        }
+        .hero-product-collage {
+          gap: 6px;
+        }
+        .hero-product-collage img {
+          min-height: 105px;
+        }
+        .offer-card {
+          padding: 24px;
+        }
+        .offer-card strong {
+          font-size: 43px;
+        }
+        .slider-controls {
+          left: 18px;
+          right: auto;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hero-slide {
+          transition: none;
+        }
+        .hero-opening-curtain {
+          display: none;
+        }
+        .hero-slide--intro .hero-intro-copy > *,
+        .hero-slide--intro .hero-logo,
+        .hero-slide--intro .hero-art::before,
+        .hero-slide .wrap > div:first-child > *,
+        .hero-slide .hero-art,
+        .hero-slide .offer-card,
+        .hero-slide--products .hero-product-collage img {
+          opacity: 1;
+          transform: none;
+          animation: none;
         }
       }
 
@@ -424,12 +892,91 @@
         padding: 88px 0;
       }
       .section-head {
-        max-width: 640px;
-        margin-bottom: 52px;
+        max-width: 700px;
+        margin: 0 auto 52px;
+        position: relative;
+        text-align: center;
       }
       .section-head h2 {
         font-size: clamp(28px, 3.6vw, 40px);
         margin-top: 10px;
+        position: relative;
+      }
+      .product-title-sweep {
+        color: var(--ink);
+      }
+      .product-title-sweep::after {
+        content: "";
+        position: absolute;
+        top: 52%;
+        left: -18%;
+        width: 76px;
+        height: 2px;
+        opacity: 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(220, 180, 58, 0.2),
+          var(--gold),
+          rgba(220, 180, 58, 0.2),
+          transparent
+        );
+        box-shadow: 0 0 12px rgba(220, 180, 58, 0.75);
+        pointer-events: none;
+      }
+      .section-head.gold-sweep-in .product-title-sweep {
+        color: transparent;
+        background: linear-gradient(
+          105deg,
+          var(--ink) 0%,
+          var(--ink) 36%,
+          var(--gold-soft) 47%,
+          #f1d477 50%,
+          var(--ink) 64%,
+          var(--ink) 100%
+        );
+        background-size: 260% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: heading-gold-sweep 1.7s cubic-bezier(0.22, 0.8, 0.25, 1) both;
+      }
+      .section-head.gold-sweep-in .product-title-sweep::after {
+        animation: heading-sparkle-sweep 1.15s 0.18s ease-out both;
+      }
+      @keyframes heading-gold-sweep {
+        from {
+          background-position: 100% 0;
+        }
+        to {
+          background-position: 0 0;
+        }
+      }
+      @keyframes heading-sparkle-sweep {
+        0% {
+          left: -18%;
+          opacity: 0;
+        }
+        18% {
+          opacity: 1;
+        }
+        82% {
+          opacity: 0.9;
+        }
+        100% {
+          left: 108%;
+          opacity: 0;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .section-head.gold-sweep-in .product-title-sweep {
+          color: var(--ink);
+          background: none;
+          animation: none;
+        }
+        .section-head.gold-sweep-in .product-title-sweep::after {
+          animation: none;
+          display: none;
+        }
       }
       .divider {
         width: 100%;
@@ -508,32 +1055,176 @@
       /* ---------- Products ---------- */
       .cat-tag {
         display: inline-block;
-        font-size: 11px;
+        font-size: 12px;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: var(--gold-soft);
         border: 1px solid rgba(169, 120, 24, 0.45);
-        padding: 5px 11px;
+        padding: 7px 13px;
         border-radius: var(--radius);
-        margin-bottom: 14px;
+        margin-bottom: 0;
       }
       .product-grid {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 22px;
         margin-top: 26px;
-        overflow-x: auto;
         padding: 2px 2px 14px;
-        scrollbar-width: none;
       }
-      .product-grid::-webkit-scrollbar {
-        display: none;
+      .carousel {
+        position: relative;
+      }
+      .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) scale(0.85);
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: rgba(251, 250, 246, 0.92);
+        color: var(--ink);
+        font-size: 22px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 3;
+        opacity: 0;
+        transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.2s ease;
+      }
+      .carousel:hover .carousel-arrow {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+      }
+      .carousel-arrow:hover {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 4px rgba(184, 138, 36, 0.18);
+      }
+      .carousel-prev {
+        left: -14px;
+      }
+      .carousel-next {
+        right: -14px;
+      }
+      @media (max-width: 820px) {
+        .product-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .carousel-arrow {
+          display: none;
+        }
+      }
+      @media (max-width: 560px) {
+        .product-grid {
+          display: flex;
+          gap: 14px;
+          overflow-x: auto;
+          grid-template-columns: none;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+          overscroll-behavior-x: contain;
+        }
+        .product-grid::-webkit-scrollbar {
+          display: none;
+        }
+        .product-grid .card {
+          flex: 0 0 min(78vw, 280px);
+          scroll-snap-align: start;
+        }
+      }
+      .product-category {
+        margin-top: 42px;
+      }
+      .product-category:first-of-type {
+        margin-top: 0;
+      }
+      .product-category-head {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 18px;
+        text-align: center;
+      }
+      .product-category-head p {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 13px;
+        text-align: center;
+      }
+      .category-empty {
+        padding: 34px 24px;
+        border: 1px dashed var(--line);
+        color: var(--ink-soft);
+        text-align: center;
+      }
+      .category-empty strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--ink);
+        font-family: var(--font-display);
+        font-size: 24px;
+      }
+      .category-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 18px;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        padding: 0;
+        background: transparent;
+        border: none;
+        position: relative;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+      .category-action::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -6px;
+        height: 1px;
+        background: rgba(20, 18, 16, 0.32);
+      }
+      .category-action::after {
+        content: "→";
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(184, 138, 36, 0.12);
+        color: var(--gold-soft);
+        font-size: 18px;
+        line-height: 1;
+        transition: transform 0.3s ease, background 0.25s ease, box-shadow 0.25s ease;
+      }
+      .category-action:hover {
+        transform: translateX(-2px);
+        opacity: 1;
+      }
+      .category-action:hover::after {
+        transform: translateX(4px) scale(1.08);
+        background: rgba(184, 138, 36, 0.18);
+        box-shadow: 0 0 0 6px rgba(184, 138, 36, 0.08);
+      }
+      .category-action:active {
+        transform: translateX(1px) scale(0.98);
       }
       .card {
-        flex: 0 0 calc((100% - 44px) / 3);
         background: rgba(251, 250, 246, 0.82);
         border: 1px solid var(--line);
         border-radius: var(--radius);
         padding: 26px 22px;
+        text-align: center;
         transition:
           border-color 0.2s ease,
           transform 0.2s ease;
@@ -546,7 +1237,7 @@
         width: 56px;
         height: 56px;
         color: var(--ink);
-        margin-bottom: 16px;
+        margin: 0 auto 16px;
       }
       .card .product-image {
         width: 100%;
@@ -559,6 +1250,7 @@
       }
       .card h3 {
         font-size: 18px;
+        text-align: center;
       }
       .card .price {
         margin-top: 10px;
@@ -567,10 +1259,12 @@
         color: var(--gold-soft);
         font-weight: 700;
         text-transform: uppercase;
+        text-align: center;
       }
       .card .item-cta {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         margin-top: 18px;
         color: var(--ink);
         font-size: 12px;
@@ -585,6 +1279,112 @@
       }
       .collection-action {
         margin-top: 22px;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
+      }
+      #products {
+        position: relative;
+        overflow: hidden;
+      }
+      #products::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(15, 15, 15, 0.04) 0%,
+          rgba(15, 15, 15, 0.38) 62%,
+          rgba(15, 15, 15, 0.7) 100%
+        );
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.6s ease;
+        z-index: 1;
+      }
+      .all-products-reveal {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        justify-content: center;
+        margin-top: 22px;
+        opacity: 0;
+        transform: translateY(18px) scale(0.96);
+        pointer-events: none;
+        transition: opacity 0.45s ease, transform 0.45s ease;
+      }
+      #products.is-ended::before {
+        opacity: 1;
+      }
+      #products.is-ended .product-category,
+      #products.is-ended .section-head {
+        filter: saturate(0.75) brightness(0.82);
+        transition: filter 0.45s ease;
+      }
+      #products.is-ended .collection-action {
+        opacity: 0.12;
+        transform: translateY(6px);
+        filter: blur(1.2px);
+      }
+      #products.is-ended .all-products-reveal {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+      .all-products-card {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 18px;
+        background: rgba(23, 23, 23, 0.96);
+        color: var(--cream);
+        border: 1px solid rgba(184, 138, 36, 0.5);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+        border-radius: 999px;
+      }
+      .all-products-eye {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(184, 138, 36, 0.16);
+        color: var(--gold);
+      }
+      .all-products-eye svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .all-products-card p {
+        margin: 0;
+        font-size: 13px;
+        letter-spacing: 0.6px;
+        color: rgba(251, 250, 246, 0.9);
+      }
+      .all-products-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 7px 14px;
+        border-radius: 999px;
+        background: var(--gold);
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.3px;
+        text-transform: uppercase;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .all-products-link:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 0 0 6px rgba(184, 138, 36, 0.12);
       }
       .whatsapp-float {
         position: fixed;
@@ -593,23 +1393,88 @@
         z-index: 40;
         display: inline-flex;
         align-items: center;
-        gap: 8px;
+        justify-content: center;
+        width: 53px;
+        height: 45px;
         background: #25d366;
         color: #fff;
-        padding: 13px 17px;
+        padding: 0;
         border-radius: 999px;
         font-size: 13px;
         font-weight: 700;
         box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
       }
+      .whatsapp-wave,
+      .whatsapp-float svg {
+        position: absolute;
+        inset: 50% auto auto 50%;
+        transform: translate(-50%, -50%);
+      }
+      .whatsapp-wave {
+        font-size: 24px;
+        line-height: 1;
+        filter: grayscale(1) brightness(0) invert(1);
+        transform-origin: 50% 75%;
+        animation: whatsapp-wave-out 12s ease-in-out infinite;
+      }
       .whatsapp-float svg {
         width: 19px;
         height: 19px;
         fill: currentColor;
+        opacity: 0;
+        animation: whatsapp-icon-in 12s ease-in-out infinite;
       }
       .whatsapp-float:hover {
         background: #188344;
         transform: translateY(-2px);
+      }
+      @keyframes whatsapp-wave-out {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -50%) rotate(0deg) scale(0.8);
+        }
+        1%,
+        3%,
+        5% {
+          opacity: 1;
+        }
+        2% {
+          transform: translate(-50%, -50%) rotate(18deg) scale(1);
+        }
+        4% {
+          transform: translate(-50%, -50%) rotate(-14deg) scale(1);
+        }
+        6% {
+          transform: translate(-50%, -50%) rotate(16deg) scale(1);
+        }
+        8% {
+          transform: translate(-50%, -50%) rotate(-10deg) scale(1);
+        }
+        10% {
+          opacity: 1;
+          transform: translate(-50%, -50%) rotate(0deg) scale(1);
+        }
+        16%,
+        100% {
+          opacity: 0;
+          transform: translate(-50%, -50%) rotate(0deg) scale(0.8);
+        }
+      }
+      @keyframes whatsapp-icon-in {
+        0%,
+        12% {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.7);
+        }
+        16%,
+        96% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.7);
+        }
       }
 
       /* ---------- Order steps ---------- */
@@ -620,15 +1485,128 @@
       .order .section-head p {
         color: rgba(244, 238, 225, 0.75);
       }
+      .order-intro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .confused-figure {
+        position: relative;
+        width: clamp(210px, 24vw, 250px);
+        height: clamp(210px, 24vw, 250px);
+        margin-bottom: 8px;
+        filter: drop-shadow(0 0 14px rgba(184, 138, 36, 0.2));
+        transform-origin: center bottom;
+      }
+      .confused-figure.reveal {
+        transform: translateY(70px) scale(0.9);
+      }
+      .confused-figure.reveal.in {
+        animation: order-figure-settle 1.8s cubic-bezier(0.18, 0.82, 0.25, 1) 1.3s forwards;
+      }
+      .confused-figure img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+      }
+      @keyframes order-figure-settle {
+        0% {
+          opacity: 0;
+          transform: translateY(70px) scale(0.9);
+        }
+        42% {
+          opacity: 1;
+          transform: translateY(-8px) scale(1.04);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(-18px) scale(0.82);
+        }
+      }
+      .order-heading {
+        margin-bottom: 34px;
+        transition-delay: 1.45s;
+      }
+      .order-heading.reveal {
+        transition-duration: 1.1s;
+      }
       .steps {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 28px;
-        margin-top: 8px;
+        margin-top: 0;
       }
       .step {
         border-top: 1px solid var(--line-on-dark);
         padding-top: 20px;
+        position: relative;
+      }
+      .step.reveal.in {
+        animation: order-step-settle 0.9s cubic-bezier(0.18, 0.82, 0.25, 1) both;
+      }
+      @keyframes order-step-settle {
+        0% {
+          opacity: 0;
+          transform: translateY(28px) scale(0.96);
+        }
+        65% {
+          opacity: 1;
+          transform: translateY(-4px) scale(1.01);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      .steps .step:nth-child(1) {
+        transition-delay: 1.95s;
+        transition-duration: 0.9s;
+        animation-delay: 1.95s;
+      }
+      .steps .step:nth-child(2) {
+        transition-delay: 2.25s;
+        transition-duration: 0.9s;
+        animation-delay: 2.25s;
+      }
+      .steps .step:nth-child(3) {
+        transition-delay: 2.55s;
+        transition-duration: 0.9s;
+        animation-delay: 2.55s;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .whatsapp-wave {
+          display: none;
+        }
+        .whatsapp-float svg {
+          opacity: 1;
+          animation: none;
+        }
+        .confused-figure.reveal.in {
+          animation: none;
+          opacity: 1;
+          transform: translateY(-18px) scale(0.82);
+        }
+        .order-heading,
+        .steps .step {
+          transition-delay: 0s;
+        }
+      }
+      .step:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        top: -13px;
+        right: -26px;
+        color: var(--gold);
+        font-size: 18px;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: opacity 0.5s ease 0.35s, transform 0.5s ease 0.35s;
+      }
+      .step.reveal.in::after {
+        opacity: 1;
+        transform: translateX(0);
       }
       .step .n {
         font-family: var(--font-display);
@@ -650,19 +1628,161 @@
         .steps {
           grid-template-columns: 1fr;
         }
+        .step:not(:last-child)::after {
+          display: none;
+        }
       }
 
       /* ---------- Contact ---------- */
+      .contact {
+        background: var(--cream);
+        padding-bottom: 0;
+      }
       .contact .grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 56px;
+        align-items: start;
+        min-height: 360px;
+        padding-bottom: 18px;
       }
       .contact-card {
+        position: relative;
+        overflow: hidden;
         background: var(--cream-deep);
         border: 1px solid var(--line);
         padding: 30px;
         border-radius: var(--radius);
+      }
+      .contact-card::before {
+        content: "";
+        position: absolute;
+        top: -42px;
+        left: 50%;
+        width: 170px;
+        height: 150px;
+        background: radial-gradient(ellipse at top, rgba(220, 180, 58, 0.48), transparent 68%);
+        opacity: 0;
+        transform: translateX(-50%) scaleY(0.35);
+        pointer-events: none;
+      }
+      .contact-card.contact-card-visible::before {
+        animation: contact-torch-in 1.5s 0.22s ease-out both;
+      }
+      .contact-card h3 {
+        position: relative;
+        z-index: 1;
+        font-size: 26px;
+        margin-bottom: 20px;
+      }
+      .contact-card.contact-card-visible h3 {
+        animation: contact-heading-in 1s 0.72s both cubic-bezier(0.22, 0.8, 0.25, 1);
+      }
+      @keyframes contact-torch-in {
+        0% { opacity: 0; transform: translateX(-50%) translateY(-18px) scaleY(0.35); }
+        45% { opacity: 0.9; transform: translateX(-50%) translateY(12px) scaleY(1); }
+        100% { opacity: 0; transform: translateX(-50%) translateY(70px) scaleY(1.15); }
+      }
+      .contact-intro {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.8, 0.25, 1);
+      }
+      .contact-intro.contact-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .contact-intro.contact-visible h2 {
+        animation: contact-heading-in 0.9s 0.12s both cubic-bezier(0.22, 0.8, 0.25, 1);
+      }
+      .contact-intro .social-row {
+        position: relative;
+        display: block;
+        width: min(100%, 470px);
+        height: 180px;
+        margin-top: 26px;
+      }
+      .contact-intro .social-row a {
+        position: absolute;
+        margin: 0;
+      }
+      .contact-intro .social-row a:nth-child(1) { left: 2%; top: 62%; --tilt: -12deg; --scale: 0.88; }
+      .contact-intro .social-row a:nth-child(2) { left: 20%; top: 20%; --tilt: 8deg; --scale: 1.2; }
+      .contact-intro .social-row a:nth-child(3) { left: 38%; top: 58%; --tilt: -5deg; --scale: 0.96; }
+      .contact-intro .social-row a:nth-child(4) { left: 56%; top: 10%; --tilt: 11deg; --scale: 1.3; }
+      .contact-intro .social-row a:nth-child(5) { left: 74%; top: 54%; --tilt: -9deg; --scale: 0.84; }
+      .contact-intro .social-row a:nth-child(6) { right: 2%; top: 27%; --tilt: 6deg; --scale: 1.1; }
+      .contact-intro.contact-visible .social-row a {
+        opacity: 0;
+        transform: translateY(-48px) rotate(var(--tilt)) scale(var(--scale));
+        animation:
+          social-rain-in 0.75s both cubic-bezier(0.18, 0.82, 0.25, 1),
+          social-shiver 2.8s 2.1s ease-in-out infinite;
+        animation-iteration-count: 1, infinite;
+        animation-fill-mode: both, none;
+      }
+      .contact-intro.contact-visible .social-row a:nth-child(1) { animation-delay: 0.58s; }
+      .contact-intro.contact-visible .social-row a:nth-child(2) { animation-delay: 0.7s; }
+      .contact-intro.contact-visible .social-row a:nth-child(3) { animation-delay: 0.82s; }
+      .contact-intro.contact-visible .social-row a:nth-child(4) { animation-delay: 0.94s; }
+      .contact-intro.contact-visible .social-row a:nth-child(5) { animation-delay: 1.06s; }
+      .contact-intro.contact-visible .social-row a:nth-child(6) { animation-delay: 1.18s; }
+      @keyframes contact-heading-in {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes social-rain-in {
+        60% { opacity: 1; transform: translateY(5px) rotate(var(--tilt)) scale(var(--scale)); }
+        100% { opacity: 1; transform: translateY(0) rotate(var(--tilt)) scale(var(--scale)); }
+      }
+      @keyframes social-shiver {
+        0%, 100% { transform: translateY(0) rotate(var(--tilt)) scale(var(--scale)); }
+        25% { transform: translateY(1px) rotate(calc(var(--tilt) - 1deg)) scale(var(--scale)); }
+        50% { transform: translateY(-1px) rotate(calc(var(--tilt) + 1deg)) scale(var(--scale)); }
+        75% { transform: translateY(1px) rotate(calc(var(--tilt) - 0.5deg)) scale(var(--scale)); }
+      }
+      .contact-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .contact-actions .btn {
+        justify-content: center;
+        flex: 0 1 175px;
+        padding: 11px 14px;
+        font-size: 12px;
+      }
+      .contact-card .btn-ghost {
+        border-color: var(--ink-soft);
+        color: var(--ink);
+      }
+      .contact-card-sequence {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      .contact-card-sequence.contact-card-visible {
+        animation: contact-card-in 0.9s 0.3s both cubic-bezier(0.22, 0.8, 0.25, 1);
+      }
+      .contact-card.contact-card-visible .contact-row {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: contact-detail-in 0.7s both cubic-bezier(0.22, 0.8, 0.25, 1);
+      }
+      .contact-card.contact-card-visible .contact-row:nth-of-type(1) { animation-delay: 1.05s; }
+      .contact-card.contact-card-visible .contact-row:nth-of-type(2) { animation-delay: 1.2s; }
+      .contact-card.contact-card-visible .contact-actions {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: contact-detail-in 0.7s 1.4s both cubic-bezier(0.22, 0.8, 0.25, 1);
+      }
+      @keyframes contact-card-in {
+        from { opacity: 0; transform: translateY(28px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes contact-detail-in {
+        to { opacity: 1; transform: translateY(0); }
       }
       .contact-row {
         display: flex;
@@ -690,20 +1810,24 @@
         margin-top: 22px;
       }
       .social-row a {
-        width: 38px;
-        height: 38px;
-        border: 1px solid var(--line);
+        width: 56px;
+        height: 56px;
+        border: 1px solid rgba(184, 138, 36, 0.38);
+        background: rgba(251, 250, 246, 0.42);
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: var(--radius);
+        border-radius: 55% 45% 60% 40% / 45% 60% 40% 55%;
+        box-shadow: 0 8px 18px rgba(20, 18, 16, 0.08);
         transition:
+          transform 0.2s ease,
+          opacity 0.2s ease,
           border-color 0.2s ease,
           background 0.2s ease;
       }
-      .social-row svg {
-        width: 18px;
-        height: 18px;
+      .contact-intro .social-row svg {
+        width: 30px;
+        height: 30px;
         fill: currentColor;
       }
       .social-row a.instagram {
@@ -725,50 +1849,84 @@
         color: #d94b3d;
       }
       .social-row a:hover {
-        border-color: currentColor;
-        background: rgba(255, 255, 255, 0.5);
+        opacity: 0.82;
+        border-color: rgba(184, 138, 36, 0.75);
+        background: rgba(251, 250, 246, 0.72);
       }
-      .map-panel {
-        margin-top: 56px;
-      }
-      .map-panel h3 {
-        font-size: 24px;
-        margin-top: 8px;
-      }
-      .map-frame {
-        margin-top: 20px;
-        border: 1px solid var(--line);
-        background: var(--cream-deep);
-        padding: 8px;
-      }
-      .map-frame iframe {
-        width: 100%;
-        height: 340px;
-        border: 0;
-        display: block;
-      }
-      .map-link {
-        display: inline-flex;
+      .find-us {
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
         align-items: center;
-        justify-content: center;
-        margin: 18px 0 20px;
-        padding: 12px 18px;
-        background: var(--gold);
-        border: 1px solid var(--gold);
-        color: var(--ink);
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
+        gap: 60px;
+        padding: 80px 60px;
+        max-width: 1400px;
+        margin: 56px auto 0;
+        background: #0b0b0c;
+        color: #fff;
       }
-      .map-link:hover {
-        background: var(--ink);
-        border-color: var(--ink);
-        color: var(--cream);
+      .find-us__left { flex: 1 1 420px; position: relative; min-width: 320px; }
+      .find-us__label { display: flex; align-items: center; gap: 10px; color: #f5b301; font-weight: 700; letter-spacing: 3px; font-size: 30px; margin-bottom: 24px; }
+      .find-us__label .spark { font-size: 12px; opacity: .8; }
+      .find-us__btn { display: inline-flex; align-items: center; gap: 10px; border: 1px solid #f5b301; color: #f5b301; background: transparent; padding: 12px 22px; border-radius: 30px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-decoration: none; margin-bottom: 24px; }
+      .find-us__btn:hover { background: rgba(245,179,1,.1); }
+      .find-us__desc { color: #b9b9be; font-size: 15px; line-height: 1.6; max-width: 320px; margin-bottom: 60px; }
+      .find-us__torch-wrap { position: relative; min-height: 150px; display: block; }
+      .find-us__copy { position: relative; z-index: 2; margin-left: 0; padding: 18px 0 10px; overflow: hidden; }
+      .find-us__copy::before { content: ""; position: absolute; top: 0; bottom: 0; left: -130px; width: 120px; background: linear-gradient(90deg, transparent, rgba(245,179,1,.22), transparent); transform: skewX(-18deg); animation: find-us-text-light 4.2s ease-in-out infinite; pointer-events: none; }
+      .find-us__on { display: block; color: #f5b301; font-size: 13px; font-weight: 700; letter-spacing: 4px; margin-bottom: 8px; animation: find-us-label-glow 3.4s ease-in-out infinite; }
+      .find-us__heading { font-size: 42px; line-height: 1.15; font-family: Georgia, 'Times New Roman', serif; margin: 0; }
+      .find-us__heading .line1 { color: #f2f2f2; }
+      .find-us__heading .line2 { color: #f5b301; font-weight: 700; animation: find-us-heading-glow 3.4s ease-in-out infinite; }
+      @keyframes find-us-text-light {
+        0%, 42% { opacity: 0; transform: translateX(0) skewX(-18deg); }
+        58% { opacity: .9; }
+        78%, 100% { opacity: 0; transform: translateX(430px) skewX(-18deg); }
       }
+      @keyframes find-us-label-glow {
+        0%, 100% { text-shadow: 0 0 0 rgba(245,179,1,0); }
+        50% { text-shadow: 0 0 14px rgba(245,179,1,.72); }
+      }
+      @keyframes find-us-heading-glow {
+        0%, 100% { text-shadow: 0 0 0 rgba(245,179,1,0); }
+        50% { text-shadow: 0 0 18px rgba(245,179,1,.48); }
+      }
+      .find-us__right { flex: 1 1 480px; min-width: 320px; }
+      .find-us .map-frame { width: 100%; min-width: 0; border: 2px solid #f5b301; border-radius: 18px; overflow: hidden; line-height: 0; padding: 0; background: transparent; }
+      .find-us .map-frame iframe { width: 100%; max-width: 100%; height: 380px; border: 0; display: block; }
       @media (max-width: 820px) {
-        .contact .grid {
+        .find-us { grid-template-columns: 1fr; }
+        .find-us__left,
+        .find-us__right {
+          min-width: 0;
+        }
+        .contact .grid { grid-template-columns: 1fr; }
+        .contact-actions {
           grid-template-columns: 1fr;
+        }
+        .contact-intro .social-row {
+          height: 220px;
+        }
+        .contact-intro .social-row a:nth-child(1) { left: 4%; top: 62%; }
+        .contact-intro .social-row a:nth-child(2) { left: 28%; top: 18%; }
+        .contact-intro .social-row a:nth-child(3) { left: 51%; top: 58%; }
+        .contact-intro .social-row a:nth-child(4) { left: 70%; top: 8%; }
+        .contact-intro .social-row a:nth-child(5) { left: 22%; top: 77%; }
+        .contact-intro .social-row a:nth-child(6) { right: 4%; top: 40%; }
+      }
+      @media (max-width: 860px) {
+        .find-us { padding: 50px 24px; }
+        .find-us__heading { font-size: 30px; }
+      }
+      @media (max-width: 560px) {
+        .find-us__copy { padding-top: 8px; }
+        .find-us__btn {
+          max-width: 100%;
+          padding-left: 16px;
+          padding-right: 16px;
+          font-size: 11px;
+        }
+        .find-us__heading {
+          font-size: clamp(30px, 10vw, 42px);
         }
       }
       @media (max-width: 600px) {
@@ -783,6 +1941,28 @@
           bottom: 14px;
           padding: 12px 14px;
         }
+      }
+
+      .developer-credit {
+        margin: 0;
+        padding: 10px 24px 18px;
+        background: var(--ink);
+        color: rgba(244, 238, 225, 0.62);
+        text-align: center;
+        font-size: 11px;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+      }
+      .developer-credit strong {
+        color: var(--gold);
+        font-weight: 700;
+      }
+      .developer-credit a {
+        color: var(--cream);
+        text-decoration: none;
+      }
+      .developer-credit a:hover {
+        color: var(--gold);
       }
 
       /* ---------- Footer ---------- */
@@ -810,178 +1990,9 @@
         transform: none;
       }
 
-      /* ---------- Website service advertisement ---------- */
-      .web-ad {
-        --web-ink: #11152b;
-        --web-blue: #3547e8;
-        --web-coral: #ff624f;
-        --web-paper: #f5f3ed;
-        position: fixed;
-        inset: 0;
-        z-index: 100;
-        display: grid;
-        place-items: center;
-        padding: 24px;
-        background: rgba(45, 50, 81, 0.84);
-      }
-      .web-ad[hidden] {
-        display: none;
-      }
-      .web-ad-panel {
-        position: relative;
-        width: min(790px, 100%);
-        max-height: calc(100vh - 20px);
-        display: grid;
-        grid-template-columns: 0.9fr 1.1fr;
-        background: var(--web-paper);
-        border: 1px solid var(--web-coral);
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
-        overflow: auto;
-      }
-      .web-ad-panel::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 7px;
-        background: var(--web-coral);
-        z-index: 1;
-      }
-      .web-ad-art {
-        min-height: 320px;
-        background: #000;
-        position: relative;
-        overflow: hidden;
-      }
-      .web-ad-sound {
-        position: absolute;
-        left: 14px;
-        bottom: 14px;
-        z-index: 2;
-        min-height: 40px;
-        padding: 9px 13px;
-        border: 1px solid rgba(255, 255, 255, 0.7);
-        border-radius: 3px;
-        background: rgba(17, 21, 43, 0.9);
-        color: #fff;
-        font: inherit;
-        font-size: 13px;
-        font-weight: 700;
-        cursor: pointer;
-      }
-      .web-ad-sound:hover,
-      .web-ad-sound:focus-visible {
-        background: var(--web-coral);
-      }
-      .web-ad-sound.is-on {
-        display: none;
-      }
-      .web-ad-video {
-        width: 100%;
-        height: 100%;
-        min-height: 320px;
-        display: block;
-        object-fit: cover;
-      }
-      .web-ad-copy {
-        padding: 34px 42px 28px;
-        color: var(--web-ink);
-      }
-      .web-ad-copy .eyebrow {
-        color: var(--web-coral);
-      }
-      .web-ad-copy h2 {
-        margin: 8px 0 12px;
-        font-family: var(--font-body);
-        font-weight: 800;
-        letter-spacing: -1px;
-        font-size: clamp(29px, 4vw, 43px);
-        line-height: 0.98;
-      }
-      .web-ad-copy p {
-        margin: 0;
-        color: #45485a;
-        font-size: 15px;
-      }
-      .web-ad-list {
-        display: grid;
-        gap: 7px;
-        margin: 18px 0 22px;
-        padding: 0;
-        list-style: none;
-        color: #303348;
-        font-size: 14px;
-      }
-      .web-ad-list li::before {
-        content: "+";
-        color: var(--web-coral);
-        font-size: 18px;
-        font-weight: 700;
-        margin-right: 10px;
-        vertical-align: -2px;
-      }
-      .web-ad-copy .btn-primary {
-        background: var(--web-coral);
-        color: #fff;
-        border-color: var(--web-coral);
-      }
-      .web-ad-copy .btn-primary:hover {
-        background: var(--web-ink);
-        border-color: var(--web-ink);
-      }
-      .web-ad-close {
-        position: absolute;
-        top: 17px;
-        right: 16px;
-        z-index: 2;
-        width: 35px;
-        height: 35px;
-        display: grid;
-        place-items: center;
-        border: 1px solid rgba(255, 255, 255, 0.45);
-        background: var(--web-ink);
-        color: #fff;
-        font-size: 25px;
-        line-height: 1;
-        cursor: pointer;
-      }
-      .web-ad-close:hover {
-        background: var(--web-coral);
-      }
-      body.ad-open {
-        overflow: hidden;
-      }
-      @media (max-width: 620px) {
-        .web-ad {
-          padding: 16px;
-        }
-        .web-ad-panel {
-          display: block;
-          max-height: calc(100vh - 32px);
-          overflow: auto;
-        }
-        .web-ad-art {
-          min-height: 175px;
-        }
-        .web-ad-sound {
-          left: 10px;
-          bottom: 10px;
-          font-size: 12px;
-        }
-        .web-ad-video {
-          min-height: 175px;
-        }
-        .web-ad-copy {
-          padding: 34px 24px 28px;
-        }
-      }
     </style>
   </head>
   <body>
-    <script>
-      window.location.replace("maintenance.html");
-    </script>
     <header class="site-nav">
       <div class="nav-inner">
         <div class="brand-mark"><span class="dot"></span>SHUDH LOHA</div>
@@ -995,7 +2006,6 @@
           ☰
         </button>
         <nav class="links" id="navLinks">
-          <a href="#about" data-lang="about">About</a>
           <a href="products.html" data-lang="products">Products</a>
           <a href="#order" data-lang="order">How to Order</a>
           <a href="#contact" class="nav-cta" data-lang="contact">Contact</a>
@@ -1012,43 +2022,82 @@
       </div>
     </header>
 
-    <section class="hero">
-      <div class="wrap">
-        <div>
-          <p class="eyebrow" data-lang="location">Malerkotla, Punjab</p>
-          <h1 data-lang="heroTitle">
-            Pure <span>Iron.</span><br />Made for Every Kitchen.
-          </h1>
-          <p class="lede" data-lang="heroLede">
-            Hand-finished iron cookware for everyday cooking, serving, and
-            living — made with traditional strength and honest quality in
-            Malerkotla, Punjab.
-          </p>
-          <div class="hero-cta">
-            <a
-              class="btn btn-primary"
-              id="heroWhatsapp"
-              href=""
-              target="_blank"
-              rel="noopener"
-              data-lang="orderWhatsapp"
-              >Order on WhatsApp</a
-            >
-            <a
-              class="btn btn-ghost"
-              href="products.html"
-              data-lang="viewProducts"
-              >View Products</a
-            >
+    <section class="hero" aria-label="Shudh Loha highlights">
+      <div class="hero-slider" id="heroSlider">
+        <div class="hero-opening-curtain" aria-hidden="true">
+          <span class="hero-curtain-panel"></span>
+          <span class="hero-curtain-panel"></span>
+        </div>
+        <article class="hero-slide hero-slide--intro is-active" data-slide="0">
+          <div class="wrap">
+            <div class="hero-intro-copy">
+              <p class="eyebrow" data-lang="location">Malerkotla, Punjab</p>
+              <h1 data-lang="heroTitle">Pure <span>Iron.</span><br />Made for Every Kitchen.</h1>
+              <div class="hero-cta">
+                <a class="btn btn-primary" id="heroWhatsapp" href="" target="_blank" rel="noopener" data-lang="orderWhatsapp">Order on WhatsApp</a>
+                <a class="btn btn-ghost" href="products.html" data-lang="viewProducts">View Products</a>
+              </div>
+            </div>
+            <div class="hero-art"><img class="hero-logo" src="logo.png" alt="Shudh Loha Kitchenware logo" /></div>
           </div>
+        </article>
+
+        <article class="hero-slide hero-slide--story" data-slide="1">
+          <div class="wrap">
+            <div>
+              <p class="eyebrow">Our story</p>
+              <h1>Craft passed down.<br /><span>Quality carried forward.</span></h1>
+              <div class="hero-cta"><a class="btn btn-primary" href="#contact">Meet us</a></div>
+            </div>
+            <div class="hero-art"><p>No mixed metal.<br />No shortcuts.<br /><span style="color: var(--gold)">Just pure loha.</span></p></div>
+          </div>
+        </article>
+
+        <article class="hero-slide hero-slide--products" data-slide="2">
+          <div class="wrap">
+            <div>
+              <p class="eyebrow">The collection</p>
+              <h1>Sarbloh pieces<br /><span>for the daily ritual.</span></h1>
+              <div class="hero-cta"><a class="btn btn-primary" href="products.html">Shop Sarbloh</a><a class="btn btn-ghost" href="#products">See highlights</a></div>
+            </div>
+            <div class="hero-art hero-product-collage"><img src="Assets 2/kadhai.png" alt="Sarbloh kadhai" /><img src="Assets 2/tutma tawa.png" alt="Sarbloh tawa" /><img src="Assets 2/Big Deg.jpeg" alt="Sarbloh deg" /></div>
+          </div>
+        </article>
+
+        <article class="hero-slide hero-slide--offer" data-slide="3">
+          <div class="wrap">
+            <div>
+              <span class="offer-kicker" id="offerEyebrow">New collection</span>
+              <h1 id="offerTitle">Modern cooking.<br /><span>Same trusted care.</span></h1>
+              <div class="hero-cta"><a class="btn btn-primary" id="offerCta" href="#contact">Ask about availability</a><a class="btn btn-ghost" href="https://www.instagram.com/shudh_loha_enterprise?igsi=MXdma2xncXk5cDVsOA==" target="_blank" rel="noopener">Follow updates</a></div>
+            </div>
+            <div class="offer-card"><strong id="offerNote">Coming<br />soon.</strong></div>
+          </div>
+        </article>
+
+        <article class="hero-slide hero-slide--contact" data-slide="4">
+          <div class="wrap">
+            <div>
+              <p class="eyebrow">Find Shudh Loha</p>
+              <h1>From our hands<br /><span>to your kitchen.</span></h1>
+              <div class="hero-cta"><a class="btn btn-primary" href="#contact">Contact us</a><a class="btn btn-ghost" href="https://maps.app.goo.gl/GBGsbKjUtPneyoNn9" target="_blank" rel="noopener">Open location</a></div>
+            </div>
+            <div class="hero-art"><p>Malerkotla,<br /><span style="color: var(--gold)">Punjab.</span><br /><small style="font: 14px var(--font-body); color: rgba(244, 238, 225, .72)">Pure Loha, Pure Quality</small></p></div>
+          </div>
+        </article>
+
+        <div class="slider-controls" aria-label="Highlight controls">
+          <button class="slider-arrow" id="heroPrevious" type="button" aria-label="Previous highlight">&#8592;</button>
+          <div id="heroDots"></div>
+          <button class="slider-arrow" id="heroNext" type="button" aria-label="Next highlight">&#8594;</button>
         </div>
-        <div class="hero-art">
-          <img
-            class="hero-logo"
-            src="logo.png"
-            alt="Shudh Loha Kitchenware logo"
-          />
-        </div>
+        <span class="sparkle s-lg" style="top: 14%; left: 46%; animation-delay: 0s;" aria-hidden="true">&#10022;</span>
+        <span class="sparkle s-sm" style="top: 72%; left: 60%; animation-delay: 0.8s;" aria-hidden="true">&#10022;</span>
+        <span class="sparkle" style="top: 30%; left: 8%; animation-delay: 1.6s;" aria-hidden="true">&#10022;</span>
+        <span class="sparkle s-sm" style="top: 20%; left: 66%; animation-delay: 2.2s;" aria-hidden="true">&#10022;</span>
+        <span class="sparkle s-lg" style="top: 62%; left: 82%; animation-delay: 2.8s;" aria-hidden="true">&#10022;</span>
+        <span class="sparkle" style="top: 40%; left: 22%; animation-delay: 3.4s;" aria-hidden="true">&#10022;</span>
+        <span class="sparkle s-sm" style="top: 74%; left: 30%; animation-delay: 4s;" aria-hidden="true">&#10022;</span>
       </div>
     </section>
 
@@ -1061,102 +2110,86 @@
       </div>
     </div>
 
-    <section class="about" id="about">
-      <div class="wrap grid">
-        <div class="reveal">
-          <p class="eyebrow" data-lang="story">Our Story</p>
-          <h2 data-lang="storyTitle">A family trade in iron, continued.</h2>
-        </div>
-        <div class="reveal">
-          <p data-lang="storyParagraphOne">
-            Shudh Loha isn't a business we started — it's one we inherited. For
-            generations, our family hasn't just sold iron items, we've built
-            them ourselves, by hand, the way it's always been done.
-          </p>
-          <p data-lang="storyParagraphTwo">
-            That's the difference between running a shop and carrying a craft
-            forward. Every item that leaves our hands has the same care behind
-            it as the ones before it — nothing rushed, nothing cut short.
-          </p>
-          <blockquote data-lang="storyQuote">
-            No mixed metal. No shortcuts.<br />Just pure iron, finished by hand.
-          </blockquote>
-          <div class="stat-row">
-            <div class="stat">
-              <div class="num">Multi-Gen.</div>
-              <div class="label">Family Craft</div>
-            </div>
-            <div class="stat">
-              <div class="num">100%</div>
-              <div class="label">Pure Iron</div>
-            </div>
-            <div class="stat">
-              <div class="num">Malerkotla</div>
-              <div class="label">Based & Trusted Locally</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="products">
+    <section id="products" style="position: relative; overflow: hidden;">
+      <span class="sparkle s-sm" style="top: 6%; left: 92%; animation-delay: 1.2s;" aria-hidden="true">&#10022;</span>
       <div class="wrap">
         <div class="section-head reveal">
           <p class="eyebrow" data-lang="sell">What We Sell</p>
-          <h2 data-lang="sellTitle">
+          <h2 class="product-title-sweep" data-lang="sellTitle">
             Iron cookware for every kind of kitchen.
           </h2>
           <div class="divider"><div class="diamond" style="left: 0"></div></div>
-          <a class="map-link" href="products.html" data-lang="fullCollection"
-            >View the full collection</a
-          >
+          
         </div>
 
         <div class="reveal">
-          <span class="cat-tag" data-lang="kitchenware">Kitchenware</span>
-          <div class="product-grid" id="kitchenGrid"></div>
-          <div class="collection-action">
-            <a
-              class="btn btn-primary"
-              href="products.html"
-              data-lang="allProducts"
-              >View all products</a
-            >
+          <div class="product-category">
+            <div class="product-category-head">
+              <div><span class="cat-tag">Sarbloh collection</span></div>
+              <p>Traditional pieces for cooking, serving, and daily rituals.</p>
+            </div>
+            <div class="carousel">
+              <button class="carousel-arrow carousel-prev" type="button" data-target="sarblohGrid" aria-label="Scroll left">&#8249;</button>
+              <div class="product-grid" id="sarblohGrid"></div>
+              <button class="carousel-arrow carousel-next" type="button" data-target="sarblohGrid" aria-label="Scroll right">&#8250;</button>
+            </div>
+            <div style="text-align:center;"><a class="category-action" href="products.html?category=Sarbloh">Explore Sarbloh items</a></div>
+          </div>
+          <div class="product-category">
+            <div class="product-category-head">
+              <div><span class="cat-tag">Modern collection</span></div>
+              <p>Everyday cookware designed for modern kitchens and daily use.</p>
+            </div>
+            <div class="carousel">
+              <button class="carousel-arrow carousel-prev" type="button" data-target="nonStickGrid" aria-label="Scroll left">&#8249;</button>
+              <div class="product-grid" id="nonStickGrid"></div>
+              <button class="carousel-arrow carousel-next" type="button" data-target="nonStickGrid" aria-label="Scroll right">&#8250;</button>
+            </div>
+            <div style="text-align:center;"><a class="category-action" href="products.html?category=Non-Stick">Explore Non-Stick cookware</a></div>
+          </div>
+         
+
+          <div class="all-products-reveal" id="allProductsReveal" aria-live="polite">
+            <div class="all-products-card">
+              <span class="all-products-eye" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </span>
+              <p>Want to see all products?</p>
+              <a class="all-products-link" href="products.html">View all</a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="order" id="order">
+    <section class="order" id="order" style="position: relative; overflow: hidden;">
+      <span class="sparkle s-lg" style="top: 10%; left: 88%; animation-delay: 0.6s;" aria-hidden="true">&#10022;</span>
+      <span class="sparkle s-sm" style="top: 70%; left: 6%; animation-delay: 2.4s;" aria-hidden="true">&#10022;</span>
       <div class="wrap">
-        <div class="section-head reveal">
-          <p class="eyebrow" data-lang="howToOrder">How To Order</p>
-          <h2 data-lang="orderTitle">No cart needed — just three steps.</h2>
+        <div class="order-intro">
+          <div class="confused-figure reveal">
+            <img src="image.png" alt="Confused customer wondering how to order" />
+          </div>
+          <div class="section-head order-heading reveal">
+            <p class="eyebrow" data-lang="howToOrder">How To Order</p>
+            <h2 data-lang="orderTitle">No cart needed — just three steps.</h2>
+          </div>
         </div>
         <div class="steps">
           <div class="step reveal">
             <div class="n">01</div>
             <h3 data-lang="stepOneTitle">Choose your item</h3>
-            <p data-lang="stepOneText">
-              Browse the collections above and note down the item, size, or
-              quantity you need.
-            </p>
           </div>
           <div class="step reveal">
             <div class="n">02</div>
             <h3 data-lang="stepTwoTitle">Call or message us</h3>
-            <p data-lang="stepTwoText">
-              Reach out on WhatsApp or call directly — we'll confirm the price
-              for your size and answer any questions.
-            </p>
           </div>
           <div class="step reveal">
             <div class="n">03</div>
             <h3 data-lang="stepThreeTitle">Get it delivered</h3>
-            <p data-lang="stepThreeText">
-              Once confirmed, we arrange delivery or pickup — pay on delivery
-              for local orders.
-            </p>
           </div>
         </div>
       </div>
@@ -1164,16 +2197,9 @@
 
     <section class="contact" id="contact">
       <div class="wrap grid">
-        <div class="reveal">
+        <div class="contact-intro">
           <p class="eyebrow" data-lang="getInTouch">Get In Touch</p>
           <h2 data-lang="contactTitle">Talk to us directly.</h2>
-          <p
-            style="margin-top: 16px; color: var(--ink-soft)"
-              href="https://maps.app.goo.gl/GBGsbKjUtPneyoNn9"
-          >
-            No forms, no waiting — call or message us and we'll help you find
-            the right piece.
-          </p>
           <div class="social-row">
             <a
               class="instagram"
@@ -1285,7 +2311,8 @@
             </a>
           </div>
         </div>
-        <div class="contact-card reveal">
+        <div class="contact-card contact-card-sequence">
+          <h3 data-lang="contactTitle">Talk to us directly.</h3>
           <div class="contact-row">
             <span class="ico">☎</span
             ><a href="tel:+917973247767">+91 79732 47767</a>
@@ -1294,37 +2321,43 @@
             <span class="ico">📍</span
             ><span data-lang="address">Malerkotla, Punjab</span>
           </div>
-          <a
-            class="btn btn-primary"
-            style="margin-top: 20px; width: 100%; justify-content: center"
-            href="#"
-            id="contactWhatsapp"
-            target="_blank"
-            rel="noopener"
-            >Message on WhatsApp</a
-          >
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="#" id="contactWhatsapp" target="_blank" rel="noopener">Message on WhatsApp</a>
+            <a class="btn btn-ghost" href="tel:+917973247767">Call us</a>
+          </div>
         </div>
       </div>
-      <div class="wrap map-panel reveal">
-        <p class="eyebrow">Find Us</p>
-        <h3 data-lang="visitTitle">Visit us in Malerkotla.</h3>
-        <a
-          class="map-link"
-          href="https://maps.app.goo.gl/GBGsbKjUtPneyoNn9"
-          target="_blank"
-          rel="noopener"
-          data-lang="openMaps"
-          >Open in Google Maps</a
-        >
-        <div class="map-frame">
-          <iframe
-            src="https://www.google.com/maps?q=Malerkotla%2C%20Punjab&output=embed"
-            title="Map showing Malerkotla, Punjab"
-            loading="lazy"
-            allowfullscreen
-          ></iframe>
+      <section class="find-us">
+        <div class="find-us__left">
+          <div class="find-us__label">
+            <span class="spark">⟿</span> FIND US <span class="spark">⟿</span>
+          </div>
+          <a href="https://maps.google.com" target="_blank" rel="noopener" class="find-us__btn">
+            📍 OPEN IN GOOGLE MAPS &nbsp;→
+          </a>
+          <p class="find-us__desc">Ready to visit? Click below to see our location on Google Maps.</p>
+          <div class="find-us__torch-wrap">
+            <div class="find-us__copy">
+              <span class="find-us__on">LIGHT ON!</span>
+              <h2 class="find-us__heading">
+                <span class="line1">Visit us in</span><br />
+                <span class="line2">Malerkotla.</span>
+              </h2>
+            </div>
+          </div>
         </div>
-      </div>
+        <div class="find-us__right">
+          <div class="map-frame">
+            <iframe
+              src="https://www.google.com/maps?q=Malerkotla,Punjab&output=embed"
+              title="Map showing Malerkotla, Punjab"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </section>
     </section>
 
     <footer>
@@ -1333,6 +2366,11 @@
         Malerkotla, Punjab
       </div>
     </footer>
+    <p class="developer-credit">
+      Developed and maintained by <strong>Shehzad_coder</strong>
+      <span aria-hidden="true"> · </span>
+      <span>Contact: <a href="tel:+919988059285">9988059285</a></span>
+    </p>
     <a
       class="whatsapp-float"
       href=""
@@ -1341,6 +2379,7 @@
       rel="noopener"
       aria-label="Chat with Shudh Loha on WhatsApp"
     >
+      <span class="whatsapp-wave" aria-hidden="true">👋</span>
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path
           d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L.2 24l6.4-1.7a11.8 11.8 0 0 0 5.5 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.2-3.5-8.4ZM12.2 21.7h-.1c-1.7 0-3.4-.5-4.9-1.3l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 0 1-1.5-5.2C2.3 6.5 6.7 2 12.1 2c2.6 0 5.1 1 7 2.9 1.9 1.9 2.9 4.3 2.9 7 0 5.4-4.4 9.8-9.8 9.8Zm5.4-7.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.6.9 3.5.8.6-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4Z"
@@ -1348,103 +2387,9 @@
       </svg>
     </a>
 
-    <div
-      class="web-ad"
-      id="webAd"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="webAdTitle"
-    >
-      <div class="web-ad-panel">
-        <button
-          class="web-ad-close"
-          id="webAdClose"
-          type="button"
-          aria-label="Close advertisement"
-        >
-          &times;
-        </button>
-        <div class="web-ad-art">
-          <iframe
-            class="web-ad-video"
-            id="webAdVideo"
-            src="https://www.youtube.com/embed/AMfiyHqJMME?autoplay=1&mute=1&loop=1&playlist=AMfiyHqJMME&controls=1&enablejsapi=1&playsinline=1"
-            title="Shudh Loha Web Dev Ad"
-            frameborder="0"
-            allow="autoplay; encrypted-media"
-            allowfullscreen
-          ></iframe>
-          <button class="web-ad-sound" id="webAdSound" type="button">
-            Turn sound on
-          </button>
-        </div>
-        <div class="web-ad-copy">
-          <p class="eyebrow">A service by our team</p>
-          <h2 id="webAdTitle">We build websites that get you noticed.</h2>
-          <p>
-            Need a website for your business? We create clean, responsive
-            websites that help customers discover your work and contact you
-            easily.
-          </p>
-          <ul class="web-ad-list">
-            <li>Business and product websites</li>
-            <li>Mobile-friendly design</li>
-            <li>WhatsApp, social media, and map integration</li>
-          </ul>
-          <a
-            class="btn btn-primary"
-            href="https://wa.me/919988059285?text=Hi%2C%20I%27d%20like%20to%20start%20a%20conversation%20about%20a%20website."
-            id="webAdContact"
-            target="_blank"
-            rel="noopener"
-            >Start a conversation</a
-          >
-        </div>
-      </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-config.js"></script>
     <script>
-      const webAd = document.getElementById("webAd");
-      const webAdClose = document.getElementById("webAdClose");
-      const webAdVideo = document.getElementById("webAdVideo");
-      const webAdSound = document.getElementById("webAdSound");
-      const enableWebAdSound = () => {
-        webAdVideo.contentWindow.postMessage(
-          JSON.stringify({ event: "command", func: "unMute", args: [] }),
-          "*",
-        );
-        webAdVideo.contentWindow.postMessage(
-          JSON.stringify({ event: "command", func: "setVolume", args: [100] }),
-          "*",
-        );
-        webAdSound.classList.add("is-on");
-      };
-      const closeWebAd = () => {
-        webAdVideo.contentWindow.postMessage(
-          JSON.stringify({ event: "command", func: "stopVideo", args: [] }),
-          "*",
-        );
-        webAdVideo.src = "about:blank";
-        webAd.hidden = true;
-        document.body.classList.remove("ad-open");
-      };
-      webAdSound.addEventListener("click", () => {
-        localStorage.setItem("shudhLohaAdSound", "on");
-        enableWebAdSound();
-      });
-      webAdVideo.addEventListener("load", () => {
-        if (localStorage.getItem("shudhLohaAdSound") === "on") {
-          enableWebAdSound();
-        }
-      });
-      webAdClose.addEventListener("click", closeWebAd);
-      document
-        .getElementById("webAdContact")
-        .addEventListener("click", closeWebAd);
-      document.body.classList.add("ad-open");
-
       // ---- EDIT ME: set the WhatsApp number that should receive orders ----
       const WHATSAPP_NUMBER = "917973247767"; // country code + number, no + or spaces
       const waLink = (item) =>
@@ -1465,6 +2410,7 @@
           image: "Assets 2/Big Deg.jpeg",
           priceKnown: false,
           price: "",
+          category: "Sarbloh",
         },
         {
           name: "Tutma Tava",
@@ -1472,6 +2418,7 @@
           image: "Assets 2/tutma tawa.png",
           priceKnown: false,
           price: "",
+          category: "Sarbloh",
         },
         {
           name: "Tikki Tavi",
@@ -1479,6 +2426,7 @@
           image: "Assets 2/Tikki Tavi.jpeg",
           priceKnown: false,
           price: "",
+          category: "Sarbloh",
         },
         {
           name: "White Batta",
@@ -1486,6 +2434,7 @@
           image: "Assets 2/White batta.png",
           priceKnown: false,
           price: "",
+          category: "Sarbloh",
         },
         {
           name: "Batta",
@@ -1493,6 +2442,7 @@
           image: "Assets 2/batta.png",
           priceKnown: false,
           price: "",
+          category: "Sarbloh",
         },
         {
           name: "Kadhai",
@@ -1500,6 +2450,7 @@
           image: "Assets 2/kadhai.png",
           priceKnown: false,
           price: "",
+          category: "Sarbloh",
         },
         {
           name: "Deg",
@@ -1507,6 +2458,7 @@
           image: "Assets 2/deg.png",
           priceKnown: false,
           price: "",
+          category: "Sarbloh",
         },
         {
           name: "Iron Tawi",
@@ -1514,6 +2466,7 @@
           image: "Assets 2/tawi.png",
           priceKnown: false,
           price: "",
+          category: "Sarbloh",
         },
         {
           name: "Fry Pan",
@@ -1521,6 +2474,23 @@
           image: "Assets 2/fry pan.png",
           priceKnown: false,
           price: "",
+          category: "Non-Stick",
+        },
+        {
+          name: "Non-Stick Kadhai",
+          icon: "kadhai",
+          image: "Assets 2/kadhai.png",
+          priceKnown: false,
+          price: "",
+          category: "Non-Stick",
+        },
+        {
+          name: "Non-Stick Tawa",
+          icon: "tawa",
+          image: "Assets 2/tawa.png",
+          priceKnown: false,
+          price: "",
+          category: "Non-Stick",
         },
         {
           name: "Iron Fork",
@@ -1528,6 +2498,7 @@
           image: "Assets 2/fork.png",
           priceKnown: false,
           price: "",
+          category: "Sarbloh",
         },
         {
           name: "Iron Spoon",
@@ -1535,6 +2506,7 @@
           image: "Assets 2/karchi without handle.png",
           priceKnown: false,
           price: "",
+          category: "Sarbloh",
         },
         {
           name: "Set of Glasses",
@@ -1542,6 +2514,7 @@
           image: "Assets 2/glasses.png",
           priceKnown: false,
           price: "",
+          category: "Sarbloh",
         },
         {
           name: "Tawa",
@@ -1549,6 +2522,7 @@
           image: "Assets 2/tawa.png",
           priceKnown: false,
           price: "",
+          category: "Sarbloh",
         },
       ];
 
@@ -1577,7 +2551,15 @@
           )
           .join("");
       }
-      let kitchenItems = fallbackKitchenItems;
+      let kitchenItems = fallbackKitchenItems.map((item) => ({ ...item, category: "Sarbloh" }));
+
+      function renderCategoryGrid(containerId, items) {
+        if (!items.length) {
+          document.getElementById(containerId).innerHTML = '<div class="category-empty"><strong>Coming soon.</strong>New pieces will be added here from our catalogue.</div>';
+          return;
+        }
+        renderGrid(containerId, items.slice(0, 6));
+      }
 
       async function loadKitchenItems() {
         if (shudhSupabase) {
@@ -1593,49 +2575,14 @@
               priceKnown: Boolean(item.price),
               price: item.price || "",
               icon: "donga",
+              category: item.category === "Iron Kitchenware" ? "Sarbloh" : item.category || "Sarbloh",
             }));
           }
         }
-        renderGrid("kitchenGrid", kitchenItems);
-        setupAutoScroll("kitchenGrid");
+        renderCategoryGrid("sarblohGrid", kitchenItems.filter((item) => item.category !== "Non-Stick"));
+        renderCategoryGrid("nonStickGrid", kitchenItems.filter((item) => item.category === "Non-Stick"));
       }
 
-      function setupAutoScroll(gridId) {
-        const grid = document.getElementById(gridId);
-        const originalCards = Array.from(grid.children);
-        originalCards.forEach((card) => {
-          const duplicate = card.cloneNode(true);
-          duplicate.setAttribute("aria-hidden", "true");
-          duplicate
-            .querySelectorAll("a")
-            .forEach((link) => link.setAttribute("tabindex", "-1"));
-          grid.appendChild(duplicate);
-        });
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-          return;
-
-        let paused = false;
-        const animate = () => {
-          if (!paused) {
-            grid.scrollLeft += 0.55;
-            if (grid.scrollLeft >= grid.scrollWidth / 2) grid.scrollLeft = 0;
-          }
-          window.requestAnimationFrame(animate);
-        };
-        grid.addEventListener("mouseenter", () => {
-          paused = true;
-        });
-        grid.addEventListener("mouseleave", () => {
-          paused = false;
-        });
-        grid.addEventListener("focusin", () => {
-          paused = true;
-        });
-        grid.addEventListener("focusout", (event) => {
-          if (!grid.contains(event.relatedTarget)) paused = false;
-        });
-        animate();
-      }
       loadKitchenItems();
       shudhTrackView();
       document.addEventListener("click", (event) => {
@@ -1644,6 +2591,65 @@
         if (link.href.includes("wa.me")) shudhTrackLead("whatsapp");
         if (link.href.startsWith("tel:")) shudhTrackLead("phone");
       });
+
+      // Home highlight carousel
+      const heroSlider = document.getElementById("heroSlider");
+      const heroSlides = [...heroSlider.querySelectorAll(".hero-slide")];
+      const heroDots = document.getElementById("heroDots");
+      let activeHeroSlide = 0;
+      let heroTimer;
+      let heroPaused = false;
+      heroDots.innerHTML = heroSlides
+        .map((_, index) => `<button class="slider-dot${index === 0 ? " is-active" : ""}" type="button" data-slide-to="${index}" aria-label="Show highlight ${index + 1}"></button>`)
+        .join("");
+      const showHeroSlide = (index) => {
+        activeHeroSlide = (index + heroSlides.length) % heroSlides.length;
+        heroSlides.forEach((slide, slideIndex) => {
+          slide.classList.toggle("is-active", slideIndex === activeHeroSlide);
+          slide.setAttribute("aria-hidden", String(slideIndex !== activeHeroSlide));
+        });
+        heroDots.querySelectorAll(".slider-dot").forEach((dot, dotIndex) => {
+          dot.classList.toggle("is-active", dotIndex === activeHeroSlide);
+          dot.setAttribute("aria-current", dotIndex === activeHeroSlide ? "true" : "false");
+        });
+      };
+      const startHeroTimer = () => {
+        clearInterval(heroTimer);
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        heroTimer = setInterval(() => {
+          if (!heroPaused) showHeroSlide(activeHeroSlide + 1);
+        }, 6500);
+      };
+      document.getElementById("heroPrevious").addEventListener("click", () => { showHeroSlide(activeHeroSlide - 1); startHeroTimer(); });
+      document.getElementById("heroNext").addEventListener("click", () => { showHeroSlide(activeHeroSlide + 1); startHeroTimer(); });
+      heroDots.addEventListener("click", (event) => {
+        const dot = event.target.closest("[data-slide-to]");
+        if (!dot) return;
+        showHeroSlide(Number(dot.dataset.slideTo));
+        startHeroTimer();
+      });
+      heroSlider.addEventListener("mouseenter", () => { heroPaused = true; });
+      heroSlider.addEventListener("mouseleave", () => { heroPaused = false; });
+      heroSlider.addEventListener("focusin", () => { heroPaused = true; });
+      heroSlider.addEventListener("focusout", (event) => { if (!heroSlider.contains(event.relatedTarget)) heroPaused = false; });
+      heroSlider.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") document.getElementById("heroPrevious").click();
+        if (event.key === "ArrowRight") document.getElementById("heroNext").click();
+      });
+      showHeroSlide(0);
+      startHeroTimer();
+
+      async function loadHomeOffer() {
+        if (!shudhSupabase) return;
+        const { data } = await shudhSupabase.from("offers").select("eyebrow,title,description,cta_label,cta_url").eq("is_active", true).order("updated_at", { ascending: false }).limit(1).maybeSingle();
+        if (!data) return;
+        document.getElementById("offerEyebrow").textContent = data.eyebrow;
+        document.getElementById("offerTitle").textContent = data.title;
+        const offerCta = document.getElementById("offerCta");
+        offerCta.textContent = data.cta_label;
+        offerCta.href = data.cta_url;
+      }
+      loadHomeOffer();
 
       // nav toggle
       const navToggle = document.getElementById("navToggle");
@@ -1834,7 +2840,7 @@
       applyLanguage(localStorage.getItem("shudhLohaLanguage") || "en");
 
       // scroll reveal
-      const revealEls = document.querySelectorAll(".reveal");
+      const revealEls = document.querySelectorAll(".reveal:not(.order .reveal)");
       const io = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
@@ -1847,6 +2853,77 @@
         { threshold: 0.15 },
       );
       revealEls.forEach((el) => io.observe(el));
+
+      const orderSection = document.querySelector(".order");
+      const orderReveals = orderSection?.querySelectorAll(".reveal");
+      if (orderSection && orderReveals?.length) {
+        const orderIo = new IntersectionObserver(
+          (entries) => {
+            const isVisible = entries.some((entry) => entry.isIntersecting);
+            orderReveals.forEach((el) => el.classList.toggle("in", isVisible));
+          },
+          { threshold: 0.2 },
+        );
+        orderIo.observe(orderSection);
+      }
+
+      const contactIntro = document.querySelector(".contact-intro");
+      const contactCard = document.querySelector(".contact-card-sequence");
+      let contactIntroPlayed = false;
+      const triggerContactIntro = () => {
+        if (contactIntroPlayed || !contactIntro) return;
+        const rect = contactIntro.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.82 && rect.bottom >= 0) {
+          contactIntro.classList.add("contact-visible");
+          contactIntroPlayed = true;
+          const cardDelay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 2050;
+          window.setTimeout(() => contactCard?.classList.add("contact-card-visible"), cardDelay);
+        }
+      };
+      window.addEventListener("scroll", triggerContactIntro, { passive: true });
+
+      const productSectionHead = document.querySelector("#products .section-head");
+      let productTitleSweepPlayed = false;
+      const triggerProductTitleSweep = () => {
+        if (productTitleSweepPlayed || !productSectionHead) return;
+        const rect = productSectionHead.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.82 && rect.bottom >= 0) {
+          productSectionHead.classList.add("gold-sweep-in");
+          productTitleSweepPlayed = true;
+        }
+      };
+      window.addEventListener("scroll", triggerProductTitleSweep, { passive: true });
+
+      const productsSection = document.getElementById("products");
+      const updateProductsEndState = () => {
+        if (!productsSection) return;
+        const rect = productsSection.getBoundingClientRect();
+        const triggerPoint = window.innerHeight * 0.82;
+
+        if (rect.bottom - triggerPoint <= 0) {
+          productsSection.classList.add("is-ended");
+        } else {
+          productsSection.classList.remove("is-ended");
+        }
+      };
+
+      updateProductsEndState();
+      window.addEventListener("scroll", updateProductsEndState, { passive: true });
+      window.addEventListener("resize", updateProductsEndState);
+
+      // carousel arrows for product rows
+      document.querySelectorAll(".carousel-arrow").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const grid = document.getElementById(btn.dataset.target);
+          if (!grid) return;
+          const cardWidth = grid.querySelector(".card")?.offsetWidth || 260;
+          const distance = cardWidth + 22; // card width + gap
+          grid.scrollBy({
+            left: btn.classList.contains("carousel-next") ? distance : -distance,
+            behavior: "smooth",
+          });
+        });
+      });
     </script>
   </body>
 </html>
