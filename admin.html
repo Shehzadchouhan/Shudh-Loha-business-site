@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Shudh Loha Admin</title>
-    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="icon" type="image/png" href="./logo.png?v=2" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
       :root { --ink:#171717; --muted:#686158; --paper:#fbfaf6; --panel:#f1ebdd; --gold:#b88a24; --line:rgba(20,18,16,.14); --danger:#a23b2d; }
@@ -49,13 +49,17 @@
       .product-row img { width:62px; height:62px; object-fit:cover; background:var(--panel); border:1px solid var(--line); }
       .product-row h3 { font-size:19px; }
       .product-row p { margin:2px 0 0; color:var(--muted); font-size:13px; }
+      .video-list { display:grid; gap:10px; }
+      .video-item { display:flex; align-items:center; gap:12px; padding:10px; border:1px solid var(--line); }
+      .video-item video { width:120px; aspect-ratio:16/9; object-fit:cover; background:var(--ink); }
+      .video-item span { flex:1; color:var(--muted); font-size:13px; }
       .row-actions { display:flex; gap:6px; }
       .icon-button { border:1px solid var(--line); background:transparent; padding:7px 9px; }
       .leads { margin-top:24px; }
       .lead-row { padding:13px 0; border-bottom:1px solid var(--line); }
       .lead-meta { color:var(--muted); font-size:12px; }
       .empty { color:var(--muted); padding:18px 0; }
-      @media (max-width:760px) { body { font-size:14px; } .shell { padding:18px; } .topbar { align-items:flex-start; flex-wrap:wrap; } .brand { font-size:18px; } .top-actions { width:100%; justify-content:flex-end; } .top-actions .button { padding:8px 10px; } .hero { padding:34px 0 24px; } .hero h1 { font-size:42px; } .stats { grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:26px; } .stat { padding:14px; } .stat strong { font-size:27px; } .columns { grid-template-columns:1fr; gap:16px; } .panel { padding:18px; } .panel-head { align-items:flex-start; } .product-row { grid-template-columns:50px 1fr; gap:10px; } .product-row img { width:50px; height:50px; } .row-actions { grid-column:2; } .row-actions .icon-button { padding:7px 12px; } .login-card { padding:26px 20px; } }
+      @media (max-width:760px) { body { font-size:14px; } .shell { padding:18px; } .topbar { align-items:flex-start; flex-wrap:wrap; } .brand { font-size:18px; } .top-actions { width:100%; justify-content:flex-end; } .top-actions .button { padding:8px 10px; } .hero { padding:34px 0 24px; } .hero h1 { font-size:42px; } .stats { grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:26px; } .stat { padding:14px; } .stat strong { font-size:27px; } .columns { grid-template-columns:1fr; gap:16px; } .panel { padding:18px; } .panel-head { align-items:flex-start; } .product-row { grid-template-columns:50px 1fr; gap:10px; } .product-row img { width:50px; height:50px; } .row-actions { grid-column:2; } .row-actions .icon-button { padding:7px 12px; } .login-card { padding:26px 20px; } .video-item { align-items:flex-start; flex-wrap:wrap; } .video-item video { width:100%; max-width:220px; } }
       @media (max-width:420px) { .stats { grid-template-columns:1fr 1fr; } .stat span { font-size:10px; letter-spacing:.6px; } .top-actions { justify-content:stretch; } .top-actions .button { flex:1; text-align:center; } }
       @media (max-width:600px) {
         body { overflow-x:hidden; }
@@ -109,7 +113,7 @@
         <div class="stats"><div class="stat"><strong id="viewsCount">0</strong><span>Views, 7 days</span></div><div class="stat"><strong id="leadsCount">0</strong><span>Leads, 7 days</span></div><div class="stat"><strong id="whatsappCount">0</strong><span>WhatsApp clicks</span></div><div class="stat"><strong id="productsCount">0</strong><span>Active products</span></div></div>
         <div class="columns">
           <section class="panel"><div class="panel-head"><h2>Products</h2><button class="button" id="newProduct" type="button">Add product</button></div><div class="product-list" id="productList"></div></section>
-          <section class="panel"><div class="panel-head"><h2 id="formTitle">New product</h2></div><form id="productForm"><input id="productId" type="hidden" /><label>Name<input id="productName" required /></label><label>Category<select id="productCategory" required><option value="Sarbloh">Sarbloh</option><option value="Non-Stick">Non-Stick</option></select></label><label>Description<textarea id="productDescription">Pure iron and hand-finished.</textarea></label><label>Price or note <small>(optional)</small><input id="productPrice" placeholder="Call for Price" /></label><label>Main product image <small>(optional)</small><input id="productImage" type="file" accept="image/*" /></label><label>Additional product images <small>(optional)</small><input id="productGalleryImages" type="file" accept="image/*" multiple /></label><label><span>Visible on site</span><select id="productActive"><option value="true">Yes</option><option value="false">No</option></select></label><div class="form-actions"><button class="button" type="submit">Save product</button><button class="button secondary" id="cancelEdit" type="button">Clear</button></div><div class="error" id="productError" role="alert"></div></form></section>
+          <section class="panel"><div class="panel-head"><h2 id="formTitle">New product</h2></div><form id="productForm"><input id="productId" type="hidden" /><label>Name<input id="productName" required /></label><label>Category<select id="productCategory" required><option value="Sarbloh">Sarbloh</option></select></label><label>Description<textarea id="productDescription">Pure iron and hand-finished.</textarea></label><label>Price or note <small>(optional)</small><input id="productPrice" placeholder="Call for Price" /></label><label>Main product image <small>(optional)</small><input id="productImage" type="file" accept="image/*" /></label><label>Additional product images <small>(optional)</small><input id="productGalleryImages" type="file" accept="image/*" multiple /></label><label>Product videos / reels <small>(optional, MP4 or WebM; max 100 MB each)</small><input id="productVideos" type="file" accept="video/mp4,video/webm,.mp4,.webm" multiple /></label><div class="video-list" id="productVideoList"></div><label><span>Visible on site</span><select id="productActive"><option value="true">Yes</option><option value="false">No</option></select></label><div class="form-actions"><button class="button" type="submit">Save product</button><button class="button secondary" id="cancelEdit" type="button">Clear</button></div><div class="error" id="productError" role="alert"></div></form></section>
         </div>
         <section class="panel"><div class="panel-head"><h2>Home banner offers</h2><button class="button" id="newOffer" type="button">Add banner</button></div><div class="product-list" id="offerList"></div><div class="panel-head"><h2 id="offerFormTitle">New banner</h2></div><form id="offerForm"><input id="offerId" type="hidden" /><label>Eyebrow<input id="offerEyebrow" value="Featured update" required /></label><label>Title<input id="offerTitle" placeholder="Seasonal offer or collection update" required /></label><label>Description<textarea id="offerDescription" required></textarea></label><label>Button text<input id="offerCtaLabel" value="Ask us" required /></label><label><span>Show this offer</span><select id="offerActive"><option value="true">Yes</option><option value="false">No</option></select></label><div class="form-actions"><button class="button" type="submit">Save banner</button><button class="button secondary" id="cancelOffer" type="button">Clear</button></div><div class="error" id="offerError" role="alert"></div></form></section>
         <section class="panel leads"><div class="panel-head"><h2>Recent leads</h2><button class="button secondary" id="refresh" type="button">Refresh</button></div><div id="leadList"></div></section>
@@ -121,6 +125,7 @@
       const configured = SHUDH_SUPABASE_READY;
       const client = shudhSupabase;
       const $ = (id) => document.getElementById(id);
+      const isSarblohProduct = (item) => !item.category || item.category === "Sarbloh" || item.category === "Iron Kitchenware";
       const show = (id) => { $("loginView").classList.toggle("active", id === "loginView"); $("appView").classList.toggle("active", id === "appView"); };
       const formatDate = (value) => new Date(value).toLocaleString([], { dateStyle: "medium", timeStyle: "short" });
       const reportError = (element, error) => { element.textContent = error?.message || String(error); };
@@ -129,21 +134,67 @@
       async function loadProducts() {
         const { data, error } = await client.from("products").select("*").order("sort_order").order("created_at");
         if (error) throw error;
-        $("productsCount").textContent = data.filter((item) => item.is_active).length;
-        $("productList").innerHTML = data.length ? data.map((item) => `<article class="product-row"><img src="${item.image_url || "logo.png"}" alt=""><div><h3>${item.name}</h3><p>${item.category} · ${item.is_active ? "Visible" : "Hidden"}</p></div><div class="row-actions"><button class="icon-button" type="button" data-edit="${item.id}">Edit</button><button class="icon-button" type="button" data-delete="${item.id}">Delete</button></div></article>`).join("") : '<p class="empty">No products yet.</p>';
+        $("productsCount").textContent = data.filter((item) => item.is_active && isSarblohProduct(item)).length;
+        $("productList").innerHTML = data.length ? data.map((item) => `<article class="product-row"><img src="${item.image_url || "./logo.png?v=2"}" alt=""><div><h3>${item.name}</h3><p>${item.category} · ${item.is_active && isSarblohProduct(item) ? "Visible" : "Hidden from storefront"}</p></div><div class="row-actions"><button class="icon-button" type="button" data-edit="${item.id}">Edit</button><button class="icon-button" type="button" data-delete="${item.id}">Delete</button></div></article>`).join("") : '<p class="empty">No products yet.</p>';
         document.querySelectorAll("[data-edit]").forEach((button) => button.addEventListener("click", () => editProduct(data.find((item) => item.id === button.dataset.edit))));
         document.querySelectorAll("[data-delete]").forEach((button) => button.addEventListener("click", () => deleteProduct(button.dataset.delete)));
       }
-      function editProduct(item) { $("formTitle").textContent = "Edit product"; $("productId").value = item.id; $("productName").value = item.name; $("productCategory").value = item.category; $("productDescription").value = item.description; $("productPrice").value = item.price || ""; $("productImage").dataset.currentUrl = item.image_url || ""; $("productGalleryImages").dataset.currentUrls = JSON.stringify(Array.isArray(item.image_urls) ? item.image_urls : []); $("productActive").value = String(item.is_active); window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }); }
+      function editProduct(item) { $("formTitle").textContent = "Edit product"; $("productId").value = item.id; $("productName").value = item.name; $("productCategory").value = "Sarbloh"; $("productDescription").value = item.description; $("productPrice").value = item.price || ""; $("productImage").dataset.currentUrl = item.image_url || ""; $("productGalleryImages").dataset.currentUrls = JSON.stringify(Array.isArray(item.image_urls) ? item.image_urls : []); $("productVideos").dataset.currentUrls = JSON.stringify(Array.isArray(item.video_urls) ? item.video_urls : []); renderProductVideos(); $("productActive").value = String(item.is_active && isSarblohProduct(item)); window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }); }
       async function deleteProduct(id) { if (!confirm("Delete this product?")) return; const { error } = await client.from("products").delete().eq("id", id); if (error) return reportError($("productError"), error); clearForm(); await loadProducts(); }
-      function clearForm() { $("productForm").reset(); $("productId").value = ""; delete $("productImage").dataset.currentUrl; delete $("productGalleryImages").dataset.currentUrls; $("productCategory").value = "Sarbloh"; $("productDescription").value = "Pure iron and hand-finished."; $("formTitle").textContent = "New product"; $("productError").textContent = ""; }
+      function clearForm() { $("productForm").reset(); $("productId").value = ""; delete $("productImage").dataset.currentUrl; delete $("productGalleryImages").dataset.currentUrls; delete $("productVideos").dataset.currentUrls; renderProductVideos(); $("productCategory").value = "Sarbloh"; $("productDescription").value = "Pure iron and hand-finished."; $("formTitle").textContent = "New product"; $("productError").textContent = ""; }
       async function loadOffers() { const { data, error } = await client.from("offers").select("*").order("updated_at", { ascending: false }); if (error) throw error; $("offerList").innerHTML = data.length ? data.map((item) => `<article class="product-row"><div><h3>${item.title}</h3><p>${item.eyebrow} · ${item.is_active ? "Visible" : "Hidden"}</p></div><div class="row-actions"><button class="icon-button" type="button" data-offer-edit="${item.id}">Edit</button><button class="icon-button" type="button" data-offer-delete="${item.id}">Delete</button></div></article>`).join("") : '<p class="empty">No banners yet.</p>'; document.querySelectorAll("[data-offer-edit]").forEach((button) => button.addEventListener("click", () => editOffer(data.find((item) => item.id === button.dataset.offerEdit)))); document.querySelectorAll("[data-offer-delete]").forEach((button) => button.addEventListener("click", () => deleteOffer(button.dataset.offerDelete))); }
       function editOffer(item) { $("offerFormTitle").textContent = "Edit banner"; $("offerId").value = item.id; $("offerEyebrow").value = item.eyebrow; $("offerTitle").value = item.title; $("offerDescription").value = item.description; $("offerCtaLabel").value = item.cta_label; $("offerActive").value = String(item.is_active); window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }); }
       async function deleteOffer(id) { if (!confirm("Delete this banner?")) return; const { error } = await client.from("offers").delete().eq("id", id); if (error) return reportError($("offerError"), error); clearOffer(); await loadOffers(); }
       function clearOffer() { $("offerForm").reset(); $("offerId").value = ""; $("offerEyebrow").value = "Featured update"; $("offerCtaLabel").value = "Ask us"; $("offerFormTitle").textContent = "New banner"; $("offerError").textContent = ""; }
       $("offerForm").addEventListener("submit", async (event) => { event.preventDefault(); $("offerError").textContent = "Saving..."; const payload = { eyebrow: $("offerEyebrow").value.trim(), title: $("offerTitle").value.trim(), description: $("offerDescription").value.trim(), cta_label: $("offerCtaLabel").value.trim(), cta_url: "#contact", is_active: $("offerActive").value === "true", updated_at: new Date().toISOString() }; const id = $("offerId").value; const query = id ? client.from("offers").update(payload).eq("id", id) : client.from("offers").insert(payload); const { error } = await query; $("offerError").textContent = error ? error.message : "Banner saved."; if (!error) { clearOffer(); await loadOffers(); } });
       async function uploadImage(file) { const extension = file.name.split(".").pop().toLowerCase(); const path = `${crypto.randomUUID()}.${extension}`; const result = await client.storage.from("product-images").upload(path, file, { upsert: false }); if (result.error) throw result.error; return client.storage.from("product-images").getPublicUrl(path).data.publicUrl; }
-      $("productForm").addEventListener("submit", async (event) => { event.preventDefault(); $("productError").textContent = "Saving..."; try { let imageUrl = $("productImage").dataset.currentUrl || null; if ($("productImage").files[0]) imageUrl = await uploadImage($("productImage").files[0]); const currentGalleryUrls = JSON.parse($("productGalleryImages").dataset.currentUrls || "[]"); const galleryFiles = [...$("productGalleryImages").files]; const uploadedGalleryUrls = await Promise.all(galleryFiles.map(uploadImage)); const payload = { name: $("productName").value.trim(), category: $("productCategory").value.trim(), description: $("productDescription").value.trim(), price: $("productPrice").value.trim() || null, image_url: imageUrl, image_urls: [...new Set([...currentGalleryUrls, ...uploadedGalleryUrls].filter((url) => url && url !== imageUrl))], is_active: $("productActive").value === "true", updated_at: new Date().toISOString() }; const id = $("productId").value; const query = id ? client.from("products").update(payload).eq("id", id) : client.from("products").insert(payload); let { error } = await query; if (error && /image_urls.*schema cache/i.test(error.message || "")) { const legacyPayload = { ...payload }; delete legacyPayload.image_urls; const legacyQuery = id ? client.from("products").update(legacyPayload).eq("id", id) : client.from("products").insert(legacyPayload); ({ error } = await legacyQuery); } if (error) throw error; clearForm(); await loadProducts(); } catch (error) { reportError($("productError"), error); } });
+      function renderProductVideos() { const list = $("productVideoList"); list.replaceChildren(); const urls = JSON.parse($("productVideos").dataset.currentUrls || "[]"); urls.forEach((url, index) => { const row = document.createElement("div"); row.className = "video-item"; const video = document.createElement("video"); video.src = url; video.controls = true; video.preload = "metadata"; video.playsInline = true; const label = document.createElement("span"); label.textContent = `Product reel ${index + 1}`; const remove = document.createElement("button"); remove.type = "button"; remove.className = "icon-button"; remove.textContent = "Remove"; remove.addEventListener("click", () => { urls.splice(index, 1); $("productVideos").dataset.currentUrls = JSON.stringify(urls); renderProductVideos(); }); row.append(video, label, remove); list.append(row); }); }
+      function validateVideoFile(file) { const extension = file.name.split(".").pop().toLowerCase(); const mimeTypes = { mp4: "video/mp4", webm: "video/webm" }; if (!mimeTypes[extension] || (file.type && file.type !== mimeTypes[extension])) throw new Error(`${file.name}: upload an MP4 or WebM video.`); if (file.size > 100 * 1024 * 1024) throw new Error(`${file.name}: video must be 100 MB or smaller.`); return { extension, mimeType: mimeTypes[extension] }; }
+      async function uploadVideo(file) { const { extension, mimeType } = validateVideoFile(file); const path = `videos/${crypto.randomUUID()}.${extension}`; const result = await client.storage.from("product-images").upload(path, file, { upsert: false, contentType: mimeType }); if (result.error) throw result.error; return client.storage.from("product-images").getPublicUrl(path).data.publicUrl; }
+      $("productVideos").addEventListener("change", () => { const selected = [...$("productVideos").files]; const invalid = selected.find((file) => { try { validateVideoFile(file); return false; } catch (error) { $("productError").textContent = error.message; return true; } }); if (invalid) $("productVideos").value = ""; else $("productError").textContent = ""; });
+      $("productForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        $("productError").textContent = "Saving...";
+        try {
+          const videoFiles = [...$("productVideos").files];
+          videoFiles.forEach(validateVideoFile);
+          let imageUrl = $("productImage").dataset.currentUrl || null;
+          if ($("productImage").files[0]) imageUrl = await uploadImage($("productImage").files[0]);
+          const currentGalleryUrls = JSON.parse($("productGalleryImages").dataset.currentUrls || "[]");
+          const galleryFiles = [...$("productGalleryImages").files];
+          const uploadedGalleryUrls = await Promise.all(galleryFiles.map(uploadImage));
+          const currentVideoUrls = JSON.parse($("productVideos").dataset.currentUrls || "[]");
+          const uploadedVideoUrls = await Promise.all(videoFiles.map(uploadVideo));
+          const payload = {
+            name: $("productName").value.trim(),
+            category: $("productCategory").value.trim(),
+            description: $("productDescription").value.trim(),
+            price: $("productPrice").value.trim() || null,
+            image_url: imageUrl,
+            image_urls: [...new Set([...currentGalleryUrls, ...uploadedGalleryUrls].filter((url) => url && url !== imageUrl))],
+            video_urls: [...new Set([...currentVideoUrls, ...uploadedVideoUrls])],
+            is_active: $("productActive").value === "true",
+            updated_at: new Date().toISOString()
+          };
+          const id = $("productId").value;
+          const query = id ? client.from("products").update(payload).eq("id", id) : client.from("products").insert(payload);
+          let { error } = await query;
+          if (error && /video_urls.*(schema cache|column)/i.test(error.message || "")) throw new Error("Product video storage is not enabled yet. Run supabase-product-videos.sql in the Supabase SQL editor, then try again.");
+          if (error && /image_urls.*schema cache/i.test(error.message || "")) {
+            const legacyPayload = { ...payload };
+            delete legacyPayload.image_urls;
+            const legacyQuery = id ? client.from("products").update(legacyPayload).eq("id", id) : client.from("products").insert(legacyPayload);
+            ({ error } = await legacyQuery);
+          }
+          if (error) throw error;
+          clearForm();
+          await loadProducts();
+        } catch (error) {
+          reportError($("productError"), error);
+        }
+      });
+      $("productVideos").dataset.currentUrls = "[]";
+      renderProductVideos();
       async function loadMetrics() { const since = daysAgo(7); const [views, leads] = await Promise.all([client.from("page_views").select("id", { count: "exact", head: true }).gte("created_at", since), client.from("leads").select("kind", { count: "exact" }).gte("created_at", since)]); if (views.error) throw views.error; if (leads.error) throw leads.error; $("viewsCount").textContent = views.count || 0; $("leadsCount").textContent = leads.data.length || 0; $("whatsappCount").textContent = leads.data.filter((lead) => lead.kind === "whatsapp").length; }
       async function loadLeads() { const { data, error } = await client.from("leads").select("*").order("created_at", { ascending: false }).limit(30); if (error) throw error; $("leadList").innerHTML = data.length ? data.map((lead) => `<article class="lead-row"><strong>${lead.kind === "form" ? (lead.name || "Form enquiry") : lead.kind === "whatsapp" ? "WhatsApp click" : "Phone click"}</strong><div class="lead-meta">${formatDate(lead.created_at)}${lead.product_name ? ` · ${lead.product_name}` : ""}${lead.phone ? ` · ${lead.phone}` : ""}</div>${lead.message ? `<div>${lead.message}</div>` : ""}</article>`).join("") : '<p class="empty">No leads yet.</p>'; }
       async function refreshApp() { try { await Promise.all([loadProducts(), loadMetrics(), loadLeads(), loadOffers()]); } catch (error) { reportError($("productError"), error); } }

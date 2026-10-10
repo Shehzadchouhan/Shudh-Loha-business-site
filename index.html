@@ -11,7 +11,7 @@
       content="Traditional articles and hand-finished iron kitchenware from Malerkotla, Punjab."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="logo.png" />
+    <meta property="og:image" content="./logo.png?v=2" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -33,7 +33,7 @@
         ]
       }
     </script>
-    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="icon" type="image/png" href="./logo.png?v=2" />
 
     <style>
       :root {
@@ -2051,7 +2051,7 @@
                 <a class="btn btn-ghost" href="products.html" data-lang="viewProducts">View Products</a>
               </div>
             </div>
-            <div class="hero-art"><img class="hero-logo" src="logo.png" alt="Shudh Loha Kitchenware logo" /></div>
+            <div class="hero-art"><img class="hero-logo" src="./logo.png?v=2" alt="Shudh Loha brand logo" /></div>
           </div>
         </article>
 
@@ -2081,7 +2081,7 @@
           <div class="wrap">
             <div>
               <span class="offer-kicker" id="offerEyebrow">New collection</span>
-              <h1 id="offerTitle">Modern cooking.<br /><span>Same trusted care.</span></h1>
+              <h1 id="offerTitle">Sarbloh cooking.<br /><span>Made for daily rituals.</span></h1>
               <div class="hero-cta"><a class="btn btn-primary" id="offerCta" href="#contact">Ask about availability</a><a class="btn btn-ghost" href="https://www.instagram.com/shudh_loha_enterprise?igsi=MXdma2xncXk5cDVsOA==" target="_blank" rel="noopener">Follow updates</a></div>
             </div>
             <div class="offer-card"><strong id="offerNote">Coming<br />soon.</strong></div>
@@ -2148,20 +2148,6 @@
             </div>
             <div style="text-align:center;"><a class="category-action" href="products.html?category=Sarbloh">Explore Sarbloh items</a></div>
           </div>
-          <div class="product-category">
-            <div class="product-category-head">
-              <div><span class="cat-tag">Modern collection</span></div>
-              <p>Everyday cookware designed for modern kitchens and daily use.</p>
-            </div>
-            <div class="carousel">
-              <button class="carousel-arrow carousel-prev" type="button" data-target="nonStickGrid" aria-label="Scroll left">&#8249;</button>
-              <div class="product-grid" id="nonStickGrid"></div>
-              <button class="carousel-arrow carousel-next" type="button" data-target="nonStickGrid" aria-label="Scroll right">&#8250;</button>
-            </div>
-            <div style="text-align:center;"><a class="category-action" href="products.html?category=Non-Stick">Explore Non-Stick cookware</a></div>
-          </div>
-         
-
           <div class="all-products-reveal" id="allProductsReveal" aria-live="polite">
             <div class="all-products-card">
               <span class="all-products-eye" aria-hidden="true">
@@ -2482,30 +2468,6 @@
           category: "Sarbloh",
         },
         {
-          name: "Fry Pan",
-          icon: "tawa",
-          image: "Assets 2/fry pan.png",
-          priceKnown: false,
-          price: "",
-          category: "Non-Stick",
-        },
-        {
-          name: "Non-Stick Kadhai",
-          icon: "kadhai",
-          image: "Assets 2/kadhai.png",
-          priceKnown: false,
-          price: "",
-          category: "Non-Stick",
-        },
-        {
-          name: "Non-Stick Tawa",
-          icon: "tawa",
-          image: "Assets 2/tawa.png",
-          priceKnown: false,
-          price: "",
-          category: "Non-Stick",
-        },
-        {
           name: "Iron Fork",
           icon: "chamcha",
           image: "Assets 2/fork.png",
@@ -2591,8 +2553,7 @@
             }));
           }
         }
-        renderCategoryGrid("sarblohGrid", kitchenItems.filter((item) => item.category !== "Non-Stick"));
-        renderCategoryGrid("nonStickGrid", kitchenItems.filter((item) => item.category === "Non-Stick"));
+        renderCategoryGrid("sarblohGrid", kitchenItems.filter((item) => !item.category || item.category === "Sarbloh" || item.category === "Iron Kitchenware"));
       }
 
       loadKitchenItems();

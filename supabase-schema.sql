@@ -1,4 +1,4 @@
--- Run this once in the Supabase SQL editor.
+-- Run this in the Supabase SQL editor when setting up or updating the site schema.
 create table if not exists public.products (
   id uuid primary key default gen_random_uuid(),
   name text not null,
@@ -14,6 +14,7 @@ create table if not exists public.products (
 );
 
 alter table public.products add column if not exists image_urls jsonb not null default '[]'::jsonb;
+alter table public.products add column if not exists video_urls jsonb not null default '[]'::jsonb;
 
 create table if not exists public.leads (
   id uuid primary key default gen_random_uuid(),
@@ -115,6 +116,10 @@ create policy "Admins can manage offers" on public.offers
 insert into storage.buckets (id, name, public)
 values ('product-images', 'product-images', true)
 on conflict (id) do nothing;
+
+update storage.buckets
+set file_size_limit = 104857600
+where id = 'product-images';
 
 create policy "Public can view product images" on storage.objects
   for select using (bucket_id = 'product-images');

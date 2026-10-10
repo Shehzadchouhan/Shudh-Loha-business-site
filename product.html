@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Product Details | Shudh Loha</title>
 <meta name="description" content="Product details for Shudh Loha pure iron cookware." />
-<link rel="icon" type="image/png" href="logo.png" />
+<link rel="icon" type="image/png" href="./logo.png?v=2" />
 <style>
   :root{--ink:#171717;--cream:#FBFAF6;--cream-deep:#F1EBDD;--gold:#B88A24;--rust:#A97818;--line:rgba(20,18,16,.14);--display:Didot,'Bodoni MT','Times New Roman',serif;--body:'Trebuchet MS','Segoe UI',sans-serif}
   *,*::before,*::after{box-sizing:border-box}
@@ -14,7 +14,7 @@
   main{padding:76px 0}.product{display:grid;grid-template-columns:minmax(280px,1fr) minmax(280px,.9fr);gap:72px;align-items:center}.visual{background:var(--cream-deep);border:1px solid var(--line);padding:18px;min-height:360px;display:grid;place-items:center}.visual img{width:100%;max-height:470px;object-fit:contain}.visual .missing{font:700 24px var(--display);text-align:center;padding:40px}.eyebrow{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase}.details h1{font:700 clamp(38px,5vw,62px)/1.05 var(--display);margin:10px 0 18px}.facts{border-top:1px solid var(--line);margin:28px 0 0}.fact{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}.fact strong{font-weight:700}.fact span{text-align:right;color:#5b554d}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;padding:13px 20px;border:1px solid var(--gold);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase}.primary{background:var(--gold)}.secondary:hover{background:var(--cream-deep)}
   footer{background:var(--ink);color:rgba(244,238,225,.7);padding:30px 0;text-align:center;font-size:13px}footer span{color:var(--gold)}
   .lead-form{border-top:1px solid var(--line);margin-top:28px;padding-top:20px;display:grid;gap:10px}.lead-form input,.lead-form textarea{width:100%;border:1px solid var(--line);padding:10px;background:var(--cream);font:inherit}.lead-form textarea{min-height:74px;resize:vertical}.lead-form button{border:1px solid var(--gold);background:var(--gold);padding:11px 14px;font-weight:700;cursor:pointer}.lead-form-status{font-size:13px;color:#5b554d;min-height:20px}
-  .visual{gap:14px}.visual-main{width:100%;display:grid;place-items:center;cursor:zoom-in}.visual-main img{cursor:zoom-in}.visual-thumbs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.visual-thumb{width:58px;height:58px;padding:3px;border:1px solid var(--line);background:var(--cream);cursor:pointer}.visual-thumb.is-active{border-color:var(--gold);box-shadow:0 0 0 2px rgba(184,138,36,.18)}.visual-thumb img{width:100%;height:100%;object-fit:cover}
+  .visual{gap:14px}.visual-main{width:100%;display:grid;place-items:center}.visual-main img,.visual-main video{width:100%;max-height:470px;object-fit:contain}.visual-main video{background:#111}.visual-main a{width:100%;display:grid;place-items:center;cursor:zoom-in}.visual-thumbs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.visual-thumbs[hidden]{display:none}.visual-thumb{position:relative;width:58px;height:58px;padding:3px;border:1px solid var(--line);background:var(--cream);cursor:pointer}.visual-thumb.is-active{border-color:var(--gold);box-shadow:0 0 0 2px rgba(184,138,36,.18)}.visual-thumb img,.visual-thumb video{width:100%;height:100%;object-fit:cover}.video-badge{position:absolute;right:2px;bottom:2px;padding:1px 4px;background:var(--ink);color:var(--cream);font-size:8px;text-transform:uppercase}
   @media(max-width:760px){main{padding:42px 0}.wrap{padding:0 18px}.nav{min-height:0;padding:12px 18px;flex-wrap:wrap;row-gap:10px}.brand{font-size:18px;flex:1}.nav-actions{flex:1 1 100%;justify-content:space-between;gap:10px}.back{font-size:11px}.language-select{padding:7px 8px}.product{grid-template-columns:1fr;gap:28px}.visual{min-height:240px;padding:12px}.details h1{font-size:clamp(36px,12vw,54px)}.fact{font-size:13px}.actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:22px}.btn{justify-content:center;width:100%}.lead-form{margin-top:24px}}
   body{margin:0;background:#f5f5f5}.visual{border:0;background:#fff}.facts{border:0;margin-top:20px}.fact{border:0;padding:6px 0}.lead-form{border:0;padding-top:0}.lead-form input,.lead-form textarea{border:0;background:#fff}.lead-form-status{color:var(--ink)}
 </style>
@@ -49,35 +49,97 @@
     'Kadhai': ['Iron Cookware', 'Assets 2/kadhai.png'],
     'Deg': ['Iron Cookware', 'Assets 2/deg.png'],
     'Iron Tawa': ['Iron Cookware', 'Assets 2/tawi.png'],
-    'Fry Pan': ['Iron Cookware', 'Assets 2/fry pan.png'],
     'Iron Fork': ['Iron Cookware', 'Assets 2/fork.png'],
     'Iron Spoon': ['Iron Cookware', 'Assets 2/karchi without handle.png'],
     'Set of Glasses': ['Iron Cookware', 'Assets 2/glasses.png'],
     'Iron Tava': ['Iron Cookware', 'Assets 2/tawa.png']
   };
   const item = new URLSearchParams(location.search).get('item') || 'Kadhai';
+  const hasFallbackProduct = Object.prototype.hasOwnProperty.call(products, item);
+  if (!shudhSupabase && !hasFallbackProduct) location.replace('products.html');
   let product = products[item] || products['Iron Tawa'];
   if (shudhSupabase) {
-    shudhSupabase.from('products').select('name,category,image_url,image_urls,description,price').eq('name', item).eq('is_active', true).maybeSingle().then(({ data }) => {
-      if (!data) return;
-      const category = data.category === 'Iron Kitchenware' ? 'Sarbloh' : data.category;
-      product = [category, data.image_url, data.description, data.price, data.image_urls || []];
+    shudhSupabase.from('products').select('name,category,image_url,image_urls,video_urls,description,price').eq('name', item).eq('is_active', true).maybeSingle().then(({ data }) => {
+      if (!data) {
+        if (!hasFallbackProduct) location.replace('products.html');
+        return;
+      }
+      if (data.category && !['Sarbloh', 'Iron Kitchenware'].includes(data.category)) {
+        location.replace('products.html');
+        return;
+      }
+      const category = data.category === 'Iron Kitchenware' ? 'Sarbloh' : data.category || 'Sarbloh';
+      product = [category, data.image_url, data.description, data.price, data.image_urls || [], data.video_urls || []];
       document.getElementById('category').textContent = category;
-      renderVisual(data.name, data.image_url, data.image_urls || []);
+      renderVisual(data.name, data.image_url, data.image_urls || [], data.video_urls || []);
       document.querySelector('[data-lang="askPrice"]').textContent = data.price || 'Ask for current price';
     });
   }
   document.title = `${item} | Shudh Loha`;
   document.getElementById('name').textContent = item;
   document.getElementById('category').textContent = product[0];
-  function renderVisual(name, mainImage, galleryImages = []) {
+  function renderVisual(name, mainImage, galleryImages = [], galleryVideos = []) {
     const images = [...new Set([mainImage, ...(Array.isArray(galleryImages) ? galleryImages : [])].filter(Boolean))];
+    const videos = [...new Set(Array.isArray(galleryVideos) ? galleryVideos.filter(Boolean) : [])];
+    const media = [...images.map((src) => ({ src, type: 'image' })), ...videos.map((src) => ({ src, type: 'video' }))];
     const visual = document.getElementById('visual');
-    if (!images.length) { visual.innerHTML = '<div class="missing">Ask us for a current photo</div>'; return; }
-    visual.innerHTML = `<a class="visual-main" id="mainProductLink" href="${images[0]}" target="_blank" rel="noopener" aria-label="Open full-size ${name} image"><img id="mainProductImage" src="${images[0]}" alt="${name}" /></a>${images.length > 1 ? `<div class="visual-thumbs" aria-label="More views of ${name}">${images.map((src, index) => `<button class="visual-thumb${index === 0 ? ' is-active' : ''}" type="button" data-image="${src}" aria-label="View ${name} image ${index + 1}"><img src="${src}" alt="" /></button>`).join('')}</div>` : ''}`;
-    visual.querySelectorAll('.visual-thumb').forEach((button) => button.addEventListener('click', () => { visual.querySelector('#mainProductImage').src = button.dataset.image; visual.querySelector('#mainProductLink').href = button.dataset.image; visual.querySelectorAll('.visual-thumb').forEach((thumb) => thumb.classList.toggle('is-active', thumb === button)); }));
+    if (!media.length) { visual.innerHTML = '<div class="missing">Ask us for a current photo or video</div>'; return; }
+    visual.innerHTML = '<div class="visual-main" id="mainProductMedia"></div><div class="visual-thumbs" aria-label="Product photos and videos"></div>';
+    const main = visual.querySelector('#mainProductMedia');
+    const thumbnails = visual.querySelector('.visual-thumbs');
+    function showMedia(index) {
+      const selected = media[index];
+      main.replaceChildren();
+      if (selected.type === 'video') {
+        const video = document.createElement('video');
+        video.src = selected.src;
+        video.controls = true;
+        video.playsInline = true;
+        video.preload = 'metadata';
+        video.setAttribute('aria-label', `${name} product video`);
+        main.append(video);
+      } else {
+        const link = document.createElement('a');
+        link.href = selected.src;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.setAttribute('aria-label', `Open full-size ${name} image`);
+        const image = document.createElement('img');
+        image.src = selected.src;
+        image.alt = name;
+        link.append(image);
+        main.append(link);
+      }
+      thumbnails.querySelectorAll('.visual-thumb').forEach((thumb, thumbIndex) => thumb.classList.toggle('is-active', thumbIndex === index));
+    }
+    media.forEach((entry, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `visual-thumb${index === 0 ? ' is-active' : ''}`;
+      button.setAttribute('aria-label', `View ${name} ${entry.type === 'video' ? 'video' : 'image'} ${entry.type === 'video' ? index - images.length + 1 : index + 1}`);
+      if (entry.type === 'video') {
+        const preview = document.createElement('video');
+        preview.src = entry.src;
+        preview.muted = true;
+        preview.playsInline = true;
+        preview.preload = 'none';
+        const badge = document.createElement('span');
+        badge.className = 'video-badge';
+        badge.textContent = 'Video';
+        button.append(preview, badge);
+      } else {
+        const preview = document.createElement('img');
+        preview.src = entry.src;
+        preview.alt = '';
+        button.append(preview);
+      }
+      button.addEventListener('click', () => showMedia(index));
+      thumbnails.append(button);
+    });
+    if (media.length === 1) thumbnails.hidden = true;
+    showMedia(0);
   }
-  renderVisual(item, product[1], product[4]);
+  renderVisual(item, product[1], product[4], product[5]);
   document.getElementById('whatsapp').href = `https://wa.me/${number}?text=${encodeURIComponent(`Hi, I'm interested in ${item}. Can you share the size, weight, price, and delivery details?`)}`;
   shudhTrackView();
   document.getElementById('whatsapp').addEventListener('click', () => shudhTrackLead('whatsapp', item));
