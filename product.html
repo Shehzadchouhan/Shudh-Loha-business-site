@@ -32,12 +32,26 @@
       <div class="fact"><strong data-lang="sizeWeight">Size & weight</strong><span data-lang="confirmWithUs">Confirm with us</span></div>
       <div class="fact"><strong data-lang="price">Price</strong><span data-lang="askPrice">Ask for current price</span></div>
     </div>
-    <div class="actions"><a class="btn primary" id="whatsapp" href="" target="_blank" rel="noopener" data-lang="askWhatsapp">Ask on WhatsApp</a><a class="btn secondary" href="tel:+917973247767" aria-label="Call Shudh Loha at +91 79732 47767" data-lang="callUs">Call us</a></div>
+    <div class="actions" style="display:flex; flex-direction:column; gap:8px;">
+      <div style="display:flex; gap:10px; flex-wrap:wrap; width:100%;">
+        <button type="button" class="btn primary" style="flex:1 1 180px; justify-content:center; cursor:pointer;" onclick="WhatsAppOrderModule.openRetailModal(item, { price: product[3] })">
+          🛍️ Order Retail (1 pc)
+        </button>
+        <button type="button" class="btn secondary" style="flex:1 1 220px; justify-content:center; cursor:pointer; background:#171717; color:#fff; border-color:#b88a24;" onclick="WhatsAppOrderModule.openWholesaleModal(item, { price: product[3] })">
+          🏭 Get Bulk/Wholesale Quote (10+ pcs)
+        </button>
+      </div>
+      <a class="btn secondary" href="tel:+917973247767" aria-label="Call Shudh Loha at +91 79732 47767" style="justify-content:center;">
+        ☎️ Call Factory Directly: +91 79732 47767
+      </a>
+      <a id="whatsapp" href="" target="_blank" rel="noopener" style="display:none;" aria-hidden="true"></a>
+    </div>
     <form class="lead-form" id="leadForm"><strong>Send an enquiry</strong><input id="leadName" placeholder="Your name" required><input id="leadPhone" type="tel" placeholder="Phone number" required><textarea id="leadMessage" placeholder="What would you like to know?"></textarea><button type="submit">Send enquiry</button><div class="lead-form-status" id="leadStatus" role="status"></div></form>
 </article></div></main>
 <footer><div class="wrap">Shudh Loha — <span data-lang="footerTagline">Pure Loha, Pure Quality</span> · <span data-lang="address">Malerkotla, Punjab</span></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
+<script src="js/whatsapp-order-module.js"></script><script src="js/b2b-catalog-modal.js"></script>
 <script>
   const number = '917973247767';
   const products = {
