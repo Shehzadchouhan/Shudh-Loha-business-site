@@ -126,51 +126,148 @@
         margin: 0;
       }
 
+      /* ---------- Announcement Bar ---------- */
+      .announcement-bar {
+        background: #100e0c;
+        color: var(--cream);
+        border-bottom: 1px solid rgba(184, 138, 36, 0.35);
+        font-size: 12px;
+        line-height: 1.4;
+        position: relative;
+        z-index: 55;
+      }
+      .announcement-inner {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 8px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .announcement-text {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .announcement-badge {
+        background: var(--gold);
+        color: var(--ink);
+        font-weight: 800;
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        padding: 2px 7px;
+        border-radius: var(--radius);
+        text-transform: uppercase;
+        display: inline-block;
+      }
+      .announcement-main {
+        color: rgba(251, 250, 246, 0.92);
+        font-weight: 500;
+      }
+      .announcement-actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-shrink: 0;
+      }
+      .announcement-tag {
+        color: rgba(244, 238, 225, 0.7);
+        font-size: 11px;
+        letter-spacing: 0.8px;
+      }
+      .announcement-tag::before {
+        content: "•";
+        margin-right: 6px;
+        color: var(--gold);
+      }
+      .announcement-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--gold);
+        font-weight: 700;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+      .announcement-link:hover {
+        color: #f1d477;
+        text-decoration: underline;
+      }
+      .announcement-link svg {
+        width: 13px;
+        height: 13px;
+      }
+
       /* ---------- Nav ---------- */
       header.site-nav {
         position: sticky;
         top: 0;
         z-index: 50;
         background: rgba(20, 18, 16, 0.96);
-        backdrop-filter: blur(6px);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(184, 138, 36, 0.18);
       }
       .nav-inner {
         max-width: var(--maxw);
         margin: 0 auto;
-        padding: 14px 28px;
+        padding: 12px 28px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 20px;
       }
       .brand-mark {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
         color: var(--cream);
-        font-family: var(--font-display);
-        font-size: 21px;
-        letter-spacing: 2.5px;
+        text-decoration: none;
       }
       .brand-mark .dot {
-        width: 8px;
-        height: 8px;
-        border: 1px solid var(--gold);
+        width: 9px;
+        height: 9px;
+        border: 1.5px solid var(--gold);
         transform: rotate(45deg);
         background: transparent;
+        flex-shrink: 0;
+      }
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+      }
+      .brand-title {
+        font-family: var(--font-display);
+        font-size: 21px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        line-height: 1.1;
+        color: var(--cream);
+      }
+      .brand-subtitle {
+        font-family: var(--font-body);
+        font-size: 10px;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 600;
       }
       nav.links {
         display: flex;
         align-items: center;
-        gap: 30px;
+        gap: 24px;
       }
       nav.links a {
         color: var(--cream);
         font-size: 13px;
-        letter-spacing: 1.5px;
+        letter-spacing: 1.2px;
         text-transform: uppercase;
-        opacity: 0.82;
+        opacity: 0.85;
         position: relative;
         padding-bottom: 4px;
+        font-weight: 600;
+        transition: opacity 0.2s ease, color 0.2s ease;
       }
       nav.links a::after {
         content: "";
@@ -178,7 +275,7 @@
         left: 0;
         bottom: 0;
         width: 0;
-        height: 1px;
+        height: 2px;
         background: var(--gold);
         transition: width 0.25s ease;
       }
@@ -187,18 +284,43 @@
       }
       nav.links a:hover {
         opacity: 1;
+        color: #fff;
       }
-      .nav-cta {
+      .nav-highlight-b2b {
+        color: #f5cf6d !important;
+        font-weight: 700 !important;
+      }
+      .nav-highlight-b2b::before {
+        content: "★";
+        color: var(--gold);
+        font-size: 10px;
+        margin-right: 4px;
+      }
+      .nav-catalog-btn {
         background: var(--gold);
         color: var(--ink) !important;
-        padding: 9px 18px;
+        padding: 8px 16px;
         border-radius: var(--radius);
-        font-weight: 700;
+        font-size: 12px;
+        font-weight: 800;
         letter-spacing: 1px;
-        opacity: 1 !important;
+        text-transform: uppercase;
+        border: 1px solid transparent;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        white-space: nowrap;
+        transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.25s ease;
       }
-      .nav-cta::after {
-        display: none;
+      .nav-catalog-btn:hover {
+        background: #dcb43a;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(220, 180, 58, 0.45);
+      }
+      .nav-catalog-btn svg {
+        width: 14px;
+        height: 14px;
       }
       .nav-toggle {
         display: none;
@@ -225,11 +347,21 @@
         color: var(--ink);
       }
 
-      @media (max-width: 820px) {
+      @media (max-width: 900px) {
+        .announcement-inner {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+          padding: 8px 18px;
+        }
+        .announcement-actions {
+          width: 100%;
+          justify-content: space-between;
+        }
         .nav-inner {
           padding: 12px 18px;
         }
-        .brand-mark {
+        .brand-title {
           font-size: 18px;
           letter-spacing: 1.5px;
         }
@@ -240,15 +372,24 @@
           right: 0;
           background: var(--ink);
           flex-direction: column;
-          align-items: flex-start;
-          padding: 18px 28px 24px;
-          gap: 18px;
+          align-items: stretch;
+          padding: 20px 24px 28px;
+          gap: 16px;
           border-bottom: 1px solid var(--line-on-dark);
+          box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
           display: none;
+        }
+        nav.links a {
+          padding: 8px 0;
+          font-size: 14px;
+        }
+        nav.links .nav-catalog-btn {
+          justify-content: center;
+          padding: 12px 18px;
         }
         nav.links .language-select {
           width: 100%;
-          max-width: 180px;
+          max-width: none;
         }
         nav.links.open {
           display: flex;
@@ -884,6 +1025,618 @@
           opacity: 1;
           transform: none;
           animation: none;
+        }
+      }
+
+      /* ---------- Hero Dual-Funnel Enhancements ---------- */
+      .hero-slide--intro {
+        background:
+          radial-gradient(circle at 82% 40%, rgba(184, 138, 36, 0.2), transparent 36%),
+          linear-gradient(110deg, #151412 0%, #1a1714 55%, #241f17 100%);
+      }
+      .hero-slide--intro .wrap {
+        padding: 68px 28px 84px;
+      }
+      .hero h1.hero-title-dual {
+        font-size: clamp(32px, 4.8vw, 56px);
+        line-height: 1.1;
+        letter-spacing: 0.5px;
+        text-transform: none;
+        font-family: var(--font-display);
+        font-weight: 700;
+        margin-top: 12px;
+      }
+      .hero h1.hero-title-dual span {
+        color: var(--gold);
+        font-style: normal;
+      }
+      .hero p.hero-subhead {
+        margin-top: 18px;
+        max-width: 580px;
+        font-size: 17px;
+        line-height: 1.6;
+        color: rgba(244, 238, 225, 0.88);
+      }
+      .hero-trust-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+      .trust-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(251, 250, 246, 0.07);
+        border: 1px solid rgba(184, 138, 36, 0.35);
+        padding: 5px 11px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: rgba(244, 238, 225, 0.92);
+        border-radius: var(--radius);
+      }
+      .trust-pill-icon {
+        color: var(--gold);
+        font-weight: 700;
+      }
+      .hero-cta-dual {
+        display: flex;
+        gap: 14px;
+        margin-top: 32px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .hero-btn-b2b {
+        background: var(--gold);
+        color: var(--ink);
+        font-size: 13px;
+        letter-spacing: 1px;
+        font-weight: 800;
+        padding: 13px 22px;
+        box-shadow: 0 6px 20px rgba(184, 138, 36, 0.35);
+      }
+      .hero-btn-b2b:hover {
+        background: #dcb43a;
+        box-shadow: 0 8px 24px rgba(220, 180, 58, 0.55);
+      }
+      .hero-btn-retail {
+        border: 1.5px solid var(--cream);
+        color: var(--cream);
+        font-size: 13px;
+        letter-spacing: 1px;
+        font-weight: 700;
+        padding: 12px 22px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .hero-btn-retail:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: rgba(184, 138, 36, 0.12);
+      }
+      .hero-art-composite {
+        position: relative;
+        width: 100%;
+        max-width: 440px;
+        justify-self: end;
+      }
+      .hero-art-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 12px;
+        align-items: stretch;
+      }
+      .hero-art-main {
+        position: relative;
+        border: 1px solid rgba(184, 138, 36, 0.45);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: #1e1b16;
+      }
+      .hero-art-main img {
+        width: 100%;
+        height: 100%;
+        min-height: 230px;
+        object-fit: cover;
+        display: block;
+      }
+      .hero-art-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .hero-art-thumb {
+        position: relative;
+        border: 1px solid rgba(251, 250, 246, 0.22);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: #1e1b16;
+        flex: 1;
+      }
+      .hero-art-thumb img {
+        width: 100%;
+        height: 100%;
+        min-height: 105px;
+        object-fit: cover;
+        display: block;
+      }
+      .art-label-tag {
+        position: absolute;
+        bottom: 6px;
+        left: 6px;
+        background: rgba(20, 18, 16, 0.88);
+        color: var(--gold);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        padding: 3px 7px;
+        text-transform: uppercase;
+        border: 1px solid rgba(184, 138, 36, 0.4);
+      }
+      .hero-factory-badge {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        background: var(--gold);
+        color: var(--ink);
+        padding: 8px 12px;
+        border-radius: var(--radius);
+        font-family: var(--font-display);
+        font-size: 12px;
+        font-weight: 700;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        line-height: 1.2;
+        z-index: 2;
+      }
+      .hero-factory-badge span {
+        display: block;
+        font-family: var(--font-body);
+        font-size: 9px;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+      }
+
+      /* ---------- Dual-Funnel Gateway Section ---------- */
+      .dual-funnel-section {
+        background: #181614;
+        color: var(--cream);
+        padding: 84px 0 92px;
+        position: relative;
+        border-bottom: 1px solid rgba(184, 138, 36, 0.22);
+      }
+      .dual-funnel-head {
+        text-align: center;
+        max-width: 780px;
+        margin: 0 auto 52px;
+      }
+      .dual-funnel-head h2 {
+        font-size: clamp(28px, 4vw, 44px);
+        margin-top: 10px;
+        color: var(--cream);
+        line-height: 1.15;
+      }
+      .dual-funnel-head p {
+        color: rgba(244, 238, 225, 0.82);
+        font-size: 16px;
+        margin-top: 14px;
+        line-height: 1.6;
+      }
+      .funnel-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+      .funnel-card {
+        position: relative;
+        background: rgba(23, 23, 23, 0.88);
+        border: 1px solid var(--line-on-dark);
+        padding: 40px 34px;
+        border-radius: var(--radius);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+      }
+      .funnel-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--gold);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+      }
+      .funnel-card--b2b {
+        border-color: rgba(184, 138, 36, 0.5);
+        background: linear-gradient(145deg, #1c1915 0%, #151412 100%);
+      }
+      .funnel-card--b2b::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold), #f1d477, var(--gold));
+      }
+      .funnel-card--retail {
+        border-color: rgba(251, 250, 246, 0.22);
+        background: linear-gradient(145deg, #1b1917 0%, #171614 100%);
+      }
+      .funnel-card--retail::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: rgba(251, 250, 246, 0.4);
+      }
+      .funnel-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 5px 11px;
+        border-radius: var(--radius);
+        width: fit-content;
+        margin-bottom: 18px;
+      }
+      .funnel-badge--b2b {
+        background: var(--gold);
+        color: var(--ink);
+      }
+      .funnel-badge--retail {
+        background: rgba(251, 250, 246, 0.12);
+        color: var(--cream);
+        border: 1px solid rgba(251, 250, 246, 0.3);
+      }
+      .funnel-title {
+        font-family: var(--font-display);
+        font-size: clamp(24px, 2.6vw, 32px);
+        line-height: 1.15;
+        margin: 0 0 8px;
+        color: var(--cream);
+      }
+      .funnel-audience {
+        color: var(--gold);
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin-bottom: 16px;
+      }
+      .funnel-desc {
+        color: rgba(244, 238, 225, 0.82);
+        font-size: 14.5px;
+        line-height: 1.6;
+        margin: 0 0 22px;
+      }
+      .funnel-specs-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 28px;
+        display: grid;
+        gap: 12px;
+      }
+      .funnel-spec-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13.5px;
+        color: rgba(244, 238, 225, 0.9);
+        line-height: 1.5;
+      }
+      .funnel-check {
+        color: var(--gold);
+        font-weight: 800;
+        font-size: 15px;
+        line-height: 1.2;
+        flex-shrink: 0;
+      }
+      .funnel-actions {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .funnel-actions .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 18px;
+      }
+
+      /* ---------- Bottom Dual CTA Section ---------- */
+      .dual-cta-section {
+        background: var(--cream-deep);
+        color: var(--ink);
+        padding: 84px 0;
+        border-top: 1px solid var(--line);
+        position: relative;
+      }
+      .dual-cta-head {
+        text-align: center;
+        max-width: 740px;
+        margin: 0 auto 48px;
+      }
+      .dual-cta-head h2 {
+        font-size: clamp(26px, 3.4vw, 38px);
+        margin-top: 10px;
+        line-height: 1.15;
+      }
+      .dual-cta-head p {
+        color: var(--ink-soft);
+        font-size: 16px;
+        margin-top: 12px;
+        line-height: 1.6;
+      }
+      .dual-cta-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+      .dual-cta-box {
+        background: #fff;
+        border: 1px solid var(--line);
+        padding: 36px 30px;
+        border-radius: var(--radius);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      }
+      .dual-cta-box:hover {
+        transform: translateY(-3px);
+        border-color: var(--gold);
+        box-shadow: 0 16px 36px rgba(20, 18, 16, 0.08);
+      }
+      .dual-cta-box--b2b {
+        border-left: 4px solid var(--gold);
+      }
+      .dual-cta-box--retail {
+        border-left: 4px solid var(--ink);
+      }
+      .dual-cta-box h3 {
+        font-size: 22px;
+        margin-bottom: 8px;
+        font-family: var(--font-display);
+      }
+      .dual-cta-box p {
+        color: var(--ink-soft);
+        font-size: 14.5px;
+        margin-bottom: 22px;
+        line-height: 1.55;
+      }
+      .dual-cta-buttons {
+        margin-top: auto;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .dual-cta-buttons .btn {
+        flex: 1 1 170px;
+        justify-content: center;
+        padding: 12px 16px;
+        font-size: 13px;
+      }
+      .btn-dark {
+        background: var(--ink);
+        color: var(--cream);
+        border-color: var(--ink);
+      }
+      .btn-dark:hover {
+        background: #000;
+        border-color: #000;
+        color: #fff;
+      }
+
+      /* ---------- Wholesale Catalog B2B Modal ---------- */
+      .catalog-modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 300;
+        background: rgba(18, 16, 14, 0.78);
+        backdrop-filter: blur(6px);
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        overflow-y: auto;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+      .catalog-modal-backdrop.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .catalog-modal-dialog {
+        background: #fff;
+        color: var(--ink);
+        width: min(600px, 100%);
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 34px 30px;
+        border-radius: var(--radius);
+        border: 1px solid var(--gold);
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+        position: relative;
+        transform: translateY(20px);
+        transition: transform 0.25s ease;
+      }
+      .catalog-modal-backdrop.is-open .catalog-modal-dialog {
+        transform: translateY(0);
+      }
+      .catalog-modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: none;
+        border: none;
+        font-size: 26px;
+        line-height: 1;
+        color: var(--ink-soft);
+        cursor: pointer;
+        padding: 4px 8px;
+      }
+      .catalog-modal-close:hover {
+        color: var(--ink);
+      }
+      .catalog-modal-badge {
+        display: inline-block;
+        background: var(--gold);
+        color: var(--ink);
+        font-weight: 800;
+        font-size: 10.5px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        margin-bottom: 8px;
+        border-radius: var(--radius);
+      }
+      .catalog-modal-title {
+        font-family: var(--font-display);
+        font-size: 26px;
+        margin: 0 0 6px;
+        line-height: 1.15;
+      }
+      .catalog-modal-desc {
+        color: var(--ink-soft);
+        font-size: 14px;
+        margin: 0 0 20px;
+        line-height: 1.5;
+      }
+      .catalog-quick-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 22px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--line);
+      }
+      .catalog-quick-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 13px 12px;
+        border-radius: var(--radius);
+        font-size: 12.5px;
+        font-weight: 700;
+        text-decoration: none;
+        border: 1px solid var(--line);
+        cursor: pointer;
+        gap: 6px;
+        transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+      }
+      .catalog-quick-btn--download {
+        background: var(--gold);
+        color: var(--ink);
+        border-color: var(--gold);
+      }
+      .catalog-quick-btn--download:hover {
+        background: #dcb43a;
+        transform: translateY(-1px);
+      }
+      .catalog-quick-btn--wa {
+        background: #25d366;
+        color: #fff;
+        border-color: #25d366;
+      }
+      .catalog-quick-btn--wa:hover {
+        background: #20bd5a;
+        transform: translateY(-1px);
+      }
+      .catalog-form-intro {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--gold-soft);
+        margin-bottom: 12px;
+      }
+      .catalog-form-grid {
+        display: grid;
+        gap: 12px;
+      }
+      .catalog-form-grid label {
+        display: grid;
+        gap: 4px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ink-soft);
+      }
+      .catalog-form-grid input,
+      .catalog-form-grid select,
+      .catalog-form-grid textarea {
+        width: 100%;
+        padding: 9px 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        font: inherit;
+        font-size: 13.5px;
+      }
+      .catalog-form-grid input:focus,
+      .catalog-form-grid select:focus,
+      .catalog-form-grid textarea:focus {
+        outline: 2px solid var(--gold);
+      }
+      .catalog-submit-btn {
+        background: var(--ink);
+        color: var(--cream);
+        border: 1px solid var(--ink);
+        padding: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        margin-top: 6px;
+        border-radius: var(--radius);
+        transition: background 0.2s ease;
+      }
+      .catalog-submit-btn:hover {
+        background: #333;
+      }
+      .catalog-status {
+        min-height: 20px;
+        font-size: 13px;
+        margin-top: 8px;
+        font-weight: 600;
+      }
+      .catalog-status.is-success {
+        color: #1e7e34;
+      }
+      .catalog-status.is-error {
+        color: #b02a37;
+      }
+
+      @media (max-width: 860px) {
+        .funnel-grid,
+        .dual-cta-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-art-composite {
+          max-width: 340px;
+          margin: 0 auto;
+          order: -1;
+        }
+        .catalog-quick-actions {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 520px) {
+        .hero-cta-dual {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .hero-cta-dual .btn {
+          width: 100%;
+          justify-content: center;
+        }
+        .funnel-card {
+          padding: 28px 20px;
+        }
+        .dual-cta-box {
+          padding: 26px 18px;
         }
       }
 
@@ -2006,9 +2759,32 @@
     </style>
   </head>
   <body>
+    <aside class="announcement-bar" aria-label="Direct factory announcement">
+      <div class="announcement-inner">
+        <div class="announcement-text">
+          <span class="announcement-badge">FACTORY DIRECT</span>
+          <span class="announcement-main">Direct Manufacturer Rates from Malerkotla | Supplying Dhabas, Caterers, Gurdwaras &amp; Retail Nationwide</span>
+        </div>
+        <div class="announcement-actions">
+          <span class="announcement-tag">Pan-India Freight</span>
+          <span class="announcement-tag">GST Invoices</span>
+          <a class="announcement-link" href="tel:+917973247767">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.24 1.02l-2.21 2.2z"/></svg>
+            +91 79732 47767
+          </a>
+        </div>
+      </div>
+    </aside>
+
     <header class="site-nav">
       <div class="nav-inner">
-        <div class="brand-mark"><span class="dot"></span>SHUDH LOHA</div>
+        <a href="index.html" class="brand-mark" aria-label="Shudh Loha Home">
+          <span class="dot"></span>
+          <div class="brand-text">
+            <span class="brand-title">SHUDH LOHA</span>
+            <span class="brand-subtitle">Pure Iron &amp; Sarbloh · Malerkotla</span>
+          </div>
+        </a>
         <button
           class="nav-toggle"
           id="navToggle"
@@ -2019,9 +2795,18 @@
           ☰
         </button>
         <nav class="links" id="navLinks">
-          <a href="products.html" data-lang="products">Products</a>
+          <a href="#dual-funnel" class="nav-highlight-b2b" data-lang="b2bNav">Wholesale (B2B)</a>
+          <a href="#products" data-lang="retailNav">Retail Cookware</a>
           <a href="#order" data-lang="order">How to Order</a>
-          <a href="#contact" class="nav-cta" data-lang="contact">Contact</a>
+          <a href="#contact" data-lang="contact">Contact</a>
+          <button type="button" class="nav-catalog-btn open-catalog-trigger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span data-lang="wholesaleCta">Download Wholesale Catalog (B2B)</span>
+          </button>
           <select
             class="language-select"
             id="languageSelect"
@@ -2035,67 +2820,137 @@
       </div>
     </header>
 
-    <section class="hero" aria-label="Shudh Loha highlights">
+    <section class="hero" aria-label="Shudh Loha Dual-Funnel Cookware">
       <div class="hero-slider" id="heroSlider">
         <div class="hero-opening-curtain" aria-hidden="true">
           <span class="hero-curtain-panel"></span>
           <span class="hero-curtain-panel"></span>
         </div>
+
+        <!-- Slide 0: The Dual-Funnel Masterpiece Hero -->
         <article class="hero-slide hero-slide--intro is-active" data-slide="0">
           <div class="wrap">
             <div class="hero-intro-copy">
-              <p class="eyebrow" data-lang="location">Malerkotla, Punjab</p>
-              <h1 data-lang="heroTitle">Pure <span>Iron.</span><br />Made for Every Kitchen.</h1>
-              <div class="hero-cta">
-                <a class="btn btn-primary" id="heroWhatsapp" href="" target="_blank" rel="noopener" data-lang="orderWhatsapp">Order on WhatsApp</a>
-                <a class="btn btn-ghost" href="products.html" data-lang="viewProducts">View Products</a>
+              <p class="eyebrow" data-lang="location">Malerkotla Foundry Direct · Pan-India Dispatch</p>
+              <h1 class="hero-title-dual" data-lang="heroTitle">Heavy-Duty Pure Iron <span>(Sarbloh) Cookware</span> — Direct From The Maker.</h1>
+              <p class="hero-subhead" data-lang="heroLede">Built for high-heat commercial kitchens, dhabas, and traditional home cooking. No Teflon. No cheap alloys. Pure strength.</p>
+
+              <div class="hero-trust-strip">
+                <span class="trust-pill"><span class="trust-pill-icon">🛡️</span> Heavy-Gauge Non-Warping</span>
+                <span class="trust-pill"><span class="trust-pill-icon">🏭</span> Direct Malerkotla Factory Rates</span>
+                <span class="trust-pill"><span class="trust-pill-icon">🌿</span> 100% Pure Food-Safe Sarbloh</span>
+                <span class="trust-pill"><span class="trust-pill-icon">🚛</span> Pan-India Freight &amp; GST Invoices</span>
+              </div>
+
+              <div class="hero-cta-dual">
+                <button type="button" class="btn btn-primary hero-btn-b2b open-catalog-trigger">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  <span data-lang="wholesaleCta">Download Wholesale Catalog (B2B)</span>
+                </button>
+                <a class="btn btn-ghost hero-btn-retail" id="heroBrowseRetail" href="#products">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                  <span data-lang="retailCta">Browse Retail Cookware</span>
+                </a>
+                <a class="btn btn-ghost" id="heroWhatsapp" href="" target="_blank" rel="noopener" style="display:none;" aria-hidden="true">WhatsApp</a>
               </div>
             </div>
-            <div class="hero-art"><img class="hero-logo" src="./logo.png?v=2" alt="Shudh Loha brand logo" /></div>
+
+            <div class="hero-art hero-art-composite">
+              <div class="hero-factory-badge">
+                5mm+ Pure Iron
+                <span>Built For Decades</span>
+              </div>
+              <div class="hero-art-grid">
+                <div class="hero-art-main">
+                  <img src="Assets 2/Big Deg.jpeg" alt="Heavy Commercial Sarbloh Deg for Dhabas &amp; Langars" />
+                  <span class="art-label-tag">B2B Commercial Deg</span>
+                </div>
+                <div class="hero-art-stack">
+                  <div class="hero-art-thumb">
+                    <img src="Assets 2/Tikki Tavi.jpeg" alt="Heavy-duty Commercial Tikki Tavi" />
+                    <span class="art-label-tag">Tikki Tavi (Dhaba)</span>
+                  </div>
+                  <div class="hero-art-thumb">
+                    <img src="Assets 2/tutma tawa.png" alt="Pure Sarbloh Tutma Tawa for Homes" />
+                    <span class="art-label-tag">Retail Tutma Tawa</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </article>
 
+        <!-- Slide 1: B2B Commercial Torture Test & Burner Strength -->
         <article class="hero-slide hero-slide--story" data-slide="1">
           <div class="wrap">
             <div>
-              <p class="eyebrow">Our story</p>
-              <h1>Craft passed down.<br /><span>Quality carried forward.</span></h1>
-              <div class="hero-cta"><a class="btn btn-primary" href="#contact">Meet us</a></div>
+              <p class="eyebrow">B2B Commercial Focus</p>
+              <h1>Engineered for 100,000 BTU burners.<br /><span>Won't bend. Won't warp.</span></h1>
+              <p style="color: rgba(244, 238, 225, 0.85); margin: 16px 0 28px; max-width: 480px;">Built specifically for high-intensity commercial kitchens, highway dhabas, banquet halwais, and Gurdwara langars. Direct factory rates on heavy kadhais and degs up to 50kg capacity.</p>
+              <div class="hero-cta">
+                <button type="button" class="btn btn-primary open-catalog-trigger">Download Wholesale Catalog (B2B)</button>
+                <a class="btn btn-ghost" href="#dual-funnel">Explore B2B Range</a>
+              </div>
             </div>
-            <div class="hero-art"><p>No mixed metal.<br />No shortcuts.<br /><span style="color: var(--gold)">Just pure loha.</span></p></div>
+            <div class="hero-art"><p>No cheap alloys.<br />No sheet metal.<br /><span style="color: var(--gold)">Heavy-gauge pure iron.</span></p></div>
           </div>
         </article>
 
+        <!-- Slide 2: Retail Household Cookware Collection -->
         <article class="hero-slide hero-slide--products" data-slide="2">
           <div class="wrap">
             <div>
-              <p class="eyebrow">The collection</p>
-              <h1>Sarbloh pieces<br /><span>for the daily ritual.</span></h1>
-              <div class="hero-cta"><a class="btn btn-primary" href="products.html">Shop Sarbloh</a><a class="btn btn-ghost" href="#products">See highlights</a></div>
+              <p class="eyebrow">D2C Retail &amp; Family Kitchens</p>
+              <h1>100% Pure Sarbloh.<br /><span>No Teflon. Real Health.</span></h1>
+              <p style="color: rgba(244, 238, 225, 0.85); margin: 16px 0 28px; max-width: 480px;">Replace toxic chemical coatings with natural dietary iron enrichment. Hand-finished Tutma Tawas, family Kadhais, and traditional batte delivered safely to your home.</p>
+              <div class="hero-cta">
+                <a class="btn btn-primary" href="products.html">Browse Retail Cookware</a>
+                <a class="btn btn-ghost" href="#products">See Family Collection</a>
+              </div>
             </div>
-            <div class="hero-art hero-product-collage"><img src="Assets 2/kadhai.png" alt="Sarbloh kadhai" /><img src="Assets 2/tutma tawa.png" alt="Sarbloh tawa" /><img src="Assets 2/Big Deg.jpeg" alt="Sarbloh deg" /></div>
+            <div class="hero-art hero-product-collage">
+              <img src="Assets 2/kadhai.png" alt="Pure Sarbloh family kadhai" />
+              <img src="Assets 2/tutma tawa.png" alt="Authentic Sarbloh tawa" />
+              <img src="Assets 2/Big Deg.jpeg" alt="Pure iron deg" />
+            </div>
           </div>
         </article>
 
+        <!-- Slide 3: Live Offer / Custom Fabrications -->
         <article class="hero-slide hero-slide--offer" data-slide="3">
           <div class="wrap">
             <div>
-              <span class="offer-kicker" id="offerEyebrow">New collection</span>
-              <h1 id="offerTitle">Sarbloh cooking.<br /><span>Made for daily rituals.</span></h1>
-              <div class="hero-cta"><a class="btn btn-primary" id="offerCta" href="#contact">Ask about availability</a><a class="btn btn-ghost" href="https://www.instagram.com/shudh_loha_enterprise?igsi=MXdma2xncXk5cDVsOA==" target="_blank" rel="noopener">Follow updates</a></div>
+              <span class="offer-kicker" id="offerEyebrow">Direct Foundry Batch</span>
+              <h1 id="offerTitle">Commercial Kadhais &amp; Degs.<br /><span>Custom sizes up to 50kg.</span></h1>
+              <div class="hero-cta">
+                <a class="btn btn-primary" id="offerCta" href="#contact">Request Custom Batch</a>
+                <a class="btn btn-ghost" href="https://www.instagram.com/shudh_loha_enterprise?igsi=MXdma2xncXk5cDVsOA==" target="_blank" rel="noopener">Follow Factory Updates</a>
+              </div>
             </div>
-            <div class="offer-card"><strong id="offerNote">Coming<br />soon.</strong></div>
+            <div class="offer-card"><strong id="offerNote">Malerkotla<br />Punjab.</strong></div>
           </div>
         </article>
 
+        <!-- Slide 4: Direct Factory Connection -->
         <article class="hero-slide hero-slide--contact" data-slide="4">
           <div class="wrap">
             <div>
-              <p class="eyebrow">Find Shudh Loha</p>
-              <h1>From our hands<br /><span>to your kitchen.</span></h1>
-              <div class="hero-cta"><a class="btn btn-primary" href="#contact">Contact us</a><a class="btn btn-ghost" href="https://maps.app.goo.gl/GBGsbKjUtPneyoNn9" target="_blank" rel="noopener">Open location</a></div>
+              <p class="eyebrow">Connect with the Maker</p>
+              <h1>From Malerkotla loha mandi<br /><span>to kitchens pan-India.</span></h1>
+              <div class="hero-cta">
+                <button type="button" class="btn btn-primary open-catalog-trigger">Download Wholesale Catalog (B2B)</button>
+                <a class="btn btn-ghost" href="https://maps.app.goo.gl/GBGsbKjUtPneyoNn9" target="_blank" rel="noopener">Open Map Location</a>
+              </div>
             </div>
-            <div class="hero-art"><p>Malerkotla,<br /><span style="color: var(--gold)">Punjab.</span><br /><small style="font: 14px var(--font-body); color: rgba(244, 238, 225, .72)">Pure Loha, Pure Quality</small></p></div>
+            <div class="hero-art"><p>Malerkotla,<br /><span style="color: var(--gold)">Punjab.</span><br /><small style="font: 14px var(--font-body); color: rgba(244, 238, 225, .72)">Pure Loha, Pure Quality · +91 79732 47767</small></p></div>
           </div>
         </article>
 
@@ -2116,12 +2971,86 @@
 
     <div class="collection-ticker" aria-label="Collection announcement">
       <div class="ticker-track">
-        <span>We also have different types of Sarbloh items available</span
-        ><span aria-hidden="true">◆</span
-        ><span>We also have different types of Sarbloh items available</span
-        ><span aria-hidden="true">◆</span>
+        <span>Direct Factory Rates from Malerkotla | Supplying Dhabas, Caterers &amp; Retail Pan-India</span>
+        <span aria-hidden="true">◆</span>
+        <span>Heavy-Gauge Pure Sarbloh Cookware | Zero Chemicals, Lasts Generations</span>
+        <span aria-hidden="true">◆</span>
       </div>
     </div>
+
+    <!-- Dual-Funnel Gateway Split Section -->
+    <section class="dual-funnel-section" id="dual-funnel" aria-label="Dual Funnel: Wholesale B2B vs Retail Cookware">
+      <div class="wrap">
+        <div class="dual-funnel-head reveal">
+          <p class="eyebrow">CHOOSE YOUR PATHWAY</p>
+          <h2>Direct Factory Supply — Built for Commercial Heavy Kitchens &amp; Healthy Homes</h2>
+          <p>Whether you need heavy-gauge bulk cookware for a high-intensity commercial enterprise or authentic pure Sarbloh pieces for family dining, choose your channel below.</p>
+        </div>
+
+        <div class="funnel-grid">
+          <!-- Funnel 1: Commercial B2B & Wholesale (70% Focus) -->
+          <div class="funnel-card funnel-card--b2b reveal">
+            <span class="funnel-badge funnel-badge--b2b">🏭 70% FACTORY FOCUS · B2B WHOLESALE</span>
+            <h3 class="funnel-title">Commercial Kitchens &amp; Wholesalers</h3>
+            <div class="funnel-audience">Target: Dhabas · Highway Restaurants · Halwais · Banquet Caterers · Gurdwara Langars · Resellers</div>
+            <p class="funnel-desc">Engineered for commercial high-heat blast burners (100,000+ BTU). Forged with extra-heavy pure iron gauges that withstand grueling daily usage without warping or thinning.</p>
+            <ul class="funnel-specs-list">
+              <li class="funnel-spec-item">
+                <span class="funnel-check">✓</span>
+                <div><strong>Heavy-Gauge Tikki Tavis &amp; Commercial Kadhais:</strong> 14" to 36"+ diameters, 4mm–6mm plate thickness with reinforced forged loop handles.</div>
+              </li>
+              <li class="funnel-spec-item">
+                <span class="funnel-check">✓</span>
+                <div><strong>Commercial Sarbloh Degs (5kg to 50kg):</strong> Heavy rolled collars, hammered solid bases built for continuous mass rice, dal &amp; biryani cooking.</div>
+              </li>
+              <li class="funnel-spec-item">
+                <span class="funnel-check">✓</span>
+                <div><strong>Direct Factory Lot Pricing &amp; GST Invoicing:</strong> Direct manufacturer rates from Malerkotla with official GST billing and reliable transport across North India &amp; Pan-India.</div>
+              </li>
+            </ul>
+            <div class="funnel-actions">
+              <button type="button" class="btn btn-primary open-catalog-trigger">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Download Wholesale Catalog (B2B)
+              </button>
+              <a href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%2C%20I%20am%20a%20commercial%20buyer%20(dhaba%2Fcaterer%2Fwholesaler).%20Please%20share%20bulk%20wholesale%20rates." target="_blank" rel="noopener" class="btn btn-ghost">
+                Request Bulk Quote on WhatsApp →
+              </a>
+            </div>
+          </div>
+
+          <!-- Funnel 2: Retail Household Cookware (30% Focus) -->
+          <div class="funnel-card funnel-card--retail reveal">
+            <span class="funnel-badge funnel-badge--retail">🌿 30% FOCUS · RETAIL &amp; HOUSEHOLD</span>
+            <h3 class="funnel-title">Healthy Everyday Home Cooking</h3>
+            <div class="funnel-audience">Target: Health-Conscious Families · Home Chefs · Traditional Cooks · Pure Sarbloh Seekers</div>
+            <p class="funnel-desc">100% chemical-free, food-safe pure iron cookware that replaces toxic peeling non-stick coatings. Naturally enriches every family meal with dietary iron while building unbeatable flavor.</p>
+            <ul class="funnel-specs-list">
+              <li class="funnel-spec-item">
+                <span class="funnel-check">✓</span>
+                <div><strong>100% Toxin-Free &amp; Food-Safe:</strong> Zero Teflon, zero synthetic coatings. Natural dietary iron release in every roti, sabzi, and curry.</div>
+              </li>
+              <li class="funnel-spec-item">
+                <span class="funnel-check">✓</span>
+                <div><strong>Handcrafted Everyday Essentials:</strong> 10"–12" Tutma Tawas for puffed rotis, deep family kadhais, fry pans, and traditional Punjabi serving batte.</div>
+              </li>
+              <li class="funnel-spec-item">
+                <span class="funnel-check">✓</span>
+                <div><strong>Pre-Seasoned Heirloom Durability:</strong> Simple home maintenance, exceptional heat retention, and sturdy cookware built to last for generations.</div>
+              </li>
+            </ul>
+            <div class="funnel-actions">
+              <a href="products.html" class="btn btn-primary">
+                Browse Retail Cookware →
+              </a>
+              <a href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%2C%20I%20would%20like%20to%20order%20cookware%20for%20my%20home." target="_blank" rel="noopener" class="btn btn-ghost">
+                Order for Home on WhatsApp →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="products" style="position: relative; overflow: hidden;">
       <span class="sparkle s-sm" style="top: 6%; left: 92%; animation-delay: 1.2s;" aria-hidden="true">&#10022;</span>
@@ -2189,6 +3118,50 @@
           <div class="step reveal">
             <div class="n">03</div>
             <h3 data-lang="stepThreeTitle">Get it delivered</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dual-Funnel Call to Action Section -->
+    <section class="dual-cta-section" id="dual-cta" aria-label="Direct Factory Call To Action">
+      <div class="wrap">
+        <div class="dual-cta-head reveal">
+          <p class="eyebrow">DIRECT FACTORY PARTNERSHIP</p>
+          <h2>Equip Your Kitchen with Pure Iron Strength</h2>
+          <p>Whether you require a single hand-forged tawa for your home stove or 50 heavy-gauge commercial kadhais for your banquet kitchen, we dispatch directly from our Malerkotla manufacturing hub.</p>
+        </div>
+
+        <div class="dual-cta-grid">
+          <!-- Commercial B2B Box -->
+          <div class="dual-cta-box dual-cta-box--b2b reveal">
+            <span class="funnel-badge funnel-badge--b2b" style="margin-bottom: 12px;">🏭 COMMERCIAL B2B &amp; BULK LOTS</span>
+            <h3>Commercial &amp; Wholesale Inquiries</h3>
+            <p>Direct manufacturer tiered pricing for dhabas, banquet caterers, halwais, Gurdwara committees, and kitchenware wholesalers. Heavy-gauge pure iron that handles 100,000 BTU continuous flame without warping. Includes valid GST invoice and freight transport.</p>
+            <div class="dual-cta-buttons">
+              <button type="button" class="btn btn-primary open-catalog-trigger">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Download Wholesale Catalog (B2B)
+              </button>
+              <a href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%2C%20I%20am%20interested%20in%20a%20B2B%20wholesale%20order%20for%20my%20kitchen%2Fbusiness." target="_blank" rel="noopener" class="btn btn-dark">
+                💬 WhatsApp Wholesale Desk
+              </a>
+            </div>
+          </div>
+
+          <!-- Retail Home Cooks Box -->
+          <div class="dual-cta-box dual-cta-box--retail reveal">
+            <span class="funnel-badge funnel-badge--retail" style="margin-bottom: 12px; color: var(--ink); border-color: rgba(20,18,16,0.2);">🌿 RETAIL HOUSEHOLD COOKWARE</span>
+            <h3>Healthy Family Home Cooking</h3>
+            <p>Replace peeling non-stick chemicals with 100% natural, food-safe Sarbloh cookware. Naturally boosts dietary iron in every meal, locks in authentic flavor, and lasts for generations in your kitchen. Safe Pan-India home courier delivery.</p>
+            <div class="dual-cta-buttons">
+              <a href="products.html" class="btn btn-primary">
+                Browse Retail Cookware →
+              </a>
+              <a href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%2C%20I%20would%20like%20to%20order%20pure%20iron%20cookware%20for%20my%20home." target="_blank" rel="noopener" class="btn btn-dark">
+                💬 Order for Home via WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -2385,6 +3358,97 @@
         />
       </svg>
     </a>
+
+    <!-- B2B Wholesale Catalog Modal -->
+    <div
+      class="catalog-modal-backdrop"
+      id="catalogModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="catalogModalTitle"
+      hidden
+    >
+      <div class="catalog-modal-dialog">
+        <button
+          class="catalog-modal-close"
+          id="catalogModalClose"
+          type="button"
+          aria-label="Close wholesale catalog modal"
+        >
+          &times;
+        </button>
+
+        <div class="catalog-modal-header">
+          <span class="catalog-modal-badge">FACTORY DIRECT SPECIFICATION</span>
+          <h2 class="catalog-modal-title" id="catalogModalTitle">Commercial B2B Wholesale Catalog &amp; Rate Card</h2>
+          <p class="catalog-modal-desc">Direct foundry supply from Malerkotla, Punjab for Dhabas, Caterers, Gurdwaras, Halwais &amp; Resellers. Includes verified GST billing and freight logistics.</p>
+        </div>
+
+        <div class="catalog-quick-actions">
+          <a
+            class="catalog-quick-btn catalog-quick-btn--download"
+            href="wholesale-catalog.html"
+            target="_blank"
+            rel="noopener"
+            id="downloadSpecSheetBtn"
+          >
+            <span style="font-size: 16px;">📥</span>
+            <span>Download B2B Spec Sheet (Printable / PDF)</span>
+            <small style="font-size: 11px; opacity: 0.85;">Instant view with gauges &amp; sizes</small>
+          </a>
+          <a
+            class="catalog-quick-btn catalog-quick-btn--wa"
+            href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%20factory%20team%2C%20I%20am%20a%20commercial%20buyer%20(dhaba%2Fcaterer%2Fwholesaler).%20Please%20send%20the%20full%20B2B%20Wholesale%20Catalog%20and%20Bulk%20Rate%20Card."
+            target="_blank"
+            rel="noopener"
+            id="modalWhatsappBtn"
+          >
+            <span style="font-size: 16px;">💬</span>
+            <span>Receive via WhatsApp Directly</span>
+            <small style="font-size: 11px; opacity: 0.9;">Fast response from Malerkotla factory</small>
+          </a>
+        </div>
+
+        <div class="catalog-form-intro">Or Request a Custom Wholesale Quote:</div>
+        <form id="b2bCatalogForm" class="catalog-form-grid">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <label>
+              Your Name
+              <input type="text" id="b2bName" placeholder="e.g. Gurpreet Singh" required />
+            </label>
+            <label>
+              Business / Kitchen Name
+              <input type="text" id="b2bBusiness" placeholder="e.g. Highway Dhaba / Caterers" required />
+            </label>
+          </div>
+          <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 10px;">
+            <label>
+              WhatsApp / Phone Number
+              <input type="tel" id="b2bPhone" inputmode="tel" placeholder="10-digit mobile number" required />
+            </label>
+            <label>
+              City / State
+              <input type="text" id="b2bCity" placeholder="e.g. Ludhiana, Punjab" required />
+            </label>
+          </div>
+          <label>
+            Products Needed
+            <select id="b2bRequirement">
+              <option value="Commercial Tikki Tavis (16-24 inch)">Commercial Tikki Tavis (16"–24")</option>
+              <option value="Commercial Deep Kadhais (14-36 inch)">Commercial Deep Kadhais (14"–36"+)</option>
+              <option value="Heavy Commercial Degs (5kg-50kg)">Heavy Commercial Degs (5kg–50kg)</option>
+              <option value="Bulk Spoons, Karchis & Skimmers">Bulk Spoons, Karchis &amp; Skimmers</option>
+              <option value="Full Dhaba / Restaurant Kitchen Setup">Full Dhaba / Restaurant Kitchen Setup</option>
+              <option value="Wholesale Reseller Lot">Wholesale Reseller / Distributor Lot</option>
+            </select>
+          </label>
+          <button type="submit" class="catalog-submit-btn" id="b2bSubmitBtn">
+            Request B2B Wholesale Pricing
+          </button>
+          <div class="catalog-status" id="b2bStatus" role="status"></div>
+        </form>
+      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-config.js"></script>
@@ -2644,16 +3708,20 @@
           products: "Products",
           order: "How to Order",
           contact: "Contact",
-          location: "Malerkotla, Punjab",
+          location: "Malerkotla Foundry Direct · Pan-India Dispatch",
           story: "Our Story",
           sell: "What We Sell",
           howToOrder: "How To Order",
           getInTouch: "Get In Touch",
           orderWhatsapp: "Order on WhatsApp",
           viewProducts: "View Products",
-          heroTitle: "Pure Iron. Made for Every Kitchen.",
+          heroTitle: "Heavy-Duty Pure Iron (Sarbloh) Cookware — Direct From The Maker.",
           heroLede:
-            "Hand-finished iron cookware for everyday cooking, serving, and living — made with traditional strength and honest quality in Malerkotla, Punjab.",
+            "Built for high-heat commercial kitchens, dhabas, and traditional home cooking. No Teflon. No cheap alloys. Pure strength.",
+          wholesaleCta: "Download Wholesale Catalog (B2B)",
+          retailCta: "Browse Retail Cookware",
+          b2bNav: "Wholesale (B2B)",
+          retailNav: "Retail Cookware",
           storyTitle: "A family trade in iron, continued.",
           storyParagraphOne:
             "Shudh Loha isn't a business we started — it's one we inherited. For generations, our family hasn't just sold iron items, we've built them ourselves, by hand, the way it's always been done.",
@@ -2696,16 +3764,20 @@
           products: "उत्पाद",
           order: "ऑर्डर कैसे करें",
           contact: "संपर्क",
-          location: "मलेरकोटला, पंजाब",
+          location: "मलेरकोटला फाउंड्री से सीधा · पैन-इंडिया सप्लाई",
           story: "हमारी कहानी",
           sell: "हम क्या बेचते हैं",
           howToOrder: "ऑर्डर कैसे करें",
           getInTouch: "संपर्क करें",
           orderWhatsapp: "WhatsApp पर ऑर्डर करें",
           viewProducts: "उत्पाद देखें",
-          heroTitle: "शुद्ध लोहा। हर रसोई के लिए।",
+          heroTitle: "हेवी-ड्यूटी शुद्ध लोहा (सरबलोह) बर्तन — सीधे निर्माता से।",
           heroLede:
-            "रोज़मर्रा के खाना पकाने और परोसने के लिए हाथ से तैयार लोहे के बर्तन — मलेरकोटला, पंजाब की पारंपरिक मजबूती और भरोसेमंद गुणवत्ता के साथ।",
+            "ढाबों, कैटरर्स और पारंपरिक घरेलू रसोई के लिए अत्यधिक टिकाऊ। कोई टेफ्लॉन नहीं, कोई मिलावट नहीं। असली शुद्ध ताकत।",
+          wholesaleCta: "थोक कैटलॉग डाउनलोड करें (B2B)",
+          retailCta: "घरेलू बर्तन देखें",
+          b2bNav: "थोक आपूर्ति (B2B)",
+          retailNav: "घरेलू बर्तन",
           storyTitle: "लोहे का पारिवारिक कारोबार, आज भी जारी।",
           storyParagraphOne:
             "शुद्ध लोहा कोई ऐसा कारोबार नहीं जिसे हमने शुरू किया — यह हमें विरासत में मिला है। पीढ़ियों से हमारा परिवार लोहे की वस्तुएँ केवल बेचता नहीं, उन्हें उसी पारंपरिक तरीके से हाथ से बनाता भी है।",
@@ -2748,16 +3820,20 @@
           products: "ਉਤਪਾਦ",
           order: "ਆਰਡਰ ਕਿਵੇਂ ਕਰੀਏ",
           contact: "ਸੰਪਰਕ",
-          location: "ਮਲੇਰਕੋਟਲਾ, ਪੰਜਾਬ",
+          location: "ਮਲੇਰਕੋਟਲਾ ਫਾਊਂਡਰੀ ਤੋਂ ਸਿੱਧਾ · ਪੈਨ-ਇੰਡੀਆ ਸਪਲਾਈ",
           story: "ਸਾਡੀ ਕਹਾਣੀ",
           sell: "ਅਸੀਂ ਕੀ ਵੇਚਦੇ ਹਾਂ",
           howToOrder: "ਆਰਡਰ ਕਿਵੇਂ ਕਰੀਏ",
           getInTouch: "ਸੰਪਰਕ ਕਰੋ",
           orderWhatsapp: "WhatsApp ਤੇ ਆਰਡਰ ਕਰੋ",
           viewProducts: "ਉਤਪਾਦ ਵੇਖੋ",
-          heroTitle: "ਸ਼ੁੱਧ ਲੋਹਾ। ਹਰ ਰਸੋਈ ਲਈ।",
+          heroTitle: "ਹੈਵੀ-ਡਿਊਟੀ ਸ਼ੁੱਧ ਲੋਹਾ (ਸਰਬਲੋਹ) ਬਰਤਨ — ਸਿੱਧੇ ਕਾਰਖਾਨੇ ਤੋਂ।",
           heroLede:
-            "ਰੋਜ਼ਾਨਾ ਖਾਣਾ ਬਣਾਉਣ ਅਤੇ ਪਰੋਸਣ ਲਈ ਹੱਥ ਨਾਲ ਤਿਆਰ ਲੋਹੇ ਦੇ ਬਰਤਨ — ਮਲੇਰਕੋਟਲਾ, ਪੰਜਾਬ ਦੀ ਰਵਾਇਤੀ ਮਜ਼ਬੂਤੀ ਅਤੇ ਭਰੋਸੇਯੋਗ ਗੁਣਵੱਤਾ ਨਾਲ।",
+            "ਢਾਬਿਆਂ, ਕੈਟਰਰਾਂ ਅਤੇ ਘਰੇਲੂ ਰਸੋਈ ਲਈ ਬੇਮਿਸਾਲ ਮਜ਼ਬੂਤੀ। ਕੋਈ ਟੈਫਲੌਨ ਨਹੀਂ, ਕੋਈ ਮਿਲਾਵਟ ਨਹੀਂ। ਅਸਲੀ ਸ਼ੁੱਧ ਤਾਕਤ।",
+          wholesaleCta: "ਥੋਕ ਕੈਟਾਲਾਗ ਡਾਊਨਲੋਡ ਕਰੋ (B2B)",
+          retailCta: "ਘਰੇਲੂ ਬਰਤਨ ਵੇਖੋ",
+          b2bNav: "ਥੋਕ ਸਪਲਾਈ (B2B)",
+          retailNav: "ਘਰੇਲੂ ਬਰਤਨ",
           storyTitle: "ਲੋਹੇ ਦਾ ਪਰਿਵਾਰਕ ਕਾਰੋਬਾਰ, ਅੱਜ ਵੀ ਜਾਰੀ।",
           storyParagraphOne:
             "ਸ਼ੁੱਧ ਲੋਹਾ ਕੋਈ ਅਜਿਹਾ ਕਾਰੋਬਾਰ ਨਹੀਂ ਜੋ ਅਸੀਂ ਸ਼ੁਰੂ ਕੀਤਾ — ਇਹ ਸਾਨੂੰ ਵਿਰਾਸਤ ਵਿੱਚ ਮਿਲਿਆ ਹੈ। ਪੀੜ੍ਹੀਆਂ ਤੋਂ ਸਾਡਾ ਪਰਿਵਾਰ ਲੋਹੇ ਦੀਆਂ ਚੀਜ਼ਾਂ ਸਿਰਫ਼ ਵੇਚਦਾ ਨਹੀਂ, ਉਨ੍ਹਾਂ ਨੂੰ ਰਵਾਇਤੀ ਤਰੀਕੇ ਨਾਲ ਹੱਥੀਂ ਬਣਾਉਂਦਾ ਵੀ ਹੈ।",
@@ -2797,6 +3873,102 @@
           adCta: "ਗੱਲਬਾਤ ਸ਼ੁਰੂ ਕਰੋ",
         },
       };
+
+      // B2B Wholesale Catalog Modal Logic
+      const catalogModal = document.getElementById("catalogModal");
+      const catalogModalClose = document.getElementById("catalogModalClose");
+      const b2bCatalogForm = document.getElementById("b2bCatalogForm");
+      const b2bStatus = document.getElementById("b2bStatus");
+
+      const openCatalogModal = () => {
+        if (!catalogModal) return;
+        catalogModal.hidden = false;
+        requestAnimationFrame(() => catalogModal.classList.add("is-open"));
+        document.body.style.overflow = "hidden";
+        if (typeof shudhTrackLead === "function") {
+          shudhTrackLead("form", "Opened Wholesale Catalog Modal");
+        }
+      };
+
+      const closeCatalogModal = () => {
+        if (!catalogModal) return;
+        catalogModal.classList.remove("is-open");
+        document.body.style.overflow = "";
+        setTimeout(() => {
+          catalogModal.hidden = true;
+          if (b2bStatus) b2bStatus.textContent = "";
+        }, 250);
+      };
+
+      document.querySelectorAll(".open-catalog-trigger").forEach((el) => {
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          openCatalogModal();
+        });
+      });
+
+      if (catalogModalClose) {
+        catalogModalClose.addEventListener("click", closeCatalogModal);
+      }
+
+      if (catalogModal) {
+        catalogModal.addEventListener("click", (e) => {
+          if (e.target === catalogModal) closeCatalogModal();
+        });
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && catalogModal && !catalogModal.hidden) {
+          closeCatalogModal();
+        }
+      });
+
+      if (b2bCatalogForm) {
+        b2bCatalogForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!b2bStatus) return;
+          const name = document.getElementById("b2bName")?.value.trim() || "";
+          const business = document.getElementById("b2bBusiness")?.value.trim() || "";
+          const phone = document.getElementById("b2bPhone")?.value.trim() || "";
+          const city = document.getElementById("b2bCity")?.value.trim() || "";
+          const requirement = document.getElementById("b2bRequirement")?.value || "";
+
+          if (!/^[+\d][\d\s()-]{7,}$/.test(phone)) {
+            b2bStatus.className = "catalog-status is-error";
+            b2bStatus.textContent = "Please enter a valid phone/WhatsApp number.";
+            return;
+          }
+
+          b2bStatus.className = "catalog-status";
+          b2bStatus.textContent = "Submitting wholesale inquiry...";
+
+          const leadMessage = `[B2B Wholesale Catalog Request] Business: ${business}, City: ${city}, Required: ${requirement}`;
+
+          if (shudhSupabase) {
+            try {
+              const { error } = await shudhSupabase.from("leads").insert({
+                kind: "form",
+                name: `${name} (${business})`,
+                phone,
+                message: leadMessage,
+                page_url: location.href,
+              });
+              if (error) throw error;
+            } catch (err) {
+              console.warn("Lead save error:", err);
+            }
+          }
+
+          b2bStatus.className = "catalog-status is-success";
+          b2bStatus.innerHTML = "✓ Wholesale request received! Opening specification catalog...";
+
+          setTimeout(() => {
+            window.open("wholesale-catalog.html", "_blank");
+            closeCatalogModal();
+            b2bCatalogForm.reset();
+          }, 1000);
+        });
+      }
       const languageSelect = document.getElementById("languageSelect");
       const applyLanguage = (language) => {
         const selected = translations[language] || translations.en;

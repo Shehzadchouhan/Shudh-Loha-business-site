@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shudh Loha — Commercial B2B Wholesale Catalog &amp; Specification Sheet</title>
+    <meta
+      name="description"
+      content="Commercial B2B Wholesale Product Specification Guide &amp; Direct Factory Rate Sheet for Dhabas, Caterers, Gurdwaras, and Wholesalers from Malerkotla, Punjab."
+    />
+    <link rel="icon" type="image/png" href="./logo.png?v=2" />
+    <style>
+      :root {
+        --ink: #141210;
+        --ink-soft: #4a453e;
+        --gold: #b88a24;
+        --gold-dark: #8a6414;
+        --paper: #fbfaf6;
+        --paper-deep: #f2ece0;
+        --line: rgba(20, 18, 16, 0.16);
+        --font-serif: Didot, "Bodoni MT", "Times New Roman", serif;
+        --font-sans: "Trebuchet MS", "Segoe UI", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 40px 20px;
+        background: #f4f0e8;
+        color: var(--ink);
+        font-family: var(--font-sans);
+        line-height: 1.55;
+      }
+      .catalog-container {
+        max-width: 960px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 48px;
+        border: 1px solid var(--line);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      }
+      .catalog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 2px solid var(--gold);
+        padding-bottom: 24px;
+        margin-bottom: 32px;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .brand-title {
+        font-family: var(--font-serif);
+        font-size: 32px;
+        letter-spacing: 3px;
+        margin: 0 0 4px;
+        color: var(--ink);
+      }
+      .brand-tag {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--gold-dark);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .catalog-meta {
+        text-align: right;
+        font-size: 13px;
+        color: var(--ink-soft);
+      }
+      .catalog-meta strong {
+        color: var(--ink);
+      }
+      .print-btn-bar {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-radius: 2px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .btn-primary {
+        background: var(--gold);
+        color: var(--ink);
+        border: 1px solid var(--gold);
+      }
+      .btn-primary:hover {
+        background: #d4a52c;
+      }
+      .btn-secondary {
+        background: var(--ink);
+        color: #fff;
+        border: 1px solid var(--ink);
+      }
+      .btn-secondary:hover {
+        background: #2b2622;
+      }
+      .doc-intro {
+        background: var(--paper-deep);
+        padding: 20px 24px;
+        border-left: 4px solid var(--gold);
+        margin-bottom: 36px;
+      }
+      .doc-intro h2 {
+        font-family: var(--font-serif);
+        font-size: 22px;
+        margin: 0 0 6px;
+      }
+      .doc-intro p {
+        margin: 0;
+        font-size: 14px;
+        color: var(--ink-soft);
+      }
+      .section-heading {
+        font-family: var(--font-serif);
+        font-size: 20px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 8px;
+        margin: 36px 0 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .section-heading span {
+        color: var(--gold-dark);
+        font-size: 12px;
+        font-family: var(--font-sans);
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      table.spec-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        margin-bottom: 24px;
+      }
+      table.spec-table th,
+      table.spec-table td {
+        padding: 12px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+      }
+      table.spec-table th {
+        background: var(--paper-deep);
+        font-weight: 700;
+        color: var(--ink);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        font-size: 11px;
+      }
+      table.spec-table tr:hover td {
+        background: rgba(184, 138, 36, 0.05);
+      }
+      .badge-heavy {
+        display: inline-block;
+        padding: 2px 6px;
+        background: rgba(184, 138, 36, 0.15);
+        color: var(--gold-dark);
+        font-size: 11px;
+        font-weight: 700;
+        border-radius: 2px;
+      }
+      .terms-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 24px;
+      }
+      .term-card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        padding: 18px 20px;
+        border-radius: 2px;
+      }
+      .term-card h4 {
+        margin: 0 0 6px;
+        font-size: 14px;
+        color: var(--gold-dark);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .term-card p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--ink-soft);
+        line-height: 1.5;
+      }
+      .contact-footer {
+        margin-top: 48px;
+        padding-top: 24px;
+        border-top: 2px solid var(--gold);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .contact-footer strong {
+        font-size: 18px;
+        font-family: var(--font-serif);
+      }
+      @media print {
+        body {
+          background: #fff;
+          padding: 0;
+        }
+        .catalog-container {
+          box-shadow: none;
+          border: none;
+          padding: 20px;
+          max-width: 100%;
+        }
+        .print-btn-bar {
+          display: none;
+        }
+        tr {
+          page-break-inside: avoid;
+        }
+      }
+      @media (max-width: 650px) {
+        .catalog-container {
+          padding: 24px 18px;
+        }
+        .catalog-header {
+          flex-direction: column;
+        }
+        .catalog-meta {
+          text-align: left;
+        }
+        .terms-grid {
+          grid-template-columns: 1fr;
+        }
+        table.spec-table {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="catalog-container">
+      <div class="print-btn-bar">
+        <button class="btn btn-primary" onclick="window.print()">
+          🖨️ Print / Save as PDF
+        </button>
+        <a
+          class="btn btn-secondary"
+          href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%2C%20I%20have%20reviewed%20your%20B2B%20Wholesale%20Catalog%20and%20would%20like%20to%20request%20a%20commercial%20quote."
+          target="_blank"
+          rel="noopener"
+        >
+          💬 Request Bulk Quote on WhatsApp
+        </a>
+        <a class="btn" style="border: 1px solid var(--line); color: var(--ink)" href="index.html">
+          ← Back to Site
+        </a>
+      </div>
+
+      <header class="catalog-header">
+        <div>
+          <h1 class="brand-title">SHUDH LOHA</h1>
+          <div class="brand-tag">Pure Iron (Sarbloh) Manufacturing Hub · Malerkotla, Punjab</div>
+        </div>
+        <div class="catalog-meta">
+          <div><strong>Doc:</strong> B2B Wholesale Specification &amp; Rate Sheet</div>
+          <div><strong>Dispatch Hub:</strong> Malerkotla Loha Mandi, Punjab</div>
+          <div><strong>WhatsApp / Call:</strong> +91 79732 47767</div>
+          <div><strong>Invoicing:</strong> GST Invoice Available</div>
+        </div>
+      </header>
+
+      <div class="doc-intro">
+        <h2>Commercial B2B Wholesale Supply Guide</h2>
+        <p>
+          Heavy-duty forged pure iron (Sarbloh) cookware manufactured specifically for high-intensity commercial burners (100,000+ BTU). Built to withstand high-volume wear without warping, sagging, or peeling. Supplying Dhabas, Highway Restaurants, Halwais, Banquet Caterers, Gurdwara Langars, and Kitchenware Resellers nationwide.
+        </p>
+      </div>
+
+      <!-- Section 1: Tikki Tavis -->
+      <div class="section-heading">
+        1. Commercial Heavy Tikki Tavis (Round &amp; Deep Concave)
+        <span>High-Heat Flame Proof</span>
+      </div>
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Size (Diameter)</th>
+            <th>Gauge / Thickness</th>
+            <th>Approx Weight</th>
+            <th>Handle Style</th>
+            <th>Target Application</th>
+            <th>Wholesale MOQ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>16 Inches</strong></td>
+            <td>4.0 mm Heavy Iron</td>
+            <td>4.5 – 5.2 kg</td>
+            <td>Dual Riveted Iron Loops</td>
+            <td>Dhaba Roti &amp; Fast Food</td>
+            <td>5 units</td>
+          </tr>
+          <tr>
+            <td><strong>18 Inches</strong></td>
+            <td>4.5 mm Heavy Iron</td>
+            <td>6.0 – 6.8 kg</td>
+            <td>Heavy Welded Ring Handles</td>
+            <td>Street Chaat, Tikki &amp; Pav Bhaji</td>
+            <td>5 units</td>
+          </tr>
+          <tr>
+            <td><strong>20 Inches</strong></td>
+            <td>5.0 mm Extra Heavy</td>
+            <td>8.2 – 9.0 kg</td>
+            <td>Reinforced Grip Loops</td>
+            <td>Continuous Dhaba &amp; Snack Stalls</td>
+            <td>3 units</td>
+          </tr>
+          <tr>
+            <td><strong>22 Inches</strong></td>
+            <td>5.5 mm Extra Heavy</td>
+            <td>10.5 – 11.5 kg</td>
+            <td>Heavy Dual Ring Grips</td>
+            <td>High-Volume Commercial Fryers</td>
+            <td>3 units</td>
+          </tr>
+          <tr>
+            <td><strong>24 – 26 Inches</strong></td>
+            <td>6.0 mm Extreme Duty</td>
+            <td>14.0 – 16.5 kg</td>
+            <td>Solid Forged Loop Handles</td>
+            <td>Large Scale Highway Dhabas &amp; Banquets</td>
+            <td>2 units</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Section 2: Commercial Kadhais -->
+      <div class="section-heading">
+        2. Commercial Deep Sarbloh Kadhais (Wide Lip &amp; Deep Well)
+        <span>Halwai &amp; Banquet Standard</span>
+      </div>
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Diameter</th>
+            <th>Approx Capacity</th>
+            <th>Gauge Thickness</th>
+            <th>Handle Style</th>
+            <th>Target Application</th>
+            <th>Wholesale MOQ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>14 – 16 Inches</strong></td>
+            <td>7 – 10 Litres</td>
+            <td>3.5 mm Pure Iron</td>
+            <td>Dual Loop Iron Grips</td>
+            <td>Small Dhaba Gravies &amp; Frying</td>
+            <td>5 units</td>
+          </tr>
+          <tr>
+            <td><strong>18 – 20 Inches</strong></td>
+            <td>14 – 18 Litres</td>
+            <td>4.0 mm Pure Iron</td>
+            <td>Heavy Welded Handles</td>
+            <td>Dal Makhani, Chana, Halwai Poori</td>
+            <td>3 units</td>
+          </tr>
+          <tr>
+            <td><strong>22 – 24 Inches</strong></td>
+            <td>25 – 35 Litres</td>
+            <td>4.5 mm Heavy Gauge</td>
+            <td>Reinforced Ring Handles</td>
+            <td>Banquet Caterers, Sweet Halwais</td>
+            <td>3 units</td>
+          </tr>
+          <tr>
+            <td><strong>28 – 32 Inches</strong></td>
+            <td>50 – 75 Litres</td>
+            <td>5.0 mm Heavy Gauge</td>
+            <td>Forged Lifting Rings</td>
+            <td>Mass Banquets &amp; Large Halwai Work</td>
+            <td>2 units</td>
+          </tr>
+          <tr>
+            <td><strong>36+ Inches (Custom)</strong></td>
+            <td>100 – 130 Litres</td>
+            <td>5.5 mm Commercial</td>
+            <td>Triple-Weld Forged Rings</td>
+            <td>Gurdwara Langars &amp; Mega Kitchens</td>
+            <td>1 unit</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Section 3: Commercial Degs -->
+      <div class="section-heading">
+        3. Commercial Sarbloh Heavy Degs (Thick Bottom &amp; Rolled Collar)
+        <span>Langar &amp; Banquet Capacity</span>
+      </div>
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Designation</th>
+            <th>Food Volume</th>
+            <th>Approx Weight</th>
+            <th>Base Construction</th>
+            <th>Application</th>
+            <th>Wholesale MOQ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>5 kg Deg</strong></td>
+            <td>Small Batch / 8L</td>
+            <td>3.8 – 4.2 kg</td>
+            <td>Hammered Pure Iron Base</td>
+            <td>Dhaba Rice / Dal Simmering</td>
+            <td>3 units</td>
+          </tr>
+          <tr>
+            <td><strong>10 kg Deg</strong></td>
+            <td>Medium Batch / 16L</td>
+            <td>6.5 – 7.2 kg</td>
+            <td>Reinforced Heavy Base</td>
+            <td>Catering Gravies &amp; Biryani</td>
+            <td>3 units</td>
+          </tr>
+          <tr>
+            <td><strong>15 – 25 kg Deg</strong></td>
+            <td>Large Batch / 35-50L</td>
+            <td>12.0 – 16.5 kg</td>
+            <td>Rolled Lip, Solid Iron Base</td>
+            <td>Banquet Rice &amp; Community Dal</td>
+            <td>2 units</td>
+          </tr>
+          <tr>
+            <td><strong>40 – 50 kg Mega Deg</strong></td>
+            <td>Commercial Langar / 90L+</td>
+            <td>24.0 – 30.0 kg</td>
+            <td>Extra Heavy Forged Base</td>
+            <td>Gurdwara Langars &amp; Mass Caterers</td>
+            <td>1 unit</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Section 4: Bulk Serving & Cooking Tools -->
+      <div class="section-heading">
+        4. Commercial Karchis, Skimmers (Pona) &amp; Spoons
+        <span>Heavy Iron Stems</span>
+      </div>
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Tool Name</th>
+            <th>Available Lengths</th>
+            <th>Stem Gauge</th>
+            <th>Head Style</th>
+            <th>Wholesale Lot Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Commercial Deep Karchi (Ladle)</strong></td>
+            <td>18", 24", 30", 36"</td>
+            <td>2.5 mm Solid Stem</td>
+            <td>Deep Round Iron Bowl (100ml to 500ml)</td>
+            <td>12 / 24 pcs lot</td>
+          </tr>
+          <tr>
+            <td><strong>Commercial Skimmer (Pona / Jhara)</strong></td>
+            <td>18", 24", 30"</td>
+            <td>2.5 mm Solid Stem</td>
+            <td>Perforated Poori &amp; Jalebi Skimmer</td>
+            <td>12 / 24 pcs lot</td>
+          </tr>
+          <tr>
+            <td><strong>Flat Turning Khurpa / Spatula</strong></td>
+            <td>14", 18", 22"</td>
+            <td>3.0 mm Iron Plate</td>
+            <td>Beveled Edge for Tikki &amp; Tawa Scraping</td>
+            <td>12 / 24 pcs lot</td>
+          </tr>
+          <tr>
+            <td><strong>Serving Batte (Bowls) &amp; Glasses</strong></td>
+            <td>Standard &amp; Large</td>
+            <td>Pure Sarbloh Plate</td>
+            <td>Traditional Punjabi Dining Sets</td>
+            <td>Sets of 24 / 50</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Section 5: Commercial Terms -->
+      <div class="section-heading">
+        5. Commercial Ordering Terms &amp; Logistics
+        <span>Direct Factory Policy</span>
+      </div>
+      <div class="terms-grid">
+        <div class="term-card">
+          <h4>🏭 Direct Manufacturer Pricing</h4>
+          <p>
+            No distributors or middleman commissions. All products ship directly from our factory in Malerkotla, Punjab at wholesale volume rates.
+          </p>
+        </div>
+        <div class="term-card">
+          <h4>📑 GST Invoicing &amp; Compliance</h4>
+          <p>
+            Official tax invoices provided with valid GST registration for seamless commercial input tax credits.
+          </p>
+        </div>
+        <div class="term-card">
+          <h4>🚛 Pan-India Transport &amp; Freight</h4>
+          <p>
+            Dispatches through verified transport networks via Ludhiana, Delhi, Amritsar, and Pan-India commercial freight carriers with goods transit tracking.
+          </p>
+        </div>
+        <div class="term-card">
+          <h4>⚙️ Custom Size &amp; Gauge Fabrication</h4>
+          <p>
+            Custom diameters, depths, handle configurations, and gauge thicknesses fabricated to order for restaurant chains and institutions.
+          </p>
+        </div>
+      </div>
+
+      <footer class="contact-footer">
+        <div>
+          <strong>Ready for a Wholesale Quote?</strong>
+          <div style="font-size: 13px; color: var(--ink-soft); margin-top: 4px">
+            Contact our Malerkotla factory dispatch desk directly with your item list.
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center">
+          <a
+            class="btn btn-primary"
+            href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%20factory%20team%2C%20I%20have%20the%20Wholesale%20Spec%20Sheet.%20Please%20quote%20for%20my%20commercial%20order."
+            target="_blank"
+            rel="noopener"
+          >
+            WhatsApp +91 79732 47767
+          </a>
+          <a class="btn btn-secondary" href="tel:+917973247767">
+            Call +91 79732 47767
+          </a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
