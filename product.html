@@ -4,8 +4,59 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Product Details | Shudh Loha</title>
-<meta name="description" content="Product details for Shudh Loha pure iron cookware." />
-<link rel="icon" type="image/png" href="./logo.png?v=2" />
+<meta name="description" content="Product details for Shudh Loha pure iron cookware hand-finished in Malerkotla, Punjab." />
+    <!-- Favicon Set -->
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="icon" type="image/png" sizes="48x48" href="./favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+
+    <!-- DOMAIN PLACEHOLDER: Change https://shudh-loha.netlify.app to your custom domain when ready -->
+    <meta property="og:site_name" content="Shudh Loha" />
+    <meta property="og:title" content="Product Details | Shudh Loha" />
+    <meta property="og:description" content="Product details for Shudh Loha pure iron cookware hand-finished in Malerkotla, Punjab." />
+    <meta property="og:type" content="product" />
+    <meta property="og:url" content="https://shudh-loha.netlify.app/product.html" />
+    <meta property="og:image" content="https://shudh-loha.netlify.app/og-banner.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Shudh Loha — Pure Iron (Sarbloh) Cookware" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Product Details | Shudh Loha" />
+    <meta name="twitter:description" content="Product details for Shudh Loha pure iron cookware hand-finished in Malerkotla, Punjab." />
+    <meta name="twitter:image" content="https://shudh-loha.netlify.app/og-banner.jpg" />
+
+<script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Shudh Loha",
+        "description": "Traditional pure iron (Sarbloh) cookware manufactured by hand in Malerkotla, Punjab. Supplying commercial B2B kitchens, dhabas, caterers, and healthy homes nationwide.",
+        "telephone": "+91 79732 47767",
+        "image": "https://shudh-loha.netlify.app/og-banner.jpg",
+        "url": "https://shudh-loha.netlify.app/",
+        "priceRange": "₹₹",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Malerkotla",
+          "addressRegion": "Punjab",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "30.5256",
+          "longitude": "75.8893"
+        },
+        "sameAs": [
+          "https://www.instagram.com/shudh_loha_enterprise?igsi=MXdma2xncXk5cDVsOA==",
+          "https://www.facebook.com/share/1NC6jeQcjM/",
+          "https://www.indiamart.com/company/271385182/",
+          "https://maps.app.goo.gl/GBGsbKjUtPneyoNn9"
+        ]
+      }
+    </script>
+
 <style>
   :root{--ink:#171717;--cream:#FBFAF6;--cream-deep:#F1EBDD;--gold:#B88A24;--rust:#A97818;--line:rgba(20,18,16,.14);--display:Didot,'Bodoni MT','Times New Roman',serif;--body:'Trebuchet MS','Segoe UI',sans-serif}
   *,*::before,*::after{box-sizing:border-box}
@@ -87,6 +138,7 @@
       document.getElementById('category').textContent = category;
       renderVisual(data.name, data.image_url, data.image_urls || [], data.video_urls || []);
       document.querySelector('[data-lang="askPrice"]').textContent = data.price || 'Ask for current price';
+      if (data.price) updateProductJsonLd(data.name, data.price, data.image_url, data.description);
     });
   }
   document.title = `${item} | Shudh Loha`;
@@ -155,6 +207,48 @@
   }
   renderVisual(item, product[1], product[4], product[5]);
   document.getElementById('whatsapp').href = `https://wa.me/${number}?text=${encodeURIComponent(`Hi, I'm interested in ${item}. Can you share the size, weight, price, and delivery details?`)}`;
+  
+    // Dynamic Product Schema JSON-LD injection when price exists
+    function updateProductJsonLd(name, price, imageUrl, description) {
+      if (!price) return;
+      let script = document.getElementById('productJsonLd');
+      if (!script) {
+        script = document.createElement('script');
+        script.id = 'productJsonLd';
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+      }
+      const rawNum = String(price).replace(/[^\d.]/g, '');
+      const num = parseFloat(rawNum);
+      if (!num) return;
+      const fullImg = imageUrl ? (imageUrl.startsWith('http') ? imageUrl : 'https://shudh-loha.netlify.app/' + imageUrl) : 'https://shudh-loha.netlify.app/og-banner.jpg';
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": name,
+        "image": fullImg,
+        "description": description || (name + " — authentic pure iron (Sarbloh) cookware hand-finished in Malerkotla, Punjab."),
+        "brand": {
+          "@type": "Brand",
+          "name": "Shudh Loha"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "INR",
+          "price": num,
+          "availability": "https://schema.org/InStock",
+          "url": window.location.href,
+          "seller": {
+            "@type": "Organization",
+            "name": "Shudh Loha"
+          }
+        }
+      };
+      script.textContent = JSON.stringify(schema, null, 2);
+    }
+  
+    if (product && product[3]) updateProductJsonLd(item, product[3], product[1], product[2]);
+  
   shudhTrackView();
   document.getElementById('whatsapp').addEventListener('click', () => shudhTrackLead('whatsapp', item));
   document.querySelector('a[href^="tel:"]').addEventListener('click', () => shudhTrackLead('phone', item));

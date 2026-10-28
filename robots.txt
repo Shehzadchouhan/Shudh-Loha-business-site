@@ -1,0 +1,7 @@
+# Robots.txt for Shudh Loha — Pure Iron (Sarbloh) Cookware
+# DOMAIN PLACEHOLDER: Change https://shudh-loha.netlify.app to your custom domain when ready
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+Sitemap: https://shudh-loha.netlify.app/sitemap.xml
