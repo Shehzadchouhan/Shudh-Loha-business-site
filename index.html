@@ -2551,6 +2551,17 @@
         gap: 28px;
         margin-top: 0;
       }
+      
+      .step-badge-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .step-icon {
+        font-size: 26px;
+        line-height: 1;
+      }
       .step {
         border-top: 1px solid var(--line-on-dark);
         padding-top: 20px;
@@ -2956,27 +2967,7 @@
         }
       }
 
-      .developer-credit {
-        margin: 0;
-        padding: 10px 24px 18px;
-        background: var(--ink);
-        color: rgba(244, 238, 225, 0.62);
-        text-align: center;
-        font-size: 11px;
-        letter-spacing: 1.2px;
-        text-transform: uppercase;
-      }
-      .developer-credit strong {
-        color: var(--gold);
-        font-weight: 700;
-      }
-      .developer-credit a {
-        color: var(--cream);
-        text-decoration: none;
-      }
-      .developer-credit a:hover {
-        color: var(--gold);
-      }
+      
 
       /* ---------- Footer ---------- */
       footer {
@@ -3010,7 +3001,7 @@
       <div class="announcement-inner">
         <div class="announcement-text">
           <span class="announcement-badge">FACTORY DIRECT</span>
-          <span class="announcement-main">Direct Manufacturer Rates from Malerkotla | Supplying Dhabas, Caterers, Gurdwaras &amp; Retail Nationwide</span>
+          <span class="announcement-main">Direct Manufacturer Rates from Malerkotla | Manufacturing for Dhabas, Caterers, Gurdwaras &amp; Retail Nationwide</span>
         </div>
         <div class="announcement-actions">
           <span class="announcement-tag">Pan-India Freight</span>
@@ -3135,39 +3126,29 @@
           </div>
         </article>
 
-        <!-- Slide 1: B2B Commercial Torture Test & Burner Strength -->
+        <!-- Slide 1: Authentic Handcrafted Heritage -->
         <article class="hero-slide hero-slide--story" data-slide="1">
           <div class="wrap">
             <div>
-              <p class="eyebrow">B2B Commercial Focus</p>
-              <h1>Engineered for 100,000 BTU burners.<br /><span>Won't bend. Won't warp.</span></h1>
-              <p style="color: rgba(244, 238, 225, 0.85); margin: 16px 0 28px; max-width: 480px;">Built specifically for high-intensity commercial kitchens, highway dhabas, banquet halwais, and Gurdwara langars. Direct factory rates on heavy kadhais and degs up to 50kg capacity.</p>
-              <div class="hero-cta">
-                <button type="button" class="btn btn-primary open-catalog-trigger">Download Wholesale Catalog (B2B)</button>
-                <a class="btn btn-ghost" href="#dual-funnel">Explore B2B Range</a>
-              </div>
+              <p class="eyebrow" data-lang="story">Our story</p>
+              <h1 data-lang="storyTitle">Craft passed down.<br /><span>Quality carried forward.</span></h1>
+              <p style="color: rgba(244, 238, 225, 0.85); margin: 16px 0 28px; max-width: 480px;">For generations in Malerkotla, Punjab, we have forged traditional iron cookware by hand — built to endure grueling commercial heat and family kitchens alike.</p>
+              <div class="hero-cta"><a class="btn btn-primary" href="#contact" data-lang="contact">Meet us</a></div>
             </div>
-            <div class="hero-art"><p>No cheap alloys.<br />No sheet metal.<br /><span style="color: var(--gold)">Heavy-gauge pure iron.</span></p></div>
+            <div class="hero-art"><p>No mixed metal.<br />No shortcuts.<br /><span style="color: var(--gold)">Just pure loha.</span></p></div>
           </div>
         </article>
 
-        <!-- Slide 2: Retail Household Cookware Collection -->
+        <!-- Slide 2: Pure Sarbloh Collection -->
         <article class="hero-slide hero-slide--products" data-slide="2">
           <div class="wrap">
             <div>
-              <p class="eyebrow">D2C Retail &amp; Family Kitchens</p>
-              <h1>100% Pure Sarbloh.<br /><span>No Teflon. Real Health.</span></h1>
-              <p style="color: rgba(244, 238, 225, 0.85); margin: 16px 0 28px; max-width: 480px;">Replace toxic chemical coatings with natural dietary iron enrichment. Hand-finished Tutma Tawas, family Kadhais, and traditional batte delivered safely to your home.</p>
-              <div class="hero-cta">
-                <a class="btn btn-primary" href="products.html">Browse Retail Cookware</a>
-                <a class="btn btn-ghost" href="#products">See Family Collection</a>
-              </div>
+              <p class="eyebrow" data-lang="sell">The collection</p>
+              <h1 data-lang="sellTitle">Sarbloh pieces<br /><span>for the daily ritual.</span></h1>
+              <p style="color: rgba(244, 238, 225, 0.85); margin: 16px 0 28px; max-width: 480px;">Hand-finished Tutma Tawas, commercial Kadhais, and traditional batte. Pure iron with exceptional heat retention, free from chemical coatings.</p>
+              <div class="hero-cta"><a class="btn btn-primary" href="products.html" data-lang="viewProducts">Shop Sarbloh</a><a class="btn btn-ghost" href="#products">See highlights</a></div>
             </div>
-            <div class="hero-art hero-product-collage">
-              <img src="Assets 2/kadhai.png" alt="Pure Sarbloh family kadhai" />
-              <img src="Assets 2/tutma tawa.png" alt="Authentic Sarbloh tawa" />
-              <img src="Assets 2/Big Deg.jpeg" alt="Pure iron deg" />
-            </div>
+            <div class="hero-art hero-product-collage"><img src="Assets 2/kadhai.png" alt="Pure Sarbloh kadhai" /><img src="Assets 2/tutma tawa.png" alt="Authentic Sarbloh tawa" /><img src="Assets 2/Big Deg.jpeg" alt="Pure iron deg" /></div>
           </div>
         </article>
 
@@ -3218,7 +3199,7 @@
 
     <div class="collection-ticker" aria-label="Collection announcement">
       <div class="ticker-track">
-        <span>Direct Factory Rates from Malerkotla | Supplying Dhabas, Caterers &amp; Retail Pan-India</span>
+        <span>Direct Factory Rates from Malerkotla | Manufacturing for Dhabas, Caterers, Gurdwaras &amp; Retail Nationwide</span>
         <span aria-hidden="true">◆</span>
         <span>Heavy-Gauge Pure Sarbloh Cookware | Zero Chemicals, Lasts Generations</span>
         <span aria-hidden="true">◆</span>
@@ -3237,9 +3218,8 @@
         <div class="funnel-grid">
           <!-- Funnel 1: Commercial B2B & Wholesale (70% Focus) -->
           <div class="funnel-card funnel-card--b2b reveal">
-            <span class="funnel-badge funnel-badge--b2b">🏭 70% FACTORY FOCUS · B2B WHOLESALE</span>
+            <span class="funnel-badge funnel-badge--b2b">🏭 B2B WHOLESALE SUPPLY</span>
             <h3 class="funnel-title">Commercial Kitchens &amp; Wholesalers</h3>
-            <div class="funnel-audience">Target: Dhabas · Highway Restaurants · Halwais · Banquet Caterers · Gurdwara Langars · Resellers</div>
             <p class="funnel-desc">Engineered for commercial high-heat blast burners (100,000+ BTU). Forged with extra-heavy pure iron gauges that withstand grueling daily usage without warping or thinning.</p>
             <ul class="funnel-specs-list">
               <li class="funnel-spec-item">
@@ -3268,9 +3248,8 @@
 
           <!-- Funnel 2: Retail Household Cookware (30% Focus) -->
           <div class="funnel-card funnel-card--retail reveal">
-            <span class="funnel-badge funnel-badge--retail">🌿 30% FOCUS · RETAIL &amp; HOUSEHOLD</span>
+            <span class="funnel-badge funnel-badge--retail">🌿 RETAIL &amp; HOUSEHOLD</span>
             <h3 class="funnel-title">Healthy Everyday Home Cooking</h3>
-            <div class="funnel-audience">Target: Health-Conscious Families · Home Chefs · Traditional Cooks · Pure Sarbloh Seekers</div>
             <p class="funnel-desc">100% chemical-free, food-safe pure iron cookware that replaces toxic peeling non-stick coatings. Naturally enriches every family meal with dietary iron while building unbeatable flavor.</p>
             <ul class="funnel-specs-list">
               <li class="funnel-spec-item">
@@ -3345,74 +3324,38 @@
       <span class="sparkle s-sm" style="top: 70%; left: 6%; animation-delay: 2.4s;" aria-hidden="true">&#10022;</span>
       <div class="wrap">
         <div class="order-intro">
-          <div class="confused-figure reveal">
-            <img src="image.png" alt="Confused customer wondering how to order" />
-          </div>
           <div class="section-head order-heading reveal">
             <p class="eyebrow" data-lang="howToOrder">How To Order</p>
-            <h2 data-lang="orderTitle">No cart needed — just three steps.</h2>
+            <h2 data-lang="orderTitle">Direct Factory Ordering in 3 Simple Steps</h2>
           </div>
         </div>
         <div class="steps">
           <div class="step reveal">
-            <div class="n">01</div>
-            <h3 data-lang="stepOneTitle">Choose your item</h3>
+            <div class="step-badge-row">
+              <span class="step-icon">📐</span>
+              <div class="n">01</div>
+            </div>
+            <h3 data-lang="stepOneTitle">Send your sizes/quantity</h3>
+            <p data-lang="stepOneText">Share your required piece sizes, diameters (e.g. 14"–36" Kadhais, 16"–24" Tikki Tavis, 5kg–50kg Degs), and quantity.</p>
           </div>
           <div class="step reveal">
-            <div class="n">02</div>
-            <h3 data-lang="stepTwoTitle">Call or message us</h3>
+            <div class="step-badge-row">
+              <span class="step-icon">💬</span>
+              <div class="n">02</div>
+            </div>
+            <h3 data-lang="stepTwoTitle">Get a quote on WhatsApp</h3>
+            <p data-lang="stepTwoText">Receive direct factory unit rates, bulk lot pricing, and freight delivery estimates directly on WhatsApp.</p>
           </div>
           <div class="step reveal">
-            <div class="n">03</div>
-            <h3 data-lang="stepThreeTitle">Get it delivered</h3>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Dual-Funnel Call to Action Section -->
-    <section class="dual-cta-section" id="dual-cta" aria-label="Direct Factory Call To Action">
-      <div class="wrap">
-        <div class="dual-cta-head reveal">
-          <p class="eyebrow">DIRECT FACTORY PARTNERSHIP</p>
-          <h2>Equip Your Kitchen with Pure Iron Strength</h2>
-          <p>Whether you require a single hand-forged tawa for your home stove or 50 heavy-gauge commercial kadhais for your banquet kitchen, we dispatch directly from our Malerkotla manufacturing hub.</p>
-        </div>
-
-        <div class="dual-cta-grid">
-          <!-- Commercial B2B Box -->
-          <div class="dual-cta-box dual-cta-box--b2b reveal">
-            <span class="funnel-badge funnel-badge--b2b" style="margin-bottom: 12px;">🏭 COMMERCIAL B2B &amp; BULK LOTS</span>
-            <h3>Commercial &amp; Wholesale Inquiries</h3>
-            <p>Direct manufacturer tiered pricing for dhabas, banquet caterers, halwais, Gurdwara committees, and kitchenware wholesalers. Heavy-gauge pure iron that handles 100,000 BTU continuous flame without warping. Includes valid GST invoice and freight transport.</p>
-            <div class="dual-cta-buttons">
-              <button type="button" class="btn btn-primary open-catalog-trigger">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                Download Wholesale Catalog (B2B)
-              </button>
-              <a href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%2C%20I%20am%20interested%20in%20a%20B2B%20wholesale%20order%20for%20my%20kitchen%2Fbusiness." target="_blank" rel="noopener" class="btn btn-dark">
-                💬 WhatsApp Wholesale Desk
-              </a>
+            <div class="step-badge-row">
+              <span class="step-icon">🚚</span>
+              <div class="n">03</div>
             </div>
-          </div>
-
-          <!-- Retail Home Cooks Box -->
-          <div class="dual-cta-box dual-cta-box--retail reveal">
-            <span class="funnel-badge funnel-badge--retail" style="margin-bottom: 12px; color: var(--ink); border-color: rgba(20,18,16,0.2);">🌿 RETAIL HOUSEHOLD COOKWARE</span>
-            <h3>Healthy Family Home Cooking</h3>
-            <p>Replace peeling non-stick chemicals with 100% natural, food-safe Sarbloh cookware. Naturally boosts dietary iron in every meal, locks in authentic flavor, and lasts for generations in your kitchen. Safe Pan-India home courier delivery.</p>
-            <div class="dual-cta-buttons">
-              <a href="products.html" class="btn btn-primary">
-                Browse Retail Cookware →
-              </a>
-              <a href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%2C%20I%20would%20like%20to%20order%20pure%20iron%20cookware%20for%20my%20home." target="_blank" rel="noopener" class="btn btn-dark">
-                💬 Order for Home via WhatsApp
-              </a>
-            </div>
+            <h3 data-lang="stepThreeTitle">GST invoice and dispatch from Malerkotla</h3>
+            <p data-lang="stepThreeText">Prompt order confirmation with verified GST invoice, secure commercial packaging, and dependable transport dispatch across India.</p>
           </div>
         </div>
-      </div>
-    </section>
+      </div></section>
 
     <section class="contact" id="contact">
       <div class="wrap grid">
@@ -3485,11 +3428,16 @@
               target="_blank"
               rel="noopener"
             >
-              IM
+              <svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22">
+                <rect x="2" y="2" width="20" height="20" rx="4" fill="#2E3192" />
+                <circle cx="7.5" cy="8" r="1.5" fill="#00A651" />
+                <rect x="6.5" y="11" width="2" height="6.5" rx="0.5" fill="#FFFFFF" />
+                <path d="M11 11v6.5h2v-3.5c0-.9.6-1.5 1.5-1.5s1.5.6 1.5 1.5v3.5h2v-3.8c0-1.8-1.2-3.2-2.9-3.2-1 0-1.8.5-2.2 1.2h-.2V11H11z" fill="#FFFFFF" />
+              </svg>
             </a>
             <a
               class="website"
-              href="https://maps.app.goo.gl/GBGsbKjUtPneyoNn9"
+              href="https://shudh-loha.netlify.app/"
               aria-label="Shudh Loha website"
               title="Shudh Loha website"
               target="_blank"
@@ -3531,7 +3479,7 @@
           </div>
         </div>
         <div class="contact-card contact-card-sequence">
-          <h3 data-lang="contactTitle">Talk to us directly.</h3>
+          
           <div class="contact-row">
             <span class="ico">☎</span
             ><a href="tel:+917973247767">+91 79732 47767</a>
@@ -3540,24 +3488,25 @@
             <span class="ico">📍</span
             ><span data-lang="address">Malerkotla, Punjab</span>
           </div>
+          <div class="contact-row">
+            <span class="ico">📑</span><span>GSTIN: [[ADD GST NUMBER]]</span>
+          </div>
           <div class="contact-actions">
-            <a class="btn btn-primary" href="#" id="contactWhatsapp" target="_blank" rel="noopener">Message on WhatsApp</a>
+            <a class="btn btn-primary" href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%2C%20I%20would%20like%20to%20inquire%20about%20your%20cookware%20and%20prices." id="contactWhatsapp" target="_blank" rel="noopener">Message on WhatsApp</a>
             <a class="btn btn-ghost" href="tel:+917973247767">Call us</a>
           </div>
         </div>
       </div>
       <section class="find-us">
         <div class="find-us__left">
-          <div class="find-us__label">
-            <span class="spark">⟿</span> FIND US <span class="spark">⟿</span>
-          </div>
-          <a href="https://maps.google.com" target="_blank" rel="noopener" class="find-us__btn">
+          
+          <a href="https://maps.app.goo.gl/GBGsbKjUtPneyoNn9" target="_blank" rel="noopener" class="find-us__btn">
             📍 OPEN IN GOOGLE MAPS &nbsp;→
           </a>
           <p class="find-us__desc">Ready to visit? Click below to see our location on Google Maps.</p>
           <div class="find-us__torch-wrap">
             <div class="find-us__copy">
-              <span class="find-us__on">LIGHT ON!</span>
+              
               <h2 class="find-us__heading">
                 <span class="line1">Visit us in</span><br />
                 <span class="line2">Malerkotla.</span>
@@ -3585,11 +3534,7 @@
         Malerkotla, Punjab
       </div>
     </footer>
-    <p class="developer-credit">
-      Developed and maintained by <strong>Shehzad_coder</strong>
-      <span aria-hidden="true"> · </span>
-      <span>Contact: <a href="tel:+919988059285">9988059285</a></span>
-    </p>
+    
     <a
       class="whatsapp-float"
       href=""
@@ -3821,7 +3766,7 @@
         `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
           item
             ? `Hi, I'm interested in ${item}. Can you share the price?`
-            : `Hi, I'd like to know more about Shudh Loha products.`,
+            : `Hi Shudh Loha team, I would like to inquire about your cookware and prices.`,
         )}`;
       document.getElementById("heroWhatsapp").href = waLink();
       document.getElementById("contactWhatsapp").href = waLink();
@@ -4096,16 +4041,16 @@
           fullCollection: "View the full collection",
           kitchenware: "Kitchenware",
           allProducts: "View all products",
-          orderTitle: "No cart needed — just three steps.",
-          stepOneTitle: "Choose your item",
+          orderTitle: "Direct Factory Ordering in 3 Simple Steps",
+          stepOneTitle: "Send your sizes/quantity",
           stepOneText:
-            "Browse the collections above and note down the item, size, or quantity you need.",
-          stepTwoTitle: "Call or message us",
+            "Share your required piece sizes, diameters (e.g. 14\"–36\" Kadhais, 16\"–24\" Tikki Tavis, 5kg–50kg Degs), and quantity.",
+          stepTwoTitle: "Get a quote on WhatsApp",
           stepTwoText:
-            "Reach out on WhatsApp or call directly — we'll confirm the price for your size and answer any questions.",
-          stepThreeTitle: "Get it delivered",
+            "Receive direct factory unit rates, bulk lot pricing, and freight delivery estimates directly on WhatsApp.",
+          stepThreeTitle: "GST invoice and dispatch from Malerkotla",
           stepThreeText:
-            "Once confirmed, we arrange delivery or pickup — pay on delivery for local orders.",
+            "Prompt order confirmation with verified GST invoice, secure commercial packaging, and dependable transport dispatch across India.",
           contactTitle: "Talk to us directly.",
           contactText:
             "No forms, no waiting — call or message us and we'll help you find the right piece.",
@@ -4113,14 +4058,6 @@
           visitTitle: "Visit us in Malerkotla.",
           openMaps: "Open in Google Maps",
           footerTagline: "Pure Loha, Pure Quality",
-          adEyebrow: "A service by our team",
-          adTitle: "We build websites that get you noticed.",
-          adText:
-            "Need a website for your business? We create clean, responsive websites that help customers discover your work and contact you easily.",
-          adListOne: "Business and product websites",
-          adListTwo: "Mobile-friendly design",
-          adListThree: "WhatsApp, social media, and map integration",
-          adCta: "Start a conversation",
         },
         hi: {
           about: "हमारे बारे में",
@@ -4169,14 +4106,6 @@
           visitTitle: "मलेरकोटला में हमसे मिलें।",
           openMaps: "Google Maps में खोलें",
           footerTagline: "शुद्ध लोहा, शुद्ध गुणवत्ता",
-          adEyebrow: "हमारी टीम की सेवा",
-          adTitle: "हम ऐसी वेबसाइट बनाते हैं जो आपको पहचान दिलाए।",
-          adText:
-            "अपने व्यवसाय के लिए वेबसाइट चाहिए? हम साफ़ और responsive वेबसाइट बनाते हैं, जिससे ग्राहक आपका काम खोज सकें और आसानी से संपर्क कर सकें।",
-          adListOne: "व्यवसाय और उत्पाद वेबसाइट",
-          adListTwo: "मोबाइल के लिए अनुकूल डिज़ाइन",
-          adListThree: "WhatsApp, सोशल मीडिया और मानचित्र का एकीकरण",
-          adCta: "बातचीत शुरू करें",
         },
         pa: {
           about: "ਸਾਡੇ ਬਾਰੇ",
@@ -4208,16 +4137,16 @@
           fullCollection: "ਪੂਰਾ ਸੰਗ੍ਰਹਿ ਵੇਖੋ",
           kitchenware: "ਰਸੋਈ ਦੇ ਬਰਤਨ",
           allProducts: "ਸਾਰੇ ਉਤਪਾਦ ਵੇਖੋ",
-          orderTitle: "ਕਾਰਟ ਦੀ ਲੋੜ ਨਹੀਂ — ਸਿਰਫ਼ ਤਿੰਨ ਕਦਮ।",
-          stepOneTitle: "ਆਪਣੀ ਚੀਜ਼ ਚੁਣੋ",
+          orderTitle: "ਸਿੱਧੇ ਫੈਕਟਰੀ ਆਰਡਰ ਦੇ 3 ਆਸਾਨ ਕਦਮ",
+          stepOneTitle: "ਆਪਣੇ ਲੋੜੀਂਦੇ ਸਾਈਜ਼ ਅਤੇ ਮਾਤਰਾ ਭੇਜੋ",
           stepOneText:
-            "ਉੱਪਰ ਦਿੱਤੇ ਸੰਗ੍ਰਹਿ ਵੇਖੋ ਅਤੇ ਆਪਣੀ ਲੋੜੀਂਦੀ ਚੀਜ਼, ਆਕਾਰ ਜਾਂ ਮਾਤਰਾ ਨੋਟ ਕਰੋ।",
-          stepTwoTitle: "ਕਾਲ ਜਾਂ ਸੁਨੇਹਾ ਕਰੋ",
+            "ਆਪਣੀ ਲੋੜ ਅਨੁਸਾਰ ਆਕਾਰ, ਵਿਆਸ (ਜਿਵੇਂ 14\"-36\" ਕੜਾਹੀ, 16\"-24\" ਟਿੱਕੀ ਤਵਾ, 5-50 ਕਿਲੋ ਦੇਗ) ਅਤੇ ਗਿਣਤੀ ਸਾਂਝੀ ਕਰੋ।",
+          stepTwoTitle: "WhatsApp ਤੇ ਤੁਰੰਤ ਕੁਓਟੇਸ਼ਨ ਪਾਓ",
           stepTwoText:
-            "WhatsApp ਤੇ ਸੁਨੇਹਾ ਭੇਜੋ ਜਾਂ ਸਿੱਧੀ ਕਾਲ ਕਰੋ — ਅਸੀਂ ਆਕਾਰ ਦੀ ਕੀਮਤ ਅਤੇ ਤੁਹਾਡੇ ਸਵਾਲਾਂ ਦੀ ਜਾਣਕਾਰੀ ਦੇਵਾਂਗੇ।",
-          stepThreeTitle: "ਡਿਲੀਵਰੀ ਪਾਓ",
+            "ਸਿੱਧੇ ਕਾਰਖਾਨੇ ਦੇ ਰੇਟ, ਥੋਕ ਛੋਟ ਅਤੇ ਟਰਾਂਸਪੋਰਟ ਭਾੜੇ ਦੀ ਜਾਣਕਾਰੀ WhatsApp ਤੇ ਪ੍ਰਾਪਤ ਕਰੋ।",
+          stepThreeTitle: "GST ਬਿੱਲ ਅਤੇ ਮਲੇਰਕੋਟਲਾ ਤੋਂ ਸਿੱਧੀ ਰਵਾਨਗੀ",
           stepThreeText:
-            "ਪੁਸ਼ਟੀ ਤੋਂ ਬਾਅਦ ਅਸੀਂ ਡਿਲੀਵਰੀ ਜਾਂ ਪਿਕਅੱਪ ਦਾ ਪ੍ਰਬੰਧ ਕਰਾਂਗੇ — ਸਥਾਨਕ ਆਰਡਰਾਂ ਲਈ ਡਿਲੀਵਰੀ ਸਮੇਂ ਭੁਗਤਾਨ ਕਰੋ।",
+            "ਪੱਕੇ GST ਬਿੱਲ, ਮਜ਼ਬੂਤ ਪੈਕਿੰਗ ਅਤੇ ਭਰੋਸੇਮੰਦ ਟਰਾਂਸਪੋਰਟ ਰਾਹੀਂ ਪੂਰੇ ਭਾਰਤ ਵਿੱਚ ਡਿਲੀਵਰੀ।",
           contactTitle: "ਸਾਡੇ ਨਾਲ ਸਿੱਧੀ ਗੱਲ ਕਰੋ।",
           contactText:
             "ਕੋਈ ਫਾਰਮ ਨਹੀਂ, ਕੋਈ ਉਡੀਕ ਨਹੀਂ — ਕਾਲ ਜਾਂ ਸੁਨੇਹਾ ਕਰੋ ਅਤੇ ਸਹੀ ਚੀਜ਼ ਚੁਣਨ ਵਿੱਚ ਸਾਡੀ ਮਦਦ ਲਵੋ।",
@@ -4225,15 +4154,6 @@
           visitTitle: "ਮਲੇਰਕੋਟਲਾ ਵਿੱਚ ਸਾਨੂੰ ਮਿਲੋ।",
           openMaps: "Google Maps ਵਿੱਚ ਖੋਲ੍ਹੋ",
           footerTagline: "ਸ਼ੁੱਧ ਲੋਹਾ, ਸ਼ੁੱਧ ਗੁਣਵੱਤਾ",
-          adEyebrow: "ਸਾਡੀ ਟੀਮ ਦੀ ਸੇਵਾ",
-          adTitle:
-            "ਅਸੀਂ ਅਜਿਹੀਆਂ ਵੈੱਬਸਾਈਟਾਂ ਬਣਾਉਂਦੇ ਹਾਂ ਜੋ ਤੁਹਾਨੂੰ ਪਛਾਣ ਦਿਵਾਉਣ।",
-          adText:
-            "ਆਪਣੇ ਕਾਰੋਬਾਰ ਲਈ ਵੈੱਬਸਾਈਟ ਚਾਹੀਦੀ ਹੈ? ਅਸੀਂ ਸਾਫ਼ ਅਤੇ responsive ਵੈੱਬਸਾਈਟਾਂ ਬਣਾਉਂਦੇ ਹਾਂ, ਤਾਂ ਜੋ ਗਾਹਕ ਤੁਹਾਡਾ ਕੰਮ ਲੱਭ ਸਕਣ ਅਤੇ ਆਸਾਨੀ ਨਾਲ ਸੰਪਰਕ ਕਰ ਸਕਣ।",
-          adListOne: "ਕਾਰੋਬਾਰ ਅਤੇ ਉਤਪਾਦ ਵੈੱਬਸਾਈਟਾਂ",
-          adListTwo: "ਮੋਬਾਈਲ ਲਈ ਅਨੁਕੂਲ ਡਿਜ਼ਾਈਨ",
-          adListThree: "WhatsApp, ਸੋਸ਼ਲ ਮੀਡੀਆ ਅਤੇ ਨਕਸ਼ੇ ਦਾ ਏਕੀਕਰਨ",
-          adCta: "ਗੱਲਬਾਤ ਸ਼ੁਰੂ ਕਰੋ",
         },
       };
 
