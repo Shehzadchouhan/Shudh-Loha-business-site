@@ -1,0 +1,4 @@
+# Exclude uncompressed originals archive from Netlify build and deploy
+originals/
+originals/**
+scripts_audit.py

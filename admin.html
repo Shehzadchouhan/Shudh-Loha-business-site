@@ -157,7 +157,7 @@
         const { data, error } = await client.from("products").select("*").order("sort_order").order("created_at");
         if (error) throw error;
         $("productsCount").textContent = data.filter((item) => item.is_active && isSarblohProduct(item)).length;
-        $("productList").innerHTML = data.length ? data.map((item) => `<article class="product-row"><img src="${item.image_url || "./logo.png?v=2"}" alt=""><div><h3>${item.name}</h3><p>${item.category} · ${item.is_active && isSarblohProduct(item) ? "Visible" : "Hidden from storefront"}</p></div><div class="row-actions"><button class="icon-button" type="button" data-edit="${item.id}">Edit</button><button class="icon-button" type="button" data-delete="${item.id}">Delete</button></div></article>`).join("") : '<p class="empty">No products yet.</p>';
+        $("productList").innerHTML = data.length ? data.map((item) => `<article class="product-row"><img src="${item.image_url || "./logo.webp"}" alt="" width="56" height="56" loading="lazy"><div><h3>${item.name}</h3><p>${item.category} · ${item.is_active && isSarblohProduct(item) ? "Visible" : "Hidden from storefront"}</p></div><div class="row-actions"><button class="icon-button" type="button" data-edit="${item.id}">Edit</button><button class="icon-button" type="button" data-delete="${item.id}">Delete</button></div></article>`).join("") : '<p class="empty">No products yet.</p>';
         document.querySelectorAll("[data-edit]").forEach((button) => button.addEventListener("click", () => editProduct(data.find((item) => item.id === button.dataset.edit))));
         document.querySelectorAll("[data-delete]").forEach((button) => button.addEventListener("click", () => deleteProduct(button.dataset.delete)));
       }

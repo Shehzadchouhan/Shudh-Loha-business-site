@@ -106,18 +106,18 @@
 <script>
   const number = '917973247767';
   const products = {
-    'Big Deg': ['Iron Cookware', 'Assets 2/Big Deg.jpeg'],
-    'Tikki Tavi': ['Iron Cookware', 'Assets 2/Tikki Tavi.jpeg'],
-    'White Batta': ['Iron Cookware', 'Assets 2/White batta.png'],
-    'Tutma Tava': ['Iron Cookware', 'Assets 2/tutma tawa.png'],
-    'Batta': ['Iron Cookware', 'Assets 2/batta.png'],
-    'Kadhai': ['Iron Cookware', 'Assets 2/kadhai.png'],
-    'Deg': ['Iron Cookware', 'Assets 2/deg.png'],
-    'Iron Tawa': ['Iron Cookware', 'Assets 2/tawi.png'],
-    'Iron Fork': ['Iron Cookware', 'Assets 2/fork.png'],
-    'Iron Spoon': ['Iron Cookware', 'Assets 2/karchi without handle.png'],
-    'Set of Glasses': ['Iron Cookware', 'Assets 2/glasses.png'],
-    'Iron Tava': ['Iron Cookware', 'Assets 2/tawa.png']
+    'Big Deg': ['Iron Cookware', 'Assets 2/Big Deg-800w.webp'],
+    'Tikki Tavi': ['Iron Cookware', 'Assets 2/Tikki Tavi-800w.webp'],
+    'White Batta': ['Iron Cookware', 'Assets 2/White batta-800w.webp'],
+    'Tutma Tava': ['Iron Cookware', 'Assets 2/tutma tawa-800w.webp'],
+    'Batta': ['Iron Cookware', 'Assets 2/batta-800w.webp'],
+    'Kadhai': ['Iron Cookware', 'Assets 2/kadhai-800w.webp'],
+    'Deg': ['Iron Cookware', 'Assets 2/deg-800w.webp'],
+    'Iron Tawa': ['Iron Cookware', 'Assets 2/tawi-800w.webp'],
+    'Iron Fork': ['Iron Cookware', 'Assets 2/fork-800w.webp'],
+    'Iron Spoon': ['Iron Cookware', 'Assets 2/karchi without handle-800w.webp'],
+    'Set of Glasses': ['Iron Cookware', 'Assets 2/glasses-800w.webp'],
+    'Iron Tava': ['Iron Cookware', 'Assets 2/tawa-800w.webp']
   };
   const item = new URLSearchParams(location.search).get('item') || 'Kadhai';
   const hasFallbackProduct = Object.prototype.hasOwnProperty.call(products, item);
@@ -173,6 +173,8 @@
         const image = document.createElement('img');
         image.src = selected.src;
         image.alt = name;
+        image.width = 600;
+        image.height = 600;
         link.append(image);
         main.append(link);
       }
@@ -197,6 +199,9 @@
         const preview = document.createElement('img');
         preview.src = entry.src;
         preview.alt = '';
+        preview.width = 72;
+        preview.height = 72;
+        preview.loading = 'lazy';
         button.append(preview);
       }
       button.addEventListener('click', () => showMedia(index));
