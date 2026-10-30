@@ -87,6 +87,17 @@ This project uses Supabase for:
 4. Make sure the storage bucket `product-images` is available if you plan to upload product media.
 5. Access the admin portal through `admin.html` after configuring auth and policies.
 
+The schema includes optional `products.size` and `products.payment_link` fields for
+retail card order messages and direct payment links. Add a hosted HTTPS checkout
+URL or UPI payment URI to a product to show its optional pay button. Reviews are
+hidden until approved records are added to `product_reviews`; new review records
+are unapproved by default and only the configured admin can publish them.
+
+Homepage banners can optionally include a photo uploaded from the admin portal.
+The photo is stored in the `product-images` Supabase Storage bucket and referenced
+by `offers.image_url`; run the updated `supabase-schema.sql` before saving banner
+photos.
+
 ## Deployment
 
 This project is well-suited for static hosting providers such as:

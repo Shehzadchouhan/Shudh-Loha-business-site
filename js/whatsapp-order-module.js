@@ -38,12 +38,33 @@
     return str ? String(str).trim() : "";
   }
 
+  function escapeHtml(str) {
+    return sanitize(str).replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    })[character]);
+  }
+
+  function getSafePaymentUrl(value) {
+    const url = sanitize(value);
+    return /^(https:\/\/|upi:\/\/)/i.test(url) ? url : "";
+  }
+
+  function formatRetailPrice(value) {
+    const price = sanitize(value) || "Price on request";
+    return /^\d/.test(price) ? `₹${price}` : price;
+  }
+
   /**
    * Build Retail WhatsApp message
    */
   function buildRetailMessage(params) {
     const productName = sanitize(params.productName) || "Pure Sarbloh Cookware";
     const price = sanitize(params.price);
+    const size = sanitize(params.size) || "Please confirm available size";
     const city = sanitize(params.city);
     const customerName = sanitize(params.customerName);
 
@@ -52,6 +73,7 @@
       "*Shudh Loha — Malerkotla, Punjab*",
       "──────────────────────────────",
       `• *Product:* ${productName}`,
+      `• *Size:* ${size}`,
       "• *Order Type:* Retail Household Order",
       "• *Quantity:* 1 piece",
       price ? `• *Price Listed:* ${price}` : "• *Price:* As per factory rates",
@@ -105,6 +127,23 @@
 
   function getWholesaleWhatsAppUrl(productName, details = {}) {
     return createWhatsAppUrl(buildWholesaleMessage({ productName, ...details }));
+  }
+
+  function renderRetailPurchaseHtml(productName, options = {}) {
+    const name = sanitize(productName);
+    const size = sanitize(options.size) || "Please confirm available size";
+    const price = formatRetailPrice(options.price);
+    const paymentUrl = getSafePaymentUrl(options.paymentLink);
+    const whatsappUrl = getRetailWhatsAppUrl(name, { size, price });
+
+    return `
+      <div class="shudh-order-actions" data-product-name="${escapeHtml(name)}">
+        <a class="btn-wa-action btn-wa-retail" data-shudh-wa-order href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" aria-label="Order ${escapeHtml(name)} on WhatsApp">
+          Order on WhatsApp (${escapeHtml(price)})
+        </a>
+        ${paymentUrl ? `<a class="btn-wa-action btn-wa-payment" href="${escapeHtml(paymentUrl)}" target="_blank" rel="noopener noreferrer">Pay now via UPI/Razorpay</a>` : ""}
+      </div>
+    `;
   }
 
   /**
@@ -267,6 +306,15 @@
         border-color: #b88a24;
         color: #171717;
       }
+      .btn-wa-payment {
+        background: #b88a24;
+        color: #171717;
+        border: 1px solid #8a6414;
+      }
+      .btn-wa-payment:hover {
+        background: #d4a52c;
+        color: #171717;
+      }
       .btn-wa-wholesale {
         background: #171717;
         color: #fbfaf6;
@@ -307,6 +355,9 @@
         pointer-events: none;
         transition: opacity 0.22s ease;
         box-sizing: border-box;
+      }
+      .shudh-wa-modal-backdrop[hidden] {
+        display: none !important;
       }
       .shudh-wa-modal-backdrop.is-open {
         opacity: 1;
@@ -626,19 +677,23 @@
    */
   function renderButtonsHtml(productName, options = {}) {
     const name = sanitize(productName);
-    const price = sanitize(options.price || "");
-    const retailLabel = options.retailLabel || "Order Retail (1 pc)";
+    const escapedName = escapeHtml(name);
+    const size = sanitize(options.size) || "Please confirm available size";
+    const price = formatRetailPrice(options.price);
+    const paymentUrl = getSafePaymentUrl(options.paymentLink);
     const wholesaleLabel = options.wholesaleLabel || "Get Bulk/Wholesale Quote (10+ pcs)";
+    const message = buildRetailMessage({ productName: name, size, price });
+    const whatsappUrl = createWhatsAppUrl(message);
 
     return `
-      <div class="shudh-order-actions" data-product-name="${name}" data-product-price="${price}">
-        <button type="button" class="btn-wa-action btn-wa-retail" data-shudh-action="retail" aria-label="Order 1 pc of ${name} via WhatsApp">
-          <span class="btn-wa-icon">🛍️</span>
-          <span>${retailLabel}</span>
-        </button>
-        <button type="button" class="btn-wa-action btn-wa-wholesale" data-shudh-action="wholesale" aria-label="Get Wholesale bulk quote for ${name} via WhatsApp">
+      <div class="shudh-order-actions" data-product-name="${escapedName}" data-product-price="${escapeHtml(price)}">
+        <a class="btn-wa-action btn-wa-retail" data-shudh-wa-order href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" aria-label="Order ${escapedName} on WhatsApp">
+          Order on WhatsApp (${escapeHtml(price)})
+        </a>
+        ${paymentUrl ? `<a class="btn-wa-action btn-wa-payment" href="${escapeHtml(paymentUrl)}" target="_blank" rel="noopener noreferrer">Pay now via UPI/Razorpay</a>` : ""}
+        <button type="button" class="btn-wa-action btn-wa-wholesale" data-shudh-action="wholesale" aria-label="Get Wholesale bulk quote for ${escapedName} via WhatsApp">
           <span class="btn-wa-icon">🏭</span>
-          <span>${wholesaleLabel}</span>
+          <span>${escapeHtml(wholesaleLabel)}</span>
         </button>
       </div>
     `;
@@ -648,6 +703,14 @@
    * Global Click Delegator
    */
   function handleActionClick(event) {
+    const whatsappLink = event.target.closest("[data-shudh-wa-order]");
+    if (whatsappLink) {
+      if (typeof window.shudhTrackLead === "function") {
+        window.shudhTrackLead("whatsapp", whatsappLink.closest(".shudh-order-actions")?.dataset.productName);
+      }
+      return;
+    }
+
     const btn = event.target.closest("[data-shudh-action]");
     if (!btn) return;
 
@@ -725,6 +788,8 @@
     CONFIG,
     init,
     renderButtonsHtml,
+    renderRetailPurchaseHtml,
+    formatRetailPrice,
     attachToCard,
     openWholesaleModal,
     openRetailModal,

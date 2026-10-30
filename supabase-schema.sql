@@ -1,4 +1,9 @@
 -- Run this in the Supabase SQL editor when setting up or updating the site schema.
+-- ==============================================================================
+-- SHUDH LOHA DATABASE SCHEMA & STRICT ROW LEVEL SECURITY (RLS) POLICIES
+-- NOTE: Replace [[ADMIN EMAIL]] with your verified admin email address.
+-- ==============================================================================
+
 create table if not exists public.products (
   id uuid primary key default gen_random_uuid(),
   name text not null,
@@ -6,7 +11,10 @@ create table if not exists public.products (
   description text not null default 'Pure iron and hand-finished.',
   image_url text,
   image_urls jsonb not null default '[]'::jsonb,
+  video_urls jsonb not null default '[]'::jsonb,
+  size text,
   price text,
+  payment_link text,
   is_active boolean not null default true,
   sort_order integer not null default 0,
   created_at timestamptz not null default now(),
@@ -15,6 +23,8 @@ create table if not exists public.products (
 
 alter table public.products add column if not exists image_urls jsonb not null default '[]'::jsonb;
 alter table public.products add column if not exists video_urls jsonb not null default '[]'::jsonb;
+alter table public.products add column if not exists size text;
+alter table public.products add column if not exists payment_link text;
 
 create table if not exists public.leads (
   id uuid primary key default gen_random_uuid(),
@@ -57,61 +67,157 @@ create table if not exists public.offers (
   description text not null,
   cta_label text not null default 'Ask us',
   cta_url text not null default '#contact',
+  image_url text,
   is_active boolean not null default true,
   updated_at timestamptz not null default now()
 );
 
+alter table public.offers add column if not exists image_url text;
+
+create table if not exists public.product_reviews (
+  id uuid primary key default gen_random_uuid(),
+  product_id uuid references public.products(id) on delete cascade,
+  reviewer_name text not null,
+  rating integer not null check (rating between 1 and 5),
+  review_text text not null,
+  is_approved boolean not null default false,
+  created_at timestamptz not null default now()
+);
+
+-- Enable RLS across all tables
 alter table public.products enable row level security;
 alter table public.leads enable row level security;
 alter table public.page_views enable row level security;
 alter table public.visitor_profiles enable row level security;
 alter table public.visitor_item_views enable row level security;
 alter table public.offers enable row level security;
+alter table public.product_reviews enable row level security;
 
+-- Drop legacy open policies
 drop policy if exists "Public can view active products" on public.products;
 drop policy if exists "Admins can manage products" on public.products;
+drop policy if exists "Admin can manage products" on public.products;
+
 drop policy if exists "Public can create leads" on public.leads;
 drop policy if exists "Admins can read leads" on public.leads;
+drop policy if exists "Admin can read leads" on public.leads;
+drop policy if exists "Admin can manage leads" on public.leads;
+
 drop policy if exists "Public can create page views" on public.page_views;
 drop policy if exists "Admins can read page views" on public.page_views;
+drop policy if exists "Admin can read page views" on public.page_views;
+
 drop policy if exists "Visitors can create own profile" on public.visitor_profiles;
 drop policy if exists "Visitors can update own profile" on public.visitor_profiles;
 drop policy if exists "Authenticated can read visitor profiles" on public.visitor_profiles;
+drop policy if exists "Admin can read visitor profiles" on public.visitor_profiles;
+
 drop policy if exists "Visitors can create own item views" on public.visitor_item_views;
 drop policy if exists "Authenticated can read item views" on public.visitor_item_views;
+drop policy if exists "Admin can read item views" on public.visitor_item_views;
+
 drop policy if exists "Public can view active offers" on public.offers;
 drop policy if exists "Admins can manage offers" on public.offers;
+drop policy if exists "Admin can manage offers" on public.offers;
+
+drop policy if exists "Public can view approved product reviews" on public.product_reviews;
+drop policy if exists "Admin can manage product reviews" on public.product_reviews;
+
 drop policy if exists "Public can view product images" on storage.objects;
 drop policy if exists "Admins can upload product images" on storage.objects;
 drop policy if exists "Admins can update product images" on storage.objects;
 drop policy if exists "Admins can delete product images" on storage.objects;
+drop policy if exists "Admin can upload product images" on storage.objects;
+drop policy if exists "Admin can update product images" on storage.objects;
+drop policy if exists "Admin can delete product images" on storage.objects;
 
+-- ==============================================================================
+-- STRICT ROW LEVEL SECURITY POLICIES
+-- ==============================================================================
+
+-- 1. PRODUCTS
+-- Anonymous visitors may view active products only
 create policy "Public can view active products" on public.products
-  for select using (is_active = true);
-create policy "Admins can manage products" on public.products
-  for all to authenticated using (true) with check (true);
+  for select to anon, authenticated
+  using (is_active = true);
+
+-- ONLY the specified admin email can view all products and write/update/delete
+create policy "Admin can manage products" on public.products
+  for all to authenticated
+  using (lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'))
+  with check (lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'));
+
+-- 2. LEADS
+-- Anonymous visitors may insert leads only
 create policy "Public can create leads" on public.leads
-  for insert with check (true);
-create policy "Admins can read leads" on public.leads
-  for select to authenticated using (true);
+  for insert to anon
+  with check (true);
+
+-- ONLY the specified admin email can read leads
+create policy "Admin can read leads" on public.leads
+  for select to authenticated
+  using (lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'));
+
+-- ONLY the specified admin email can update or delete leads
+create policy "Admin can manage leads" on public.leads
+  for all to authenticated
+  using (lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'))
+  with check (lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'));
+
+-- 3. PAGE VIEWS
+-- Anonymous and public visitors may ONLY record page views
 create policy "Public can create page views" on public.page_views
-  for insert with check (true);
-create policy "Admins can read page views" on public.page_views
-  for select to authenticated using (true);
+  for insert
+  with check (true);
+
+-- ONLY the specified admin email can inspect analytics / page views
+create policy "Admin can read page views" on public.page_views
+  for select to authenticated
+  using (lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'));
+
+-- 4. VISITOR PROFILES & ITEM VIEWS
 create policy "Visitors can create own profile" on public.visitor_profiles
   for insert to authenticated with check (auth.uid() = id);
+
 create policy "Visitors can update own profile" on public.visitor_profiles
   for update to authenticated using (auth.uid() = id) with check (auth.uid() = id);
-create policy "Authenticated can read visitor profiles" on public.visitor_profiles
-  for select to authenticated using (true);
+
+create policy "Admin can read visitor profiles" on public.visitor_profiles
+  for select to authenticated
+  using (lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'));
+
 create policy "Visitors can create own item views" on public.visitor_item_views
   for insert to authenticated with check (auth.uid() = visitor_id);
-create policy "Authenticated can read item views" on public.visitor_item_views
-  for select to authenticated using (true);
+
+create policy "Admin can read item views" on public.visitor_item_views
+  for select to authenticated
+  using (lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'));
+
+-- 5. OFFERS
+-- Public may ONLY view active promotional offers
 create policy "Public can view active offers" on public.offers
-  for select using (is_active = true);
-create policy "Admins can manage offers" on public.offers
-  for all to authenticated using (true) with check (true);
+  for select
+  using (is_active = true);
+
+-- ONLY the specified admin email can manage promotional offers
+create policy "Admin can manage offers" on public.offers
+  for all to authenticated
+  using (lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'))
+  with check (lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'));
+
+-- Only approved customer reviews are visible publicly; admin controls review publishing.
+create policy "Public can view approved product reviews" on public.product_reviews
+  for select to anon, authenticated
+  using (is_approved = true);
+
+create policy "Admin can manage product reviews" on public.product_reviews
+  for all to authenticated
+  using (lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'))
+  with check (lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'));
+
+-- ==============================================================================
+-- STORAGE BUCKET & POLICIES
+-- ==============================================================================
 
 insert into storage.buckets (id, name, public)
 values ('product-images', 'product-images', true)
@@ -121,14 +227,26 @@ update storage.buckets
 set file_size_limit = 104857600
 where id = 'product-images';
 
+-- Public can view images in product-images bucket
 create policy "Public can view product images" on storage.objects
   for select using (bucket_id = 'product-images');
-create policy "Admins can upload product images" on storage.objects
-  for insert to authenticated with check (bucket_id = 'product-images');
-create policy "Admins can update product images" on storage.objects
-  for update to authenticated using (bucket_id = 'product-images');
-create policy "Admins can delete product images" on storage.objects
-  for delete to authenticated using (bucket_id = 'product-images');
+
+-- ONLY the specified admin email can upload, update, or delete product images
+create policy "Admin can upload product images" on storage.objects
+  for insert to authenticated
+  with check (bucket_id = 'product-images' and lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'));
+
+create policy "Admin can update product images" on storage.objects
+  for update to authenticated
+  using (bucket_id = 'product-images' and lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'));
+
+create policy "Admin can delete product images" on storage.objects
+  for delete to authenticated
+  using (bucket_id = 'product-images' and lower(auth.jwt() ->> 'email') = lower('[[ADMIN EMAIL]]'));
+
+-- ==============================================================================
+-- SEED DATA (Normalized with optimized WebP assets)
+-- ==============================================================================
 
 update public.products
 set category = 'Sarbloh'
@@ -136,17 +254,17 @@ where category = 'Iron Kitchenware';
 
 insert into public.products (name, category, image_url, sort_order)
 values
-  ('Big Deg', 'Sarbloh', 'Assets 2/Big Deg.jpeg', 1),
-  ('Tutma Tava', 'Sarbloh', 'Assets 2/tutma tawa.png', 2),
-  ('Tikki Tavi', 'Sarbloh', 'Assets 2/Tikki Tavi.jpeg', 3),
-  ('White Batta', 'Sarbloh', 'Assets 2/White batta.png', 4),
-  ('Batta', 'Sarbloh', 'Assets 2/batta.png', 5),
-  ('Kadhai', 'Sarbloh', 'Assets 2/kadhai.png', 6),
-  ('Deg', 'Sarbloh', 'Assets 2/deg.png', 7),
-  ('Iron Tawa', 'Sarbloh', 'Assets 2/tawi.png', 8),
-  ('Fry Pan', 'Sarbloh', 'Assets 2/fry pan.png', 9),
-  ('Iron Fork', 'Sarbloh', 'Assets 2/fork.png', 10),
-  ('Iron Spoon', 'Sarbloh', 'Assets 2/karchi without handle.png', 11),
-  ('Set of Glasses', 'Sarbloh', 'Assets 2/glasses.png', 12),
-  ('Tawa', 'Sarbloh', 'Assets 2/tawa.png', 13)
+  ('Big Deg', 'Sarbloh', 'Assets 2/Big Deg-400w.webp', 1),
+  ('Tutma Tava', 'Sarbloh', 'Assets 2/tutma tawa-400w.webp', 2),
+  ('Tikki Tavi', 'Sarbloh', 'Assets 2/Tikki Tavi-400w.webp', 3),
+  ('White Batta', 'Sarbloh', 'Assets 2/White batta-400w.webp', 4),
+  ('Batta', 'Sarbloh', 'Assets 2/batta-400w.webp', 5),
+  ('Kadhai', 'Sarbloh', 'Assets 2/kadhai-400w.webp', 6),
+  ('Deg', 'Sarbloh', 'Assets 2/deg-400w.webp', 7),
+  ('Iron Tawa', 'Sarbloh', 'Assets 2/tawi-400w.webp', 8),
+  ('Fry Pan', 'Sarbloh', 'Assets 2/fry pan-400w.webp', 9),
+  ('Iron Fork', 'Sarbloh', 'Assets 2/fork-400w.webp', 10),
+  ('Iron Spoon', 'Sarbloh', 'Assets 2/karchi without handle-400w.webp', 11),
+  ('Set of Glasses', 'Sarbloh', 'Assets 2/glasses-400w.webp', 12),
+  ('Tawa', 'Sarbloh', 'Assets 2/tawa-400w.webp', 13)
 on conflict do nothing;

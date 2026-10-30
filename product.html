@@ -80,14 +80,12 @@
     <div class="facts">
       <div class="fact"><strong data-lang="material">Material</strong><span data-lang="pureIron">Pure iron</span></div>
       <div class="fact"><strong data-lang="finish">Finish</strong><span data-lang="handFinished">Hand-finished</span></div>
-      <div class="fact"><strong data-lang="sizeWeight">Size & weight</strong><span data-lang="confirmWithUs">Confirm with us</span></div>
-      <div class="fact"><strong data-lang="price">Price</strong><span data-lang="askPrice">Ask for current price</span></div>
+      <div class="fact"><strong data-lang="sizeWeight">Size &amp; available sizes</strong><span id="productSize">Confirm with us</span></div>
+      <div class="fact"><strong data-lang="price">Price</strong><span data-lang="askPrice" id="productPrice">Ask for current price</span></div>
     </div>
     <div class="actions" style="display:flex; flex-direction:column; gap:8px;">
+      <div id="retailPurchaseActions"></div>
       <div style="display:flex; gap:10px; flex-wrap:wrap; width:100%;">
-        <button type="button" class="btn primary" style="flex:1 1 180px; justify-content:center; cursor:pointer;" onclick="WhatsAppOrderModule.openRetailModal(item, { price: product[3] })">
-          🛍️ Order Retail (1 pc)
-        </button>
         <button type="button" class="btn secondary" style="flex:1 1 220px; justify-content:center; cursor:pointer; background:#171717; color:#fff; border-color:#b88a24;" onclick="WhatsAppOrderModule.openWholesaleModal(item, { price: product[3] })">
           🏭 Get Bulk/Wholesale Quote (10+ pcs)
         </button>
@@ -97,7 +95,18 @@
       </a>
       <a id="whatsapp" href="" target="_blank" rel="noopener" style="display:none;" aria-hidden="true"></a>
     </div>
-    <form class="lead-form" id="leadForm"><strong>Send an enquiry</strong><input id="leadName" placeholder="Your name" required><input id="leadPhone" type="tel" placeholder="Phone number" required><textarea id="leadMessage" placeholder="What would you like to know?"></textarea><button type="submit">Send enquiry</button><div class="lead-form-status" id="leadStatus" role="status"></div></form>
+    <form class="lead-form" id="leadForm" novalidate>
+      <strong>Send an enquiry</strong>
+      <!-- Honeypot anti-spam trap -->
+      <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
+        <input type="text" name="lead_hp_check" id="leadHp" tabindex="-1" autocomplete="off" />
+      </div>
+      <input id="leadName" placeholder="Your name" autocomplete="name" required />
+      <input id="leadPhone" type="tel" inputmode="tel" placeholder="10-digit WhatsApp number" autocomplete="tel" required />
+      <textarea id="leadMessage" placeholder="What would you like to know? (e.g. Size, weight, freight to your city)"></textarea>
+      <button type="submit">Send enquiry &amp; WhatsApp</button>
+      <div class="lead-form-status" id="leadStatus" role="status"></div>
+    </form>
 </article></div></main>
 <footer><div class="wrap">Shudh Loha — <span data-lang="footerTagline">Pure Loha, Pure Quality</span> · <span data-lang="address">Malerkotla, Punjab</span></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -123,8 +132,27 @@
   const hasFallbackProduct = Object.prototype.hasOwnProperty.call(products, item);
   if (!shudhSupabase && !hasFallbackProduct) location.replace('products.html');
   let product = products[item] || products['Iron Tawa'];
+  let productSize = '';
+  let paymentLink = '';
+  function renderRetailPurchaseActions() {
+    document.getElementById('retailPurchaseActions').innerHTML = WhatsAppOrderModule.renderRetailPurchaseHtml(item, {
+      price: product[3] || '',
+      size: productSize,
+      paymentLink
+    });
+  }
+  renderRetailPurchaseActions();
   if (shudhSupabase) {
-    shudhSupabase.from('products').select('name,category,image_url,image_urls,video_urls,description,price').eq('name', item).eq('is_active', true).maybeSingle().then(({ data }) => {
+    shudhSupabase.from('products').select('name,category,image_url,image_urls,video_urls,description,size,price,payment_link').eq('name', item).eq('is_active', true).maybeSingle().then(async ({ data, error }) => {
+      if (error) {
+        console.error('Could not load product details:', error);
+        const legacy = await shudhSupabase.from('products').select('name,category,image_url,image_urls,video_urls,description,price').eq('name', item).eq('is_active', true).maybeSingle();
+        if (legacy.error) {
+          console.error('Could not load product details using legacy columns:', legacy.error);
+          return;
+        }
+        data = legacy.data;
+      }
       if (!data) {
         if (!hasFallbackProduct) location.replace('products.html');
         return;
@@ -135,7 +163,12 @@
       }
       const category = data.category === 'Iron Kitchenware' ? 'Sarbloh' : data.category || 'Sarbloh';
       product = [category, data.image_url, data.description, data.price, data.image_urls || [], data.video_urls || []];
+      productSize = data.size || '';
+      paymentLink = data.payment_link || '';
       document.getElementById('category').textContent = category;
+      document.getElementById('productSize').textContent = productSize || 'Confirm available sizes';
+      document.getElementById('productPrice').textContent = data.price || 'Price on request';
+      renderRetailPurchaseActions();
       renderVisual(data.name, data.image_url, data.image_urls || [], data.video_urls || []);
       document.querySelector('[data-lang="askPrice"]').textContent = data.price || 'Ask for current price';
       if (data.price) updateProductJsonLd(data.name, data.price, data.image_url, data.description);
@@ -262,13 +295,100 @@
     hi: { backProducts:'उत्पादों पर वापस जाएँ', productCategory:'लोहे के बर्तन', material:'सामग्री', pureIron:'शुद्ध लोहा', finish:'फिनिश', handFinished:'हाथ से तैयार', sizeWeight:'आकार और वजन', confirmWithUs:'हमसे पुष्टि करें', price:'कीमत', askPrice:'वर्तमान कीमत पूछें', askWhatsapp:'WhatsApp पर पूछें', callUs:'कॉल करें', footerTagline:'शुद्ध लोहा, शुद्ध गुणवत्ता', address:'मलेरकोटला, पंजाब' },
     pa: { backProducts:'ਉਤਪਾਦਾਂ ਤੇ ਵਾਪਸ', productCategory:'ਲੋਹੇ ਦੇ ਬਰਤਨ', material:'ਸਮੱਗਰੀ', pureIron:'ਸ਼ੁੱਧ ਲੋਹਾ', finish:'ਫਿਨਿਸ਼', handFinished:'ਹੱਥ ਨਾਲ ਤਿਆਰ', sizeWeight:'ਆਕਾਰ ਅਤੇ ਭਾਰ', confirmWithUs:'ਸਾਡੇ ਤੋਂ ਪੁਸ਼ਟੀ ਕਰੋ', price:'ਕੀਮਤ', askPrice:'ਮੌਜੂਦਾ ਕੀਮਤ ਪੁੱਛੋ', askWhatsapp:'WhatsApp ਤੇ ਪੁੱਛੋ', callUs:'ਕਾਲ ਕਰੋ', footerTagline:'ਸ਼ੁੱਧ ਲੋਹਾ, ਸ਼ੁੱਧ ਗੁਣਵੱਤਾ', address:'ਮਲੇਰਕੋਟਲਾ, ਪੰਜਾਬ' }
   };
+  // Basic Indian & International phone validation
+  function isValidPhoneNumber(phone) {
+    if (!phone) return false;
+    const digits = String(phone).replace(/\D/g, '');
+    if (digits.length === 10 && /^[6-9]\d{9}$/.test(digits)) return true;
+    if (digits.length === 11 && digits.startsWith('0') && /^[6-9]\d{9}$/.test(digits.slice(1))) return true;
+    if (digits.length === 12 && digits.startsWith('91') && /^[6-9]\d{9}$/.test(digits.slice(2))) return true;
+    return digits.length >= 10 && digits.length <= 15;
+  }
+
   document.getElementById('leadForm').addEventListener('submit', async event => {
     event.preventDefault();
     const status = document.getElementById('leadStatus');
-    if (!shudhSupabase) { status.textContent = 'Enquiries are not configured yet.'; return; }
-    const { error } = await shudhSupabase.from('leads').insert({ kind: 'form', product_name: item, name: document.getElementById('leadName').value.trim(), phone: document.getElementById('leadPhone').value.trim(), message: document.getElementById('leadMessage').value.trim(), page_url: location.href });
-    status.textContent = error ? 'Could not send. Please call or use WhatsApp.' : 'Thanks. We will contact you soon.';
-    if (!error) event.target.reset();
+
+    // 1. Honeypot check
+    const honeypot = document.getElementById('leadHp')?.value.trim();
+    if (honeypot) {
+      status.textContent = 'Enquiry sent! We will contact you soon.';
+      event.target.reset();
+      return;
+    }
+
+    const name = document.getElementById('leadName').value.trim();
+    const phone = document.getElementById('leadPhone').value.trim();
+    const message = document.getElementById('leadMessage').value.trim();
+
+    if (!name) {
+      status.style.color = '#a23b2d';
+      status.textContent = 'Please enter your name.';
+      document.getElementById('leadName').focus();
+      return;
+    }
+
+    // 2. Phone number validation
+    if (!isValidPhoneNumber(phone)) {
+      status.style.color = '#a23b2d';
+      status.textContent = 'Please enter a valid 10-digit WhatsApp or mobile number.';
+      document.getElementById('leadPhone').focus();
+      return;
+    }
+
+    if (!shudhSupabase) {
+      status.style.color = '#a23b2d';
+      status.textContent = 'Enquiries are not configured yet. Please call or use WhatsApp.';
+      return;
+    }
+
+    status.style.color = 'var(--gold)';
+    status.textContent = 'Submitting enquiry & opening WhatsApp...';
+
+    const whatsappWindow = window.open('about:blank', '_blank');
+    if (whatsappWindow) whatsappWindow.opener = null;
+
+    // 3. Save to Supabase leads table
+    try {
+      const { error } = await shudhSupabase.from('leads').insert({
+        kind: 'form',
+        product_name: item,
+        name,
+        phone,
+        message: message || 'Product enquiry from product details page',
+        page_url: location.href
+      });
+      if (error) throw error;
+    } catch (err) {
+      console.error('Supabase lead error:', err);
+      if (whatsappWindow) whatsappWindow.close();
+      status.style.color = '#a23b2d';
+      status.textContent = 'Could not save your enquiry. Please try again or contact us directly.';
+      return;
+    }
+
+    // 4. Open WhatsApp with pre-filled message built from form fields
+    const waText = `Hi Shudh Loha factory team,
+I'm interested in *${item}*.
+- Name: ${name || 'Customer'}
+- Phone: ${phone}
+${message ? '- Question: ' + message + '\n' : ''}
+Please confirm current factory price, availability, and delivery details.`;
+
+    const waUrl = `https://wa.me/917973247767?text=${encodeURIComponent(waText)}`;
+if (whatsappWindow) {
+  whatsappWindow.location.href = waUrl;
+  status.textContent = 'Enquiry saved! WhatsApp chat opened.';
+} else {
+  status.replaceChildren(document.createTextNode('Enquiry saved. '));
+  const whatsappLink = document.createElement('a');
+  whatsappLink.href = waUrl;
+  whatsappLink.target = '_blank';
+  whatsappLink.rel = 'noopener noreferrer';
+  whatsappLink.textContent = 'Open WhatsApp';
+  status.append(whatsappLink);
+}
+event.target.reset();
   });
 </script>
 </body>

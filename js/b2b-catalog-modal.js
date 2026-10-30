@@ -27,7 +27,7 @@
 
   const CONFIG = {
     whatsappNumber: "917973247767",
-    catalogUrl: "wholesale-catalog.html",
+    catalogUrl: "Shudh_Loha_Sarbloh_Catalogue.pdf",
     modalId: "catalogModal",
     formId: "b2bCatalogForm",
     statusId: "b2bStatus",
@@ -36,12 +36,15 @@
   const STYLES_ID = "shudhCatalogModalStyles";
 
   /**
-   * Phone number validator
+   * Phone number validator (requires minimum 10 digits; standard Indian mobile or international)
    */
   function isValidPhone(phone) {
     if (!phone) return false;
-    const cleaned = String(phone).replace(/\s+/g, "");
-    return /^[+\d][\d\s()-]{7,15}$/.test(cleaned);
+    const digits = String(phone).replace(/\D/g, "");
+    if (digits.length === 10 && /^[6-9]\d{9}$/.test(digits)) return true;
+    if (digits.length === 11 && digits.startsWith("0") && /^[6-9]\d{9}$/.test(digits.slice(1))) return true;
+    if (digits.length === 12 && digits.startsWith("91") && /^[6-9]\d{9}$/.test(digits.slice(2))) return true;
+    return digits.length >= 10 && digits.length <= 15;
   }
 
   /**
@@ -99,6 +102,9 @@
         pointer-events: none;
         transition: opacity 0.25s ease;
         box-sizing: border-box;
+      }
+      .catalog-modal-backdrop[hidden] {
+        display: none !important;
       }
       .catalog-modal-backdrop.is-open {
         opacity: 1;
@@ -562,6 +568,10 @@
             </div>
 
             <form id="b2bCatalogForm" class="catalog-form-grid" novalidate>
+              <!-- Honeypot anti-spam trap -->
+              <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
+                <input type="text" name="b2b_hp_field" id="b2bHp" tabindex="-1" autocomplete="off" />
+              </div>
               <div class="catalog-field-row">
                 <div class="catalog-field-group">
                   <label for="b2bBusiness">
@@ -689,15 +699,14 @@
               <a
                 class="catalog-unlocked-card catalog-unlocked-card--catalog"
                 id="unlockedCatalogLink"
-                href="wholesale-catalog.html"
-                target="_blank"
-                rel="noopener"
+                href="Shudh_Loha_Sarbloh_Catalogue.pdf"
+                download
               >
                 <div class="unlocked-card-icon">📄</div>
                 <div class="unlocked-card-body">
-                  <h3>View / Download B2B Rate Sheet</h3>
-                  <p>Complete sizes, weights, gauge thickness (4mm–6mm), MOQs &amp; GST billing terms.</p>
-                  <span class="unlocked-card-action">Open Printable Catalog →</span>
+                  <h3>Download Sarbloh Catalogue PDF</h3>
+                  <p>Product sizes, approximate weights, selling prices, and minimum order quantities.</p>
+                  <span class="unlocked-card-action">Download PDF →</span>
                 </div>
               </a>
 
@@ -774,15 +783,6 @@
     });
     document.body.style.overflow = "hidden";
 
-    // Track lead view
-    if (typeof window.shudhTrackLead === "function") {
-      try {
-        window.shudhTrackLead("form", "Opened Wholesale Catalog Modal");
-      } catch (e) {
-        console.warn("Track lead view error:", e);
-      }
-    }
-
     // Auto-focus first empty required input
     setTimeout(() => {
       const businessInput = document.getElementById("b2bBusiness");
@@ -829,6 +829,16 @@
     // Detect which button was clicked
     const submitter = event.submitter || document.activeElement;
     const requestedAction = submitter?.getAttribute("data-action") || "catalog";
+
+    const honeypot = (document.getElementById("b2bHp")?.value || "").trim();
+    if (honeypot) {
+      if (status) {
+        status.className = "catalog-status";
+        status.textContent = "Thank you. Your request has been received.";
+      }
+      form.reset();
+      return;
+    }
 
     const business = (document.getElementById("b2bBusiness")?.value || "").trim();
     const city = (document.getElementById("b2bCity")?.value || "").trim();
@@ -887,34 +897,42 @@
 
     const leadMessage = `[Wholesale Catalog & Rate Card Request] Business: ${business}, City: ${city}${requirement ? ', Requirement: ' + requirement : ''}, Preferred Action: ${requestedAction}`;
 
+    if (!window.shudhSupabase) {
+      if (status) {
+        status.className = "catalog-status is-error";
+        status.textContent = "Enquiry submission is unavailable. Please contact us directly.";
+      }
+      if (submitBtnCatalog) submitBtnCatalog.disabled = false;
+      if (submitBtnWhatsapp) submitBtnWhatsapp.disabled = false;
+      return;
+    }
+
+    const destinationWindow = window.open("about:blank", "_blank");
+    if (destinationWindow) destinationWindow.opener = null;
+
     // 1. Submit lead to Supabase
     try {
-      if (window.shudhSupabase) {
-        const { error } = await window.shudhSupabase.from("leads").insert({
-          kind: "form",
-          name: name ? `${name} (${business})` : business,
-          phone: phone,
-          message: leadMessage,
-          page_url: window.location.href,
-        });
-        if (error) {
-          console.warn("Supabase lead submission warning:", error);
-        }
-      }
+      const { error } = await window.shudhSupabase.from("leads").insert({
+        kind: "form",
+        name: name ? `${name} (${business})` : business,
+        phone,
+        message: leadMessage,
+        page_url: window.location.href,
+      });
+      if (error) throw error;
     } catch (err) {
-      console.warn("Supabase lead submission exception:", err);
-    }
-
-    // 2. Track lead via global helper
-    if (typeof window.shudhTrackLead === "function") {
-      try {
-        window.shudhTrackLead("form", "Wholesale Catalog Request");
-      } catch (e) {
-        console.warn("Track lead error:", e);
+      console.error("Supabase lead submission error:", err);
+      if (destinationWindow) destinationWindow.close();
+      if (status) {
+        status.className = "catalog-status is-error";
+        status.textContent = "Could not save your enquiry. Please try again.";
       }
+      if (submitBtnCatalog) submitBtnCatalog.disabled = false;
+      if (submitBtnWhatsapp) submitBtnWhatsapp.disabled = false;
+      return;
     }
 
-    // 3. Save to localStorage as backup record & unlock flag
+    // 2. Save to localStorage as backup record & unlock flag
     try {
       localStorage.setItem("shudh_b2b_catalog_unlocked", "1");
       const existing = JSON.parse(localStorage.getItem("shudh_b2b_leads") || "[]");
@@ -924,11 +942,11 @@
       // quota or private mode fallback
     }
 
-    // 4. Prepare Destination URLs
+    // 3. Prepare Destination URLs
     const waUrl = getWhatsAppUrl(leadPayload);
     const catalogUrl = CONFIG.catalogUrl;
 
-    // 5. Update Success View in Modal
+    // 4. Update Success View in Modal
     const formView = document.getElementById("catalogModalFormView");
     const successView = document.getElementById("catalogModalSuccessView");
     const successDesc = document.getElementById("catalogSuccessDesc");
@@ -953,15 +971,10 @@
     if (submitBtnCatalog) submitBtnCatalog.disabled = false;
     if (submitBtnWhatsapp) submitBtnWhatsapp.disabled = false;
 
-    // 6. Immediately open requested destination in a new window/tab
+    // 5. Open the requested destination after the lead has been saved.
     const targetUrl = requestedAction === "whatsapp" ? waUrl : catalogUrl;
-    try {
-      const opened = window.open(targetUrl, "_blank", "noopener,noreferrer");
-      if (!opened || opened.closed || typeof opened.closed === "undefined") {
-        console.log("Popup blocked by browser; direct links are presented on screen.");
-      }
-    } catch (e) {
-      console.log("window.open exception:", e);
+    if (destinationWindow) {
+      destinationWindow.location.href = targetUrl;
     }
   }
 

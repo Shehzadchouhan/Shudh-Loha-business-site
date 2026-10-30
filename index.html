@@ -797,6 +797,15 @@
         border: 1px solid rgba(251, 250, 246, 0.35);
         background: rgba(23, 23, 23, 0.35);
       }
+      .offer-card img[hidden] { display: none; }
+      .offer-card-image {
+        display: block;
+        width: 100%;
+        max-height: 360px;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        border: 1px solid rgba(251, 250, 246, 0.35);
+      }
       .offer-card strong {
         display: block;
         margin-bottom: 10px;
@@ -1469,6 +1478,9 @@
         pointer-events: none;
         transition: opacity 0.25s ease;
         box-sizing: border-box;
+      }
+      .catalog-modal-backdrop[hidden] {
+        display: none !important;
       }
       .catalog-modal-backdrop.is-open {
         opacity: 1;
@@ -2442,6 +2454,9 @@
         font-weight: 700;
         box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
       }
+      .mobile-contact-bar {
+        display: none;
+      }
       .whatsapp-wave,
       .whatsapp-float svg {
         position: absolute;
@@ -2986,9 +3001,31 @@
           flex-wrap: wrap;
         }
         .whatsapp-float {
-          right: 14px;
-          bottom: 14px;
-          padding: 12px 14px;
+          display: none;
+        }
+        body {
+          padding-bottom: calc(70px + env(safe-area-inset-bottom));
+        }
+        .mobile-contact-bar {
+          position: fixed;
+          inset: auto 0 0;
+          z-index: 80;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+          padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+          border-top: 1px solid var(--line);
+          background: var(--paper);
+          box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.14);
+        }
+        .mobile-contact-bar .btn {
+          min-height: 42px;
+          justify-content: center;
+        }
+      }
+      @media print {
+        .mobile-contact-bar {
+          display: none !important;
         }
       }
 
@@ -3062,14 +3099,14 @@
           <a href="#products" data-lang="retailNav">Retail Cookware</a>
           <a href="#order" data-lang="order">How to Order</a>
           <a href="#contact" data-lang="contact">Contact</a>
-          <button type="button" class="nav-catalog-btn open-catalog-trigger">
+          <a class="nav-catalog-btn" href="Shudh_Loha_Sarbloh_Catalogue.pdf" download>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
             <span data-lang="wholesaleCta">Download Wholesale Catalog (B2B)</span>
-          </button>
+          </a>
           <select
             class="language-select"
             id="languageSelect"
@@ -3106,14 +3143,14 @@
               </div>
 
               <div class="hero-cta-dual">
-                <button type="button" class="btn btn-primary hero-btn-b2b open-catalog-trigger">
+                <a class="btn btn-primary hero-btn-b2b" href="Shudh_Loha_Sarbloh_Catalogue.pdf" download>
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
                     <line x1="12" y1="15" x2="12" y2="3"></line>
                   </svg>
                   <span data-lang="wholesaleCta">Download Wholesale Catalog (B2B)</span>
-                </button>
+                </a>
                 <a class="btn btn-ghost hero-btn-retail" id="heroBrowseRetail" href="#products">
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <circle cx="9" cy="21" r="1"></circle>
@@ -3188,7 +3225,7 @@
                 <a class="btn btn-ghost" href="https://www.instagram.com/shudh_loha_enterprise?igsi=MXdma2xncXk5cDVsOA==" target="_blank" rel="noopener">Follow Factory Updates</a>
               </div>
             </div>
-            <div class="offer-card"><strong id="offerNote">Malerkotla<br />Punjab.</strong></div>
+            <div class="offer-card"><img class="offer-card-image" id="offerImage" alt="" hidden /><strong id="offerNote">Malerkotla<br />Punjab.</strong></div>
           </div>
         </article>
 
@@ -3199,7 +3236,7 @@
               <p class="eyebrow">Connect with the Maker</p>
               <h1>From Malerkotla loha mandi<br /><span>to kitchens pan-India.</span></h1>
               <div class="hero-cta">
-                <button type="button" class="btn btn-primary open-catalog-trigger">Download Wholesale Catalog (B2B)</button>
+                <a class="btn btn-primary" href="Shudh_Loha_Sarbloh_Catalogue.pdf" download>Download Wholesale Catalog (B2B)</a>
                 <a class="btn btn-ghost" href="https://maps.app.goo.gl/GBGsbKjUtPneyoNn9" target="_blank" rel="noopener">Open Map Location</a>
               </div>
             </div>
@@ -3245,15 +3282,15 @@
           <div class="funnel-card funnel-card--b2b reveal">
             <span class="funnel-badge funnel-badge--b2b">🏭 B2B WHOLESALE SUPPLY</span>
             <h3 class="funnel-title">Commercial Kitchens &amp; Wholesalers</h3>
-            <p class="funnel-desc">Engineered for commercial high-heat blast burners (100,000+ BTU). Forged with extra-heavy pure iron gauges that withstand grueling daily usage without warping or thinning.</p>
+            <p class="funnel-desc">Explore the product sizes, approximate weights, selling prices, and minimum order quantities listed in the supplied Sarbloh catalogue.</p>
             <ul class="funnel-specs-list">
               <li class="funnel-spec-item">
                 <span class="funnel-check">✓</span>
-                <div><strong>Heavy-Gauge Tikki Tavis &amp; Commercial Kadhais:</strong> 14" to 36"+ diameters, 4mm–6mm plate thickness with reinforced forged loop handles.</div>
+                <div><strong>Tikki Tawi / Roti Tawi:</strong> 16–40 inches; approx. 4 kg and above; ₹95/kg; minimum order 10 kg.</div>
               </li>
               <li class="funnel-spec-item">
                 <span class="funnel-check">✓</span>
-                <div><strong>Commercial Sarbloh Degs (5kg to 50kg):</strong> Heavy rolled collars, hammered solid bases built for continuous mass rice, dal &amp; biryani cooking.</div>
+                <div><strong>Big Deg:</strong> 14 inches and above; approx. 7 kg and above; ₹150/kg; minimum order 10 kg.</div>
               </li>
               <li class="funnel-spec-item">
                 <span class="funnel-check">✓</span>
@@ -3261,10 +3298,10 @@
               </li>
             </ul>
             <div class="funnel-actions">
-              <button type="button" class="btn btn-primary open-catalog-trigger">
+              <a class="btn btn-primary" href="Shudh_Loha_Sarbloh_Catalogue.pdf" download>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 Download Wholesale Catalog (B2B)
-              </button>
+              </a>
               <a href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%2C%20I%20am%20a%20commercial%20buyer%20(dhaba%2Fcaterer%2Fwholesaler).%20Please%20share%20bulk%20wholesale%20rates." target="_blank" rel="noopener" class="btn btn-ghost">
                 Request Bulk Quote on WhatsApp →
               </a>
@@ -3559,6 +3596,16 @@
         Malerkotla, Punjab
       </div>
     </footer>
+
+    <nav class="mobile-contact-bar" aria-label="Quick factory contact">
+      <a class="btn btn-ghost" href="tel:+917973247767">Call</a>
+      <a
+        class="btn btn-primary"
+        href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%2C%20I%20would%20like%20a%20commercial%20quote."
+        target="_blank"
+        rel="noopener"
+      >WhatsApp</a>
+    </nav>
     
     <a
       class="whatsapp-float"
@@ -3616,6 +3663,10 @@
           </div>
 
           <form id="b2bCatalogForm" class="catalog-form-grid" novalidate>
+            <!-- Honeypot anti-spam trap -->
+            <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
+              <input type="text" name="b2b_hp_field" id="b2bHp" tabindex="-1" autocomplete="off" />
+            </div>
             <div class="catalog-field-row">
               <div class="catalog-field-group">
                 <label for="b2bBusiness">
@@ -3743,15 +3794,14 @@
             <a
               class="catalog-unlocked-card catalog-unlocked-card--catalog"
               id="unlockedCatalogLink"
-              href="wholesale-catalog.html"
-              target="_blank"
-              rel="noopener"
+              href="Shudh_Loha_Sarbloh_Catalogue.pdf"
+              download
             >
               <div class="unlocked-card-icon">📄</div>
               <div class="unlocked-card-body">
-                <h3>View / Download B2B Rate Sheet</h3>
-                <p>Complete sizes, weights, gauge thickness (4mm–6mm), MOQs &amp; GST billing terms.</p>
-                <span class="unlocked-card-action">Open Printable Catalog →</span>
+                <h3>Download Sarbloh Catalogue PDF</h3>
+                <p>Product sizes, approximate weights, selling prices, and minimum order quantities.</p>
+                <span class="unlocked-card-action">Download PDF →</span>
               </div>
             </a>
 
@@ -3915,14 +3965,14 @@
       <div class="card">
         ${it.image ? `<a class="product-image-link" href="product.html?item=${encodeURIComponent(it.name)}" aria-label="View ${it.name}"><img class="product-image" src="${it.image}" alt="${it.name}" width="300" height="300" loading="lazy" /></a>` : `<svg class="icon" viewBox="0 0 100 100">${icons[it.icon] || ""}</svg>`}
         <h3>${it.name}</h3>
-        <div class="price">${it.priceKnown ? it.price : "Call for Price"}</div>
-        ${typeof WhatsAppOrderModule !== "undefined" ? WhatsAppOrderModule.renderButtonsHtml(it.name, { price: it.priceKnown ? it.price : "" }) : ""}
+        <div class="price">${typeof WhatsAppOrderModule !== "undefined" ? WhatsAppOrderModule.formatRetailPrice(it.price) : (it.price || "Price on request")}</div>
+        ${typeof WhatsAppOrderModule !== "undefined" ? WhatsAppOrderModule.renderButtonsHtml(it.name, { price: it.price, size: it.size, paymentLink: it.paymentLink }) : ""}
       </div>
     `,
           )
           .join("");
       }
-      let kitchenItems = fallbackKitchenItems.map((item) => ({ ...item, category: "Sarbloh" }));
+      let kitchenItems = shudhSupabase ? [] : fallbackKitchenItems.map((item) => ({ ...item, category: "Sarbloh" }));
 
       function renderCategoryGrid(containerId, items) {
         if (!items.length) {
@@ -3934,17 +3984,32 @@
 
       async function loadKitchenItems() {
         if (shudhSupabase) {
-          const { data } = await shudhSupabase
+          let result = await shudhSupabase
             .from("products")
-            .select("name, image_url, price, category")
+            .select("name, image_url, price, size, payment_link, category")
             .eq("is_active", true)
             .order("sort_order");
-          if (data?.length) {
-            kitchenItems = data.map((item) => ({
+          if (result.error) {
+            console.error("Could not load new product fields; retrying with legacy columns:", result.error);
+            result = await shudhSupabase
+              .from("products")
+              .select("name, image_url, price, category")
+              .eq("is_active", true)
+              .order("sort_order");
+          }
+          if (result.error) {
+            console.error("Could not load retail products:", result.error);
+            const productGrid = document.getElementById("sarblohGrid");
+            productGrid.textContent = "Products could not be loaded. Please try again later.";
+            return;
+          }
+          if (result.data?.length) {
+            kitchenItems = result.data.map((item) => ({
               name: item.name,
               image: item.image_url,
-              priceKnown: Boolean(item.price),
               price: item.price || "",
+              size: item.size || "",
+              paymentLink: item.payment_link || "",
               icon: "donga",
               category: item.category === "Iron Kitchenware" ? "Sarbloh" : item.category || "Sarbloh",
             }));
@@ -4011,13 +4076,26 @@
 
       async function loadHomeOffer() {
         if (!shudhSupabase) return;
-        const { data } = await shudhSupabase.from("offers").select("eyebrow,title,description,cta_label,cta_url").eq("is_active", true).order("updated_at", { ascending: false }).limit(1).maybeSingle();
+        let result = await shudhSupabase.from("offers").select("eyebrow,title,description,cta_label,cta_url,image_url").eq("is_active", true).order("updated_at", { ascending: false }).limit(1).maybeSingle();
+        if (result.error) {
+          console.error("Could not load banner photos; retrying without the optional photo field:", result.error);
+          result = await shudhSupabase.from("offers").select("eyebrow,title,description,cta_label,cta_url").eq("is_active", true).order("updated_at", { ascending: false }).limit(1).maybeSingle();
+        }
+        if (result.error) {
+          console.error("Could not load homepage banner:", result.error);
+          return;
+        }
+        const { data } = result;
         if (!data) return;
         document.getElementById("offerEyebrow").textContent = data.eyebrow;
         document.getElementById("offerTitle").textContent = data.title;
         const offerCta = document.getElementById("offerCta");
         offerCta.textContent = data.cta_label;
         offerCta.href = data.cta_url;
+        const offerImage = document.getElementById("offerImage");
+        offerImage.hidden = !data.image_url;
+        offerImage.src = data.image_url || "";
+        offerImage.alt = data.title ? `${data.title} banner photo` : "Banner photo";
       }
       loadHomeOffer();
 
