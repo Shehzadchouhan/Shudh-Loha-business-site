@@ -98,6 +98,12 @@ The photo is stored in the `product-images` Supabase Storage bucket and referenc
 by `offers.image_url`; run the updated `supabase-schema.sql` before saving banner
 photos.
 
+To replace the storefront's Sarbloh list and specifications with the product
+catalogue, run `supabase-catalogue-product-specs.sql` in the Supabase SQL editor
+before deploying the updated pages. The migration keeps non-Sarbloh categories
+unchanged and makes only the 14 catalogue products visible in the Sarbloh
+storefront.
+
 ## Deployment
 
 This project is well-suited for static hosting providers such as:
@@ -116,10 +122,24 @@ After deployment:
 
 You can personalize the site by editing:
 
-- product names and pricing in the Supabase content or frontend templates
+- product names and details in Supabase; keep numeric prices private and share ranges by request
 - colors and branding in the CSS inside the HTML files
 - product imagery under `Assets/` and `Assets 2/`
 - social/contact information in the page content and Supabase data
+
+### Product image processing
+
+Put PNG or JPG product images in `product-images-raw/` and run
+`python process_product_images.py`. The script pads images to square without
+cropping, exports 1200 x 1200 WebP files to `Assets/products/`, and lowers
+quality in steps from 85 until each file is under 200 KB. It prints a size
+report and flags any output that remains over the limit. Deploy the generated
+files before running `supabase-catalogue-product-specs.sql`; that migration
+updates the matching primary and gallery photo paths as it refreshes existing
+catalogue rows. For an already-migrated catalogue that only needs its photos
+refreshed, run `supabase-product-image-paths.sql` instead. It also removes
+public numeric product prices; run it to update existing Supabase catalogue
+rows. Public pages and the downloadable catalogue show price ranges on request.
 
 ## Business Context
 

@@ -65,8 +65,9 @@
   main{padding:76px 0}.product{display:grid;grid-template-columns:minmax(280px,1fr) minmax(280px,.9fr);gap:72px;align-items:center}.visual{background:var(--cream-deep);border:1px solid var(--line);padding:18px;min-height:360px;display:grid;place-items:center}.visual img{width:100%;max-height:470px;object-fit:contain}.visual .missing{font:700 24px var(--display);text-align:center;padding:40px}.eyebrow{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase}.details h1{font:700 clamp(38px,5vw,62px)/1.05 var(--display);margin:10px 0 18px}.facts{border-top:1px solid var(--line);margin:28px 0 0}.fact{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}.fact strong{font-weight:700}.fact span{text-align:right;color:#5b554d}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;padding:13px 20px;border:1px solid var(--gold);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase}.primary{background:var(--gold)}.secondary:hover{background:var(--cream-deep)}
   footer{background:var(--ink);color:rgba(244,238,225,.7);padding:30px 0;text-align:center;font-size:13px}footer span{color:var(--gold)}
   .lead-form{border-top:1px solid var(--line);margin-top:28px;padding-top:20px;display:grid;gap:10px}.lead-form input,.lead-form textarea{width:100%;border:1px solid var(--line);padding:10px;background:var(--cream);font:inherit}.lead-form textarea{min-height:74px;resize:vertical}.lead-form button{border:1px solid var(--gold);background:var(--gold);padding:11px 14px;font-weight:700;cursor:pointer}.lead-form-status{font-size:13px;color:#5b554d;min-height:20px}
-  .visual{gap:14px}.visual-main{width:100%;display:grid;place-items:center}.visual-main img,.visual-main video{width:100%;max-height:470px;object-fit:contain}.visual-main video{background:#111}.visual-main a{width:100%;display:grid;place-items:center;cursor:zoom-in}.visual-thumbs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.visual-thumbs[hidden]{display:none}.visual-thumb{position:relative;width:58px;height:58px;padding:3px;border:1px solid var(--line);background:var(--cream);cursor:pointer}.visual-thumb.is-active{border-color:var(--gold);box-shadow:0 0 0 2px rgba(184,138,36,.18)}.visual-thumb img,.visual-thumb video{width:100%;height:100%;object-fit:cover}.video-badge{position:absolute;right:2px;bottom:2px;padding:1px 4px;background:var(--ink);color:var(--cream);font-size:8px;text-transform:uppercase}
-  @media(max-width:760px){main{padding:42px 0}.wrap{padding:0 18px}.nav{min-height:0;padding:12px 18px;flex-wrap:wrap;row-gap:10px}.brand{font-size:18px;flex:1}.nav-actions{flex:1 1 100%;justify-content:space-between;gap:10px}.back{font-size:11px}.language-select{padding:7px 8px}.product{grid-template-columns:1fr;gap:28px}.visual{min-height:240px;padding:12px}.details h1{font-size:clamp(36px,12vw,54px)}.fact{font-size:13px}.actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:22px}.btn{justify-content:center;width:100%}.lead-form{margin-top:24px}}
+  .call-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.call-link{min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 16px;border:1px solid var(--ink);border-radius:4px;background:var(--ink);color:var(--cream);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;transition:background .2s ease,border-color .2s ease,color .2s ease}.call-link:hover{background:#302b24;border-color:var(--gold);color:#fff}.call-link-alt{background:transparent;color:var(--ink);border-color:var(--line)}.call-link-alt:hover{background:var(--cream-deep);color:var(--ink);border-color:var(--gold)}.call-link svg{width:16px;height:16px;flex:none}
+  .visual{gap:14px}.visual-main{width:100%;display:grid;place-items:center}.visual-main img,.visual-main video{width:100%;max-height:470px;object-fit:contain}.visual-main img{border:1px solid var(--line)}.visual-main video{background:#111}.visual-main a{width:100%;display:grid;place-items:center;cursor:zoom-in}.visual-thumbs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.visual-thumbs[hidden]{display:none}.visual-thumb{position:relative;width:58px;height:58px;padding:3px;border:1px solid var(--line);background:var(--cream);cursor:pointer}.visual-thumb.is-active{border-color:var(--gold);box-shadow:0 0 0 2px rgba(184,138,36,.18)}.visual-thumb img,.visual-thumb video{width:100%;height:100%;object-fit:cover}.visual-thumb img{border:1px solid var(--line)}.video-badge{position:absolute;right:2px;bottom:2px;padding:1px 4px;background:var(--ink);color:var(--cream);font-size:8px;text-transform:uppercase}
+  @media(max-width:760px){main{padding:42px 0}.wrap{padding:0 18px}.nav{min-height:0;padding:12px 18px;flex-wrap:wrap;row-gap:10px}.brand{font-size:18px;flex:1}.nav-actions{flex:1 1 100%;justify-content:space-between;gap:10px}.back{font-size:11px}.language-select{padding:7px 8px}.product{grid-template-columns:1fr;gap:28px}.visual{min-height:240px;padding:12px}.details h1{font-size:clamp(36px,12vw,54px)}.fact{font-size:13px}.actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:22px}.btn{justify-content:center;width:100%}.call-actions{grid-template-columns:1fr}.lead-form{margin-top:24px}}
   body{margin:0;background:#f5f5f5}.visual{border:0;background:#fff}.facts{border:0;margin-top:20px}.fact{border:0;padding:6px 0}.lead-form{border:0;padding-top:0}.lead-form input,.lead-form textarea{border:0;background:#fff}.lead-form-status{color:var(--ink)}
 </style>
 </head>
@@ -78,24 +79,28 @@
     <p class="eyebrow" id="category" data-lang="productCategory">Shudh Loha</p>
     <h1 id="name">Product details</h1>
     <div class="facts">
-      <div class="fact"><strong data-lang="material">Material</strong><span data-lang="pureIron">Pure iron</span></div>
-      <div class="fact"><strong data-lang="finish">Finish</strong><span data-lang="handFinished">Hand-finished</span></div>
-      <div class="fact"><strong data-lang="sizeWeight">Size &amp; available sizes</strong><span id="productSize">Confirm with us</span></div>
-      <div class="fact"><strong data-lang="price">Price</strong><span data-lang="askPrice" id="productPrice">Ask for current price</span></div>
+      <div class="fact"><strong data-lang="size">Size</strong><span id="productSize"></span></div>
+      <div class="fact"><strong data-lang="approxWeight">Approx. weight</strong><span id="productWeight"></span></div>
+      <div class="fact"><strong data-lang="sellingPrice">Price range</strong><span id="productPrice"></span></div>
+      <div class="fact"><strong data-lang="minimumOrder">Minimum order</strong><span id="productMinimumOrder"></span></div>
     </div>
     <div class="actions" style="display:flex; flex-direction:column; gap:8px;">
       <div id="retailPurchaseActions"></div>
       <div style="display:flex; gap:10px; flex-wrap:wrap; width:100%;">
-        <button type="button" class="btn secondary" style="flex:1 1 220px; justify-content:center; cursor:pointer; background:#171717; color:#fff; border-color:#b88a24;" onclick="WhatsAppOrderModule.openWholesaleModal(item, { price: product[3] })">
-          🏭 Get Bulk/Wholesale Quote (10+ pcs)
+        <button type="button" class="btn secondary" style="flex:1 1 220px; justify-content:center; cursor:pointer; background:#171717; color:#fff; border-color:#b88a24;" onclick="WhatsAppOrderModule.openWholesaleModal(item)">
+          Wholesale on WhatsApp
         </button>
       </div>
-      <a class="btn secondary" href="tel:+917973247767" aria-label="Call Shudh Loha at +91 79732 47767" style="justify-content:center;">
-        ☎️ Call Factory Directly: +91 79732 47767
-      </a>
-      <a class="btn secondary" href="tel:+919988059285" aria-label="Call Shudh Loha alternate number at +91 99880 59285" style="justify-content:center;">
-        ☎️ Alternate Number: +91 99880 59285
-      </a>
+      <div class="call-actions" aria-label="Call Shudh Loha">
+        <a class="call-link" href="tel:+917973247767" aria-label="Call the factory at +91 79732 47767">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.58 2.8.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>Call Factory</span>
+        </a>
+        <a class="call-link call-link-alt" href="tel:+919988059285" aria-label="Call the alternate factory number at +91 99880 59285">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.58 2.8.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>Alternate Line</span>
+        </a>
+      </div>
       <a id="whatsapp" href="" target="_blank" rel="noopener" style="display:none;" aria-hidden="true"></a>
     </div>
     <form class="lead-form" id="leadForm" novalidate>
@@ -115,44 +120,29 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="js/whatsapp-order-module.js"></script><script src="js/b2b-catalog-modal.js"></script>
+<script src="js/product-catalogue.js"></script>
 <script>
-  const number = '917973247767';
-  const products = {
-    'Big Deg': ['Iron Cookware', 'Assets 2/Big Deg-800w.webp'],
-    'Tikki Tavi': ['Iron Cookware', 'Assets 2/Tikki Tavi-800w.webp'],
-    'White Batta': ['Iron Cookware', 'Assets 2/White batta-800w.webp'],
-    'Tutma Tava': ['Iron Cookware', 'Assets 2/tutma tawa-800w.webp'],
-    'Batta': ['Iron Cookware', 'Assets 2/batta-800w.webp'],
-    'Kadhai': ['Iron Cookware', 'Assets 2/kadhai-800w.webp'],
-    'Deg': ['Iron Cookware', 'Assets 2/deg-800w.webp'],
-    'Iron Tawa': ['Iron Cookware', 'Assets 2/tawi-800w.webp'],
-    'Iron Fork': ['Iron Cookware', 'Assets 2/fork-800w.webp'],
-    'Iron Spoon': ['Iron Cookware', 'Assets 2/karchi without handle-800w.webp'],
-    'Set of Glasses': ['Iron Cookware', 'Assets 2/glasses-800w.webp'],
-    'Iron Tava': ['Iron Cookware', 'Assets 2/tawa-800w.webp']
-  };
-  const item = new URLSearchParams(location.search).get('item') || 'Kadhai';
-  const hasFallbackProduct = Object.prototype.hasOwnProperty.call(products, item);
+  const requestedItem = new URLSearchParams(location.search).get('item') || 'Big Deg';
+  const fallbackProduct = window.getShudhProductByName(requestedItem);
+  const item = fallbackProduct?.name || requestedItem;
+  const hasFallbackProduct = Boolean(fallbackProduct);
   if (!shudhSupabase && !hasFallbackProduct) location.replace('products.html');
-  let product = products[item] || products['Iron Tawa'];
-  const fallbackImage = products[item]?.[1];
-  const resolveProductImage = (imageUrl) =>
-    imageUrl?.startsWith('Assets 2/') ? fallbackImage || imageUrl : imageUrl || fallbackImage;
-  let productSize = '';
+  let product = { category: 'Sarbloh', image: fallbackProduct?.image || '', galleryImages: fallbackProduct?.galleryImages || [], price: 'Price range on request', size: fallbackProduct?.size || '', approxWeight: fallbackProduct?.approxWeight || '', minimumOrder: fallbackProduct?.minimumOrder || '' };
+  const resolveProductImage = (imageUrl) => fallbackProduct?.image || imageUrl || '';
+  let productSize = product.size;
   let paymentLink = '';
   function renderRetailPurchaseActions() {
     document.getElementById('retailPurchaseActions').innerHTML = WhatsAppOrderModule.renderRetailPurchaseHtml(item, {
-      price: product[3] || '',
       size: productSize,
       paymentLink
     });
   }
   renderRetailPurchaseActions();
   if (shudhSupabase) {
-    shudhSupabase.from('products').select('name,category,image_url,image_urls,video_urls,description,size,price,payment_link').eq('name', item).eq('is_active', true).maybeSingle().then(async ({ data, error }) => {
+    shudhSupabase.from('products').select('name,category,image_url,image_urls,video_urls,description,size,approx_weight,minimum_order,payment_link').eq('name', item).eq('is_active', true).maybeSingle().then(async ({ data, error }) => {
       if (error) {
         console.error('Could not load product details:', error);
-        const legacy = await shudhSupabase.from('products').select('name,category,image_url,image_urls,video_urls,description,price').eq('name', item).eq('is_active', true).maybeSingle();
+        const legacy = await shudhSupabase.from('products').select('name,category,image_url,image_urls,video_urls,description').eq('name', item).eq('is_active', true).maybeSingle();
         if (legacy.error) {
           console.error('Could not load product details using legacy columns:', legacy.error);
           return;
@@ -169,22 +159,38 @@
       }
       const category = data.category === 'Iron Kitchenware' ? 'Sarbloh' : data.category || 'Sarbloh';
       const image = resolveProductImage(data.image_url);
-      const galleryImages = (data.image_urls || []).map(resolveProductImage);
-      product = [category, image, data.description, data.price, galleryImages, data.video_urls || []];
-      productSize = data.size || '';
+      const galleryImages = fallbackProduct
+        ? fallbackProduct.galleryImages || []
+        : (data.image_urls || []).map(resolveProductImage);
+      product = {
+        category,
+        image,
+        description: data.description,
+        price: 'Price range on request',
+        size: data.size || fallbackProduct?.size || '',
+        approxWeight: data.approx_weight || fallbackProduct?.approxWeight || '',
+        minimumOrder: data.minimum_order || fallbackProduct?.minimumOrder || '',
+        galleryImages,
+        videos: data.video_urls || []
+      };
+      productSize = product.size;
       paymentLink = data.payment_link || '';
       document.getElementById('category').textContent = category;
-      document.getElementById('productSize').textContent = productSize || 'Confirm available sizes';
-      document.getElementById('productPrice').textContent = data.price || 'Price on request';
+      document.getElementById('productSize').textContent = productSize;
+      document.getElementById('productWeight').textContent = product.approxWeight;
+      document.getElementById('productPrice').textContent = product.price;
+      document.getElementById('productMinimumOrder').textContent = product.minimumOrder;
       renderRetailPurchaseActions();
       renderVisual(data.name, image, galleryImages, data.video_urls || []);
-      document.querySelector('[data-lang="askPrice"]').textContent = data.price || 'Ask for current price';
-      if (data.price) updateProductJsonLd(data.name, data.price, image, data.description);
     });
   }
   document.title = `${item} | Shudh Loha`;
   document.getElementById('name').textContent = item;
-  document.getElementById('category').textContent = product[0];
+  document.getElementById('category').textContent = product.category;
+  document.getElementById('productSize').textContent = product.size;
+  document.getElementById('productWeight').textContent = product.approxWeight;
+  document.getElementById('productPrice').textContent = product.price;
+  document.getElementById('productMinimumOrder').textContent = product.minimumOrder;
   function renderVisual(name, mainImage, galleryImages = [], galleryVideos = []) {
     const images = [...new Set([mainImage, ...(Array.isArray(galleryImages) ? galleryImages : [])].filter(Boolean))];
     const videos = [...new Set(Array.isArray(galleryVideos) ? galleryVideos.filter(Boolean) : [])];
@@ -251,57 +257,16 @@
     if (media.length === 1) thumbnails.hidden = true;
     showMedia(0);
   }
-  renderVisual(item, product[1], product[4], product[5]);
-  document.getElementById('whatsapp').href = `https://wa.me/${number}?text=${encodeURIComponent(`Hi, I'm interested in ${item}. Can you share the size, weight, price, and delivery details?`)}`;
-  
-    // Dynamic Product Schema JSON-LD injection when price exists
-    function updateProductJsonLd(name, price, imageUrl, description) {
-      if (!price) return;
-      let script = document.getElementById('productJsonLd');
-      if (!script) {
-        script = document.createElement('script');
-        script.id = 'productJsonLd';
-        script.type = 'application/ld+json';
-        document.head.appendChild(script);
-      }
-      const rawNum = String(price).replace(/[^\d.]/g, '');
-      const num = parseFloat(rawNum);
-      if (!num) return;
-      const fullImg = imageUrl ? (imageUrl.startsWith('http') ? imageUrl : 'https://shudh-loha.netlify.app/' + imageUrl) : 'https://shudh-loha.netlify.app/og-banner.jpg';
-      const schema = {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": name,
-        "image": fullImg,
-        "description": description || (name + " — authentic pure iron (Sarbloh) cookware hand-finished in Malerkotla, Punjab."),
-        "brand": {
-          "@type": "Brand",
-          "name": "Shudh Loha"
-        },
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "INR",
-          "price": num,
-          "availability": "https://schema.org/InStock",
-          "url": window.location.href,
-          "seller": {
-            "@type": "Organization",
-            "name": "Shudh Loha"
-          }
-        }
-      };
-      script.textContent = JSON.stringify(schema, null, 2);
-    }
-  
-    if (product && product[3]) updateProductJsonLd(item, product[3], product[1], product[2]);
+  renderVisual(item, product.image, product.galleryImages || [], product.videos || []);
+  document.getElementById('whatsapp').href = `https://wa.me/${number}?text=${encodeURIComponent(`Hi, I'm interested in ${item}. Can you share the size, weight, current price range, and delivery details?`)}`;
   
   shudhTrackView();
   document.getElementById('whatsapp').addEventListener('click', () => shudhTrackLead('whatsapp', item));
   document.querySelector('a[href^="tel:"]').addEventListener('click', () => shudhTrackLead('phone', item));
   const translations = {
-    en: { backProducts:'Back to products', productCategory:'Sarbloh', material:'Material', pureIron:'Pure iron', finish:'Finish', handFinished:'Hand-finished', sizeWeight:'Size & weight', confirmWithUs:'Confirm with us', price:'Price', askPrice:'Ask for current price', askWhatsapp:'Ask on WhatsApp', callUs:'Call us', footerTagline:'Pure Loha, Pure Quality', address:'Malerkotla, Punjab' },
-    hi: { backProducts:'उत्पादों पर वापस जाएँ', productCategory:'लोहे के बर्तन', material:'सामग्री', pureIron:'शुद्ध लोहा', finish:'फिनिश', handFinished:'हाथ से तैयार', sizeWeight:'आकार और वजन', confirmWithUs:'हमसे पुष्टि करें', price:'कीमत', askPrice:'वर्तमान कीमत पूछें', askWhatsapp:'WhatsApp पर पूछें', callUs:'कॉल करें', footerTagline:'शुद्ध लोहा, शुद्ध गुणवत्ता', address:'मलेरकोटला, पंजाब' },
-    pa: { backProducts:'ਉਤਪਾਦਾਂ ਤੇ ਵਾਪਸ', productCategory:'ਲੋਹੇ ਦੇ ਬਰਤਨ', material:'ਸਮੱਗਰੀ', pureIron:'ਸ਼ੁੱਧ ਲੋਹਾ', finish:'ਫਿਨਿਸ਼', handFinished:'ਹੱਥ ਨਾਲ ਤਿਆਰ', sizeWeight:'ਆਕਾਰ ਅਤੇ ਭਾਰ', confirmWithUs:'ਸਾਡੇ ਤੋਂ ਪੁਸ਼ਟੀ ਕਰੋ', price:'ਕੀਮਤ', askPrice:'ਮੌਜੂਦਾ ਕੀਮਤ ਪੁੱਛੋ', askWhatsapp:'WhatsApp ਤੇ ਪੁੱਛੋ', callUs:'ਕਾਲ ਕਰੋ', footerTagline:'ਸ਼ੁੱਧ ਲੋਹਾ, ਸ਼ੁੱਧ ਗੁਣਵੱਤਾ', address:'ਮਲੇਰਕੋਟਲਾ, ਪੰਜਾਬ' }
+    en: { backProducts:'Back to products', productCategory:'Sarbloh', size:'Size', approxWeight:'Approx. weight', sellingPrice:'Price range', minimumOrder:'Minimum order', askWhatsapp:'Ask on WhatsApp', callUs:'Call us', footerTagline:'Pure Loha, Pure Quality', address:'Malerkotla, Punjab' },
+    hi: { backProducts:'उत्पादों पर वापस जाएँ', productCategory:'लोहे के बर्तन', size:'आकार', approxWeight:'लगभग वजन', sellingPrice:'मूल्य सीमा', minimumOrder:'न्यूनतम ऑर्डर', askWhatsapp:'WhatsApp पर पूछें', callUs:'कॉल करें', footerTagline:'शुद्ध लोहा, शुद्ध गुणवत्ता', address:'मलेरकोटला, पंजाब' },
+    pa: { backProducts:'ਉਤਪਾਦਾਂ ਤੇ ਵਾਪਸ', productCategory:'ਲੋਹੇ ਦੇ ਬਰਤਨ', size:'ਆਕਾਰ', approxWeight:'ਲਗਭਗ ਭਾਰ', sellingPrice:'ਕੀਮਤ ਸੀਮਾ', minimumOrder:'ਘੱਟੋ-ਘੱਟ ਆਰਡਰ', askWhatsapp:'WhatsApp ਤੇ ਪੁੱਛੋ', callUs:'ਕਾਲ ਕਰੋ', footerTagline:'ਸ਼ੁੱਧ ਲੋਹਾ, ਸ਼ੁੱਧ ਗੁਣਵੱਤਾ', address:'ਮਲੇਰਕੋਟਲਾ, ਪੰਜਾਬ' }
   };
   // Basic Indian & International phone validation
   function isValidPhoneNumber(phone) {

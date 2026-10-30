@@ -705,7 +705,7 @@
                 <div class="unlocked-card-icon">📄</div>
                 <div class="unlocked-card-body">
                   <h3>Download Sarbloh Catalogue PDF</h3>
-                  <p>Product sizes, approximate weights, selling prices, and minimum order quantities.</p>
+                  <p>Product sizes, approximate weights, minimum order quantities, and how to request a price range.</p>
                   <span class="unlocked-card-action">Download PDF →</span>
                 </div>
               </a>

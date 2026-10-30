@@ -72,9 +72,7 @@
      - Pre-seasoned tips & retail shipping.
      - CTA: *"View Retail Collection"*
 4. **Product Showcase Grid:**
-   - Features key products with dual price indicators:
-     - *Retail:* "₹499 each"
-     - *Wholesale:* "Bulk Rates from ₹280/pc (MOQ: 10 pcs)" or "Call/WhatsApp for Wholesale Lot"
+   - Product cards direct customers to request retail and wholesale price ranges privately on WhatsApp.
 5. **How B2B Ordering Works (3 Steps):**
    - Step 1: Browse catalog or tell us your required sizes/weights.
    - Step 2: Receive immediate wholesale quote & transport options via WhatsApp.

@@ -13,7 +13,9 @@ create table if not exists public.products (
   image_urls jsonb not null default '[]'::jsonb,
   video_urls jsonb not null default '[]'::jsonb,
   size text,
+  approx_weight text,
   price text,
+  minimum_order text,
   payment_link text,
   is_active boolean not null default true,
   sort_order integer not null default 0,
@@ -24,6 +26,8 @@ create table if not exists public.products (
 alter table public.products add column if not exists image_urls jsonb not null default '[]'::jsonb;
 alter table public.products add column if not exists video_urls jsonb not null default '[]'::jsonb;
 alter table public.products add column if not exists size text;
+alter table public.products add column if not exists approx_weight text;
+alter table public.products add column if not exists minimum_order text;
 alter table public.products add column if not exists payment_link text;
 
 create table if not exists public.leads (
@@ -252,19 +256,42 @@ update public.products
 set category = 'Sarbloh'
 where category = 'Iron Kitchenware';
 
-insert into public.products (name, category, image_url, sort_order)
-values
-  ('Big Deg', 'Sarbloh', 'Assets 2/Big Deg-400w.webp', 1),
-  ('Tutma Tava', 'Sarbloh', 'Assets 2/tutma tawa-400w.webp', 2),
-  ('Tikki Tavi', 'Sarbloh', 'Assets 2/Tikki Tavi-400w.webp', 3),
-  ('White Batta', 'Sarbloh', 'Assets 2/White batta-400w.webp', 4),
-  ('Batta', 'Sarbloh', 'Assets 2/batta-400w.webp', 5),
-  ('Kadhai', 'Sarbloh', 'Assets 2/kadhai-400w.webp', 6),
-  ('Deg', 'Sarbloh', 'Assets 2/deg-400w.webp', 7),
-  ('Iron Tawa', 'Sarbloh', 'Assets 2/tawi-400w.webp', 8),
-  ('Fry Pan', 'Sarbloh', 'Assets 2/fry pan-400w.webp', 9),
-  ('Iron Fork', 'Sarbloh', 'Assets 2/fork-400w.webp', 10),
-  ('Iron Spoon', 'Sarbloh', 'Assets 2/karchi without handle-400w.webp', 11),
-  ('Set of Glasses', 'Sarbloh', 'Assets 2/glasses-400w.webp', 12),
-  ('Tawa', 'Sarbloh', 'Assets 2/tawa-400w.webp', 13)
-on conflict do nothing;
+update public.products
+set is_active = false,
+    updated_at = now()
+where lower(trim(name)) = 'iron fork';
+
+update public.products old_product
+set name = 'Karchi / Chamcha (With Handle)',
+    updated_at = now()
+where lower(trim(old_product.name)) = 'iron spoon'
+  and not exists (
+    select 1
+    from public.products existing
+    where lower(trim(existing.name)) = 'karchi / chamcha (with handle)'
+      and existing.id <> old_product.id
+  );
+
+insert into public.products (name, category, image_url, size, approx_weight, price, minimum_order, sort_order)
+select catalogue.name, 'Sarbloh', catalogue.image_url, catalogue.size, catalogue.approx_weight,
+       catalogue.price, catalogue.minimum_order, catalogue.sort_order
+from (values
+  ('Handi / Kadni', 'Assets/products/kadni-handi.webp', '6, 7, 8 muh', '3–8 kg', 'Price range on request', '10 kg', 1),
+  ('Tadka Pan', 'Assets/products/tadka-pan.webp', '6–10 muh', '700 g–2 kg', 'Price range on request', '10 kg', 2),
+  ('Big Deg', 'Assets/products/big-deg.webp', '14 inch and above', '7 kg and above', 'Price range on request', '10 kg', 3),
+  ('Tutma Tawa', 'Assets/products/tutma-tawa.webp', '9, 10, 11 and other sizes', '1–2 kg', 'Price range on request', '10 kg', 4),
+  ('Tikki Tawi / Roti Tawi', 'Assets/products/tawi.webp', '16–40 inch', '4 kg and above', 'Price range on request', '10 kg', 5),
+  ('White Batta / Sarbloh Set', 'Assets/products/white-batta-set.webp', '6, 7, 8 and other sizes', '200 g–1 kg', 'Price range on request', '10 kg', 6),
+  ('Batta / Sarbloh Set', 'Assets/products/sarbloh-batta.webp', '6, 7, 8 and other sizes', '200 g–1 kg', 'Price range on request', '10 kg', 7),
+  ('Chotti Kadahi (13–14 gauge)', 'Assets/products/sarbloh-kadai.webp', '12–18 inch', '1.25–4 kg', 'Price range on request', '10 kg', 8),
+  ('Chotti Deg / Donga', 'Assets/products/chotti-deg-dongi.webp', '6, 7, 8 muh', '3–8 kg', 'Price range on request', '10 kg', 9),
+  ('Fry Pan', 'Assets/products/sarbloh-fry-pan.webp', '9, 10, 11, 12 inch', '1–2 kg', 'Price range on request', '10 kg', 10),
+  ('Tadka Fry Pan', 'Assets/products/tadka-fry-pan.webp', '6–10 muh', '700 g–2 kg', 'Price range on request', '10 kg', 11),
+  ('Karchi / Chamcha (Without Handle)', 'Assets/products/karchi-without-handle.webp', '9, 10, 11, 12 inch', '1–2 kg', 'Price range on request', '10 kg', 12),
+  ('Karchi / Chamcha (With Handle)', 'Assets/products/chamcha-with-handle.webp', '15–24 inch', '500 g–2 kg', 'Price range on request', '10 kg', 13),
+  ('Iron Plain Tawa', 'Assets/products/plane-tawa.webp', '9, 10, 11 and other sizes', '1–2 kg', 'Price range on request', '10 kg', 14),
+  ('Londa / One Piece (10 gauge)', 'Assets/products/one-piece.webp', '18–40 inch', '4–45 kg', 'Price range on request', '10 kg', 15)
+) as catalogue(name, image_url, size, approx_weight, price, minimum_order, sort_order)
+where not exists (
+  select 1 from public.products existing where lower(existing.name) = lower(catalogue.name)
+);

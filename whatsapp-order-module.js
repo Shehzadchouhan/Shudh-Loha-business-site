@@ -3,8 +3,8 @@
  * Direct Factory Supply from Malerkotla, Punjab
  *
  * Provides two dynamic conversion actions for product cards:
- * 1. "Order Retail (1 pc)"
- * 2. "Get Bulk/Wholesale Quote (10+ pcs)"
+ * 1. "Order on WhatsApp"
+ * 2. "Wholesale on WhatsApp"
  *
  * Generates structured, pre-filled WhatsApp messages with customized fields:
  * - Wholesale: Business Name, City/Transport destination, Quantity (10+ pcs), GST invoice
@@ -43,7 +43,6 @@
    */
   function buildRetailMessage(params) {
     const productName = sanitize(params.productName) || "Pure Sarbloh Cookware";
-    const price = sanitize(params.price);
     const city = sanitize(params.city);
     const customerName = sanitize(params.customerName);
 
@@ -54,7 +53,7 @@
       `• *Product:* ${productName}`,
       "• *Order Type:* Retail Household Order",
       "• *Quantity:* 1 piece",
-      price ? `• *Price Listed:* ${price}` : "• *Price:* As per factory rates",
+      "• *Price range:* Please share the current range.",
       `• *Delivery Destination (City / Pincode):* ${city || "[Please provide your City & Pincode]"}`,
       `• *Customer Name:* ${customerName || "[Your Name]"}`,
       "──────────────────────────────",
@@ -157,7 +156,6 @@
           <form id="shudhWaModalForm" class="shudh-wa-modal-form">
             <input type="hidden" id="shudhWaType" value="wholesale" />
             <input type="hidden" id="shudhWaProductName" value="" />
-            <input type="hidden" id="shudhWaProductPrice" value="" />
 
             <div class="shudh-wa-field-row" id="shudhWaBusinessRow">
               <label for="shudhWaBusiness">
@@ -497,11 +495,9 @@
       skipBtn.onclick = () => {
         const type = document.getElementById("shudhWaType").value;
         const productName = document.getElementById("shudhWaProductName").value;
-        const price = document.getElementById("shudhWaProductPrice").value;
-
         const url = type === "wholesale"
           ? getWholesaleWhatsAppUrl(productName)
-          : getRetailWhatsAppUrl(productName, { price });
+          : getRetailWhatsAppUrl(productName);
 
         trackOrderLead(type, productName);
         window.open(url, "_blank", "noopener,noreferrer");
@@ -514,7 +510,6 @@
         e.preventDefault();
         const type = document.getElementById("shudhWaType").value;
         const productName = document.getElementById("shudhWaProductName").value;
-        const price = document.getElementById("shudhWaProductPrice").value;
         const businessName = document.getElementById("shudhWaBusiness")?.value || "";
         const city = document.getElementById("shudhWaCity")?.value || "";
         const quantity = document.getElementById("shudhWaQuantity")?.value || "";
@@ -531,7 +526,6 @@
           trackOrderLead("wholesale", productName, { businessName, destination: city, customerName });
         } else {
           url = getRetailWhatsAppUrl(productName, {
-            price,
             city,
             customerName,
           });
@@ -548,14 +542,13 @@
   /**
    * Open Modal in Wholesale mode
    */
-  function openWholesaleModal(productName, options = {}) {
+  function openWholesaleModal(productName) {
     ensureModal();
     const modal = document.getElementById("shudhWaOrderModal");
     if (!modal) return;
 
     document.getElementById("shudhWaType").value = "wholesale";
     document.getElementById("shudhWaProductName").value = productName;
-    document.getElementById("shudhWaProductPrice").value = options.price || "";
 
     document.getElementById("shudhWaModalBadge").textContent = "FACTORY B2B BULK QUOTE";
     document.getElementById("shudhWaModalTitle").textContent = `${productName}`;
@@ -574,7 +567,7 @@
     document.getElementById("shudhWaCity").placeholder = "e.g. Ludhiana, Delhi, Jaipur Mandi";
     document.getElementById("shudhWaSubmitBtn").innerHTML = `
       <svg viewBox="0 0 24 24" class="shudh-wa-icon" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/></svg>
-      Get B2B Wholesale Quote (10+ pcs)
+      Send on WhatsApp
     `;
 
     modal.hidden = false;
@@ -586,14 +579,13 @@
   /**
    * Open Modal in Retail mode
    */
-  function openRetailModal(productName, options = {}) {
+  function openRetailModal(productName) {
     ensureModal();
     const modal = document.getElementById("shudhWaOrderModal");
     if (!modal) return;
 
     document.getElementById("shudhWaType").value = "retail";
     document.getElementById("shudhWaProductName").value = productName;
-    document.getElementById("shudhWaProductPrice").value = options.price || "";
 
     document.getElementById("shudhWaModalBadge").textContent = "RETAIL HOUSEHOLD ORDER (1 PC)";
     document.getElementById("shudhWaModalTitle").textContent = `${productName}`;
@@ -612,7 +604,7 @@
     document.getElementById("shudhWaCity").placeholder = "e.g. Chandigarh, Pincode 160017";
     document.getElementById("shudhWaSubmitBtn").innerHTML = `
       <svg viewBox="0 0 24 24" class="shudh-wa-icon" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/></svg>
-      Order 1 pc on WhatsApp
+      Order on WhatsApp
     `;
 
     modal.hidden = false;
@@ -626,19 +618,14 @@
    */
   function renderButtonsHtml(productName, options = {}) {
     const name = sanitize(productName);
-    const price = sanitize(options.price || "");
-    const retailLabel = options.retailLabel || "Order Retail (1 pc)";
-    const wholesaleLabel = options.wholesaleLabel || "Get Bulk/Wholesale Quote (10+ pcs)";
 
     return `
-      <div class="shudh-order-actions" data-product-name="${name}" data-product-price="${price}">
+      <div class="shudh-order-actions" data-product-name="${name}">
         <button type="button" class="btn-wa-action btn-wa-retail" data-shudh-action="retail" aria-label="Order 1 pc of ${name} via WhatsApp">
-          <span class="btn-wa-icon">🛍️</span>
-          <span>${retailLabel}</span>
+          Order on WhatsApp
         </button>
         <button type="button" class="btn-wa-action btn-wa-wholesale" data-shudh-action="wholesale" aria-label="Get Wholesale bulk quote for ${name} via WhatsApp">
-          <span class="btn-wa-icon">🏭</span>
-          <span>${wholesaleLabel}</span>
+          Wholesale on WhatsApp
         </button>
       </div>
     `;
@@ -664,16 +651,10 @@
       card?.querySelector("h3, h1")?.textContent?.trim() ||
       "Pure Sarbloh Cookware";
 
-    let price =
-      container?.getAttribute("data-product-price") ||
-      btn.getAttribute("data-product-price") ||
-      card?.querySelector(".price")?.textContent?.trim() ||
-      "";
-
     if (action === "wholesale") {
-      openWholesaleModal(productName, { price });
+      openWholesaleModal(productName);
     } else if (action === "retail") {
-      openRetailModal(productName, { price });
+      openRetailModal(productName);
     }
   }
 
@@ -706,8 +687,7 @@
       const cards = document.querySelectorAll(options.selector || ".card");
       cards.forEach((card) => {
         const name = card.querySelector("h3, h1")?.textContent?.trim();
-        const price = card.querySelector(".price")?.textContent?.trim();
-        if (name) attachToCard(card, name, { price });
+        if (name) attachToCard(card, name);
       });
     }
   }
