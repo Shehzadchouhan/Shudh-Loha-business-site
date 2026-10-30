@@ -4,6 +4,7 @@
 - Brand: Shudh Loha (Pure Iron / Sarbloh Cookware & Utensils)
 - Manufacturing Hub: Malerkotla, Punjab, India
 - Direct Line / WhatsApp: +91 79732 47767
+- Alternate phone: +91 99880 59285
 - Primary Business Focus (70%): B2B Wholesale Supply
   - Target Clients: Dhabas, Highway Restaurants, Halwais, Banquet Caterers, Gurdwara Langar Committees, Kitchenware Distributors, Supermarkets, Kirana/Bazaar Resellers.
   - Bulk Products: Heavy-gauge Tikki Tavis, Commercial Deep Kadhais (14" to 36"+), Commercial Degs (5kg to 50kg capacity), bulk sets of Karchis/Skimmers/Spoons.

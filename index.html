@@ -36,7 +36,7 @@
         "@type": "LocalBusiness",
         "name": "Shudh Loha",
         "description": "Traditional pure iron (Sarbloh) cookware manufactured by hand in Malerkotla, Punjab. Supplying commercial B2B kitchens, dhabas, caterers, and healthy homes nationwide.",
-        "telephone": "+91 79732 47767",
+        "telephone": ["+91 79732 47767", "+91 99880 59285"],
         "image": "https://shudh-loha.netlify.app/og-banner.jpg",
         "url": "https://shudh-loha.netlify.app/",
         "priceRange": "₹₹",
@@ -2454,6 +2454,23 @@
         font-weight: 700;
         box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
       }
+      .fixed-call {
+        position: fixed;
+        right: 86px;
+        bottom: 22px;
+        z-index: 80;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 45px;
+        padding: 0 16px;
+        border-radius: 999px;
+        background: var(--gold);
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 700;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+      }
       .mobile-contact-bar {
         display: none;
       }
@@ -3015,16 +3032,131 @@
           gap: 10px;
           padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
           border-top: 1px solid var(--line);
-          background: var(--paper);
+          background: var(--ink);
           box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.14);
         }
         .mobile-contact-bar .btn {
           min-height: 42px;
           justify-content: center;
         }
+        .mobile-contact-bar .btn-ghost {
+          background: var(--gold);
+          border-color: var(--gold);
+          color: var(--ink);
+        }
+        .mobile-contact-bar .btn-primary {
+          background: #25d366;
+          border-color: #25d366;
+          color: #fff;
+        }
+        .fixed-call {
+          display: none;
+        }
+        .hero-slider {
+          min-height: 0;
+        }
+        .hero-slide {
+          position: relative;
+          inset: auto;
+          display: none;
+          min-height: 0;
+          opacity: 1;
+          transform: none;
+        }
+        .hero-slide.is-active {
+          display: grid;
+          opacity: 1;
+          transform: none;
+        }
+        .hero-slide .wrap,
+        .hero-slide--intro .wrap {
+          grid-template-columns: 1fr;
+          align-content: start;
+          align-items: start;
+          padding: 28px 16px 76px;
+        }
+        .hero-art-composite {
+          width: 100%;
+          max-width: 300px;
+          margin: 0 auto 10px;
+        }
+        .hero h1.hero-title-dual {
+          font-size: clamp(32px, 8.5vw, 40px);
+          line-height: 1.08;
+        }
+        .hero p.hero-subhead {
+          margin-top: 12px;
+          font-size: 15px;
+          line-height: 1.45;
+        }
+        .hero-trust-strip {
+          gap: 6px;
+          margin-top: 14px;
+        }
+        .trust-pill {
+          padding: 5px 7px;
+          font-size: 10px;
+          letter-spacing: 0;
+        }
+        .hero-cta-dual {
+          align-items: stretch;
+          gap: 8px;
+          margin-top: 18px;
+        }
+        .hero-cta-dual .btn {
+          min-height: 44px;
+          padding: 10px 12px;
+          font-size: 11px;
+          letter-spacing: 0.4px;
+        }
+        .slider-controls {
+          right: 16px;
+          bottom: 12px;
+        }
+        .dual-funnel-section {
+          padding: 56px 0;
+        }
+        .dual-funnel-head {
+          margin-bottom: 28px;
+        }
+        .funnel-card {
+          padding: 24px 18px;
+        }
+        .funnel-actions {
+          align-items: stretch;
+        }
+        .funnel-actions .btn {
+          justify-content: center;
+          width: 100%;
+        }
+        .steps {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        .step:not(:last-child)::after {
+          display: none;
+        }
+        .section-head {
+          margin-bottom: 30px;
+        }
+        .contact-card {
+          padding: 22px 18px;
+        }
+        .contact-row a,
+        .contact-row span {
+          overflow-wrap: anywhere;
+        }
+        .wrap {
+          width: 100%;
+          padding-right: 18px;
+          padding-left: 18px;
+        }
       }
       @media print {
         .mobile-contact-bar {
+          display: none !important;
+        }
+        .fixed-call {
           display: none !important;
         }
       }
@@ -3133,7 +3265,7 @@
             <div class="hero-intro-copy">
               <p class="eyebrow" data-lang="location">Malerkotla Foundry Direct · Pan-India Dispatch</p>
               <h1 class="hero-title-dual" data-lang="heroTitle">Heavy-Duty Pure Iron <span>(Sarbloh) Cookware</span> — Direct From The Maker.</h1>
-              <p class="hero-subhead" data-lang="heroLede">Built for high-heat commercial kitchens, dhabas, and traditional home cooking. No Teflon. No cheap alloys. Pure strength.</p>
+              <p class="hero-subhead" data-lang="heroLede">Built for busy dhabas, caterers and home kitchens. Pure iron. No synthetic coatings.</p>
 
               <div class="hero-trust-strip">
                 <span class="trust-pill"><span class="trust-pill-icon">🛡️</span> Heavy-Gauge Non-Warping</span>
@@ -3194,7 +3326,7 @@
             <div>
               <p class="eyebrow" data-lang="story">Our story</p>
               <h1 data-lang="storyTitle">Craft passed down.<br /><span>Quality carried forward.</span></h1>
-              <p style="color: rgba(244, 238, 225, 0.85); margin: 16px 0 28px; max-width: 480px;">For generations in Malerkotla, Punjab, we have forged traditional iron cookware by hand — built to endure grueling commercial heat and family kitchens alike.</p>
+              <p style="color: rgba(244, 238, 225, 0.85); margin: 16px 0 28px; max-width: 480px;">Made by hand in Malerkotla—built for high-heat kitchens and everyday cooking.</p>
               <div class="hero-cta"><a class="btn btn-primary" href="#contact" data-lang="contact">Meet us</a></div>
             </div>
             <div class="hero-art"><p>No mixed metal.<br />No shortcuts.<br /><span style="color: var(--gold)">Just pure loha.</span></p></div>
@@ -3207,7 +3339,7 @@
             <div>
               <p class="eyebrow" data-lang="sell">The collection</p>
               <h1 data-lang="sellTitle">Sarbloh pieces<br /><span>for the daily ritual.</span></h1>
-              <p style="color: rgba(244, 238, 225, 0.85); margin: 16px 0 28px; max-width: 480px;">Hand-finished Tutma Tawas, commercial Kadhais, and traditional batte. Pure iron with exceptional heat retention, free from chemical coatings.</p>
+              <p style="color: rgba(244, 238, 225, 0.85); margin: 16px 0 28px; max-width: 480px;">Hand-finished tawas, kadhais and serving pieces in pure iron.</p>
               <div class="hero-cta"><a class="btn btn-primary" href="products.html" data-lang="viewProducts">Shop Sarbloh</a><a class="btn btn-ghost" href="#products">See highlights</a></div>
             </div>
             <div class="hero-art hero-product-collage"><img src="Assets 2/kadhai-400w.webp" alt="Pure Sarbloh kadhai" width="220" height="274" loading="lazy" /><img src="Assets 2/tutma tawa-400w.webp" alt="Authentic Sarbloh tawa" width="220" height="220" loading="lazy" /><img src="Assets 2/Big Deg-400w.webp" alt="Pure iron deg" width="220" height="220" loading="lazy" /></div>
@@ -3282,19 +3414,19 @@
           <div class="funnel-card funnel-card--b2b reveal">
             <span class="funnel-badge funnel-badge--b2b">🏭 B2B WHOLESALE SUPPLY</span>
             <h3 class="funnel-title">Commercial Kitchens &amp; Wholesalers</h3>
-            <p class="funnel-desc">Explore the product sizes, approximate weights, selling prices, and minimum order quantities listed in the supplied Sarbloh catalogue.</p>
+            <p class="funnel-desc">Heavy-gauge cookware, made to order and shipped direct from Malerkotla.</p>
             <ul class="funnel-specs-list">
               <li class="funnel-spec-item">
                 <span class="funnel-check">✓</span>
-                <div><strong>Tikki Tawi / Roti Tawi:</strong> 16–40 inches; approx. 4 kg and above; ₹95/kg; minimum order 10 kg.</div>
+                <div><strong>Tikki Tawi:</strong> 16–40 in · from 4 kg.</div>
               </li>
               <li class="funnel-spec-item">
                 <span class="funnel-check">✓</span>
-                <div><strong>Big Deg:</strong> 14 inches and above; approx. 7 kg and above; ₹150/kg; minimum order 10 kg.</div>
+                <div><strong>Big Deg:</strong> 14 in+ · from 7 kg.</div>
               </li>
               <li class="funnel-spec-item">
                 <span class="funnel-check">✓</span>
-                <div><strong>Direct Factory Lot Pricing &amp; GST Invoicing:</strong> Direct manufacturer rates from Malerkotla with official GST billing and reliable transport across North India &amp; Pan-India.</div>
+                <div><strong>Factory rates</strong> · GST invoice · Pan-India freight.</div>
               </li>
             </ul>
             <div class="funnel-actions">
@@ -3312,19 +3444,19 @@
           <div class="funnel-card funnel-card--retail reveal">
             <span class="funnel-badge funnel-badge--retail">🌿 RETAIL &amp; HOUSEHOLD</span>
             <h3 class="funnel-title">Healthy Everyday Home Cooking</h3>
-            <p class="funnel-desc">100% chemical-free, food-safe pure iron cookware that replaces toxic peeling non-stick coatings. Naturally enriches every family meal with dietary iron while building unbeatable flavor.</p>
+            <p class="funnel-desc">Pure iron cookware for home cooking. No non-stick coating; made for everyday use.</p>
             <ul class="funnel-specs-list">
               <li class="funnel-spec-item">
                 <span class="funnel-check">✓</span>
-                <div><strong>100% Toxin-Free &amp; Food-Safe:</strong> Zero Teflon, zero synthetic coatings. Natural dietary iron release in every roti, sabzi, and curry.</div>
+                <div><strong>No synthetic coating:</strong> Traditional pure iron construction.</div>
               </li>
               <li class="funnel-spec-item">
                 <span class="funnel-check">✓</span>
-                <div><strong>Handcrafted Everyday Essentials:</strong> 10"–12" Tutma Tawas for puffed rotis, deep family kadhais, fry pans, and traditional Punjabi serving batte.</div>
+                <div><strong>Home essentials:</strong> 10–12 in tawas, kadhais, fry pans and serving batte.</div>
               </li>
               <li class="funnel-spec-item">
                 <span class="funnel-check">✓</span>
-                <div><strong>Pre-Seasoned Heirloom Durability:</strong> Simple home maintenance, exceptional heat retention, and sturdy cookware built to last for generations.</div>
+                <div><strong>Made to last:</strong> Seasoning and care guidance included.</div>
               </li>
             </ul>
             <div class="funnel-actions">
@@ -3398,7 +3530,7 @@
               <div class="n">01</div>
             </div>
             <h3 data-lang="stepOneTitle">Send your sizes/quantity</h3>
-            <p data-lang="stepOneText">Share your required piece sizes, diameters (e.g. 14"–36" Kadhais, 16"–24" Tikki Tavis, 5kg–50kg Degs), and quantity.</p>
+            <p data-lang="stepOneText">Send the product, size and quantity you need.</p>
           </div>
           <div class="step reveal">
             <div class="step-badge-row">
@@ -3406,7 +3538,7 @@
               <div class="n">02</div>
             </div>
             <h3 data-lang="stepTwoTitle">Get a quote on WhatsApp</h3>
-            <p data-lang="stepTwoText">Receive direct factory unit rates, bulk lot pricing, and freight delivery estimates directly on WhatsApp.</p>
+            <p data-lang="stepTwoText">Get factory rates and freight options on WhatsApp.</p>
           </div>
           <div class="step reveal">
             <div class="step-badge-row">
@@ -3414,7 +3546,7 @@
               <div class="n">03</div>
             </div>
             <h3 data-lang="stepThreeTitle">GST invoice and dispatch from Malerkotla</h3>
-            <p data-lang="stepThreeText">Prompt order confirmation with verified GST invoice, secure commercial packaging, and dependable transport dispatch across India.</p>
+            <p data-lang="stepThreeText">Confirm your order for GST-invoiced dispatch from Malerkotla.</p>
           </div>
         </div>
       </div></section>
@@ -3547,6 +3679,10 @@
             ><a href="tel:+917973247767">+91 79732 47767</a>
           </div>
           <div class="contact-row">
+            <span class="ico">☎</span
+            ><a href="tel:+919988059285">Alternate: +91 99880 59285</a>
+          </div>
+          <div class="contact-row">
             <span class="ico">📍</span
             ><span data-lang="address">Malerkotla, Punjab</span>
           </div>
@@ -3606,6 +3742,7 @@
         rel="noopener"
       >WhatsApp</a>
     </nav>
+    <a class="fixed-call" href="tel:+917973247767" aria-label="Call Shudh Loha">Call us</a>
     
     <a
       class="whatsapp-float"
@@ -3874,6 +4011,14 @@
           category: "Sarbloh",
         },
         {
+          name: "Fry Pan",
+          icon: "kadhai",
+          image: "Assets 2/fry pan-400w.webp",
+          priceKnown: false,
+          price: "",
+          category: "Sarbloh",
+        },
+        {
           name: "White Batta",
           icon: "bata",
           image: "Assets 2/White batta-400w.webp",
@@ -3961,14 +4106,23 @@
         const el = document.getElementById(containerId);
         el.innerHTML = items
           .map(
-            (it) => `
+            (it) => {
+              const fallbackImage = fallbackKitchenItems.find(
+                (fallback) => fallback.name.toLowerCase() === it.name.trim().toLowerCase(),
+              )?.image;
+              const image =
+                typeof it.image === "string" && it.image.startsWith("Assets 2/")
+                  ? fallbackImage || it.image
+                  : it.image || fallbackImage;
+              return `
       <div class="card">
-        ${it.image ? `<a class="product-image-link" href="product.html?item=${encodeURIComponent(it.name)}" aria-label="View ${it.name}"><img class="product-image" src="${it.image}" alt="${it.name}" width="300" height="300" loading="lazy" /></a>` : `<svg class="icon" viewBox="0 0 100 100">${icons[it.icon] || ""}</svg>`}
+        ${image ? `<a class="product-image-link" href="product.html?item=${encodeURIComponent(it.name)}" aria-label="View ${it.name}"><img class="product-image" src="${image}" alt="${it.name}" width="300" height="300" loading="lazy" /></a>` : `<svg class="icon" viewBox="0 0 100 100">${icons[it.icon] || ""}</svg>`}
         <h3>${it.name}</h3>
         <div class="price">${typeof WhatsAppOrderModule !== "undefined" ? WhatsAppOrderModule.formatRetailPrice(it.price) : (it.price || "Price on request")}</div>
         ${typeof WhatsAppOrderModule !== "undefined" ? WhatsAppOrderModule.renderButtonsHtml(it.name, { price: it.price, size: it.size, paymentLink: it.paymentLink }) : ""}
       </div>
-    `,
+    `;
+            },
           )
           .join("");
       }
@@ -4050,13 +4204,17 @@
       };
       const startHeroTimer = () => {
         clearInterval(heroTimer);
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+          window.matchMedia("(max-width: 600px)").matches
+        ) return;
         heroTimer = setInterval(() => {
           if (!heroPaused) showHeroSlide(activeHeroSlide + 1);
         }, 6500);
       };
       document.getElementById("heroPrevious").addEventListener("click", () => { showHeroSlide(activeHeroSlide - 1); startHeroTimer(); });
       document.getElementById("heroNext").addEventListener("click", () => { showHeroSlide(activeHeroSlide + 1); startHeroTimer(); });
+      window.addEventListener("resize", startHeroTimer);
       heroDots.addEventListener("click", (event) => {
         const dot = event.target.closest("[data-slide-to]");
         if (!dot) return;
@@ -4128,7 +4286,7 @@
           viewProducts: "View Products",
           heroTitle: "Heavy-Duty Pure Iron (Sarbloh) Cookware — Direct From The Maker.",
           heroLede:
-            "Built for high-heat commercial kitchens, dhabas, and traditional home cooking. No Teflon. No cheap alloys. Pure strength.",
+            "Built for busy dhabas, caterers and home kitchens. Pure iron. No synthetic coatings.",
           wholesaleCta: "Download Wholesale Catalog (B2B)",
           retailCta: "Browse Retail Cookware",
           b2bNav: "Wholesale (B2B)",
@@ -4146,14 +4304,11 @@
           allProducts: "View all products",
           orderTitle: "Direct Factory Ordering in 3 Simple Steps",
           stepOneTitle: "Send your sizes/quantity",
-          stepOneText:
-            "Share your required piece sizes, diameters (e.g. 14\"–36\" Kadhais, 16\"–24\" Tikki Tavis, 5kg–50kg Degs), and quantity.",
+          stepOneText: "Send the product, size and quantity you need.",
           stepTwoTitle: "Get a quote on WhatsApp",
-          stepTwoText:
-            "Receive direct factory unit rates, bulk lot pricing, and freight delivery estimates directly on WhatsApp.",
+          stepTwoText: "Get factory rates and freight options on WhatsApp.",
           stepThreeTitle: "GST invoice and dispatch from Malerkotla",
-          stepThreeText:
-            "Prompt order confirmation with verified GST invoice, secure commercial packaging, and dependable transport dispatch across India.",
+          stepThreeText: "Confirm your order for GST-invoiced dispatch from Malerkotla.",
           contactTitle: "Talk to us directly.",
           contactText:
             "No forms, no waiting — call or message us and we'll help you find the right piece.",
@@ -4176,7 +4331,7 @@
           viewProducts: "उत्पाद देखें",
           heroTitle: "हेवी-ड्यूटी शुद्ध लोहा (सरबलोह) बर्तन — सीधे निर्माता से।",
           heroLede:
-            "ढाबों, कैटरर्स और पारंपरिक घरेलू रसोई के लिए अत्यधिक टिकाऊ। कोई टेफ्लॉन नहीं, कोई मिलावट नहीं। असली शुद्ध ताकत।",
+            "ढाबों, कैटरर्स और घर की रसोई के लिए। शुद्ध लोहा, बिना सिंथेटिक कोटिंग।",
           wholesaleCta: "थोक कैटलॉग डाउनलोड करें (B2B)",
           retailCta: "घरेलू बर्तन देखें",
           b2bNav: "थोक आपूर्ति (B2B)",
@@ -4194,14 +4349,11 @@
           allProducts: "सभी उत्पाद देखें",
           orderTitle: "कार्ट की ज़रूरत नहीं — बस तीन कदम।",
           stepOneTitle: "अपना सामान चुनें",
-          stepOneText:
-            "ऊपर दिए संग्रह देखें और अपनी ज़रूरत की वस्तु, आकार या मात्रा नोट करें।",
+          stepOneText: "उत्पाद, आकार और मात्रा बताएं।",
           stepTwoTitle: "कॉल या संदेश करें",
-          stepTwoText:
-            "WhatsApp पर संदेश भेजें या सीधे कॉल करें — हम आकार की कीमत और आपके सवालों की जानकारी देंगे।",
+          stepTwoText: "WhatsApp पर फैक्टरी रेट और भाड़ा जानें।",
           stepThreeTitle: "डिलीवरी पाएँ",
-          stepThreeText:
-            "पुष्टि के बाद हम डिलीवरी या पिकअप की व्यवस्था करेंगे — स्थानीय ऑर्डर पर डिलीवरी के समय भुगतान करें।",
+          stepThreeText: "ऑर्डर पक्का करें—GST बिल के साथ Malerkotla से dispatch।",
           contactTitle: "हमसे सीधे बात करें।",
           contactText:
             "कोई फॉर्म नहीं, कोई इंतज़ार नहीं — कॉल या संदेश करें और सही वस्तु चुनने में हमारी मदद लें।",
@@ -4224,7 +4376,7 @@
           viewProducts: "ਉਤਪਾਦ ਵੇਖੋ",
           heroTitle: "ਹੈਵੀ-ਡਿਊਟੀ ਸ਼ੁੱਧ ਲੋਹਾ (ਸਰਬਲੋਹ) ਬਰਤਨ — ਸਿੱਧੇ ਕਾਰਖਾਨੇ ਤੋਂ।",
           heroLede:
-            "ਢਾਬਿਆਂ, ਕੈਟਰਰਾਂ ਅਤੇ ਘਰੇਲੂ ਰਸੋਈ ਲਈ ਬੇਮਿਸਾਲ ਮਜ਼ਬੂਤੀ। ਕੋਈ ਟੈਫਲੌਨ ਨਹੀਂ, ਕੋਈ ਮਿਲਾਵਟ ਨਹੀਂ। ਅਸਲੀ ਸ਼ੁੱਧ ਤਾਕਤ।",
+            "ਢਾਬਿਆਂ, ਕੇਟਰਰਾਂ ਅਤੇ ਘਰੇਲੂ ਰਸੋਈ ਲਈ। ਸ਼ੁੱਧ ਲੋਹਾ, ਬਿਨਾਂ ਸਿੰਥੈਟਿਕ ਕੋਟਿੰਗ।",
           wholesaleCta: "ਥੋਕ ਕੈਟਾਲਾਗ ਡਾਊਨਲੋਡ ਕਰੋ (B2B)",
           retailCta: "ਘਰੇਲੂ ਬਰਤਨ ਵੇਖੋ",
           b2bNav: "ਥੋਕ ਸਪਲਾਈ (B2B)",
@@ -4242,14 +4394,11 @@
           allProducts: "ਸਾਰੇ ਉਤਪਾਦ ਵੇਖੋ",
           orderTitle: "ਸਿੱਧੇ ਫੈਕਟਰੀ ਆਰਡਰ ਦੇ 3 ਆਸਾਨ ਕਦਮ",
           stepOneTitle: "ਆਪਣੇ ਲੋੜੀਂਦੇ ਸਾਈਜ਼ ਅਤੇ ਮਾਤਰਾ ਭੇਜੋ",
-          stepOneText:
-            "ਆਪਣੀ ਲੋੜ ਅਨੁਸਾਰ ਆਕਾਰ, ਵਿਆਸ (ਜਿਵੇਂ 14\"-36\" ਕੜਾਹੀ, 16\"-24\" ਟਿੱਕੀ ਤਵਾ, 5-50 ਕਿਲੋ ਦੇਗ) ਅਤੇ ਗਿਣਤੀ ਸਾਂਝੀ ਕਰੋ।",
+          stepOneText: "ਉਤਪਾਦ, ਆਕਾਰ ਅਤੇ ਮਾਤਰਾ ਦੱਸੋ।",
           stepTwoTitle: "WhatsApp ਤੇ ਤੁਰੰਤ ਕੁਓਟੇਸ਼ਨ ਪਾਓ",
-          stepTwoText:
-            "ਸਿੱਧੇ ਕਾਰਖਾਨੇ ਦੇ ਰੇਟ, ਥੋਕ ਛੋਟ ਅਤੇ ਟਰਾਂਸਪੋਰਟ ਭਾੜੇ ਦੀ ਜਾਣਕਾਰੀ WhatsApp ਤੇ ਪ੍ਰਾਪਤ ਕਰੋ।",
+          stepTwoText: "WhatsApp ਤੇ ਫੈਕਟਰੀ ਰੇਟ ਅਤੇ ਭਾੜੇ ਦੀ ਜਾਣਕਾਰੀ ਲਵੋ।",
           stepThreeTitle: "GST ਬਿੱਲ ਅਤੇ ਮਲੇਰਕੋਟਲਾ ਤੋਂ ਸਿੱਧੀ ਰਵਾਨਗੀ",
-          stepThreeText:
-            "ਪੱਕੇ GST ਬਿੱਲ, ਮਜ਼ਬੂਤ ਪੈਕਿੰਗ ਅਤੇ ਭਰੋਸੇਮੰਦ ਟਰਾਂਸਪੋਰਟ ਰਾਹੀਂ ਪੂਰੇ ਭਾਰਤ ਵਿੱਚ ਡਿਲੀਵਰੀ।",
+          stepThreeText: "ਆਰਡਰ ਪੱਕਾ ਕਰੋ—GST ਬਿੱਲ ਨਾਲ ਮਲੇਰਕੋਟਲਾ ਤੋਂ ਭੇਜਿਆ ਜਾਵੇਗਾ।",
           contactTitle: "ਸਾਡੇ ਨਾਲ ਸਿੱਧੀ ਗੱਲ ਕਰੋ।",
           contactText:
             "ਕੋਈ ਫਾਰਮ ਨਹੀਂ, ਕੋਈ ਉਡੀਕ ਨਹੀਂ — ਕਾਲ ਜਾਂ ਸੁਨੇਹਾ ਕਰੋ ਅਤੇ ਸਹੀ ਚੀਜ਼ ਚੁਣਨ ਵਿੱਚ ਸਾਡੀ ਮਦਦ ਲਵੋ।",

@@ -33,7 +33,7 @@
         "@type": "LocalBusiness",
         "name": "Shudh Loha",
         "description": "Traditional pure iron (Sarbloh) cookware manufactured by hand in Malerkotla, Punjab. Supplying commercial B2B kitchens, dhabas, caterers, and healthy homes nationwide.",
-        "telephone": "+91 79732 47767",
+        "telephone": ["+91 79732 47767", "+91 99880 59285"],
         "image": "https://shudh-loha.netlify.app/og-banner.jpg",
         "url": "https://shudh-loha.netlify.app/",
         "priceRange": "₹₹",
@@ -93,6 +93,9 @@
       <a class="btn secondary" href="tel:+917973247767" aria-label="Call Shudh Loha at +91 79732 47767" style="justify-content:center;">
         ☎️ Call Factory Directly: +91 79732 47767
       </a>
+      <a class="btn secondary" href="tel:+919988059285" aria-label="Call Shudh Loha alternate number at +91 99880 59285" style="justify-content:center;">
+        ☎️ Alternate Number: +91 99880 59285
+      </a>
       <a id="whatsapp" href="" target="_blank" rel="noopener" style="display:none;" aria-hidden="true"></a>
     </div>
     <form class="lead-form" id="leadForm" novalidate>
@@ -132,6 +135,9 @@
   const hasFallbackProduct = Object.prototype.hasOwnProperty.call(products, item);
   if (!shudhSupabase && !hasFallbackProduct) location.replace('products.html');
   let product = products[item] || products['Iron Tawa'];
+  const fallbackImage = products[item]?.[1];
+  const resolveProductImage = (imageUrl) =>
+    imageUrl?.startsWith('Assets 2/') ? fallbackImage || imageUrl : imageUrl || fallbackImage;
   let productSize = '';
   let paymentLink = '';
   function renderRetailPurchaseActions() {
@@ -162,16 +168,18 @@
         return;
       }
       const category = data.category === 'Iron Kitchenware' ? 'Sarbloh' : data.category || 'Sarbloh';
-      product = [category, data.image_url, data.description, data.price, data.image_urls || [], data.video_urls || []];
+      const image = resolveProductImage(data.image_url);
+      const galleryImages = (data.image_urls || []).map(resolveProductImage);
+      product = [category, image, data.description, data.price, galleryImages, data.video_urls || []];
       productSize = data.size || '';
       paymentLink = data.payment_link || '';
       document.getElementById('category').textContent = category;
       document.getElementById('productSize').textContent = productSize || 'Confirm available sizes';
       document.getElementById('productPrice').textContent = data.price || 'Price on request';
       renderRetailPurchaseActions();
-      renderVisual(data.name, data.image_url, data.image_urls || [], data.video_urls || []);
+      renderVisual(data.name, image, galleryImages, data.video_urls || []);
       document.querySelector('[data-lang="askPrice"]').textContent = data.price || 'Ask for current price';
-      if (data.price) updateProductJsonLd(data.name, data.price, data.image_url, data.description);
+      if (data.price) updateProductJsonLd(data.name, data.price, image, data.description);
     });
   }
   document.title = `${item} | Shudh Loha`;

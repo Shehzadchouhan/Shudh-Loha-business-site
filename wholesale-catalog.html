@@ -36,7 +36,7 @@
         "@type": "LocalBusiness",
         "name": "Shudh Loha",
         "description": "Traditional pure iron (Sarbloh) cookware manufactured by hand in Malerkotla, Punjab. Supplying commercial B2B kitchens, dhabas, caterers, and healthy homes nationwide.",
-        "telephone": "+91 79732 47767",
+        "telephone": ["+91 79732 47767", "+91 99880 59285"],
         "image": "https://shudh-loha.netlify.app/og-banner.jpg",
         "url": "https://shudh-loha.netlify.app/",
         "priceRange": "₹₹",
@@ -125,6 +125,7 @@
       }
       .print-btn-bar {
         display: flex;
+        flex-wrap: wrap;
         gap: 12px;
         margin-bottom: 28px;
       }
@@ -470,7 +471,8 @@
         <div class="catalog-meta">
           <div><strong>Doc:</strong> B2B Wholesale Specification &amp; Rate Sheet</div>
           <div><strong>Dispatch Hub:</strong> Malerkotla Loha Mandi, Punjab</div>
-          <div><strong>WhatsApp / Call:</strong> +91 79732 47767</div>
+          <div><strong>WhatsApp:</strong> +91 79732 47767</div>
+          <div><strong>Alternate phone:</strong> <a href="tel:+919988059285">+91 99880 59285</a></div>
           <div><strong>Invoicing:</strong> GST Invoice Available</div>
         </div>
       </header>
@@ -556,6 +558,7 @@
             <p><strong>GST number:</strong> [[ADD VALUE]]</p>
             <p><strong>Working hours:</strong> [[ADD VALUE]]</p>
             <p><strong>Call / WhatsApp:</strong> +91 79732 47767</p>
+            <p><strong>Alternate phone:</strong> <a href="tel:+919988059285">+91 99880 59285</a></p>
           </div>
           <div class="map-frame">
             <iframe
@@ -613,7 +616,7 @@
             Contact our Malerkotla factory dispatch desk directly with your item list.
           </div>
         </div>
-        <div style="display: flex; gap: 12px; align-items: center">
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; max-width: 100%">
           <a
             class="btn btn-primary"
             href="https://wa.me/917973247767?text=Hi%20Shudh%20Loha%20factory%20team%2C%20I%20have%20the%20Wholesale%20Spec%20Sheet.%20Please%20quote%20for%20my%20commercial%20order."
@@ -624,6 +627,9 @@
           </a>
           <a class="btn btn-secondary" href="tel:+917973247767">
             Call +91 79732 47767
+          </a>
+          <a class="btn btn-secondary" href="tel:+919988059285">
+            Alternate +91 99880 59285
           </a>
         </div>
       </footer>
