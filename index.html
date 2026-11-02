@@ -9,11 +9,11 @@
       content="Traditional pure iron cookware hand-finished in Malerkotla, Punjab. Built for commercial dhabas, caterers, and healthy homes nationwide."
     />
     <!-- Favicon Set -->
-    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-    <link rel="icon" type="image/png" sizes="48x48" href="./favicon-48x48.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-192x192.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- DOMAIN PLACEHOLDER: Change https://shudh-loha.netlify.app to your custom domain when ready -->
     <meta property="og:site_name" content="Shudh Loha" />
@@ -29,6 +29,17 @@
     <meta name="twitter:title" content="Shudh Loha — Heavy-Duty Pure Iron (Sarbloh) Cookware" />
     <meta name="twitter:description" content="Traditional pure iron cookware hand-finished in Malerkotla, Punjab. Built for commercial dhabas, caterers, and healthy homes nationwide." />
     <meta name="twitter:image" content="https://shudh-loha.netlify.app/og-banner.jpg" />
+
+    <!-- Google Search Site Name Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Shudh Loha",
+        "alternateName": ["Shudh Loha Enterprise", "Shudh Loha Malerkotla"],
+        "url": "https://shudh-loha.netlify.app/"
+      }
+    </script>
 
     <script type="application/ld+json">
       {
@@ -2079,6 +2090,131 @@
         margin-top: 26px;
         padding: 2px 2px 14px;
       }
+      .real-work {
+        background: var(--cream-deep);
+      }
+      .real-work .section-head {
+        margin-bottom: 20px;
+      }
+      .real-work-intro {
+        max-width: 760px;
+        margin: 0 auto;
+        color: var(--ink-soft);
+        text-align: center;
+      }
+      .real-work-trust {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 22px 0 34px;
+      }
+      .real-work-trust span {
+        border: 1px solid rgba(169, 120, 24, 0.45);
+        padding: 7px 12px;
+        color: var(--ink-soft);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .real-work-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .real-work-card {
+        margin: 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: var(--cream);
+      }
+      .real-work-card img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        transition: transform 0.35s ease;
+      }
+      .real-work-card:hover img {
+        transform: scale(1.035);
+      }
+      .real-work-card figcaption {
+        padding: 13px 15px;
+        color: var(--ink-soft);
+        font-family: var(--font-display);
+        font-size: 17px;
+        font-weight: 700;
+      }
+      .real-work-more {
+        display: flex;
+        justify-content: center;
+        margin-top: 28px;
+      }
+      .real-work-card[hidden] {
+        display: none;
+      }
+      .hero-slide--real-products {
+        background:
+          radial-gradient(circle at 82% 45%, rgba(184, 138, 36, 0.18), transparent 34%),
+          linear-gradient(110deg, #171614, #252019);
+      }
+      .real-products-slide-copy {
+        position: relative;
+        z-index: 2;
+      }
+      .real-products-slide-copy h1 {
+        margin-top: 12px;
+        font-family: var(--font-display);
+        font-size: clamp(32px, 4.8vw, 56px);
+        line-height: 1.1;
+        text-transform: none;
+      }
+      .real-products-slide-copy p:not(.eyebrow) {
+        max-width: 500px;
+        margin: 18px 0 0;
+        color: rgba(251, 250, 246, 0.78);
+      }
+      .real-products-slide-art {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        grid-template-rows: repeat(2, minmax(110px, 1fr));
+        gap: 10px;
+        max-width: 410px;
+      }
+      .real-products-slide-art img {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        object-fit: cover;
+        border: 1px solid rgba(251, 250, 246, 0.28);
+      }
+      .real-products-slide-art img:first-child {
+        grid-row: span 2;
+      }
+      @media (max-width: 820px) {
+        .real-products-slide-art {
+          max-width: 340px;
+        }
+      }
+      @media (max-width: 820px) {
+        .real-work-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 560px) {
+        .real-work-grid {
+          gap: 12px;
+        }
+        .real-work-card figcaption {
+          padding: 10px;
+          font-size: 15px;
+        }
+      }
+      @media (max-width: 420px) {
+        .real-work-grid {
+          grid-template-columns: 1fr;
+        }
+      }
       .carousel {
         position: relative;
       }
@@ -3192,6 +3328,7 @@
         <nav class="links" id="navLinks">
           <a href="#dual-funnel" class="nav-highlight-b2b" data-lang="b2bNav">Wholesale (B2B)</a>
           <a href="#products" data-lang="retailNav">Retail Cookware</a>
+          <a href="#real-work" class="nav-catalog-btn" data-lang="realProductsNav">See Real Products</a>
           <a href="#order" data-lang="order">How to Order</a>
           <a href="#contact" data-lang="contact">Contact</a>
           <a class="nav-catalog-btn" href="Shudh_Loha_Sarbloh_Catalogue.pdf" download>
@@ -3277,7 +3414,25 @@
         </article>
 
         <!-- Slide 1: Authentic Handcrafted Heritage -->
-        <article class="hero-slide hero-slide--story" data-slide="1">
+        <article class="hero-slide hero-slide--real-products" data-slide="1">
+          <div class="wrap">
+            <div class="real-products-slide-copy">
+              <p class="eyebrow" data-lang="realProductsBannerEyebrow">Real products from our work</p>
+              <h1 data-lang="realProductsBannerTitle">Made by us. Supplied with care.</h1>
+              <p data-lang="realProductsBannerText">See real cookware from our Malerkotla workshop and the products we trade and supply.</p>
+              <div class="hero-cta">
+                <a class="btn btn-primary" href="#real-work" data-lang="realProductsBannerCta">See our real products</a>
+              </div>
+            </div>
+            <div class="hero-art real-products-slide-art" aria-label="Photos of our real products">
+              <img src="Assets_natural/IMG-20260827-WA0018.jpg" alt="Large iron cooking pot made for commercial kitchens" loading="lazy" decoding="async" />
+              <img src="Assets_natural/fry pan.jpeg" alt="Real iron fry pan with a wooden handle" loading="lazy" decoding="async" />
+              <img src="Assets_natural/IMG-20261009-WA0036.jpg" alt="Finished iron deg with lid and handles" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </article>
+
+        <article class="hero-slide hero-slide--story" data-slide="2">
           <div class="wrap">
             <div>
               <p class="eyebrow" data-lang="story">Our story</p>
@@ -3290,7 +3445,7 @@
         </article>
 
         <!-- Slide 2: Pure Sarbloh Collection -->
-        <article class="hero-slide hero-slide--products" data-slide="2">
+        <article class="hero-slide hero-slide--products" data-slide="3">
           <div class="wrap">
             <div>
               <p class="eyebrow" data-lang="sell">The collection</p>
@@ -3303,7 +3458,7 @@
         </article>
 
         <!-- Slide 3: Live Offer / Custom Fabrications -->
-        <article class="hero-slide hero-slide--offer" data-slide="3">
+        <article class="hero-slide hero-slide--offer" data-slide="4">
           <div class="wrap">
             <div>
               <span class="offer-kicker" id="offerEyebrow">Direct Foundry Batch</span>
@@ -3318,7 +3473,7 @@
         </article>
 
         <!-- Slide 4: Direct Factory Connection -->
-        <article class="hero-slide hero-slide--contact" data-slide="4">
+        <article class="hero-slide hero-slide--contact" data-slide="5">
           <div class="wrap">
             <div>
               <p class="eyebrow">Connect with the Maker</p>
@@ -3462,6 +3617,75 @@
               <a class="all-products-link" href="products.html">View all</a>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="real-work" id="real-work">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-lang="realWorkEyebrow">From our workshop to your kitchen</p>
+          <h2 data-lang="realWorkTitle">Real products. Real work.</h2>
+        </div>
+        <p class="real-work-intro reveal" data-lang="realWorkIntro">
+          We manufacture traditional Sarbloh cookware in Malerkotla and also trade complementary cookware and kitchenware. These real product and workshop photos show the range we make and supply.
+        </p>
+        <div class="real-work-trust reveal" aria-label="Our business">
+          <span data-lang="realWorkMade">Made in Malerkotla</span>
+          <span data-lang="realWorkTrading">Manufacturing + Trading</span>
+        </div>
+        <div class="real-work-grid reveal">
+          <figure class="real-work-card">
+            <img src="Assets_natural/IMG-20260824-WA0016.jpg" alt="Traditional iron cookware in our workshop" loading="lazy" decoding="async" />
+            <figcaption>Workshop-made cookware</figcaption>
+          </figure>
+          <figure class="real-work-card">
+            <img src="Assets_natural/IMG-20260827-WA0018.jpg" alt="Large iron cooking pot made for commercial kitchens" loading="lazy" decoding="async" />
+            <figcaption>Heavy-duty cooking pots</figcaption>
+          </figure>
+          <figure class="real-work-card">
+            <img src="Assets_natural/IMG-20261009-WA0036.jpg" alt="Finished iron deg with lid and handles" loading="lazy" decoding="async" />
+            <figcaption>Large degs for busy kitchens</figcaption>
+          </figure>
+          <figure class="real-work-card">
+            <img src="Assets_natural/fry pan.jpeg" alt="Real iron fry pan with a wooden handle" loading="lazy" decoding="async" />
+            <figcaption>Iron fry pan</figcaption>
+          </figure>
+          <figure class="real-work-card">
+            <img src="Assets_natural/chamcha.jpeg" alt="Long-handled iron serving ladle" loading="lazy" decoding="async" />
+            <figcaption>Serving and cooking tools</figcaption>
+          </figure>
+          <figure class="real-work-card">
+            <img src="Assets_natural/fork.jpeg" alt="Iron cooking fork from our product range" loading="lazy" decoding="async" />
+            <figcaption>Everyday kitchen essentials</figcaption>
+          </figure>
+          <figure class="real-work-card" hidden>
+            <img src="Assets_natural/IMG-20260824-WA0022.jpg" alt="Traditional two-handled iron cooking pot" loading="lazy" decoding="async" />
+            <figcaption>Two-handled iron cookware</figcaption>
+          </figure>
+          <figure class="real-work-card" hidden>
+            <img src="Assets_natural/IMG-20260824-WA0024.jpg" alt="Long-handled iron ladle shown at the workshop" loading="lazy" decoding="async" />
+            <figcaption>Long-handled iron ladles</figcaption>
+          </figure>
+          <figure class="real-work-card" hidden>
+            <img src="Assets_natural/IMG-20260824-WA0026(1).jpg" alt="Large iron cooking plate at the workshop" loading="lazy" decoding="async" />
+            <figcaption>Large-format iron cookware</figcaption>
+          </figure>
+          <figure class="real-work-card" hidden>
+            <img src="Assets_natural/IMG-20260824-WA0030.jpg" alt="Iron kitchen vessels from our product range" loading="lazy" decoding="async" />
+            <figcaption>Iron vessels for kitchen use</figcaption>
+          </figure>
+          <figure class="real-work-card" hidden>
+            <img src="Assets_natural/IMG-20260827-WA0020(1).jpg" alt="Traditional iron tawa with wooden handle" loading="lazy" decoding="async" />
+            <figcaption>Traditional iron tawa</figcaption>
+          </figure>
+          <figure class="real-work-card" hidden>
+            <img src="Assets_natural/IMG-20260824-WA0028(1).jpg" alt="Nested iron cookware shown as a set" loading="lazy" decoding="async" />
+            <figcaption>Cookware in multiple sizes</figcaption>
+          </figure>
+        </div>
+        <div class="real-work-more">
+          <button class="btn btn-primary" id="realWorkMore" type="button" aria-expanded="false" data-lang="realWorkShowMore">See more</button>
         </div>
       </div>
     </section>
@@ -4132,6 +4356,24 @@
         }),
       );
 
+      const realWorkMore = document.getElementById("realWorkMore");
+      const additionalRealWorkCards = document.querySelectorAll(
+        "#real-work .real-work-card[hidden]",
+      );
+      realWorkMore.addEventListener("click", () => {
+        const isExpanded = realWorkMore.getAttribute("aria-expanded") === "true";
+        const nextLanguage =
+          translations[languageSelect.value] || translations.en;
+        additionalRealWorkCards.forEach((card) => {
+          card.hidden = isExpanded;
+        });
+        realWorkMore.setAttribute("aria-expanded", String(!isExpanded));
+        realWorkMore.dataset.lang = isExpanded
+          ? "realWorkShowMore"
+          : "realWorkShowLess";
+        realWorkMore.textContent = nextLanguage[realWorkMore.dataset.lang];
+      });
+
       const translations = {
         en: {
           about: "About",
@@ -4152,6 +4394,9 @@
           retailCta: "Browse Retail Cookware",
           b2bNav: "Wholesale (B2B)",
           retailNav: "Retail Cookware",
+          realProductsNav: "See Real Products",
+          realWorkShowMore: "See more",
+          realWorkShowLess: "Show less",
           storyTitle: "A family trade in iron, continued.",
           storyParagraphOne:
             "Shudh Loha isn't a business we started — it's one we inherited. For generations, our family hasn't just sold iron items, we've built them ourselves, by hand, the way it's always been done.",
@@ -4160,6 +4405,17 @@
           storyQuote:
             "No mixed metal. No shortcuts. Just pure iron, finished by hand.",
           sellTitle: "Iron cookware for every kind of kitchen.",
+          realWorkEyebrow: "From our workshop to your kitchen",
+          realWorkTitle: "Real products. Real work.",
+          realWorkIntro:
+            "We manufacture traditional Sarbloh cookware in Malerkotla and also trade complementary cookware and kitchenware. These real product and workshop photos show the range we make and supply.",
+          realWorkMade: "Made in Malerkotla",
+          realWorkTrading: "Manufacturing + Trading",
+          realProductsBannerEyebrow: "Real products from our work",
+          realProductsBannerTitle: "Made by us. Supplied with care.",
+          realProductsBannerText:
+            "See real cookware from our Malerkotla workshop and the products we trade and supply.",
+          realProductsBannerCta: "See our real products",
           fullCollection: "View the full collection",
           kitchenware: "Kitchenware",
           allProducts: "View all products",
@@ -4197,6 +4453,9 @@
           retailCta: "घरेलू बर्तन देखें",
           b2bNav: "थोक आपूर्ति (B2B)",
           retailNav: "घरेलू बर्तन",
+          realProductsNav: "असली उत्पाद देखें",
+          realWorkShowMore: "और देखें",
+          realWorkShowLess: "कम देखें",
           storyTitle: "लोहे का पारिवारिक कारोबार, आज भी जारी।",
           storyParagraphOne:
             "शुद्ध लोहा कोई ऐसा कारोबार नहीं जिसे हमने शुरू किया — यह हमें विरासत में मिला है। पीढ़ियों से हमारा परिवार लोहे की वस्तुएँ केवल बेचता नहीं, उन्हें उसी पारंपरिक तरीके से हाथ से बनाता भी है।",
@@ -4205,6 +4464,17 @@
           storyQuote:
             "मिश्रित धातु नहीं। कोई समझौता नहीं। केवल हाथ से तैयार शुद्ध लोहा।",
           sellTitle: "हर तरह की रसोई के लिए लोहे के बर्तन।",
+          realWorkEyebrow: "हमारी कार्यशाला से आपकी रसोई तक",
+          realWorkTitle: "असली उत्पाद। असली काम।",
+          realWorkIntro:
+            "हम मलेरकोटला में पारंपरिक सरबलोह के बर्तन बनाते हैं और अन्य बर्तनों व रसोई के सामान का व्यापार भी करते हैं। ये हमारे असली उत्पादों और कार्यशाला की तस्वीरें हैं—हम क्या बनाते और सप्लाई करते हैं, इसकी एक झलक।",
+          realWorkMade: "मलेरकोटला में निर्मित",
+          realWorkTrading: "निर्माण + व्यापार",
+          realProductsBannerEyebrow: "हमारे काम के असली उत्पाद",
+          realProductsBannerTitle: "हम बनाते हैं। भरोसे से सप्लाई करते हैं।",
+          realProductsBannerText:
+            "मलेरकोटला की हमारी कार्यशाला के असली बर्तन और हमारे द्वारा ट्रेड व सप्लाई किए जाने वाले उत्पाद देखें।",
+          realProductsBannerCta: "हमारे असली उत्पाद देखें",
           fullCollection: "पूरा संग्रह देखें",
           kitchenware: "रसोई के बर्तन",
           allProducts: "सभी उत्पाद देखें",
@@ -4242,6 +4512,9 @@
           retailCta: "ਘਰੇਲੂ ਬਰਤਨ ਵੇਖੋ",
           b2bNav: "ਥੋਕ ਸਪਲਾਈ (B2B)",
           retailNav: "ਘਰੇਲੂ ਬਰਤਨ",
+          realProductsNav: "ਅਸਲੀ ਉਤਪਾਦ ਵੇਖੋ",
+          realWorkShowMore: "ਹੋਰ ਵੇਖੋ",
+          realWorkShowLess: "ਘੱਟ ਵੇਖੋ",
           storyTitle: "ਲੋਹੇ ਦਾ ਪਰਿਵਾਰਕ ਕਾਰੋਬਾਰ, ਅੱਜ ਵੀ ਜਾਰੀ।",
           storyParagraphOne:
             "ਸ਼ੁੱਧ ਲੋਹਾ ਕੋਈ ਅਜਿਹਾ ਕਾਰੋਬਾਰ ਨਹੀਂ ਜੋ ਅਸੀਂ ਸ਼ੁਰੂ ਕੀਤਾ — ਇਹ ਸਾਨੂੰ ਵਿਰਾਸਤ ਵਿੱਚ ਮਿਲਿਆ ਹੈ। ਪੀੜ੍ਹੀਆਂ ਤੋਂ ਸਾਡਾ ਪਰਿਵਾਰ ਲੋਹੇ ਦੀਆਂ ਚੀਜ਼ਾਂ ਸਿਰਫ਼ ਵੇਚਦਾ ਨਹੀਂ, ਉਨ੍ਹਾਂ ਨੂੰ ਰਵਾਇਤੀ ਤਰੀਕੇ ਨਾਲ ਹੱਥੀਂ ਬਣਾਉਂਦਾ ਵੀ ਹੈ।",
@@ -4250,6 +4523,17 @@
           storyQuote:
             "ਮਿਲੀ-ਜੁਲੀ ਧਾਤ ਨਹੀਂ। ਕੋਈ ਸਮਝੌਤਾ ਨਹੀਂ। ਸਿਰਫ਼ ਹੱਥ ਨਾਲ ਤਿਆਰ ਸ਼ੁੱਧ ਲੋਹਾ।",
           sellTitle: "ਹਰ ਕਿਸਮ ਦੀ ਰਸੋਈ ਲਈ ਲੋਹੇ ਦੇ ਬਰਤਨ।",
+          realWorkEyebrow: "ਸਾਡੀ ਵਰਕਸ਼ਾਪ ਤੋਂ ਤੁਹਾਡੀ ਰਸੋਈ ਤੱਕ",
+          realWorkTitle: "ਅਸਲੀ ਉਤਪਾਦ। ਅਸਲੀ ਕੰਮ।",
+          realWorkIntro:
+            "ਅਸੀਂ ਮਲੇਰਕੋਟਲਾ ਵਿੱਚ ਰਵਾਇਤੀ ਸਰਬਲੋਹ ਦੇ ਬਰਤਨ ਬਣਾਉਂਦੇ ਹਾਂ ਅਤੇ ਹੋਰ ਬਰਤਨਾਂ ਤੇ ਰਸੋਈ ਦੇ ਸਮਾਨ ਦਾ ਵਪਾਰ ਵੀ ਕਰਦੇ ਹਾਂ। ਇਹ ਸਾਡੇ ਅਸਲੀ ਉਤਪਾਦਾਂ ਅਤੇ ਵਰਕਸ਼ਾਪ ਦੀਆਂ ਤਸਵੀਰਾਂ ਹਨ—ਸਾਡੇ ਬਣਾਏ ਅਤੇ ਸਪਲਾਈ ਕੀਤੇ ਸਮਾਨ ਦੀ ਝਲਕ।",
+          realWorkMade: "ਮਲੇਰਕੋਟਲਾ ਵਿੱਚ ਬਣਿਆ",
+          realWorkTrading: "ਨਿਰਮਾਣ + ਵਪਾਰ",
+          realProductsBannerEyebrow: "ਸਾਡੇ ਕੰਮ ਦੇ ਅਸਲੀ ਉਤਪਾਦ",
+          realProductsBannerTitle: "ਸਾਡੇ ਵੱਲੋਂ ਬਣੇ। ਭਰੋਸੇ ਨਾਲ ਸਪਲਾਈ।",
+          realProductsBannerText:
+            "ਮਲੇਰਕੋਟਲਾ ਦੀ ਸਾਡੀ ਵਰਕਸ਼ਾਪ ਦੇ ਅਸਲੀ ਬਰਤਨ ਅਤੇ ਸਾਡੇ ਵੱਲੋਂ ਵਪਾਰ ਤੇ ਸਪਲਾਈ ਕੀਤੇ ਉਤਪਾਦ ਵੇਖੋ।",
+          realProductsBannerCta: "ਸਾਡੇ ਅਸਲੀ ਉਤਪਾਦ ਵੇਖੋ",
           fullCollection: "ਪੂਰਾ ਸੰਗ੍ਰਹਿ ਵੇਖੋ",
           kitchenware: "ਰਸੋਈ ਦੇ ਬਰਤਨ",
           allProducts: "ਸਾਰੇ ਉਤਪਾਦ ਵੇਖੋ",
