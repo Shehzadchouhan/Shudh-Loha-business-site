@@ -3295,7 +3295,7 @@
       <div class="announcement-inner">
         <div class="announcement-text">
           <span class="announcement-badge">FACTORY DIRECT</span>
-          <span class="announcement-main">Direct Manufacturer Rates from Malerkotla | Manufacturing for Dhabas, Caterers, Gurdwaras &amp; Retail Nationwide</span>
+          <span class="announcement-main">We manufacture Sarbloh cookware and trade selected iron kitchenware | Malerkotla · Pan-India supply</span>
         </div>
         <div class="announcement-actions">
           <span class="announcement-tag">Pan-India Freight</span>
@@ -3365,8 +3365,8 @@
           <div class="wrap">
             <div class="hero-intro-copy">
               <p class="eyebrow" data-lang="location">Malerkotla Foundry Direct · Pan-India Dispatch</p>
-              <h1 class="hero-title-dual" data-lang="heroTitle">Heavy-Duty Pure Iron <span>(Sarbloh) Cookware</span> — Direct From The Maker.</h1>
-              <p class="hero-subhead" data-lang="heroLede">Built for busy dhabas, caterers and home kitchens. Pure iron. No synthetic coatings.</p>
+              <h1 class="hero-title-dual" data-lang="heroTitle">We Make Sarbloh. <span>We Supply Iron Kitchenware.</span></h1>
+              <p class="hero-subhead" data-lang="heroLede">Sarbloh cookware made in Malerkotla, plus selected traded iron kitchenware such as Londa / One Piece. For homes, dhabas and caterers.</p>
 
               <div class="hero-cta-dual">
                 <a class="btn btn-primary hero-btn-b2b" href="Shudh_Loha_Sarbloh_Catalogue.pdf" download>
@@ -3405,8 +3405,8 @@
                     <span class="art-label-tag">Tikki Tavi (Dhaba)</span>
                   </div>
                   <div class="hero-art-thumb">
-                    <img src="Assets/products/tutma-tawa.webp" alt="Pure Sarbloh Tutma Tawa for Homes" width="180" height="180" loading="lazy" />
-                    <span class="art-label-tag">Retail Tutma Tawa</span>
+                    <img src="Assets/products/one-piece.webp" alt="Iron Londa / One Piece cookware supplied by Shudh Loha" width="180" height="180" loading="lazy" />
+                    <span class="art-label-tag">Traded Iron One Piece</span>
                   </div>
                 </div>
               </div>
@@ -3419,8 +3419,8 @@
           <div class="wrap">
             <div class="real-products-slide-copy">
               <p class="eyebrow" data-lang="realProductsBannerEyebrow">Real products from our work</p>
-              <h1 data-lang="realProductsBannerTitle">Made by us. Supplied with care.</h1>
-              <p data-lang="realProductsBannerText">See real cookware from our Malerkotla workshop and the products we trade and supply.</p>
+              <h1 data-lang="realProductsBannerTitle">Sarbloh made here. Iron cookware supplied.</h1>
+              <p data-lang="realProductsBannerText">We manufacture Sarbloh cookware in Malerkotla and trade selected iron kitchenware, including Londa / One Piece.</p>
               <div class="hero-cta">
                 <a class="btn btn-primary" href="#real-work" data-lang="realProductsBannerCta">See our real products</a>
               </div>
@@ -3605,6 +3605,18 @@
               <button class="carousel-arrow carousel-next" type="button" data-target="sarblohGrid" aria-label="Scroll right">&#8250;</button>
             </div>
             <div style="text-align:center;"><a class="category-action" href="products.html?category=Sarbloh">Explore Sarbloh items</a></div>
+          </div>
+          <div class="product-category">
+            <div class="product-category-head">
+              <div><span class="cat-tag">Iron kitchenware</span></div>
+              <p>Londa / One Piece iron cookware in sizes for traditional kitchens.</p>
+            </div>
+            <div class="carousel">
+              <button class="carousel-arrow carousel-prev" type="button" data-target="ironKitchenwareGrid" aria-label="Scroll left">&#8249;</button>
+              <div class="product-grid" id="ironKitchenwareGrid"></div>
+              <button class="carousel-arrow carousel-next" type="button" data-target="ironKitchenwareGrid" aria-label="Scroll right">&#8250;</button>
+            </div>
+            <div style="text-align:center;"><a class="category-action" href="products.html?category=Iron%20Kitchenware">Explore iron kitchenware</a></div>
           </div>
           <div class="all-products-reveal" id="allProductsReveal" aria-live="polite">
             <div class="all-products-card">
@@ -4163,7 +4175,7 @@
       // Product prices are shared privately on request.
       const fallbackKitchenItems = window.shudhProductCatalogue.map((product) => ({
         ...product,
-        category: "Sarbloh",
+        category: product.category || "Sarbloh",
       }));
 
       const icons = {
@@ -4197,7 +4209,7 @@
           )
           .join("");
       }
-      let kitchenItems = shudhSupabase ? [] : fallbackKitchenItems.map((item) => ({ ...item, category: "Sarbloh" }));
+      let kitchenItems = shudhSupabase ? [] : fallbackKitchenItems;
 
       function renderCategoryGrid(containerId, items) {
         if (!items.length) {
@@ -4248,14 +4260,15 @@
                 minimumOrder: item.minimum_order || fallback?.minimumOrder || "",
                 paymentLink: item.payment_link || "",
                 icon: fallback?.icon || "donga",
-                category: item.category === "Iron Kitchenware" ? "Sarbloh" : item.category || "Sarbloh",
+                category: fallback.category || item.category || "Sarbloh",
               };
             });
             const loadedNames = new Set(kitchenItems.map((product) => product.name.toLowerCase()));
             kitchenItems.push(...fallbackKitchenItems.filter((product) => !loadedNames.has(product.name.toLowerCase())));
           }
         }
-        renderCategoryGrid("sarblohGrid", kitchenItems.filter((item) => !item.category || item.category === "Sarbloh" || item.category === "Iron Kitchenware"));
+        renderCategoryGrid("sarblohGrid", kitchenItems.filter((item) => !item.category || item.category === "Sarbloh"));
+        renderCategoryGrid("ironKitchenwareGrid", kitchenItems.filter((item) => item.category === "Iron Kitchenware"));
       }
 
       loadKitchenItems();
@@ -4388,9 +4401,9 @@
           getInTouch: "Get In Touch",
           orderWhatsapp: "Order on WhatsApp",
           viewProducts: "View Products",
-          heroTitle: "Heavy-Duty Pure Iron (Sarbloh) Cookware — Direct From The Maker.",
+          heroTitle: "We Make Sarbloh. We Supply Iron Kitchenware.",
           heroLede:
-            "Built for busy dhabas, caterers and home kitchens. Pure iron. No synthetic coatings.",
+            "Sarbloh cookware made in Malerkotla, plus selected traded iron kitchenware such as Londa / One Piece. For homes, dhabas and caterers.",
           wholesaleCta: "Download Wholesale Catalog (B2B)",
           retailCta: "Browse Retail Cookware",
           b2bNav: "Wholesale (B2B)",
@@ -4413,9 +4426,9 @@
           realWorkMade: "Made in Malerkotla",
           realWorkTrading: "Manufacturing + Trading",
           realProductsBannerEyebrow: "Real products from our work",
-          realProductsBannerTitle: "Made by us. Supplied with care.",
+          realProductsBannerTitle: "Sarbloh made here. Iron cookware supplied.",
           realProductsBannerText:
-            "See real cookware from our Malerkotla workshop and the products we trade and supply.",
+            "We manufacture Sarbloh cookware in Malerkotla and trade selected iron kitchenware, including Londa / One Piece.",
           realProductsBannerCta: "See our real products",
           fullCollection: "View the full collection",
           kitchenware: "Kitchenware",
@@ -4447,9 +4460,9 @@
           getInTouch: "संपर्क करें",
           orderWhatsapp: "WhatsApp पर ऑर्डर करें",
           viewProducts: "उत्पाद देखें",
-          heroTitle: "हेवी-ड्यूटी शुद्ध लोहा (सरबलोह) बर्तन — सीधे निर्माता से।",
+          heroTitle: "हम सरबलोह बनाते हैं। लोहे के बर्तन सप्लाई करते हैं।",
           heroLede:
-            "ढाबों, कैटरर्स और घर की रसोई के लिए। शुद्ध लोहा, बिना सिंथेटिक कोटिंग।",
+            "मलेरकोटला में बने सरबलोह के बर्तन और लोंडा / वन पीस जैसे चुनिंदा ट्रेड किए हुए लोहे के बर्तन। घरों, ढाबों और कैटरर्स के लिए।",
           wholesaleCta: "थोक कैटलॉग डाउनलोड करें (B2B)",
           retailCta: "घरेलू बर्तन देखें",
           b2bNav: "थोक आपूर्ति (B2B)",
@@ -4472,9 +4485,9 @@
           realWorkMade: "मलेरकोटला में निर्मित",
           realWorkTrading: "निर्माण + व्यापार",
           realProductsBannerEyebrow: "हमारे काम के असली उत्पाद",
-          realProductsBannerTitle: "हम बनाते हैं। भरोसे से सप्लाई करते हैं।",
+          realProductsBannerTitle: "सरबलोह का निर्माण। लोहे के बर्तनों की सप्लाई।",
           realProductsBannerText:
-            "मलेरकोटला की हमारी कार्यशाला के असली बर्तन और हमारे द्वारा ट्रेड व सप्लाई किए जाने वाले उत्पाद देखें।",
+            "हम मलेरकोटला में सरबलोह के बर्तन बनाते हैं और लोंडा / वन पीस सहित चुनिंदा लोहे के बर्तनों का व्यापार करते हैं।",
           realProductsBannerCta: "हमारे असली उत्पाद देखें",
           fullCollection: "पूरा संग्रह देखें",
           kitchenware: "रसोई के बर्तन",
@@ -4506,9 +4519,9 @@
           getInTouch: "ਸੰਪਰਕ ਕਰੋ",
           orderWhatsapp: "WhatsApp ਤੇ ਆਰਡਰ ਕਰੋ",
           viewProducts: "ਉਤਪਾਦ ਵੇਖੋ",
-          heroTitle: "ਹੈਵੀ-ਡਿਊਟੀ ਸ਼ੁੱਧ ਲੋਹਾ (ਸਰਬਲੋਹ) ਬਰਤਨ — ਸਿੱਧੇ ਕਾਰਖਾਨੇ ਤੋਂ।",
+          heroTitle: "ਅਸੀਂ ਸਰਬਲੋਹ ਬਣਾਉਂਦੇ ਹਾਂ। ਲੋਹੇ ਦੇ ਬਰਤਨ ਸਪਲਾਈ ਕਰਦੇ ਹਾਂ।",
           heroLede:
-            "ਢਾਬਿਆਂ, ਕੇਟਰਰਾਂ ਅਤੇ ਘਰੇਲੂ ਰਸੋਈ ਲਈ। ਸ਼ੁੱਧ ਲੋਹਾ, ਬਿਨਾਂ ਸਿੰਥੈਟਿਕ ਕੋਟਿੰਗ।",
+            "ਮਲੇਰਕੋਟਲਾ ਵਿੱਚ ਬਣੇ ਸਰਬਲੋਹ ਦੇ ਬਰਤਨ ਅਤੇ ਲੋਂਡਾ / ਵਨ ਪੀਸ ਵਰਗੇ ਚੁਣੇ ਹੋਏ ਵਪਾਰਕ ਲੋਹੇ ਦੇ ਬਰਤਨ। ਘਰਾਂ, ਢਾਬਿਆਂ ਅਤੇ ਕੇਟਰਰਾਂ ਲਈ।",
           wholesaleCta: "ਥੋਕ ਕੈਟਾਲਾਗ ਡਾਊਨਲੋਡ ਕਰੋ (B2B)",
           retailCta: "ਘਰੇਲੂ ਬਰਤਨ ਵੇਖੋ",
           b2bNav: "ਥੋਕ ਸਪਲਾਈ (B2B)",
@@ -4531,9 +4544,9 @@
           realWorkMade: "ਮਲੇਰਕੋਟਲਾ ਵਿੱਚ ਬਣਿਆ",
           realWorkTrading: "ਨਿਰਮਾਣ + ਵਪਾਰ",
           realProductsBannerEyebrow: "ਸਾਡੇ ਕੰਮ ਦੇ ਅਸਲੀ ਉਤਪਾਦ",
-          realProductsBannerTitle: "ਸਾਡੇ ਵੱਲੋਂ ਬਣੇ। ਭਰੋਸੇ ਨਾਲ ਸਪਲਾਈ।",
+          realProductsBannerTitle: "ਸਰਬਲੋਹ ਇੱਥੇ ਬਣਦਾ ਹੈ। ਲੋਹੇ ਦੇ ਬਰਤਨ ਸਪਲਾਈ ਹੁੰਦੇ ਹਨ।",
           realProductsBannerText:
-            "ਮਲੇਰਕੋਟਲਾ ਦੀ ਸਾਡੀ ਵਰਕਸ਼ਾਪ ਦੇ ਅਸਲੀ ਬਰਤਨ ਅਤੇ ਸਾਡੇ ਵੱਲੋਂ ਵਪਾਰ ਤੇ ਸਪਲਾਈ ਕੀਤੇ ਉਤਪਾਦ ਵੇਖੋ।",
+            "ਅਸੀਂ ਮਲੇਰਕੋਟਲਾ ਵਿੱਚ ਸਰਬਲੋਹ ਦੇ ਬਰਤਨ ਬਣਾਉਂਦੇ ਹਾਂ ਅਤੇ ਲੋਂਡਾ / ਵਨ ਪੀਸ ਸਮੇਤ ਚੁਣੇ ਹੋਏ ਲੋਹੇ ਦੇ ਬਰਤਨਾਂ ਦਾ ਵਪਾਰ ਕਰਦੇ ਹਾਂ।",
           realProductsBannerCta: "ਸਾਡੇ ਅਸਲੀ ਉਤਪਾਦ ਵੇਖੋ",
           fullCollection: "ਪੂਰਾ ਸੰਗ੍ਰਹਿ ਵੇਖੋ",
           kitchenware: "ਰਸੋਈ ਦੇ ਬਰਤਨ",

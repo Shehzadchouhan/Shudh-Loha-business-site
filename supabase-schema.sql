@@ -253,10 +253,6 @@ create policy "Admin can delete product images" on storage.objects
 -- ==============================================================================
 
 update public.products
-set category = 'Sarbloh'
-where category = 'Iron Kitchenware';
-
-update public.products
 set is_active = false,
     updated_at = now()
 where lower(trim(name)) = 'iron fork';
@@ -276,22 +272,30 @@ insert into public.products (name, category, image_url, size, approx_weight, pri
 select catalogue.name, 'Sarbloh', catalogue.image_url, catalogue.size, catalogue.approx_weight,
        catalogue.price, catalogue.minimum_order, catalogue.sort_order
 from (values
-  ('Handi / Kadni', 'Assets/products/kadni-handi.webp', '6, 7, 8 muh', '3–8 kg', 'Price range on request', '10 kg', 1),
-  ('Tadka Pan', 'Assets/products/tadka-pan.webp', '6–10 muh', '700 g–2 kg', 'Price range on request', '10 kg', 2),
-  ('Big Deg', 'Assets/products/big-deg.webp', '14 inch and above', '7 kg and above', 'Price range on request', '10 kg', 3),
+  ('Sarbloh Kadni', 'Assets/products/kadni-handi.webp', '6, 7, 8 muh', '3–8 kg', 'Price range on request', '10 kg', 1),
+  ('Sarbloh Tadka Pan', 'Assets/products/tadka-pan.webp', '6–10 muh', '700 g–2 kg', 'Price range on request', '10 kg', 2),
+  ('Sarbloh Deg', 'Assets/products/big-deg.webp', '14 inch and above', '7 kg and above', 'Price range on request', '10 kg', 3),
   ('Tutma Tawa', 'Assets/products/tutma-tawa.webp', '9, 10, 11 and other sizes', '1–2 kg', 'Price range on request', '10 kg', 4),
   ('Tikki Tawi / Roti Tawi', 'Assets/products/tawi.webp', '16–40 inch', '4 kg and above', 'Price range on request', '10 kg', 5),
-  ('White Batta / Sarbloh Set', 'Assets/products/white-batta-set.webp', '6, 7, 8 and other sizes', '200 g–1 kg', 'Price range on request', '10 kg', 6),
-  ('Batta / Sarbloh Set', 'Assets/products/sarbloh-batta.webp', '6, 7, 8 and other sizes', '200 g–1 kg', 'Price range on request', '10 kg', 7),
+  ('Sarbloh White Batta Set', 'Assets/products/white-batta-set.webp', '6, 7, 8 and other sizes', '200 g–1 kg', 'Price range on request', '10 kg', 6),
+  ('Sarbloh Batta Set', 'Assets/products/sarbloh-batta.webp', '6, 7, 8 and other sizes', '200 g–1 kg', 'Price range on request', '10 kg', 7),
   ('Chotti Kadahi (13–14 gauge)', 'Assets/products/sarbloh-kadai.webp', '12–18 inch', '1.25–4 kg', 'Price range on request', '10 kg', 8),
-  ('Chotti Deg / Donga', 'Assets/products/chotti-deg-dongi.webp', '6, 7, 8 muh', '3–8 kg', 'Price range on request', '10 kg', 9),
+  ('Sarbloh Dongi', 'Assets/products/chotti-deg-dongi.webp', '6, 7, 8 muh', '3–8 kg', 'Price range on request', '10 kg', 9),
   ('Fry Pan', 'Assets/products/sarbloh-fry-pan.webp', '9, 10, 11, 12 inch', '1–2 kg', 'Price range on request', '10 kg', 10),
   ('Tadka Fry Pan', 'Assets/products/tadka-fry-pan.webp', '6–10 muh', '700 g–2 kg', 'Price range on request', '10 kg', 11),
   ('Karchi / Chamcha (Without Handle)', 'Assets/products/karchi-without-handle.webp', '9, 10, 11, 12 inch', '1–2 kg', 'Price range on request', '10 kg', 12),
   ('Karchi / Chamcha (With Handle)', 'Assets/products/chamcha-with-handle.webp', '15–24 inch', '500 g–2 kg', 'Price range on request', '10 kg', 13),
-  ('Iron Plain Tawa', 'Assets/products/plane-tawa.webp', '9, 10, 11 and other sizes', '1–2 kg', 'Price range on request', '10 kg', 14),
+  ('Sarbloh Plain Tawa', 'Assets/products/plane-tawa.webp', '9, 10, 11 and other sizes', '1–2 kg', 'Price range on request', '10 kg', 14),
   ('Londa / One Piece (10 gauge)', 'Assets/products/one-piece.webp', '18–40 inch', '4–45 kg', 'Price range on request', '10 kg', 15)
 ) as catalogue(name, image_url, size, approx_weight, price, minimum_order, sort_order)
 where not exists (
   select 1 from public.products existing where lower(existing.name) = lower(catalogue.name)
 );
+
+update public.products
+set category = case
+      when lower(trim(name)) = 'londa / one piece (10 gauge)' then 'Iron Kitchenware'
+      else 'Sarbloh'
+    end
+where category = 'Iron Kitchenware'
+   or lower(trim(name)) = 'londa / one piece (10 gauge)';

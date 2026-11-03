@@ -127,7 +127,7 @@
   const item = fallbackProduct?.name || requestedItem;
   const hasFallbackProduct = Boolean(fallbackProduct);
   if (!shudhSupabase && !hasFallbackProduct) location.replace('products.html');
-  let product = { category: 'Sarbloh', image: fallbackProduct?.image || '', galleryImages: fallbackProduct?.galleryImages || [], price: 'Price range on request', size: fallbackProduct?.size || '', approxWeight: fallbackProduct?.approxWeight || '', minimumOrder: fallbackProduct?.minimumOrder || '' };
+  let product = { category: fallbackProduct?.category || 'Sarbloh', image: fallbackProduct?.image || '', galleryImages: fallbackProduct?.galleryImages || [], price: 'Price range on request', size: fallbackProduct?.size || '', approxWeight: fallbackProduct?.approxWeight || '', minimumOrder: fallbackProduct?.minimumOrder || '' };
   const resolveProductImage = (imageUrl) => fallbackProduct?.image || imageUrl || '';
   let productSize = product.size;
   let paymentLink = '';
@@ -157,7 +157,7 @@
         location.replace('products.html');
         return;
       }
-      const category = data.category === 'Iron Kitchenware' ? 'Sarbloh' : data.category || 'Sarbloh';
+      const category = fallbackProduct?.category || data.category || 'Sarbloh';
       const image = resolveProductImage(data.image_url);
       const galleryImages = fallbackProduct
         ? fallbackProduct.galleryImages || []

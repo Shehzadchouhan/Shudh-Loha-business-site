@@ -19,20 +19,20 @@ create temporary table catalogue_product_specs (
 
 insert into catalogue_product_specs (name, aliases, image_url, size, approx_weight, price, minimum_order, sort_order)
 values
-  ('Handi / Kadni', array['Handi / Kadni'], 'Assets/products/kadni-handi.webp', '6, 7, 8 muh', '3–8 kg', 'Price range on request', '10 kg', 1),
-  ('Tadka Pan', array['Tadka Pan'], 'Assets/products/tadka-pan.webp', '6–10 muh', '700 g–2 kg', 'Price range on request', '10 kg', 2),
-  ('Big Deg', array['Big Deg'], 'Assets/products/big-deg.webp', '14 inch and above', '7 kg and above', 'Price range on request', '10 kg', 3),
+  ('Sarbloh Kadni', array['Sarbloh Kadni', 'Handi / Kadni'], 'Assets/products/kadni-handi.webp', '6, 7, 8 muh', '3–8 kg', 'Price range on request', '10 kg', 1),
+  ('Sarbloh Tadka Pan', array['Sarbloh Tadka Pan', 'Tadka Pan'], 'Assets/products/tadka-pan.webp', '6–10 muh', '700 g–2 kg', 'Price range on request', '10 kg', 2),
+  ('Sarbloh Deg', array['Sarbloh Deg', 'Big Deg'], 'Assets/products/big-deg.webp', '14 inch and above', '7 kg and above', 'Price range on request', '10 kg', 3),
   ('Tutma Tawa', array['Tutma Tawa', 'Tutma Tava'], 'Assets/products/tutma-tawa.webp', '9, 10, 11 and other sizes', '1–2 kg', 'Price range on request', '10 kg', 4),
   ('Tikki Tawi / Roti Tawi', array['Tikki Tawi / Roti Tawi', 'Tikki Tavi', 'Iron Tawi', 'Iron Tawa'], 'Assets/products/tawi.webp', '16–40 inch', '4 kg and above', 'Price range on request', '10 kg', 5),
-  ('White Batta / Sarbloh Set', array['White Batta / Sarbloh Set', 'White Batta'], 'Assets/products/white-batta-set.webp', '6, 7, 8 and other sizes', '200 g–1 kg', 'Price range on request', '10 kg', 6),
-  ('Batta / Sarbloh Set', array['Batta / Sarbloh Set', 'Batta'], 'Assets/products/sarbloh-batta.webp', '6, 7, 8 and other sizes', '200 g–1 kg', 'Price range on request', '10 kg', 7),
+  ('Sarbloh White Batta Set', array['Sarbloh White Batta Set', 'sarbloh White Batta / Sarbloh Set', 'White Batta / Sarbloh Set', 'White Batta'], 'Assets/products/white-batta-set.webp', '6, 7, 8 and other sizes', '200 g–1 kg', 'Price range on request', '10 kg', 6),
+  ('Sarbloh Batta Set', array['Sarbloh Batta Set', 'Sarbloh Batta / Sarbloh Set', 'Batta / Sarbloh Set', 'Batta'], 'Assets/products/sarbloh-batta.webp', '6, 7, 8 and other sizes', '200 g–1 kg', 'Price range on request', '10 kg', 7),
   ('Chotti Kadahi (13–14 gauge)', array['Chotti Kadahi (13–14 gauge)', 'Kadhai'], 'Assets/products/sarbloh-kadai.webp', '12–18 inch', '1.25–4 kg', 'Price range on request', '10 kg', 8),
-  ('Chotti Deg / Donga', array['Chotti Deg / Donga', 'Deg'], 'Assets/products/chotti-deg-dongi.webp', '6, 7, 8 muh', '3–8 kg', 'Price range on request', '10 kg', 9),
+  ('Sarbloh Dongi', array['Sarbloh Dongi', 'Chotti Deg / Donga', 'Deg'], 'Assets/products/chotti-deg-dongi.webp', '6, 7, 8 muh', '3–8 kg', 'Price range on request', '10 kg', 9),
   ('Fry Pan', array['Fry Pan'], 'Assets/products/sarbloh-fry-pan.webp', '9, 10, 11, 12 inch', '1–2 kg', 'Price range on request', '10 kg', 10),
   ('Tadka Fry Pan', array['Tadka Fry Pan'], 'Assets/products/tadka-fry-pan.webp', '6–10 muh', '700 g–2 kg', 'Price range on request', '10 kg', 11),
   ('Karchi / Chamcha (Without Handle)', array['Karchi / Chamcha (Without Handle)', 'Karchi without Handle', 'Chamcha without Handle'], 'Assets/products/karchi-without-handle.webp', '9, 10, 11, 12 inch', '1–2 kg', 'Price range on request', '10 kg', 12),
   ('Karchi / Chamcha (With Handle)', array['Karchi / Chamcha (With Handle)', 'Iron Spoon', 'Chamcha with Handle', 'Karchi with Handle'], 'Assets/products/chamcha-with-handle.webp', '15–24 inch', '500 g–2 kg', 'Price range on request', '10 kg', 13),
-  ('Iron Plain Tawa', array['Iron Plain Tawa', 'Tawa', 'Iron Tava'], 'Assets/products/plane-tawa.webp', '9, 10, 11 and other sizes', '1–2 kg', 'Price range on request', '10 kg', 14),
+  ('Sarbloh Plain Tawa', array['Sarbloh Plain Tawa', 'Iron Plain Tawa', 'Tawa', 'Iron Tava'], 'Assets/products/plane-tawa.webp', '9, 10, 11 and other sizes', '1–2 kg', 'Price range on request', '10 kg', 14),
   ('Londa / One Piece (10 gauge)', array['Londa / One Piece (10 gauge)'], 'Assets/products/one-piece.webp', '18–40 inch', '4–45 kg', 'Price range on request', '10 kg', 15);
 
 update public.products
@@ -66,7 +66,10 @@ with matches as (
 )
 update public.products p
 set name = m.name,
-    category = 'Sarbloh',
+    category = case
+      when m.name = 'Londa / One Piece (10 gauge)' then 'Iron Kitchenware'
+      else 'Sarbloh'
+    end,
     image_url = coalesce(m.image_url, p.image_url),
     image_urls = '[]'::jsonb,
     size = m.size,
@@ -85,7 +88,10 @@ insert into public.products (
 )
 select
   c.name,
-  'Sarbloh',
+  case
+    when c.name = 'Londa / One Piece (10 gauge)' then 'Iron Kitchenware'
+    else 'Sarbloh'
+  end,
   c.image_url,
   '[]'::jsonb,
   c.size,

@@ -98,11 +98,11 @@ The photo is stored in the `product-images` Supabase Storage bucket and referenc
 by `offers.image_url`; run the updated `supabase-schema.sql` before saving banner
 photos.
 
-To replace the storefront's Sarbloh list and specifications with the product
-catalogue, run `supabase-catalogue-product-specs.sql` in the Supabase SQL editor
-before deploying the updated pages. The migration keeps non-Sarbloh categories
-unchanged and makes only the 14 catalogue products visible in the Sarbloh
-storefront.
+To replace the storefront list and specifications with the product catalogue,
+run `supabase-catalogue-product-specs.sql` in the Supabase SQL editor before
+deploying the updated pages. The catalogue groups Londa / One Piece under Iron
+Kitchenware; the remaining catalogue products, including Tikki Tawi / Roti Tawi,
+are grouped under Sarbloh.
 
 ## Deployment
 
